@@ -1,3 +1,4 @@
+import pandas as pd
 
 
 def set_alignment(value: str,
@@ -145,3 +146,78 @@ def populate_dict(line: str,
         start_index += column_widths[i]
 
     return field_dict
+
+
+def prep_data(field_dict: dict,
+              template_file: str,
+              column_list: list,
+              column_widths: dict,
+              data_types: dict,
+              comment: str = "#",
+              skip_rows: int = 0):
+    """Ingest statemod file and format into a data frame.
+
+    :param field_dict:              Dictionary holding values for each field.
+    :type field_dict:               dict
+
+    :param template_file:           Statemod input file to parse.
+    :type template_file:            str
+
+    :param column_widths:           Dictionary of column names to expected widths.
+    :type column_widths:            dict
+
+    :param column_list:             List of columns to process.
+    :type column_list:              list
+
+    :param data_types:              Dictionary of column names to data types.
+    :type data_types:               dict
+
+    :param comment:                 Characters leading string indicating ignoring a line.
+    :type comment:                  str
+
+    :param skip_rows:               The number of uncommented rows of data to skip.
+    :type skip_rows:                int
+
+    :return:                        [0] data frame of data from file
+                                    [1] header data from file
+
+    """
+
+    # empty string to hold header data
+    header = ""
+
+    capture = False
+    with open(template_file) as template:
+
+        for idx, line in enumerate(template):
+
+            if capture:
+
+                # populate dictionary with data content
+                field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types)
+
+            else:
+
+                # passes all commented lines in header
+                if line[0] != comment:
+
+                    if skip_rows == 0:
+
+                        field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types)
+                        capture = True
+
+                    else:
+
+                        # count down the number of rows to skip
+                        skip_rows -= 1
+
+                        # store any header and preliminary lines to use in restoration
+                        header += line
+
+                else:
+                    header += line
+
+    # convert dictionary to a pandas data frame
+    df = pd.DataFrame(field_dict)
+
+    return df, header
