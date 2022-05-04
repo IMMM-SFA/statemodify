@@ -51,6 +51,15 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(self.COMP_NONE, s)
         self.assertEqual(len(self.COMP_NONE), len(s))
 
+    def test_pad_with_spaces(self):
+        """Tests for the pad_with_spaces function.  Majority of tests accounted for in child function."""
+
+        # ensure error is raised when value length is greater than expected width
+        with self.assertRaises(AssertionError):
+            s = utils.pad_with_spaces(value="  test  ",
+                                      expected_width=2,
+                                      align="right")
+
 
 if __name__ == '__main__':
     unittest.main()
