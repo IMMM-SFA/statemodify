@@ -95,3 +95,53 @@ def add_zero_padding(x: str,
         return f"{x}{'0' * n_zeros}"
     else:
         return x
+
+
+def populate_dict(line: str,
+                  field_dict: dict,
+                  column_widths: dict,
+                  column_list: list,
+                  data_types: dict) -> dict:
+    """Populate the input dictionary with values from each line based on column widths.
+
+    :param line:                    Line of data as a string from the input file.
+    :type line:                     str
+
+    :param field_dict:              Dictionary holding values for each field.
+    :type field_dict:               dict
+
+    :param column_widths:           Dictionary of column names to expected widths.
+    :type column_widths:            dict
+
+    :param column_list:             List of columns to process.
+    :type column_list:              list
+
+    :param data_types:              Dictionary of column names to data types.
+    :type data_types:               dict
+
+    :return:                        Populated data dictionary.
+
+    """
+
+    start_index = 0
+    for idx, i in enumerate(column_list):
+
+        if idx == 0:
+            end_index = column_widths[i]
+
+        else:
+            end_index = start_index + column_widths[i]
+
+        # extract portion of the line based on the known column width
+        string_extraction = line[start_index: end_index]
+
+        # convert to desired data type
+        out_string = data_types[i](string_extraction)
+
+        # append to dict
+        field_dict[i].append(out_string)
+
+        # advance start index for next iteration
+        start_index += column_widths[i]
+
+    return field_dict

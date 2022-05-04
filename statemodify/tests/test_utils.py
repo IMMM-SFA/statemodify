@@ -10,6 +10,11 @@ class TestUtils(unittest.TestCase):
     COMP_LEFT = "test    "
     COMP_NONE = "test"
     COMP_ZEROS = "0.10"
+    COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
+    FIELD_DICT = {"a": [], "b": [], "c": []}
+    COLUMN_WIDTHS = {"a": 1, "b": 7, "c": 3}
+    COLUMN_LIST = ["a", "b", "c"]
+    DATA_TYPES = {"a": int, "b": str, "c": float}
 
     def test_set_alignment(self):
         """Tests for the set_alignment function."""
@@ -69,6 +74,18 @@ class TestUtils(unittest.TestCase):
                                    precision=2)
 
         self.assertEqual(self.COMP_ZEROS, s)
+
+    def test_populate_dict(self):
+        """Tests for the populate_dict function."""
+
+        # ensure parsing into dict is correct
+        d = utils.populate_dict(line="0alpha  2.0\n",
+                                field_dict=self.FIELD_DICT,
+                                column_widths=self.COLUMN_WIDTHS,
+                                column_list=self.COLUMN_LIST,
+                                data_types=self.DATA_TYPES)
+
+        self.assertEqual(self.COMP_DATA, d)
 
 
 if __name__ == '__main__':
