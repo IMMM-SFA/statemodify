@@ -9,6 +9,7 @@ class TestUtils(unittest.TestCase):
     COMP_RIGHT = "    test"
     COMP_LEFT = "test    "
     COMP_NONE = "test"
+    COMP_ZEROS = "0.10"
 
     def test_set_alignment(self):
         """Tests for the set_alignment function."""
@@ -59,6 +60,15 @@ class TestUtils(unittest.TestCase):
             s = utils.pad_with_spaces(value="  test  ",
                                       expected_width=2,
                                       align="right")
+
+    def test_add_zero_padding(self):
+        """Tests for the add_zero_padding function."""
+
+        # ensure zeros are added to the desired precision
+        s = utils.add_zero_padding(x="0.1",
+                                   precision=2)
+
+        self.assertEqual(self.COMP_ZEROS, s)
 
 
 if __name__ == '__main__':

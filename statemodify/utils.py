@@ -67,3 +67,31 @@ def pad_with_spaces(value: str,
 
     else:
         raise AssertionError(f"Column width '{field_length}' exceeds the expected width '{expected_width}'")
+
+
+def add_zero_padding(x: str,
+                     precision: int = 2) -> str:
+    """Some fields expect zero padding that gets rounded off by pandas.
+    This method adds that back in.
+
+    :param x:                       Float value from file that is represented as a string.
+    :type x:                        str
+
+    :param precision:               Precision to account for.
+    :type precision:                int
+
+    :return:                        Zero padded string.
+
+    """
+
+    # get length of precision
+    x_length = len(x.split(".")[-1])
+
+    if x_length < precision:
+
+        # determine the number of zeros needed
+        n_zeros = precision - x_length
+
+        return f"{x}{'0' * n_zeros}"
+    else:
+        return x
