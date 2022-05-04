@@ -1,3 +1,4 @@
+[![build](https://github.com/IMMM-SFA/statemodify/actions/workflows/build.yml/badge.svg)](https://github.com/IMMM-SFA/statemodify/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/IMMM-SFA/statemodify/branch/main/graph/badge.svg?token=csQBZMRSdp)](https://codecov.io/gh/IMMM-SFA/statemodify)
 
 # statemodify
