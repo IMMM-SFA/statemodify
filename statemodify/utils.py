@@ -15,6 +15,8 @@ def set_alignment(value: str,
     :param align:                   Either 'left' or 'right' alignment for the value.
     :type align:                    str
 
+    :return:                        Value with string padding.
+
     """
 
     # set align attribute to lower case
