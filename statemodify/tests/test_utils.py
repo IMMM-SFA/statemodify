@@ -11,6 +11,7 @@ class TestUtils(unittest.TestCase):
     COMP_NONE = "test"
     COMP_ZEROS = "0.10"
     COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
+    COMP_FILE = "/my/output/directory/file_scenario-test_sample-0.txt"
     FIELD_DICT = {"a": [], "b": [], "c": []}
     COLUMN_WIDTHS = {"a": 1, "b": 7, "c": 3}
     COLUMN_LIST = ["a", "b", "c"]
@@ -86,6 +87,17 @@ class TestUtils(unittest.TestCase):
                                 data_types=self.DATA_TYPES)
 
         self.assertEqual(self.COMP_DATA, d)
+
+    def test_construct_outfile_name(self):
+        """Tests for construct_outfile_name function."""
+
+        # ensure function produces what is expected
+        f = utils.construct_outfile_name(template_file="/my/template/file/file.txt",
+                                         output_directory="/my/output/directory",
+                                         scenario="test",
+                                         sample_id=0)
+
+        self.assertEqual(self.COMP_FILE, f)
 
 
 if __name__ == '__main__':

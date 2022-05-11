@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 
@@ -201,6 +203,7 @@ def prep_data(field_dict: dict,
                 # passes all commented lines in header
                 if line[0] != comment:
 
+                    # if you are not skipping any rows that are not comments
                     if skip_rows == 0:
 
                         field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types)
@@ -221,3 +224,39 @@ def prep_data(field_dict: dict,
     df = pd.DataFrame(field_dict)
 
     return df, header
+
+
+def construct_outfile_name(template_file: str,
+                           output_directory: str,
+                           scenario: str,
+                           sample_id: int) -> str:
+    """Construct output file name from input template.
+
+    :param template_file:           Statemod input file to parse.
+    :type template_file:            str
+
+    :param output_directory:        Output directory to save outputs to.
+    :type output_directory:         str
+
+    :param scenario:                Scenario name.
+    :type scenario:                 str
+
+    :param sample_id:               ID of sample.
+    :type sample_id:                int
+
+    :return:                        Full path with file name and extension for the modified output file.
+
+    """
+
+    # extract file basename
+    template_basename = os.path.basename(template_file)
+
+    # split basename into filename and extension
+    template_name_parts = os.path.splitext(template_basename)
+
+    # output file name
+    output_file = f"{template_name_parts[0]}_scenario-{scenario}_sample-{sample_id}{template_name_parts[-1]}"
+
+    return os.path.join(output_directory, output_file)
+
+
