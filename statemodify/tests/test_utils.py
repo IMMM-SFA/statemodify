@@ -15,6 +15,7 @@ class TestUtils(unittest.TestCase):
     COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
     COMP_FILE = "/my/output/directory/file_scenario-test_sample-0.txt"
     COMP_STR = "item   focus\n"
+    COMP_ADJ_DF = pd.DataFrame({"a": [10., 2.], "b": [-1., -0.2]})
     FIELD_DICT = {"a": [], "b": [], "c": []}
     COLUMN_WIDTHS = {"a": 1, "b": 7, "c": 3}
     COLUMN_LIST = ["a", "b", "c"]
@@ -113,6 +114,16 @@ class TestUtils(unittest.TestCase):
 
         self.assertEqual(self.COMP_STR, data)
 
+    def test_apply_adjustment_factor(self):
+        data = utils.apply_adjustment_factor(data_df=pd.DataFrame({"a": [10, 20],
+                                                                   "b": [-1, -2],
+                                                                   "c": [0, 1]}),
+                                             value_columns=["a", "b"],
+                                             query_field="c",
+                                             target_ids=[1],
+                                             factor=0.1)
 
-if __name__ == '__main__':
-    unittest.main()
+        pd.testing.assert_frame_equal(self.COMP_ADJ_DF, data)
+
+    if __name__ == '__main__':
+        unittest.main()

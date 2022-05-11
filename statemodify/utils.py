@@ -1,5 +1,6 @@
 import os
 
+import numpy as np
 import pandas as pd
 
 
@@ -300,3 +301,31 @@ def construct_data_string(df: pd.DataFrame,
 
     return data
 
+
+def apply_adjustment_factor(data_df: pd.DataFrame,
+                            value_columns: list,
+                            query_field: str,
+                            target_ids: list,
+                            factor: float) -> pd.DataFrame:
+    """Apply adjustment to template file values for target ids using a sample factor.
+
+    :param data_df:                         Data frame of data content from file.
+    :type data_df:                          pd.DataFrame
+
+    :param value_columns:                   Value columns that may be modified.
+    :type value_columns:                    list
+
+    :param query_field:                     Field name to conduct queries for.
+    :type query_field:                      str
+
+    :param target_ids:                      Ids associated in query field to modify.
+    :type target_ids:                       list
+
+    :param factor:                          Value to multiply the selected value columns by.
+    :type factor:                           float
+
+    :return:                                An data frame of modified values to replace the original data with.
+
+    """
+
+    return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
