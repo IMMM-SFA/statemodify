@@ -260,3 +260,43 @@ def construct_outfile_name(template_file: str,
     return os.path.join(output_directory, output_file)
 
 
+def construct_data_string(df: pd.DataFrame,
+                          column_list: list,
+                          column_widths: dict,
+                          column_alignment: dict) -> str:
+    """Format line and construct data string.
+
+    :param df:                      ID of sample.
+    :type df:                       pd.DataFrame
+
+    :param column_widths:           Dictionary of column names to expected widths.
+    :type column_widths:            dict
+
+    :param column_list:             List of columns to process.
+    :type column_list:              list
+
+    :param column_alignment:        Dictionary of column names to their expected alignment (e.g., right, left).
+    :type column_alignment:         dict
+
+    :return:                        Formatted data string.
+
+    """
+
+    # initialize empty string to store data in
+    data = ""
+
+    # for each row of data
+    for idx in df.index:
+
+        # for each column in row
+        for i in column_list:
+
+            # add to output string
+            data += pad_with_spaces(df[i][idx],
+                                    column_widths[i],
+                                    align=column_alignment[i])
+        # add in newline
+        data += "\n"
+
+    return data
+

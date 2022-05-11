@@ -1,5 +1,7 @@
 import unittest
 
+import pandas as pd
+
 import statemodify.utils as utils
 
 
@@ -12,6 +14,7 @@ class TestUtils(unittest.TestCase):
     COMP_ZEROS = "0.10"
     COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
     COMP_FILE = "/my/output/directory/file_scenario-test_sample-0.txt"
+    COMP_STR = "item   focus\n"
     FIELD_DICT = {"a": [], "b": [], "c": []}
     COLUMN_WIDTHS = {"a": 1, "b": 7, "c": 3}
     COLUMN_LIST = ["a", "b", "c"]
@@ -98,6 +101,17 @@ class TestUtils(unittest.TestCase):
                                          sample_id=0)
 
         self.assertEqual(self.COMP_FILE, f)
+
+    def test_construct_data_string(self):
+        """Tests for construct_data_string function."""
+
+        data = utils.construct_data_string(df=pd.DataFrame({"a": ["item   "],
+                                                            "b": ["   focus  "]}),
+                                           column_list=["a", "b"],
+                                           column_widths={"a": 7, "b": 5},
+                                           column_alignment={"a": "left", "b": "right"})
+
+        self.assertEqual(self.COMP_STR, data)
 
 
 if __name__ == '__main__':
