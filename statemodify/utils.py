@@ -1,5 +1,6 @@
 import os
 
+import numpy as np
 import pandas as pd
 
 
@@ -69,7 +70,26 @@ def pad_with_spaces(value: str,
                              align=align)
 
     else:
-        raise AssertionError(f"Column width '{field_length}' exceeds the expected width '{expected_width}'")
+
+        # reduce precision to fit field if float
+        try:
+
+            split_value = value_stripped.split(".")
+
+            if len(split_value) == 1:
+                raise f"Column width '{field_length}' for value '{split_value[0]}' exceeds the expected width '{expected_width}'"
+
+            # precision of value
+            n_decimals = len(split_value[-1])
+
+            # number of decimals overflowing
+            overflow = n_decimals - (field_length - expected_width)
+
+            # round to fit
+            return np.float64(value_stripped).round(overflow).astype(str)
+
+        except TypeError:
+            raise f"Column width '{field_length}' for value '{value_stripped}' exceeds the expected width '{expected_width}'"
 
 
 def add_zero_padding(x: str,

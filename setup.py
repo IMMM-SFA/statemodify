@@ -17,7 +17,7 @@ setup(
     url='https://github.com/IMMM-SFA/statemodify',
     license='BSD-2-Clause',
     author='',
-    author_email='chris.vernon@pnnl.gov',
+    author_email='',
     description="A package to modify StateMod's input and output files for exploratory modeling",
     long_description=readme(),
     long_description_content_type="text/markdown",
