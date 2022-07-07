@@ -66,7 +66,7 @@ class TestUtils(unittest.TestCase):
         """Tests for the pad_with_spaces function.  Majority of tests accounted for in child function."""
 
         # ensure error is raised when value length is greater than expected width
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(TypeError):
             s = utils.pad_with_spaces(value="  test  ",
                                       expected_width=2,
                                       align="right")
