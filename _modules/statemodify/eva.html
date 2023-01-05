@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>statemodify.eva &#8212; statemodify documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo_statemodify.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/quickstarter.html">
+   Quickstarter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/tutorial.html">
+   Tutorial
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../examples/modify-inputs.html">
+   Modify Inputs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/api.html">
+   Python API
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contributing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/contributing.html">
+   Contributing to
+   <strong>
+    statemodify
+   </strong>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/IMMM-SFA/statemodify"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/IMMM-SFA/statemodify/issues/new?title=Issue%20on%20page%20%2F_modules/statemodify/eva.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for statemodify.eva</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">SALib.sample</span> <span class="kn">import</span> <span class="n">latin</span>
+
+<span class="kn">import</span> <span class="nn">statemodify.utils</span> <span class="k">as</span> <span class="nn">utx</span>
+
+
+<span class="k">class</span> <span class="nc">ModifyEva</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify .eva files.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">modify_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                 <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">modify_dict</span> <span class="o">=</span> <span class="n">modify_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">n_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed_value</span> <span class="o">=</span> <span class="n">seed_value</span>
+
+        <span class="c1"># character indicating row is a comment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;#&quot;</span>
+
+        <span class="c1"># dictionary to hold values for each field</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;oct&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;nov&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;dec&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;jan&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;feb&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;mar&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;apr&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;may&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;jun&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;jul&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;aug&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                          <span class="s2">&quot;sep&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="c1"># define the column widths for the output file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_widths</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                              <span class="s2">&quot;oct&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;nov&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;dec&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;jan&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;feb&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;mar&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;apr&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;may&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;jun&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;jul&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;aug&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                              <span class="s2">&quot;sep&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+
+        <span class="c1"># expected column alignment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_alignment</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;oct&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;nov&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;dec&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;jan&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;feb&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;mar&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;apr&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;may&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;jun&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;jul&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;aug&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;sep&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">}</span>
+
+        <span class="c1"># expected data types for each field</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="s2">&quot;oct&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;nov&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;dec&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;jan&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;feb&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;mar&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;apr&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;may&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;jun&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;jul&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;aug&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+                           <span class="s2">&quot;sep&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">}</span>
+
+        <span class="c1"># list of columns to process</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;prefix&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;oct&quot;</span><span class="p">,</span> <span class="s2">&quot;nov&quot;</span><span class="p">,</span> <span class="s2">&quot;dec&quot;</span><span class="p">,</span> <span class="s2">&quot;jan&quot;</span><span class="p">,</span> <span class="s2">&quot;feb&quot;</span><span class="p">,</span> <span class="s2">&quot;mar&quot;</span><span class="p">,</span> <span class="s2">&quot;apr&quot;</span><span class="p">,</span> <span class="s2">&quot;may&quot;</span><span class="p">,</span> <span class="s2">&quot;jun&quot;</span><span class="p">,</span> <span class="s2">&quot;jul&quot;</span><span class="p">,</span> <span class="s2">&quot;aug&quot;</span><span class="p">,</span> <span class="s2">&quot;sep&quot;</span><span class="p">]</span>
+
+        <span class="c1"># list of value columns that may be modified</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;oct&quot;</span><span class="p">,</span> <span class="s2">&quot;nov&quot;</span><span class="p">,</span> <span class="s2">&quot;dec&quot;</span><span class="p">,</span> <span class="s2">&quot;jan&quot;</span><span class="p">,</span> <span class="s2">&quot;feb&quot;</span><span class="p">,</span> <span class="s2">&quot;mar&quot;</span><span class="p">,</span> <span class="s2">&quot;apr&quot;</span><span class="p">,</span> <span class="s2">&quot;may&quot;</span><span class="p">,</span> <span class="s2">&quot;jun&quot;</span><span class="p">,</span> <span class="s2">&quot;jul&quot;</span><span class="p">,</span> <span class="s2">&quot;aug&quot;</span><span class="p">,</span> <span class="s2">&quot;sep&quot;</span><span class="p">]</span>
+
+        <span class="c1"># field to conduct queries for</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+
+        <span class="c1"># template file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_file</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/template.eva&quot;</span><span class="p">)</span>
+
+        <span class="c1"># number of rows to skip after the commented fields end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># build problem set</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_problem</span><span class="p">()</span>
+
+        <span class="c1"># generate samples and add them to modify dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;samples&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_samples</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ingest statemod file and format into a data frame.</span>
+
+<span class="sd">        :param field_dict:              Dictionary holding values for each field.</span>
+<span class="sd">        :type field_dict:               dict</span>
+
+<span class="sd">        :param template_file:           Statemod input file to parse.</span>
+<span class="sd">        :type template_file:            str</span>
+
+<span class="sd">        :param column_widths:           Dictionary of column names to expected widths.</span>
+<span class="sd">        :type column_widths:            dict</span>
+
+<span class="sd">        :param column_list:             List of columns to process.</span>
+<span class="sd">        :type column_list:              list</span>
+
+<span class="sd">        :param data_types:              Dictionary of column names to data types.</span>
+<span class="sd">        :type data_types:               dict</span>
+
+<span class="sd">        :param comment:                 Characters leading string indicating ignoring a line.</span>
+<span class="sd">        :type comment:                  str</span>
+
+<span class="sd">        :param skip_rows:               The number of uncommented rows of data to skip.</span>
+<span class="sd">        :type skip_rows:                int</span>
+
+<span class="sd">        :return:                        [0] data frame of data from file</span>
+<span class="sd">                                        [1] header data from file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">utx</span><span class="o">.</span><span class="n">prep_data</span><span class="p">(</span><span class="n">field_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">,</span>
+                             <span class="n">template_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_file</span><span class="p">,</span>
+                             <span class="n">column_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">column_list</span><span class="p">,</span>
+                             <span class="n">column_widths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">column_widths</span><span class="p">,</span>
+                             <span class="n">data_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_types</span><span class="p">,</span>
+                             <span class="n">comment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="p">,</span>
+                             <span class="n">skip_rows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">skip_rows</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">validate_modify_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure modify dictionary is complete.&quot;&quot;&quot;</span>
+
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">build_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the problem set from the input modify dictionary.&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;num_vars&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;names&quot;</span><span class="p">]),</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;names&quot;</span><span class="p">],</span>
+            <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;bounds&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">generate_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate samples.&quot;&quot;&quot;</span>
+
+        <span class="c1"># generate our sample</span>
+        <span class="k">return</span> <span class="n">latin</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">problem</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="p">,</span>
+                            <span class="n">N</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span><span class="p">,</span>
+                            <span class="n">seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seed_value</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+
+<span class="k">def</span> <span class="nf">modify_single_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">,</span>
+                      <span class="n">sample_id</span><span class="p">,</span>
+                      <span class="n">output_dir</span><span class="p">,</span>
+                      <span class="n">scenario</span><span class="p">,</span>
+                      <span class="n">n_samples</span><span class="p">,</span>
+                      <span class="n">seed_value</span><span class="p">):</span>
+
+    <span class="c1"># instantiate</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">ModifyEva</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+                    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                    <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+
+    <span class="c1"># copy template data frame for alteration</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">generate_data</span><span class="p">()</span>
+
+    <span class="c1"># strip the query field of any whitespace</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">query_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">query_field</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># modify value columns associated structures based on the sample draw</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;names&quot;</span><span class="p">]):</span>
+
+        <span class="c1"># extract target ids to modify</span>
+        <span class="n">id_list</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="c1"># extract factors from sample for the subset and sample</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;samples&quot;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="n">sample_id</span><span class="p">]</span>
+
+        <span class="n">df</span><span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">apply_adjustment_factor</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">value_columns</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">query_field</span><span class="p">,</span> <span class="n">id_list</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
+
+    <span class="c1"># reconstruct precision</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1"># convert all fields to str type</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="c1"># add formatted data to output string</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">construct_data_string</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">column_list</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">column_widths</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">column_alignment</span><span class="p">)</span>
+
+    <span class="c1"># write output file</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">construct_outfile_name</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">template_file</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span> <span class="n">sample_id</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+        <span class="c1"># write header</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+
+        <span class="c1"># write data</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="modify_eva"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_eva">[docs]</a><span class="k">def</span> <span class="nf">modify_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
+               <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+               <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.</span>
+<span class="sd">    Samples are processed in parallel. Modification is targeted at &#39;municipal&#39; and &#39;standard&#39; fields where ids to</span>
+<span class="sd">    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.</span>
+
+<span class="sd">    :param modify_dict: Dictionary of parameters to setup the sampler.  See following example.</span>
+<span class="sd">    :type modify_dict: Dict[str, List[Union[str, float]]]</span>
+
+<span class="sd">    :param output_dir: Path to output directory.</span>
+<span class="sd">    :type output_dir: str</span>
+
+<span class="sd">    :param scenario: Scenario name.</span>
+<span class="sd">    :type scenario: str</span>
+
+<span class="sd">    :param n_samples: Number of LHS samples to generate, optional. Defaults to 1.</span>
+<span class="sd">    :type n_samples: int, optional</span>
+
+<span class="sd">    :param seed_value: Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.</span>
+<span class="sd">    :type seed_value: Union[None, int], optional</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    :rtype: None</span>
+
+<span class="sd">    :example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import statemodify as stm</span>
+
+<span class="sd">        # a dictionary to describe what you want to modify and the bounds for the LHS</span>
+<span class="sd">        setup_dict = {</span>
+<span class="sd">            &quot;names&quot;: [&quot;municipal&quot;, &quot;standard&quot;],</span>
+<span class="sd">            &quot;ids&quot;: [[&quot;10001&quot;, &quot;10004&quot;], [&quot;10005&quot;, &quot;10006&quot;]],</span>
+<span class="sd">            &quot;bounds&quot;: [[-1.0, 1.0], [-1.0, 1.0]]</span>
+<span class="sd">        }</span>
+
+<span class="sd">        output_directory = &quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="sd">        scenario = &quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="sd">        # the number of samples you wish to generate</span>
+<span class="sd">        n_samples = 4</span>
+
+<span class="sd">        # seed value for reproducibility if so desired</span>
+<span class="sd">        seed_value = None</span>
+
+<span class="sd">        # generate a batch of files using generated LHS</span>
+<span class="sd">        stm.modify_eva(modify_dict=setup_dict,</span>
+<span class="sd">                       output_dir=output_directory,</span>
+<span class="sd">                       scenario=scenario,</span>
+<span class="sd">                       n_samples=n_samples,</span>
+<span class="sd">                       seed_value=seed_value)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># generate all files in parallel</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;loky&quot;</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">modify_single_eva</span><span class="p">)(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+                                                                             <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+                                                                             <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                                                                             <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                                                                             <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                                                                             <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span> <span class="k">for</span> <span class="n">sample_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Rohini S. Gupta<br/>
+    
+        &copy; Copyright 2023, Battelle Memorial Institute.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
