@@ -1,5 +1,5 @@
 import pkg_resources
-from typing import Union
+from typing import Union, Dict, List
 
 import numpy as np
 from joblib import Parallel, delayed
@@ -217,12 +217,42 @@ def modify_single_eva(modify_dict,
         out.write(data)
 
 
-def modify_eva(modify_dict: dict,
+def modify_eva(modify_dict: Dict[List[Union[str, float]]],
                output_dir: str,
                scenario: str,
                n_samples: int = 1,
                seed_value: Union[None, int] = None):
-    """Modify StateMod net reservoir evaporation annual data file (.eva)
+    """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
+    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
+    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+
+    :param modify_dict: Dictionary of parameters to modify the DDM.
+                        Dictionary must include the following fields:  'names', 'ids', 'bounds' where:
+                        - 'names' is a list of field names such as ['municipal', 'standard'],
+                        - 'ids' is a list of target ids as strings such as [["7200764", "7200813CH"], ["7200764_I", "7200818"]],
+                        - 'bounds' is a list of bounds for each name such as [[-1.0, 1.0], [-1.0, 1.0]]
+                        Example:
+                        .. highlight:: python
+                        .. code-block:: python
+                            setup_dict = {"names": ["municipal", "standard"],
+                                          "ids": [["10001", "10004"], ["10005", "10006"]],
+                                          "bounds": [[-1.0, 1.0], [-1.0, 1.0]]}
+    :type modify_dict: Dict[List[Union[str, float]]]
+
+    :param output_dir: Path to output directory.
+    :type output_dir: str
+
+    :param scenario: Scenario name.
+    :type scenario: str
+
+    :param n_samples: Number of LHS samples to generate, optional. Defaults to 1.
+    :type n_samples: int, optional
+
+    :param seed_value: Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.
+    :type seed_value: Union[None, int], optional
+
+    :return: None
+    :rtype: None
 
     """
 
@@ -233,25 +263,3 @@ def modify_eva(modify_dict: dict,
                                                                              scenario=scenario,
                                                                              n_samples=n_samples,
                                                                              seed_value=seed_value) for sample_id in range(n_samples))
-
-
-if __name__ == "__main__":
-
-    setup_dict = {
-        "names": ["municipal", "standard"],
-        "ids": [["10001", "10004"], ["10005", "10006"]],
-        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
-    }
-
-    output_directory = "/Users/d3y010/Desktop/statemod"
-    scenario = "ibis"
-    n_samples = 4
-    seed_value = None
-
-    modify_eva(modify_dict=setup_dict,
-               output_dir=output_directory,
-               scenario=scenario,
-               n_samples=n_samples,
-               seed_value=seed_value)
-
-
