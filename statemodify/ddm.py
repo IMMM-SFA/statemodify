@@ -1,5 +1,5 @@
 import pkg_resources
-from typing import Union
+from typing import Union, Dict, List
 
 import numpy as np
 from joblib import Parallel, delayed
@@ -233,14 +233,44 @@ def modify_single_ddm(modify_dict,
         out.write(data)
 
 
-def modify_ddm(modify_dict: dict,
+def modify_ddm(modify_dict: Dict[List[Union[str, float]]],
                output_dir: str,
                scenario: str,
                n_samples: int = 1,
                seed_value: Union[None, int] = None,
                template_file: str = pkg_resources.resource_filename("statemodify", "data/template.ddm"),
-               query_field: str = "id"):
-    """Modify StateMod .ddm data file
+               query_field: str = "id") -> None:
+    """Modify StateMod .ddm data file using a Latin Hypercube Sample from the user.  Samples are processed in parallel.
+    Modification is targeted at 'municipal' and 'standard' fields where ids to modify are specified in the `modify_dict`
+    argument.  The user must specify bounds for each field name.
+
+    :param modify_dict: Dictionary of parameters to modify the DDM.
+                        Dictionary must include the following fields:  'names', 'ids', 'bounds' where:
+                        - 'names' is a list of field names such as ['municipal', 'standard'],
+                        - 'ids' is a list of target ids as strings such as [["7200764", "7200813CH"], ["7200764_I", "7200818"]],
+                        - 'bounds' is a list of bounds for each name such as [[-1.0, 1.0], [-1.0, 1.0]]
+    :type modify_dict: Dict[List[Union[str, float]]]
+
+    :param output_dir: Path to output directory.
+    :type output_dir: str
+
+    :param scenario: Scenario name.
+    :type scenario: str
+
+    :param n_samples: Number of LHS samples to generate, optional. Defaults to 1.
+    :type n_samples: int, optional
+
+    :param seed_value: Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.
+    :type seed_value: Union[None, int], optional
+
+    :param template_file: Path to the DDM template file, optional. Defaults to a DDM template included in the statemodify package.
+    :type template_file: str, optional
+
+    :param query_field: Field used for mapping parameters to DDM, optional. Defaults to "id".
+    :type query_field: str, optional
+
+    :return: None
+    :rtype: None
 
     """
 
@@ -254,28 +284,3 @@ def modify_ddm(modify_dict: dict,
                                                                              template_file=template_file,
                                                                              query_field=query_field) for sample_id in range(n_samples))
 
-
-if __name__ == "__main__":
-
-    setup_dict = {
-        "names": ["municipal", "standard"],
-        "ids": [["7200764", "7200813CH"], ["7200764_I", "7200818"]],
-        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
-    }
-
-    output_directory = "/Users/d3y010/Desktop/statemod"
-    scenario = "ibis"
-    n_samples = 4
-    seed_value = None
-
-    # the field that you want to use to query and modify the data
-    query_field = "id"
-
-    # generate a batch of files using generated LHS
-    modify_ddm(modify_dict=setup_dict,
-               output_dir=output_directory,
-               scenario=scenario,
-               n_samples=n_samples,
-               seed_value=seed_value,
-               query_field=query_field,
-               template_file="/Users/d3y010/Desktop/SP2016_H.ddm")
