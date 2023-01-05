@@ -249,6 +249,12 @@ def modify_ddm(modify_dict: Dict[List[Union[str, float]]],
                         - 'names' is a list of field names such as ['municipal', 'standard'],
                         - 'ids' is a list of target ids as strings such as [["7200764", "7200813CH"], ["7200764_I", "7200818"]],
                         - 'bounds' is a list of bounds for each name such as [[-1.0, 1.0], [-1.0, 1.0]]
+                        Example:
+                        .. highlight:: python
+                        .. code-block:: python
+                            setup_dict = {"names": ["municipal", "standard"],
+                                          "ids": [["10001", "10004"], ["10005", "10006"]],
+                                          "bounds": [[-1.0, 1.0], [-1.0, 1.0]]}
     :type modify_dict: Dict[List[Union[str, float]]]
 
     :param output_dir: Path to output directory.
