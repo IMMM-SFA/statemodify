@@ -217,7 +217,7 @@ def modify_single_eva(modify_dict,
         out.write(data)
 
 
-def modify_eva(modify_dict: Dict[List[Union[str, float]]],
+def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                output_dir: str,
                scenario: str,
                n_samples: int = 1,
@@ -226,18 +226,8 @@ def modify_eva(modify_dict: Dict[List[Union[str, float]]],
     Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
     modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
-    :param modify_dict: Dictionary of parameters to modify the DDM.
-                        Dictionary must include the following fields:  'names', 'ids', 'bounds' where:
-                        - 'names' is a list of field names such as ['municipal', 'standard'],
-                        - 'ids' is a list of target ids as strings such as [["7200764", "7200813CH"], ["7200764_I", "7200818"]],
-                        - 'bounds' is a list of bounds for each name such as [[-1.0, 1.0], [-1.0, 1.0]]
-                        Example:
-                        .. highlight:: python
-                        .. code-block:: python
-                            setup_dict = {"names": ["municipal", "standard"],
-                                          "ids": [["10001", "10004"], ["10005", "10006"]],
-                                          "bounds": [[-1.0, 1.0], [-1.0, 1.0]]}
-    :type modify_dict: Dict[List[Union[str, float]]]
+    :param modify_dict: Dictionary of parameters to setup the sampler.  See following example.
+    :type modify_dict: Dict[str, List[Union[str, float]]]
 
     :param output_dir: Path to output directory.
     :type output_dir: str
@@ -253,6 +243,35 @@ def modify_eva(modify_dict: Dict[List[Union[str, float]]],
 
     :return: None
     :rtype: None
+
+    :example:
+
+    .. code-block:: python
+
+        import statemodify as stm
+
+        # a dictionary to describe what you want to modify and the bounds for the LHS
+        setup_dict = {
+            "names": ["municipal", "standard"],
+            "ids": [["10001", "10004"], ["10005", "10006"]],
+            "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+        }
+
+        output_directory = "<your desired output directory>"
+        scenario = "<your scenario name>"
+
+        # the number of samples you wish to generate
+        n_samples = 4
+
+        # seed value for reproducibility if so desired
+        seed_value = None
+
+        # generate a batch of files using generated LHS
+        stm.modify_eva(modify_dict=setup_dict,
+                       output_dir=output_directory,
+                       scenario=scenario,
+                       n_samples=n_samples,
+                       seed_value=seed_value)
 
     """
 
