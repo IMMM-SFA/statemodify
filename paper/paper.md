@@ -4,16 +4,19 @@ tags:
   - Python
   - StateMod
 authors:
-  - name: Person One
-    orcid: 0000-0002-3406-6214
+  - name: Rohini S. Gupta
+    orcid: 0000-0003-3538-0675
     affiliation: 1
-  - name: Human Two
-    orcid: 0000-0002-7833-9456
+  - name: Chris R. Vernon
+    orcid: 0000-0002-3406-6214
+    affiliation: 2
+  - name: Travis Thruber
+    orcid: 0000-0002-4370-9971
     affiliation: 2
 affiliations:
- - name: Place of work, Portland, OR., USA
+ - name: Department of Civil and Environmental Engineering, Cornell University, 527 College Ave, Hollister Hall, Ithaca, NY, 14853, USA
    index: 1
- - name: Plase of work, Portland, ME., USA
+ - name: Pacific Northwest National Laboratory, Richland, WA., USA
    index: 2
 date: 5 January 2023
 bibliography: paper.bib
