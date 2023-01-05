@@ -137,7 +137,7 @@ def generate_flows(sample: np.array,
     covariance_matrix_dry_sampled = covariance_matrix_dry * sample[1]
     covariance_matrix_wet_sampled = covariance_matrix_wet * sample[3]
 
-    # apply diagonal multipliers
+    # apply diagonal multipliers to calculate variance
     for i in range(n_parameters):
         covariance_matrix_dry_sampled[i, i] = covariance_matrix_dry_sampled[i, i] * sample[1]
         covariance_matrix_wet_sampled[i, i] = covariance_matrix_wet_sampled[i, i] * sample[3]
@@ -186,4 +186,26 @@ def generate_flows(sample: np.array,
     annual_q_s = np.exp(log_annual_q_s) - 1
 
     return annual_q_s
+
+
+def flow_disaggregation(basin_name: str,
+                        basin_abbrev: str,
+                        n_sites: int,
+                        n_iwr_sites: int,
+                        start_xbm: int,
+                        start_iwr: int,
+                        xbm_file: str,
+                        iwr_file: str,
+                        xbm_out: str,
+                        iwr_out: str,
+                        abbrev_file_xbm: str,
+                        abbrev_file_iwr: str,
+                        historical_column: int = 0):
+    """Monthly and spatial disaggregation and irrigation files.
+
+    """
+
+
+
+
 

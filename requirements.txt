@@ -4,3 +4,4 @@ pandas>=1.4.2
 joblib>=1.1.0
 SALib>=1.4.5
 hmmlearn>=0.2.8
+statsmodels>=0.13.5

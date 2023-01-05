@@ -29,6 +29,7 @@ setup(
         'joblib>=1.1.0',
         'SALib>1.4.5',
         'scipy>=1.8.0',
-        'hmmlearn>=0.2.8'
+        'hmmlearn>=0.2.8',
+        'statsmodels>=0.13.5',
     ],
 )
