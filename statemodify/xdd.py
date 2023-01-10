@@ -21,7 +21,7 @@ class XddConverter:
         id_subset: Union[None, List[str]] = None,
         parallel_jobs: int = 4,
     ):
-        """
+        """Converter object for transforming StateMod output .xdd files into compressed, columnar .parquet files
 
         :param output_path:         Path to a folder where outputs should be written; default "./output"
         :type output_path:          str
@@ -37,6 +37,29 @@ class XddConverter:
 
         :param parallel_jobs:       How many files to process in parallel; default 4
         :type parallel_jobs:        int
+
+        :example:
+
+        .. code-block:: python
+
+            import statemodify as stm
+
+            converter = stm.xdd.XddConverter(
+                # path to a directory where output .parquet files should be written
+                output_path="./output",
+                # whether to abort if .parquet files already exist at the output_path
+                allow_overwrite=False,
+                # path, glob, or a list of paths/globs to the .xdd files you want to convert
+                xdd_files="**/*.xdd",
+                # if the output .parquet files should only contain a subset of structure ids, list them here; None for all
+                id_subset=None,
+                # how many .xdd files to convert in paralllel; optimally you will want 2-4 CPUs per parallel process
+                parallel_jobs=4,
+            )
+
+            converter.convert()
+
+            # look for your output .parquet files at the output_path!
 
         """
 
@@ -165,3 +188,63 @@ class XddConverter:
         if id_subset is not None:
             df = df[df['structure_id'].isin(id_subset)]
         df.to_parquet(f"{output_path}/{Path(file).stem}.parquet")
+
+def convert_xdd(
+    *,
+    output_path: Union[str, Path] = "./output",
+    allow_overwrite: bool = False,
+    xdd_files: Union[str, Path, List[Union[str, Path]]] = "**/*.xdd",
+    id_subset: Union[None, List[str]] = None,
+    parallel_jobs: int = 4,
+):
+    """Convert StateMod output .xdd files to compressed, columnar .parquet files which easily interoperate
+    with pandas dataframes.
+
+    :param output_path:         Path to a folder where outputs should be written; default "./output"
+    :type output_path:          str
+
+    :param allow_overwrite:     If False, abort if files already exist in the output_path; default False
+    :type allow_overwrite:      bool
+
+    :param xdd_files:           File(s) or glob(s) to the .xdd files to convert; default "**/*.xdd"
+    :type xdd_files:            List[str]
+
+    :param id_subset:           List of structure IDs to convert, or None for all; default None
+    :type id_subset:            List[str]
+
+    :param parallel_jobs:       How many files to process in parallel; default 4
+    :type parallel_jobs:        int
+
+    :return: None
+    :rtype: None
+
+    :example:
+
+    .. code-block:: python
+
+        import statemodify as stm
+
+        stm.xdd.convert_xdd(
+            # path to a directory where output .parquet files should be written
+            output_path="./output",
+            # whether to abort if .parquet files already exist at the output_path
+            allow_overwrite=False,
+            # path, glob, or a list of paths/globs to the .xdd files you want to convert
+            xdd_files="**/*.xdd",
+            # if the output .parquet files should only contain a subset of structure ids, list them here; None for all
+            id_subset=None,
+            # how many .xdd files to convert in paralllel; optimally you will want 2-4 CPUs per parallel process
+            parallel_jobs=4,
+        )
+
+        # look for your output .parquet files at the output_path!
+
+    """
+
+    XddConverter(
+        output_path=output_path,
+        allow_overwrite=allow_overwrite,
+        xdd_files=xdd_files,
+        id_subset=id_subset,
+        parallel_jobs=parallel_jobs,
+    ).convert()

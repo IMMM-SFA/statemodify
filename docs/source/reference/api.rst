@@ -23,3 +23,8 @@ statemodify.modify_ddm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autofunction:: statemodify.modify_ddm
+
+statemodify.convert_xdd
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.convert_xdd
