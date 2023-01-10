@@ -12,13 +12,36 @@ class ModifyEva:
     """Modify .eva files."""
 
     def __init__(self,
-                 modify_dict: dict,
+                 modify_dict: Dict[str, List[Union[str, float]]],
+                 query_field: str,
                  n_samples: int = 1,
-                 seed_value: Union[int, None] = None):
+                 skip_rows: int = 1,
+                 seed_value: Union[None, int] = None):
+        """Modifier for evapotranspiration files.
+
+
+        :param modify_dict:         Dictionary of parameters to setup the sampler.
+        :type modify_dict:          Dict[str, List[Union[str, float]]]
+
+        :param query_field:         Field name to use for target query.
+        :type query_field:          str
+
+        :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.
+        :type n_samples:            int, optional
+
+        :param skip_rows:           Number of rows to skip after the commented fields end; default 1
+        :type skip_rows:            int, optional
+
+        :param seed_value: Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.
+        :type seed_value: Union[None, int], optional
+
+        """
 
         self.modify_dict = modify_dict
+        self.query_field = query_field
         self.n_samples = n_samples
         self.seed_value = seed_value
+        self.skip_rows = skip_rows
 
         # character indicating row is a comment
         self.comment = "#"
@@ -93,14 +116,8 @@ class ModifyEva:
         # list of value columns that may be modified
         self.value_columns = ["oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep"]
 
-        # field to conduct queries for
-        self.query_field = "id"
-
         # template file
         self.template_file = pkg_resources.resource_filename("statemodify", "data/template.eva")
-
-        # number of rows to skip after the commented fields end
-        self.skip_rows = 0
 
         # build problem set
         self.problem = self.build_problem()
@@ -168,16 +185,20 @@ class ModifyEva:
                             seed=self.seed_value).T
 
 
-def modify_single_eva(modify_dict,
-                      sample_id,
-                      output_dir,
-                      scenario,
-                      n_samples,
-                      seed_value):
+def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
+                      query_field: str,
+                      sample_id: int,
+                      output_dir: str,
+                      scenario: str,
+                      n_samples: int = 1,
+                      skip_rows: int = 1,
+                      seed_value: Union[None, int] = None):
 
     # instantiate
     mod = ModifyEva(modify_dict=modify_dict,
+                    query_field=query_field,
                     n_samples=n_samples,
+                    skip_rows=skip_rows,
                     seed_value=seed_value)
 
     # copy template data frame for alteration
@@ -218,11 +239,15 @@ def modify_single_eva(modify_dict,
 
 
 def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
+               query_field: str,
                output_dir: str,
                scenario: str,
                n_samples: int = 1,
+               skip_rows: int = 1,
+               n_jobs: int = -1,
                seed_value: Union[None, int] = None):
-    """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
+    """TODO: add the additional params
+    Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
     modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
@@ -266,19 +291,34 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # seed value for reproducibility if so desired
         seed_value = None
 
+        # number of rows to skip in file after comment
+        skip_rows = 1
+
+        # name of field to query
+        query_field = "id"
+
+        # number of jobs to launch in parallel; -1 is all but 1 processor used
+        n_jobs = -1
+
         # generate a batch of files using generated LHS
-        stm.modify_eva(modify_dict=setup_dict,
-                       output_dir=output_directory,
+        stm.modify_eva(modify_dict=modify_dict,
+                       query_field=query_field,
+                       sample_id=sample_id,
+                       output_dir=output_dir,
                        scenario=scenario,
                        n_samples=n_samples,
+                       skip_rows=skip_rows,
+                       n_jobs=n_jobs,
                        seed_value=seed_value)
 
     """
 
     # generate all files in parallel
-    results = Parallel(n_jobs=-1, backend="loky")(delayed(modify_single_eva)(modify_dict=modify_dict,
-                                                                             sample_id=sample_id,
-                                                                             output_dir=output_dir,
-                                                                             scenario=scenario,
-                                                                             n_samples=n_samples,
-                                                                             seed_value=seed_value) for sample_id in range(n_samples))
+    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_eva)(modify_dict=modify_dict,
+                                                                                 query_field=query_field,
+                                                                                 sample_id=sample_id,
+                                                                                 output_dir=output_dir,
+                                                                                 scenario=scenario,
+                                                                                 n_samples=n_samples,
+                                                                                 skip_rows=skip_rows,
+                                                                                 seed_value=seed_value) for sample_id in range(n_samples))
