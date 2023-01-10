@@ -1,0 +1,167 @@
+import itertools
+from glob import glob
+from pathlib import Path
+from typing import Union, List, Type
+
+import numpy as np
+import pandas as pd
+from joblib import Parallel, delayed
+from tqdm import tqdm
+
+
+class XddConverter:
+    """Convert .xdd files to columnar .parquet files"""
+
+    def __init__(
+        self,
+        *,
+        output_path: Union[str, Path] = "./output",
+        allow_overwrite: bool = False,
+        xdd_files: Union[str, Path, List[Union[str, Path]]] = "**/*.xdd",
+        id_subset: Union[None, List[str]] = None,
+        parallel_jobs: int = 4,
+    ):
+        """
+
+        :param output_path:         Path to a folder where outputs should be written; default "./output"
+        :type output_path:          str
+
+        :param allow_overwrite:     If False, abort if files already exist in the output_path; default False
+        :type allow_overwrite:      bool
+
+        :param xdd_files:           File(s) or glob(s) to the .xdd files to convert; default "**/*.xdd"
+        :type xdd_files:            List[str]
+
+        :param id_subset:           List of structure IDs to convert, or None for all; default None
+        :type id_subset:            List[str]
+
+        :param parallel_jobs:       How many files to process in parallel; default 4
+        :type parallel_jobs:        int
+
+        """
+
+        # where to write the parquet files
+        self.output_path = Path(output_path)
+        if not self.output_path.exists():
+            self.output_path.mkdir(parents=True, exist_ok=True)
+        if not self.output_path.is_dir():
+            raise IOError(f"output_path '{self.output_path}' is not a directory")
+        if not allow_overwrite:
+            if len(list(self.output_path.glob("*.parquet"))) > 0:
+                raise IOError(f"parquet files already exist in {self.output_path} but allow_overwrite is False")
+        else:
+            for f in self.output_path.glob("*.parquet"):
+                f.unlink()
+
+        # which xdd files to convert
+        if isinstance(xdd_files, list):
+            self.xdd_files = [Path(g) for sublist in [glob(p) for p in xdd_files] for g in sublist]
+        else:
+            self.xdd_files = [Path(g) for g in glob(xdd_files, recursive=True)]
+        if len(self.xdd_files) == 0:
+            raise IOError(f"no .xdd files found in {xdd_files}")
+
+        # filter to a subset of structure IDs (None means keep all)
+        self.id_subset = id_subset
+
+        # run this many jobs in parallel
+        self.parallel_jobs = parallel_jobs
+
+        # field names for each .xdd entry
+        self.fields = [
+            'structure_id',
+            'river_id',
+            'year',
+            'month',
+            'demand_total',
+            'demand_cu',
+            'from_river_by_priority',
+            'from_river_by_storage',
+            'from_river_by_other',
+            'from_river_by_loss',
+            'from_well',
+            'from_carrier_by_priority',
+            'from_carrier_by_other',
+            'from_carrier_by_loss',
+            'carried_exchange_bypass',
+            'from_soil',
+            'supply_total',
+            'shortage_total',
+            'shortage_cu',
+            'water_use_cu',
+            'water_use_to_soil',
+            'water_use_to_other',
+            'water_use_loss',
+            'station_in_out_upstream_inflow',
+            'station_in_out_reach_gain',
+            'station_in_out_return_flow',
+            'station_in_out_well_deplete',
+            'station_in_out_from_to_groundwater_storage',
+            'station_balance_river_inflow',
+            'station_balance_river_divert',
+            'station_balance_river_by_well',
+            'station_balance_river_outflow',
+            'available_flow',
+            'control_location',
+            'control_right',
+        ]
+
+        # field sizes for each line of interest in the .xdd file
+        self.field_sizes = np.array([
+            11, 13, 5, 5, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 13, 12,
+        ])
+
+        # the expected line length for lines of interest
+        # the line separator counts as an extra character, hence the +1
+        self.expected_line_size = self.field_sizes.sum() + 1
+
+        # the names of months expected in the data
+        # one of these must be in the line of the file to be parsed
+        self.months = ['OCT', 'NOV', 'DEC', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'TOT']
+
+    def convert(self):
+        """Convert .xdd files into columnar .parquet files"""
+        Parallel(
+            n_jobs=self.parallel_jobs,
+            backend="loky"
+        )(delayed(XddConverter._parse_file)(
+            file=file,
+            fields=self.fields,
+            sizes=self.field_sizes,
+            line_size=self.expected_line_size,
+            months=self.months,
+            output_path=self.output_path,
+            id_subset=self.id_subset
+        ) for file in tqdm(self.xdd_files))
+
+    @staticmethod
+    def _parse_file(
+        *,
+        file: Path,
+        fields: List[str],
+        sizes: List[int],
+        line_size: int,
+        months: List[str],
+        output_path: str,
+        id_subset: Union[None, List[str]],
+    ):
+        data = []
+        with open(file) as f:
+            structure_name = ""
+            line = f.readline()
+            while line:
+                if "STRUCTURE NAME" in line:
+                    structure_name = line.split(":")[1].strip()
+                elif len(line) == line_size:
+                    if any(m in line for m in months):
+                        d = [structure_name]
+                        position = 0
+                        for count in sizes:
+                            d.append(line[position:position + count].strip())
+                            position += count
+                        data.append(d)
+                line = f.readline()
+        df = pd.DataFrame(data=data, columns=['structure_name'] + fields)
+        if id_subset is not None:
+            df = df[df['structure_id'].isin(id_subset)]
+        df.to_parquet(f"{output_path}/{Path(file).stem}.parquet")
