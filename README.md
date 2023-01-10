@@ -46,3 +46,24 @@ stm.modify_ddm(modify_dict=setup_dict,
                query_field=query_field,
                template_file=template_file)
 ```
+
+### Convert output .xdd files to .parquet files
+Parquet files are efficient columnar data stores that easily interoperate with pandas dataframes.
+```python
+from statemodify.xdd import XddConverter
+
+# set up the converter
+converter = XddConverter(
+    output_path='./output',
+    allow_overwrite=False,
+    xdd_files='**/*.xdd',
+    id_subset=None,
+    parallel_jobs=4,
+)
+
+# convert the files
+converter.convert()
+
+# look for your parquet files in './output'!
+
+```
