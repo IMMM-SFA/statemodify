@@ -24,9 +24,11 @@ setup(
     python_requires='>=3.8.*, <4',
     include_package_data=True,
     install_requires=[
+        'joblib>=1.1.0',
         'numpy>=1.22.3',
         'pandas>=1.4.2',
-        'joblib>=1.1.0',
-        'SALib>1.4.5'
+        'pyarrow>=10.0.1',
+        'SALib>1.4.5',
+        'tqdm>=4.64.1',
     ],
 )
