@@ -24,7 +24,7 @@ def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
             print(f"Filling names field for 'modify_dict' with generic ID as it is not used in this function.")
             modify_dict["names"] = [f"group_{index}" for index, i in enumerate(modify_dict["ids"])]
 
-        elif (key not in modify_dict):
+        elif key not in modify_dict:
             raise KeyError(f"Missing the following key in user provided modify dictionary:  '{key}'")
 
     return modify_dict
