@@ -18,17 +18,34 @@ class TestSampler(unittest.TestCase):
         "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
     }
 
+    VALID_MODIFY_DICT_NONAMES = {
+        "ids": [["10001", "10004"], ["10005", "10006"]],
+        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+    }
+
     PROBLEM_DICT = {
         'num_vars': 2,
         'names': ['municipal', 'standard'],
         'bounds': [[-1.0, 1.0], [-1.0, 1.0]]
     }
 
-    def test_validate_modify_dict(self):
+    FILL_COMP_DICT = {'ids': [['10001', '10004'], ['10005', '10006']],
+                      'bounds': [[-1.0, 1.0], [-1.0, 1.0]],
+                      'names': ['group_0', 'group_1']
+    }
+
+    def test_validate_modify_dict_fail(self):
         """Ensure validation raises error."""
 
         with self.assertRaises(KeyError):
-            sampler.validate_modify_dict(TestSampler.INVALID_MODIFY_DICT)
+            d = sampler.validate_modify_dict(TestSampler.INVALID_MODIFY_DICT, fill=False)
+
+    def test_validate_modify_dict_fill(self):
+        """Ensure validation fills missing names."""
+
+        d = sampler.validate_modify_dict(TestSampler.VALID_MODIFY_DICT_NONAMES, fill=True)
+
+        self.assertEqual(TestSampler.FILL_COMP_DICT, d)
 
     def test_build_problem_dict(self):
         """Ensure expected output is generated."""
@@ -47,8 +64,8 @@ class TestSampler(unittest.TestCase):
                                           sampling_method="LHS",
                                           seed_value=123)
 
-        expected_result = np.array([[-0.30353081, 0.22685145],
-                                    [0.55131477, -0.71386067]])
+        expected_result = np.array([[-0.30353081, 0.55131477],
+                                    [0.22685145, -0.71386067]])
 
         np.testing.assert_array_equal(np.around(expected_result, 4),
                                       np.around(result, 4))

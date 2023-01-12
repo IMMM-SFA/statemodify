@@ -4,29 +4,41 @@ import numpy as np
 from SALib.sample import latin
 
 
-def validate_modify_dict(modify_dict) -> None:
+def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
+                         fill: bool = False) -> dict:
     """Validate user input modify dictionary to ensure all necessary elements are present.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
 
-    :returns:                   None
-    :rtype:                     None
+    :returns:                   Dictionary of validated parameters
+    :rtype:                     dict
 
     """
 
-    required_keys = ("names", "ids", "bounds")
+    # note: names is last to setup the conditional later
+    required_keys = ("ids", "bounds", "names")
 
     for key in required_keys:
-        if key not in modify_dict:
+        if (key not in modify_dict) and (key == "names") and (fill is True):
+            print(f"Filling names field for 'modify_dict' with generic ID as it is not used in this function.")
+            modify_dict["names"] = [f"group_{index}" for index, i in enumerate(modify_dict["ids"])]
+
+        elif (key not in modify_dict):
             raise KeyError(f"Missing the following key in user provided modify dictionary:  '{key}'")
 
+    return modify_dict
 
-def build_problem_dict(modify_dict) -> dict:
+
+def build_problem_dict(modify_dict: Dict[str, List[Union[str, float]]],
+                       fill: bool = False) -> dict:
     """Build the problem set from the input modify dictionary provided by the user.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
+
+    :param fill:                If True, fill in missing names using the index of the ids list. Default False.
+    :type fill:                 bool
 
     :returns:                   Dictionary ready for use by SALib sample generators
     :rtype:                     dict
@@ -45,12 +57,13 @@ def build_problem_dict(modify_dict) -> dict:
         }
 
         # generate problem dictionary to use with SALib sampling components
-        problem_dict = stm.build_problem_dict(modify_dict)
+        problem_dict = stm.build_problem_dict(modify_dict, fill=False)
 
     """
 
     # ensure all keys are present in the user provided dictionary
-    validate_modify_dict(modify_dict)
+    modify_dict = validate_modify_dict(modify_dict=modify_dict,
+                                       fill=fill)
 
     return {
         'num_vars': len(modify_dict["names"]),
