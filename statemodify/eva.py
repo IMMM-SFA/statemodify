@@ -3,34 +3,22 @@ from typing import Union, Dict, List
 
 import numpy as np
 from joblib import Parallel, delayed
+from SALib.sample import latin
 
 import statemodify.utils as utx
-import statemodify.sampler as sampler
 
 
 class ModifyEva:
     """Modify .eva files."""
 
     def __init__(self,
-                 query_field: str,
-                 skip_rows: int = 1,
-                 template_file: Union[None, str] = None):
-        """Modifier class for evapotranspiration files.
+                 modify_dict: dict,
+                 n_samples: int = 1,
+                 seed_value: Union[int, None] = None):
 
-        :param query_field:         Field name to use for target query.
-        :type query_field:          str
-
-        :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-        :type skip_rows:            int, optional
-
-        :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                    default template in this package will be used.
-        :type template_file:        Union[None, str]
-
-        """
-
-        self.query_field = query_field
-        self.skip_rows = skip_rows
+        self.modify_dict = modify_dict
+        self.n_samples = n_samples
+        self.seed_value = seed_value
 
         # character indicating row is a comment
         self.comment = "#"
@@ -105,11 +93,20 @@ class ModifyEva:
         # list of value columns that may be modified
         self.value_columns = ["oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep"]
 
+        # field to conduct queries for
+        self.query_field = "id"
+
         # template file
-        if template_file is None:
-            self.template_file = pkg_resources.resource_filename("statemodify", "data/template.eva")
-        else:
-            self.template_file = template_file
+        self.template_file = pkg_resources.resource_filename("statemodify", "data/template.eva")
+
+        # number of rows to skip after the commented fields end
+        self.skip_rows = 0
+
+        # build problem set
+        self.problem = self.build_problem()
+
+        # generate samples and add them to modify dict
+        self.modify_dict["samples"] = self.generate_samples()
 
     def generate_data(self):
         """Ingest statemod file and format into a data frame.
@@ -148,103 +145,40 @@ class ModifyEva:
                              comment=self.comment,
                              skip_rows=self.skip_rows)
 
+    def validate_modify_dict(self):
+        """Ensure modify dictionary is complete."""
 
-def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
-                      query_field: str,
-                      output_dir: str,
-                      scenario: str,
-                      sample: np.array,
-                      sample_id: int = 0,
-                      skip_rows: int = 1,
-                      template_file: Union[None, str] = None) -> None:
-    """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
-    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
-    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+        pass
 
-    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
-    :type modify_dict:          Dict[str, List[Union[str, float]]]
+    def build_problem(self):
+        """Build the problem set from the input modify dictionary."""
 
-    :param query_field:         Field name to use for target query.
-    :type query_field:          str
-
-    :param sample:              An array of samples for each parameter.
-    :type sample:               np.array
-
-    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
-    :type sample_id:            int
-
-    :param output_dir:          Path to output directory.
-    :type output_dir:           str
-
-    :param scenario:            Scenario name.
-    :type scenario:             str
-
-    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.
-    :type n_samples:            int, optional
-
-    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-    :type skip_rows:            int, optional
-
-    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.
-                                Defaults to None.
-    :type seed_value:           Union[None, int], optional
-
-    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                default template in this package will be used.
-    :type template_file:        Union[None, str]
-
-    :return: None
-    :rtype: None
-
-    :example:
-
-    .. code-block:: python
-
-        import statemodify as stm
-
-        # a dictionary to describe what you want to modify and the bounds for the LHS
-        setup_dict = {
-            "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+        return {
+            'num_vars': len(self.modify_dict["names"]),
+            'names': self.modify_dict["names"],
+            'bounds': self.modify_dict["bounds"]
         }
 
-        output_directory = "<your desired output directory>"
-        scenario = "<your scenario name>"
+    def generate_samples(self):
+        """Generate samples."""
 
-        # sample id for the current run
-        sample_id = 0
+        # generate our sample
+        return latin.sample(problem=self.problem,
+                            N=self.n_samples,
+                            seed=self.seed_value).T
 
-        # sample array for each parameter
-        sample = np.array([0.39, -0.42])
 
-        # seed value for reproducibility if so desired
-        seed_value = None
-
-        # number of rows to skip in file after comment
-        skip_rows = 1
-
-        # name of field to query
-        query_field = "id"
-
-        # number of jobs to launch in parallel; -1 is all but 1 processor used
-        n_jobs = -1
-
-        # generate a batch of files using generated LHS
-        stm.modify_single_eva(modify_dict=modify_dict,
-                              query_field=query_field,
-                              sample=sample,
-                              sample_id=sample_id,
-                              output_dir=output_dir,
-                              scenario=scenario,
-                              skip_rows=skip_rows,
-                              template_file=None)
-
-    """
+def modify_single_eva(modify_dict,
+                      sample_id,
+                      output_dir,
+                      scenario,
+                      n_samples,
+                      seed_value):
 
     # instantiate
-    mod = ModifyEva(query_field=query_field,
-                    skip_rows=skip_rows,
-                    template_file=template_file)
+    mod = ModifyEva(modify_dict=modify_dict,
+                    n_samples=n_samples,
+                    seed_value=seed_value)
 
     # copy template data frame for alteration
     df, header = mod.generate_data()
@@ -253,20 +187,15 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     df[mod.query_field] = df[mod.query_field].str.strip()
 
     # modify value columns associated structures based on the sample draw
-    for index, i in enumerate(modify_dict["names"]):
+    for index, i in enumerate(mod.modify_dict["names"]):
 
         # extract target ids to modify
-        id_list = modify_dict["ids"][index]
+        id_list = mod.modify_dict["ids"][index]
 
         # extract factors from sample for the subset and sample
-        factor = sample[index]
+        factor = mod.modify_dict["samples"][index][sample_id]
 
-        # apply adjustment
-        df[mod.value_columns] = utx.apply_adjustment_factor(df,
-                                                            mod.value_columns,
-                                                            mod.query_field,
-                                                            id_list,
-                                                            factor)
+        df[mod.value_columns] = utx.apply_adjustment_factor(df, mod.value_columns, mod.query_field, id_list, factor)
 
     # reconstruct precision
     df[mod.value_columns] = df[mod.value_columns].round(4)
@@ -289,51 +218,28 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
 
 def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
-               query_field: str,
                output_dir: str,
                scenario: str,
-               sampling_method: str = "LHS",
                n_samples: int = 1,
-               skip_rows: int = 1,
-               n_jobs: int = -1,
-               seed_value: Union[None, int] = None,
-               template_file: Union[None, str] = None) -> None:
+               seed_value: Union[None, int] = None):
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
     modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
-    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
-    :type modify_dict:          Dict[str, List[Union[str, float]]]
+    :param modify_dict: Dictionary of parameters to setup the sampler.  See following example.
+    :type modify_dict: Dict[str, List[Union[str, float]]]
 
-    :param query_field:         Field name to use for target query.
-    :type query_field:          str
+    :param output_dir: Path to output directory.
+    :type output_dir: str
 
-    :param output_dir:          Path to output directory.
-    :type output_dir:           str
+    :param scenario: Scenario name.
+    :type scenario: str
 
-    :param scenario:            Scenario name.
-    :type scenario:             str
+    :param n_samples: Number of LHS samples to generate, optional. Defaults to 1.
+    :type n_samples: int, optional
 
-    :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
-                                Currently supports the following method:  "LHS" for Latin Hypercube Sampling
-    :type sampling_method:      str
-
-    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.
-    :type n_samples:            int, optional
-
-    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-    :type skip_rows:            int, optional
-
-    :param n_jobs:              Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.
-    :type n_jobs:               int
-
-    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.
-                                Defaults to None.
-    :type seed_value:           Union[None, int], optional
-
-    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                default template in this package will be used.
-    :type template_file:        Union[None, str]
+    :param seed_value: Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.
+    :type seed_value: Union[None, int], optional
 
     :return: None
     :rtype: None
@@ -346,6 +252,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
+            "names": ["municipal", "standard"],
             "ids": [["10001", "10004"], ["10005", "10006"]],
             "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
         }
@@ -359,44 +266,19 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # seed value for reproducibility if so desired
         seed_value = None
 
-        # number of rows to skip in file after comment
-        skip_rows = 1
-
-        # name of field to query
-        query_field = "id"
-
-        # number of jobs to launch in parallel; -1 is all but 1 processor used
-        n_jobs = -1
-
         # generate a batch of files using generated LHS
-        stm.modify_eva(modify_dict=modify_dict,
-                       query_field=query_field,
-                       output_dir=output_dir,
+        stm.modify_eva(modify_dict=setup_dict,
+                       output_dir=output_directory,
                        scenario=scenario,
-                       sampling_method="LHS",
                        n_samples=n_samples,
-                       skip_rows=skip_rows,
-                       n_jobs=n_jobs,
-                       seed_value=seed_value,
-                       template_file=None)
+                       seed_value=seed_value)
 
     """
 
-    # build a probelm dictionary for use by SALib
-    problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
-
-    # generate a sample array
-    sample_array = sampler.generate_samples(problem_dict=problem_dict,
-                                            n_samples=n_samples,
-                                            sampling_method=sampling_method,
-                                            seed_value=seed_value)
-
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_eva)(modify_dict=modify_dict,
-                                                                                 query_field=query_field,
-                                                                                 sample=sample,
-                                                                                 sample_id=sample_id,
-                                                                                 output_dir=output_dir,
-                                                                                 scenario=scenario,
-                                                                                 skip_rows=skip_rows,
-                                                                                 template_file=template_file) for sample_id, sample in enumerate(sample_array))
+    results = Parallel(n_jobs=-1, backend="loky")(delayed(modify_single_eva)(modify_dict=modify_dict,
+                                                                             sample_id=sample_id,
+                                                                             output_dir=output_dir,
+                                                                             scenario=scenario,
+                                                                             n_samples=n_samples,
+                                                                             seed_value=seed_value) for sample_id in range(n_samples))
