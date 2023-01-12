@@ -88,7 +88,7 @@ def generate_samples(problem_dict: dict,
 
         return latin.sample(problem=problem_dict,
                             N=n_samples,
-                            seed=seed_value).T
+                            seed=seed_value)
 
     else:
         raise KeyError(f"Selected sampling method is not currently supported.  Please file a feature request here: https://github.com/IMMM-SFA/statemodify/issues")
