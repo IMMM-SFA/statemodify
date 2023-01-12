@@ -170,7 +170,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     :param sample:              An array of samples for each parameter.
     :type sample:               np.array
 
-    :param sample_id:           Numeric ID of sample that is being procecessed. Defaults to 0.
+    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
     :type sample_id:            int
 
     :param output_dir:          Path to output directory.
@@ -216,7 +216,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         sample_id = 0
 
         # sample array for each parameter
-        sample = np.array([[1.0], [1.2]])
+        sample = np.array([0.39, -0.42])
 
         # seed value for reproducibility if so desired
         seed_value = None
