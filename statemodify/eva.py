@@ -204,7 +204,6 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "names": ["municipal", "standard"],
             "ids": [["10001", "10004"], ["10005", "10006"]],
             "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
         }
@@ -347,7 +346,6 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "names": ["municipal", "standard"],
             "ids": [["10001", "10004"], ["10005", "10006"]],
             "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
         }
@@ -385,7 +383,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
     """
 
     # build a probelm dictionary for use by SALib
-    problem_dict = sampler.build_problem_dict(modify_dict)
+    problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
 
     # generate a sample array
     sample_array = sampler.generate_samples(problem_dict=problem_dict,

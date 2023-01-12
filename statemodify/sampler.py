@@ -11,6 +11,9 @@ def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
     :param modify_dict:         Dictionary of parameters to setup the sampler.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
 
+    :param fill:                If True, fill in missing names using the index of the ids list. Default False.
+    :type fill:                 bool
+
     :returns:                   Dictionary of validated parameters
     :rtype:                     dict
 
@@ -21,7 +24,7 @@ def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
 
     for key in required_keys:
         if (key not in modify_dict) and (key == "names") and (fill is True):
-            print(f"Filling names field for 'modify_dict' with generic ID as it is not used in this function.")
+            print(f"Filling 'names' field for 'modify_dict' with generic names as they are not used in this function.")
             modify_dict["names"] = [f"group_{index}" for index, i in enumerate(modify_dict["ids"])]
 
         elif key not in modify_dict:

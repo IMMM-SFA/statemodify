@@ -11,7 +11,6 @@ import statemodify as stm
 class TestEva(unittest.TestCase):
 
     VALID_MODIFY_DICT = {
-        "names": ["municipal", "standard"],
         "ids": [["10001", "10004"], ["10005", "10006"]],
         "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
     }
