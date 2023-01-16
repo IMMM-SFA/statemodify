@@ -43,7 +43,6 @@ class TestEva(unittest.TestCase):
             # ensure equality
             self.assertEqual(comp_data, sim_data, msg="Simulated data for EVA file does not match what was expected.")
 
-
     def test_modify_eva_run(self):
         """Ensure the parallel function runs and generates an expected output."""
 

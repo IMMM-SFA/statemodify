@@ -242,7 +242,8 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                               output_dir=output_dir,
                               scenario=scenario,
                               skip_rows=skip_rows,
-                              template_file=None)
+                              template_file=None,
+                              factor_method="add")
 
     """
 
@@ -389,7 +390,8 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                        skip_rows=skip_rows,
                        n_jobs=n_jobs,
                        seed_value=seed_value,
-                       template_file=None)
+                       template_file=None,
+                       factor_method="add")
 
     """
 
