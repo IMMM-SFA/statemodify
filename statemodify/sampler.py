@@ -24,7 +24,7 @@ def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
 
     for key in required_keys:
         if (key not in modify_dict) and (key == "names") and (fill is True):
-            print(f"Filling 'names' field for 'modify_dict' with generic names as they are not used in this function.")
+            print(f"NOTICE: Filling 'names' field for 'modify_dict' with generic names as they are not used in this function.")
             modify_dict["names"] = [f"group_{index}" for index, i in enumerate(modify_dict["ids"])]
 
         elif key not in modify_dict:
