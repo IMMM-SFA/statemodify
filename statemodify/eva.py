@@ -156,7 +156,8 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                       sample: np.array,
                       sample_id: int = 0,
                       skip_rows: int = 1,
-                      template_file: Union[None, str] = None) -> None:
+                      template_file: Union[None, str] = None,
+                      factor_method: str = "add") -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
     modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
@@ -193,6 +194,10 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                 default template in this package will be used.
     :type template_file:        Union[None, str]
 
+    :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
+                                Defaults to 'add'.
+    :type factor_method:        str
+
     :return: None
     :rtype: None
 
@@ -205,7 +210,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+            "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
         }
 
         output_directory = "<your desired output directory>"
@@ -262,11 +267,12 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         factor = sample[index]
 
         # apply adjustment
-        df[mod.value_columns] = utx.apply_adjustment_factor(df,
-                                                            mod.value_columns,
-                                                            mod.query_field,
-                                                            id_list,
-                                                            factor)
+        df[mod.value_columns] = utx.apply_adjustment_factor(data_df=df,
+                                                            value_columns=mod.value_columns,
+                                                            query_field=mod.query_field,
+                                                            target_ids=id_list,
+                                                            factor=factor,
+                                                            factor_method=factor_method)
 
     # reconstruct precision
     df[mod.value_columns] = df[mod.value_columns].round(4)
@@ -297,7 +303,8 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                skip_rows: int = 1,
                n_jobs: int = -1,
                seed_value: Union[None, int] = None,
-               template_file: Union[None, str] = None) -> None:
+               template_file: Union[None, str] = None,
+               factor_method: str = "add") -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
     modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
@@ -335,6 +342,10 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                 default template in this package will be used.
     :type template_file:        Union[None, str]
 
+    :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
+                                Defaults to 'add'.
+    :type factor_method:        str
+
     :return: None
     :rtype: None
 
@@ -347,7 +358,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+            "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
         }
 
         output_directory = "<your desired output directory>"
@@ -399,4 +410,5 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                                                                  output_dir=output_dir,
                                                                                  scenario=scenario,
                                                                                  skip_rows=skip_rows,
-                                                                                 template_file=template_file) for sample_id, sample in enumerate(sample_array))
+                                                                                 template_file=template_file,
+                                                                                 factor_method=factor_method) for sample_id, sample in enumerate(sample_array))
