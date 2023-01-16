@@ -9,13 +9,19 @@ import statemodify.sampler as sampler
 
 
 class ModifyEva:
-    """Modify .eva files."""
+    """Data specifics for the StateMod evapotranspiration files (.eva) file specification."""
+
+    # set minimum and maximum feasible sampling bounds in feet per month
+    MIN_BOUND_VALUE: float = -0.5
+    MAX_BOUND_VALUE: float = 1.0
 
     def __init__(self,
                  query_field: str,
                  skip_rows: int = 1,
                  template_file: Union[None, str] = None):
-        """Modifier class for evapotranspiration files.
+
+        """Data specifics for the StateMod evapotranspiration files (.eva) file specification.
+
 
         :param query_field:         Field name to use for target query.
         :type query_field:          str
@@ -105,48 +111,20 @@ class ModifyEva:
         # list of value columns that may be modified
         self.value_columns = ["oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep"]
 
-        # template file
+        # template file selection
         if template_file is None:
             self.template_file = pkg_resources.resource_filename("statemodify", "data/template.eva")
         else:
             self.template_file = template_file
 
-    def generate_data(self):
-        """Ingest statemod file and format into a data frame.
-
-        :param field_dict:              Dictionary holding values for each field.
-        :type field_dict:               dict
-
-        :param template_file:           Statemod input file to parse.
-        :type template_file:            str
-
-        :param column_widths:           Dictionary of column names to expected widths.
-        :type column_widths:            dict
-
-        :param column_list:             List of columns to process.
-        :type column_list:              list
-
-        :param data_types:              Dictionary of column names to data types.
-        :type data_types:               dict
-
-        :param comment:                 Characters leading string indicating ignoring a line.
-        :type comment:                  str
-
-        :param skip_rows:               The number of uncommented rows of data to skip.
-        :type skip_rows:                int
-
-        :return:                        [0] data frame of data from file
-                                        [1] header data from file
-
-        """
-
-        return utx.prep_data(field_dict=self.data_dict,
-                             template_file=self.template_file,
-                             column_list=self.column_list,
-                             column_widths=self.column_widths,
-                             data_types=self.data_types,
-                             comment=self.comment,
-                             skip_rows=self.skip_rows)
+        # prepare template data frame for alteration
+        self.template_df, self.template_header = utx.prep_data(field_dict=self.data_dict,
+                                                               template_file=self.template_file,
+                                                               column_list=self.column_list,
+                                                               column_widths=self.column_widths,
+                                                               data_types=self.data_types,
+                                                               comment=self.comment,
+                                                               skip_rows=self.skip_rows)
 
 
 def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
@@ -247,16 +225,18 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
-    # instantiate
+    # instantiate specification class
     mod = ModifyEva(query_field=query_field,
                     skip_rows=skip_rows,
                     template_file=template_file)
 
-    # copy template data frame for alteration
-    df, header = mod.generate_data()
-
     # strip the query field of any whitespace
-    df[mod.query_field] = df[mod.query_field].str.strip()
+    mod.template_df[mod.query_field] = mod.template_df[mod.query_field].str.strip()
+
+    # validate user provided sample bounds to ensure they are within a feasible range
+    utx.validate_bounds(bounds_list=modify_dict["bounds"],
+                        min_value=mod.MIN_BOUND_VALUE,
+                        max_value=mod.MAX_BOUND_VALUE)
 
     # modify value columns associated structures based on the sample draw
     for index, i in enumerate(modify_dict["names"]):
@@ -268,28 +248,28 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         factor = sample[index]
 
         # apply adjustment
-        df[mod.value_columns] = utx.apply_adjustment_factor(data_df=df,
-                                                            value_columns=mod.value_columns,
-                                                            query_field=mod.query_field,
-                                                            target_ids=id_list,
-                                                            factor=factor,
-                                                            factor_method=factor_method)
+        mod.template_df[mod.value_columns] = utx.apply_adjustment_factor(data_df=mod.template_df,
+                                                                         value_columns=mod.value_columns,
+                                                                         query_field=mod.query_field,
+                                                                         target_ids=id_list,
+                                                                         factor=factor,
+                                                                         factor_method=factor_method)
 
     # reconstruct precision
-    df[mod.value_columns] = df[mod.value_columns].round(4)
+    mod.template_df[mod.value_columns] = mod.template_df[mod.value_columns].round(4)
 
     # convert all fields to str type
-    df = df.astype(str)
+    mod.template_df = mod.template_df.astype(str)
 
     # add formatted data to output string
-    data = utx.construct_data_string(df, mod.column_list, mod.column_widths, mod.column_alignment)
+    data = utx.construct_data_string(mod.template_df, mod.column_list, mod.column_widths, mod.column_alignment)
 
     # write output file
     output_file = utx.construct_outfile_name(mod.template_file, output_dir, scenario, sample_id)
 
     with open(output_file, "w") as out:
         # write header
-        out.write(header)
+        out.write(mod.template_header)
 
         # write data
         out.write(data)
@@ -395,7 +375,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
-    # build a probelm dictionary for use by SALib
+    # build a problem dictionary for use by SALib
     problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
 
     # generate a sample array

@@ -12,7 +12,7 @@ class TestEva(unittest.TestCase):
 
     VALID_MODIFY_DICT = {
         "ids": [["10001", "10004"], ["10005", "10006"]],
-        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+        "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
     }
 
     EVA_COMP_FILE_NAME = "template_scenario-test_sample-0.eva"
@@ -25,7 +25,7 @@ class TestEva(unittest.TestCase):
 
             stm.modify_single_eva(modify_dict=TestEva.VALID_MODIFY_DICT,
                                   query_field="id",
-                                  sample=np.array([0.39293837, -0.42772133]),
+                                  sample=np.array([0.54470378, -0.070791]),
                                   sample_id=0,
                                   output_dir=tmp_dir,
                                   scenario="test",
