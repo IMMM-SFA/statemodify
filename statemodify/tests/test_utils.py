@@ -4,7 +4,6 @@ import unittest
 import numpy as np
 
 import statemodify.utils as utx
-import statemodify.modify as modify
 
 
 class TestUtils(unittest.TestCase):
@@ -12,20 +11,22 @@ class TestUtils(unittest.TestCase):
 
     TEST_YAML = pkg_resources.resource_filename("statemodify", "data/ddm_data_specification.yml")
 
-    def test_yaml(self):
-        """Test YAML return string."""
+    def test_select_template_file(self):
+        """Test template file retrieval."""
 
-        d = utx.yaml_to_dict(TestUtils.TEST_YAML)
+        template_file_custom = utx.select_template_file("/test/eva_data_specification.yml")
 
-        file_spec = modify.Modify(comment_indicator=d["comment_indicator"],
-                                  data_dict=d["data_dict"],
-                                  column_widths=d["column_widths"],
-                                  column_alignment=d["column_alignment"],
-                                  data_types=d["data_types"],
-                                  column_list=d["column_list"],
-                                  value_columns=d["value_columns"])
+        self.assertEqual("/test/eva_data_specification.yml",
+                         template_file_custom,
+                         msg="Failure for YAML file selection.")
 
-        print(file_spec.value_columns)
+
+    def test_select_template_file(self):
+        """Test template file retrieval."""
+
+        template_file_custom = utx.select_template_file("/test/template_file.eva")
+
+        self.assertEqual("/test/template_file.eva", template_file_custom, msg="Failure for template file selection.")
 
     def test_yaml_str(self):
         """Test YAML return string."""
