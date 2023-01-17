@@ -1,4 +1,5 @@
 import os
+from typing import Union, List
 
 import numpy as np
 import pandas as pd
@@ -325,7 +326,8 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
                             value_columns: list,
                             query_field: str,
                             target_ids: list,
-                            factor: float) -> pd.DataFrame:
+                            factor: float,
+                            factor_method: str = "add") -> pd.DataFrame:
     """Apply adjustment to template file values for target ids using a sample factor.
 
     :param data_df:                         Data frame of data content from file.
@@ -343,8 +345,83 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
     :param factor:                          Value to multiply the selected value columns by.
     :type factor:                           float
 
+    :param factor_method:                   Method by which to apply the factor. Options 'add', 'multiply'.
+                                            Defaults to 'add'.
+    :type factor_method:                    str
+
     :return:                                An data frame of modified values to replace the original data with.
+    :rtype:                                 pd.DataFrame
 
     """
 
-    return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+    if factor_method == "add":
+        return (data_df[value_columns] + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+
+    elif factor_method == "multiply":
+        return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+
+    else:
+        raise KeyError(f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply').")
+
+
+def validate_bounds(bounds_list: List[List[float]],
+                    min_value: float = -0.5,
+                    max_value: float = 1.0) -> None:
+    """Ensure sample bounds provided by the user conform to a feasible range of values in feet per month.
+
+    :param bounds_list:             List of bounds to use for each parameter.
+    :type bounds_list:              List[List[float]]
+
+    :param min_value:               Minimum value of bounds that is feasible. Default -0.5.
+    :type max_value:                float
+
+    :param max_value:               Maximum value of bounds that is feasible. Default 1.0.
+    :type max_value:                float
+
+    :return:                        None
+    :rtype:                         None
+
+    :example:
+
+        .. code-block:: python
+
+        import statemodify as stm
+
+        # list of bounds to use for each parameter
+        bounds_list = [[-0.5, 1.0], [-0.5, 1.0]]
+
+        # validate bounds
+        stm.validate_bounds(bounds_list=bounds_list,
+                            min_value=-0.5,
+                            max_value=1.0)
+
+    """
+
+    flag_min_error = False
+    flag_max_error = False
+
+    # get min of lists
+    l_min = min([min(i) for i in bounds_list])
+
+    # get max of lists
+    l_max = max([max(i) for i in bounds_list])
+
+    if l_min < min_value:
+        msg_min = f"Minimum value for feasible sample bound '{l_min}' is invalid.  Minimum possible bound is '{min_value}'."
+        flag_min_error = True
+
+    if l_max > max_value:
+        msg_max = f"Maximum value for feasible sample bound '{l_max}' is invalid.  Maximum possible bound is '{max_value}'."
+        flag_max_error = True
+
+    if flag_min_error and flag_max_error:
+        raise ValueError((msg_min, msg_max))
+
+    elif flag_min_error and flag_max_error is False:
+        raise ValueError(msg_min)
+
+    elif flag_min_error is False and flag_max_error:
+        raise ValueError(msg_max)
+
+    else:
+        return None

@@ -15,11 +15,15 @@ class TestUtils(unittest.TestCase):
     COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
     COMP_FILE = "/my/output/directory/file_scenario-test_sample-0.txt"
     COMP_STR = "item   focus\n"
-    COMP_ADJ_DF = pd.DataFrame({"a": [10., 2.], "b": [-1., -0.2]})
+    COMP_ADJ_DF_ADD = pd.DataFrame({"a": [10., 20.1], "b": [-1., -1.9]})
+    COMP_ADJ_DF_MULTIPLY = pd.DataFrame({"a": [10., 2.], "b": [-1., -0.2]})
     FIELD_DICT = {"a": [], "b": [], "c": []}
     COLUMN_WIDTHS = {"a": 1, "b": 7, "c": 3}
     COLUMN_LIST = ["a", "b", "c"]
     DATA_TYPES = {"a": int, "b": str, "c": float}
+    BAD_BOUNDS_LOW = [[-0.5, 1.0], [-0.7, 1.0]]
+    BAD_BOUNDS_HIGH = [[-0.5, 1.4], [-0.5, 1.0]]
+    BAD_BOUNDS_BOTH = [[-0.5, 1.4], [-0.7, 1.0]]
 
     def test_set_alignment(self):
         """Tests for the set_alignment function."""
@@ -114,16 +118,64 @@ class TestUtils(unittest.TestCase):
 
         self.assertEqual(self.COMP_STR, data)
 
-    def test_apply_adjustment_factor(self):
+    def test_apply_adjustment_factor_add(self):
+        """Ensure add adjustment works."""
+
         data = utils.apply_adjustment_factor(data_df=pd.DataFrame({"a": [10, 20],
                                                                    "b": [-1, -2],
                                                                    "c": [0, 1]}),
                                              value_columns=["a", "b"],
                                              query_field="c",
                                              target_ids=[1],
-                                             factor=0.1)
+                                             factor=0.1,
+                                             factor_method="add")
 
-        pd.testing.assert_frame_equal(self.COMP_ADJ_DF, data)
+        pd.testing.assert_frame_equal(self.COMP_ADJ_DF_ADD, data)
+
+    def test_apply_adjustment_factor_multiply(self):
+        """Ensure multiply adjustment works."""
+
+        data = utils.apply_adjustment_factor(data_df=pd.DataFrame({"a": [10, 20],
+                                                                   "b": [-1, -2],
+                                                                   "c": [0, 1]}),
+                                             value_columns=["a", "b"],
+                                             query_field="c",
+                                             target_ids=[1],
+                                             factor=0.1,
+                                             factor_method="multiply")
+
+        pd.testing.assert_frame_equal(self.COMP_ADJ_DF_MULTIPLY, data)
+
+    def test_apply_adjustment_factor_error(self):
+        """Ensure error is raised for invalid factor_method."""
+
+        with self.assertRaises(KeyError):
+            data = utils.apply_adjustment_factor(data_df=pd.DataFrame({"a": [10, 20],
+                                                                       "b": [-1, -2],
+                                                                       "c": [0, 1]}),
+                                                 value_columns=["a", "b"],
+                                                 query_field="c",
+                                                 target_ids=[1],
+                                                 factor=0.1,
+                                                 factor_method="divide")
+
+    def test_validate_bounds_low(self):
+        """Raise error for low bound violation."""
+
+        with self.assertRaises(ValueError, msg="Low bounds validation failure."):
+            utils.validate_bounds(bounds_list=TestUtils.BAD_BOUNDS_LOW)
+
+    def test_validate_bounds_high(self):
+        """Raise error for high bound violation."""
+
+        with self.assertRaises(ValueError, msg="High bounds validation failure."):
+            utils.validate_bounds(bounds_list=TestUtils.BAD_BOUNDS_HIGH)
+
+    def test_validate_bounds_both(self):
+        """Raise error for both bound violation."""
+
+        with self.assertRaises(ValueError, msg="High and low bounds validation failure."):
+            utils.validate_bounds(bounds_list=TestUtils.BAD_BOUNDS_BOTH)
 
     if __name__ == '__main__':
         unittest.main()
