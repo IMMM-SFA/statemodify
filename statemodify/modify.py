@@ -433,23 +433,9 @@ def validate_bounds(bounds_list: List[List[float]],
         return None
 
 
-
-
 @dataclass
 class Modify:
     """Modification template for data transformation.
-
-    :param query_field:         Field name to use for target query.
-    :type query_field:          str
-
-    :param skip_rows:           Number of rows to skip after the commented fields end
-    :type skip_rows:            int, optional
-
-    :param min_bound_value:     Minimum value allowable for the sample generator to produce.
-    :type min_bound_value:      float
-
-    :param max_bound_value:     Maximum value allowable for the sample generator to produce.
-    :type max_bound_value:      float
 
     :param comment_indicator:   Character(s) indicating the line in the file is a comment. Defualt "#"
     :type comment_indicator:    str
@@ -474,10 +460,10 @@ class Modify:
 
     """
 
-    query_field: str
-    skip_rows: int
-    min_bound_value: float
-    max_bound_value: float
+    # query_field: str
+    # skip_rows: int
+    # min_bound_value: float
+    # max_bound_value: float
     comment_indicator: str
     data_dict: Dict[str, List[None]]
     column_widths: Dict[str, int]

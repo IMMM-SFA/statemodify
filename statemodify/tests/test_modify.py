@@ -177,6 +177,21 @@ class TestModify(unittest.TestCase):
         with self.assertRaises(ValueError, msg="High and low bounds validation failure."):
             modify.validate_bounds(bounds_list=TestModify.BAD_BOUNDS_BOTH)
 
+    def test_modify_dataclass(self):
+        """Ensure the modify data class is functioning properly."""
+
+        file_spec = modify.Modify(comment_indicator="#",
+                                  data_dict={"a": []},
+                                  column_widths={"a": 5},
+                                  column_alignment={"a": "left"},
+                                  data_types={"a": int},
+                                  column_list=["a"],
+                                  value_columns=["a"])
+
+        self.assertEqual("#", file_spec.comment_indicator)
+        self.assertEqual({"a": []}, file_spec.data_dict)
+        self.assertEqual(["a"], file_spec.column_list)
+
 
 if __name__ == '__main__':
     unittest.main()

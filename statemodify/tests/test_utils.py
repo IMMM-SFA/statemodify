@@ -4,12 +4,28 @@ import unittest
 import numpy as np
 
 import statemodify.utils as utx
+import statemodify.modify as modify
 
 
 class TestUtils(unittest.TestCase):
     """Tests to ensure functionality and stability of utils.py."""
 
     TEST_YAML = pkg_resources.resource_filename("statemodify", "data/ddm_data_specification.yml")
+
+    def test_yaml(self):
+        """Test YAML return string."""
+
+        d = utx.yaml_to_dict(TestUtils.TEST_YAML)
+
+        file_spec = modify.Modify(comment_indicator=d["comment_indicator"],
+                                  data_dict=d["data_dict"],
+                                  column_widths=d["column_widths"],
+                                  column_alignment=d["column_alignment"],
+                                  data_types=d["data_types"],
+                                  column_list=d["column_list"],
+                                  value_columns=d["value_columns"])
+
+        print(file_spec.value_columns)
 
     def test_yaml_str(self):
         """Test YAML return string."""
