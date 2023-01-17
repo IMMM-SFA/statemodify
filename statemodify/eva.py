@@ -4,7 +4,7 @@ from typing import Union, Dict, List
 import numpy as np
 from joblib import Parallel, delayed
 
-import statemodify.utils as utx
+import statemodify.modify as modify
 import statemodify.sampler as sampler
 
 
@@ -118,13 +118,13 @@ class ModifyEva:
             self.template_file = template_file
 
         # prepare template data frame for alteration
-        self.template_df, self.template_header = utx.prep_data(field_dict=self.data_dict,
-                                                               template_file=self.template_file,
-                                                               column_list=self.column_list,
-                                                               column_widths=self.column_widths,
-                                                               data_types=self.data_types,
-                                                               comment=self.comment,
-                                                               skip_rows=self.skip_rows)
+        self.template_df, self.template_header = modify.prep_data(field_dict=self.data_dict,
+                                                                  template_file=self.template_file,
+                                                                  column_list=self.column_list,
+                                                                  column_widths=self.column_widths,
+                                                                  data_types=self.data_types,
+                                                                  comment=self.comment,
+                                                                  skip_rows=self.skip_rows)
 
 
 def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
@@ -227,9 +227,9 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     mod.template_df[mod.query_field] = mod.template_df[mod.query_field].str.strip()
 
     # validate user provided sample bounds to ensure they are within a feasible range
-    utx.validate_bounds(bounds_list=modify_dict["bounds"],
-                        min_value=mod.MIN_BOUND_VALUE,
-                        max_value=mod.MAX_BOUND_VALUE)
+    modify.validate_bounds(bounds_list=modify_dict["bounds"],
+                           min_value=mod.MIN_BOUND_VALUE,
+                           max_value=mod.MAX_BOUND_VALUE)
 
     # modify value columns associated structures based on the sample draw
     for index, i in enumerate(modify_dict["names"]):
@@ -241,12 +241,12 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         factor = sample[index]
 
         # apply adjustment
-        mod.template_df[mod.value_columns] = utx.apply_adjustment_factor(data_df=mod.template_df,
-                                                                         value_columns=mod.value_columns,
-                                                                         query_field=mod.query_field,
-                                                                         target_ids=id_list,
-                                                                         factor=factor,
-                                                                         factor_method=factor_method)
+        mod.template_df[mod.value_columns] = modify.apply_adjustment_factor(data_df=mod.template_df,
+                                                                            value_columns=mod.value_columns,
+                                                                            query_field=mod.query_field,
+                                                                            target_ids=id_list,
+                                                                            factor=factor,
+                                                                            factor_method=factor_method)
 
     # reconstruct precision
     mod.template_df[mod.value_columns] = mod.template_df[mod.value_columns].round(4)
@@ -255,10 +255,10 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     mod.template_df = mod.template_df.astype(str)
 
     # add formatted data to output string
-    data = utx.construct_data_string(mod.template_df, mod.column_list, mod.column_widths, mod.column_alignment)
+    data = modify.construct_data_string(mod.template_df, mod.column_list, mod.column_widths, mod.column_alignment)
 
     # write output file
-    output_file = utx.construct_outfile_name(mod.template_file, output_dir, scenario, sample_id)
+    output_file = modify.construct_outfile_name(mod.template_file, output_dir, scenario, sample_id)
 
     with open(output_file, "w") as out:
         # write header
