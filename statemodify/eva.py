@@ -3,9 +3,9 @@ from typing import Union, Dict, List
 
 import numpy as np
 from joblib import Parallel, delayed
+from SALib.sample import latin
 
 import statemodify.utils as utx
-import statemodify.sampler as sampler
 
 
 class ModifyEva:
@@ -23,20 +23,9 @@ class ModifyEva:
         """Data specifics for the StateMod evapotranspiration files (.eva) file specification.
 
 
-        :param query_field:         Field name to use for target query.
-        :type query_field:          str
-
-        :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-        :type skip_rows:            int, optional
-
-        :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                    default template in this package will be used.
-        :type template_file:        Union[None, str]
-
-        """
-
-        self.query_field = query_field
-        self.skip_rows = skip_rows
+        self.modify_dict = modify_dict
+        self.n_samples = n_samples
+        self.seed_value = seed_value
 
         # character indicating row is a comment
         self.comment = "#"
@@ -126,6 +115,8 @@ class ModifyEva:
                                                                comment=self.comment,
                                                                skip_rows=self.skip_rows)
 
+    def validate_modify_dict(self):
+        """Ensure modify dictionary is complete."""
 
 def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                       query_field: str,
@@ -191,17 +182,14 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
             "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
         }
 
-        output_directory = "<your desired output directory>"
-        scenario = "<your scenario name>"
+    def generate_samples(self):
+        """Generate samples."""
 
-        # sample id for the current run
-        sample_id = 0
+        # generate our sample
+        return latin.sample(problem=self.problem,
+                            N=self.n_samples,
+                            seed=self.seed_value).T
 
-        # sample array for each parameter
-        sample = np.array([0.39, -0.42])
-
-        # seed value for reproducibility if so desired
-        seed_value = None
 
         # number of rows to skip in file after comment
         skip_rows = 1
@@ -239,13 +227,13 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                         max_value=mod.MAX_BOUND_VALUE)
 
     # modify value columns associated structures based on the sample draw
-    for index, i in enumerate(modify_dict["names"]):
+    for index, i in enumerate(mod.modify_dict["names"]):
 
         # extract target ids to modify
-        id_list = modify_dict["ids"][index]
+        id_list = mod.modify_dict["ids"][index]
 
         # extract factors from sample for the subset and sample
-        factor = sample[index]
+        factor = mod.modify_dict["samples"][index][sample_id]
 
         # apply adjustment
         mod.template_df[mod.value_columns] = utx.apply_adjustment_factor(data_df=mod.template_df,
@@ -276,10 +264,8 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
 
 def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
-               query_field: str,
                output_dir: str,
                scenario: str,
-               sampling_method: str = "LHS",
                n_samples: int = 1,
                skip_rows: int = 1,
                n_jobs: int = -1,
@@ -290,38 +276,20 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
     Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
     modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
-    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
-    :type modify_dict:          Dict[str, List[Union[str, float]]]
+    :param modify_dict: Dictionary of parameters to setup the sampler.  See following example.
+    :type modify_dict: Dict[str, List[Union[str, float]]]
 
-    :param query_field:         Field name to use for target query.
-    :type query_field:          str
+    :param output_dir: Path to output directory.
+    :type output_dir: str
 
-    :param output_dir:          Path to output directory.
-    :type output_dir:           str
+    :param scenario: Scenario name.
+    :type scenario: str
 
-    :param scenario:            Scenario name.
-    :type scenario:             str
+    :param n_samples: Number of LHS samples to generate, optional. Defaults to 1.
+    :type n_samples: int, optional
 
-    :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
-                                Currently supports the following method:  "LHS" for Latin Hypercube Sampling
-    :type sampling_method:      str
-
-    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.
-    :type n_samples:            int, optional
-
-    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-    :type skip_rows:            int, optional
-
-    :param n_jobs:              Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.
-    :type n_jobs:               int
-
-    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.
-                                Defaults to None.
-    :type seed_value:           Union[None, int], optional
-
-    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                default template in this package will be used.
-    :type template_file:        Union[None, str]
+    :param seed_value: Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.
+    :type seed_value: Union[None, int], optional
 
     :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
                                 Defaults to 'add'.
@@ -338,6 +306,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
+            "names": ["municipal", "standard"],
             "ids": [["10001", "10004"], ["10005", "10006"]],
             "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
         }
@@ -351,21 +320,10 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # seed value for reproducibility if so desired
         seed_value = None
 
-        # number of rows to skip in file after comment
-        skip_rows = 1
-
-        # name of field to query
-        query_field = "id"
-
-        # number of jobs to launch in parallel; -1 is all but 1 processor used
-        n_jobs = -1
-
         # generate a batch of files using generated LHS
-        stm.modify_eva(modify_dict=modify_dict,
-                       query_field=query_field,
-                       output_dir=output_dir,
+        stm.modify_eva(modify_dict=setup_dict,
+                       output_dir=output_directory,
                        scenario=scenario,
-                       sampling_method="LHS",
                        n_samples=n_samples,
                        skip_rows=skip_rows,
                        n_jobs=n_jobs,
