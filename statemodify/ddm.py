@@ -3,27 +3,39 @@ from typing import Union, Dict, List
 
 import numpy as np
 from joblib import Parallel, delayed
-from SALib.sample import latin
 
 import statemodify.utils as utx
+import statemodify.sampler as sampler
 
 
 class ModifyDdm:
-    """Modify .ddm files."""
+    """Data specifics for the StateMod municipal, industrial, transbasin Demands (.ddm) file specification."""
+
+    # set minimum and maximum feasible sampling bounds in feet per month
+    MIN_BOUND_VALUE: float = 0.5
+    MAX_BOUND_VALUE: float = 1.5
 
     def __init__(self,
-                 modify_dict: dict,
-                 n_samples: int = 1,
-                 seed_value: Union[int, None] = None,
-                 template_file: str = pkg_resources.resource_filename("statemodify", "data/template.ddm"),
-                 query_field: str = "id",
-                 skip_rows: int = 1):
+                 query_field: str,
+                 skip_rows: int = 1,
+                 template_file: Union[None, str] = None):
 
-        self.modify_dict = modify_dict
-        self.n_samples = n_samples
-        self.seed_value = seed_value
+        """Data specifics for the StateMod evapotranspiration files (.eva) file specification.
 
-        # number of rows to skip after the commented fields end
+
+        :param query_field:         Field name to use for target query.
+        :type query_field:          str
+
+        :param skip_rows:           Number of rows to skip after the commented fields end; default 1
+        :type skip_rows:            int, optional
+
+        :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
+                                    default template in this package will be used.
+        :type template_file:        Union[None, str]
+
+        """
+
+        self.query_field = query_field
         self.skip_rows = skip_rows
 
         # character indicating row is a comment
@@ -107,127 +119,158 @@ class ModifyDdm:
         # list of value columns that may be modified
         self.value_columns = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 
-        # field to conduct queries for
-        self.query_field = query_field
+        # template file selection
+        if template_file is None:
+            self.template_file = pkg_resources.resource_filename("statemodify", "data/template.ddm")
+        else:
+            self.template_file = template_file
 
-        # template file
-        self.template_file = template_file
+        # prepare template data frame for alteration
+        self.template_df, self.template_header = utx.prep_data(field_dict=self.data_dict,
+                                                               template_file=self.template_file,
+                                                               column_list=self.column_list,
+                                                               column_widths=self.column_widths,
+                                                               data_types=self.data_types,
+                                                               comment=self.comment,
+                                                               skip_rows=self.skip_rows)
 
-        # build problem set
-        self.problem = self.build_problem()
 
-        # generate samples and add them to modify dict
-        self.modify_dict["samples"] = self.generate_samples()
+def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
+                      query_field: str,
+                      output_dir: str,
+                      scenario: str,
+                      sample: np.array,
+                      sample_id: int = 0,
+                      skip_rows: int = 1,
+                      template_file: Union[None, str] = None,
+                      factor_method: str = "multiply") -> None:
+    """Modify StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample from the user.
+    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
+    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
-    def generate_data(self):
-        """Ingest statemod file and format into a data frame.
+    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
+    :type modify_dict:          Dict[str, List[Union[str, float]]]
 
-        :param field_dict:              Dictionary holding values for each field.
-        :type field_dict:               dict
+    :param query_field:         Field name to use for target query.
+    :type query_field:          str
 
-        :param template_file:           Statemod input file to parse.
-        :type template_file:            str
+    :param sample:              An array of samples for each parameter.
+    :type sample:               np.array
 
-        :param column_widths:           Dictionary of column names to expected widths.
-        :type column_widths:            dict
+    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
+    :type sample_id:            int
 
-        :param column_list:             List of columns to process.
-        :type column_list:              list
+    :param output_dir:          Path to output directory.
+    :type output_dir:           str
 
-        :param data_types:              Dictionary of column names to data types.
-        :type data_types:               dict
+    :param scenario:            Scenario name.
+    :type scenario:             str
 
-        :param comment:                 Characters leading string indicating ignoring a line.
-        :type comment:                  str
+    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
+    :type skip_rows:            int, optional
 
-        :param skip_rows:               The number of uncommented rows of data to skip.
-        :type skip_rows:                int
+    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
+                                default template in this package will be used.
+    :type template_file:        Union[None, str]
 
-        :return:                        [0] data frame of data from file
-                                        [1] header data from file
+    :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
+                                Defaults to 'add'.
+    :type factor_method:        str
 
-        """
+    :return: None
+    :rtype: None
 
-        return utx.prep_data(field_dict=self.data_dict,
-                             template_file=self.template_file,
-                             column_list=self.column_list,
-                             column_widths=self.column_widths,
-                             data_types=self.data_types,
-                             comment=self.comment,
-                             skip_rows=self.skip_rows)
+    :example:
 
-    def validate_modify_dict(self):
-        """Ensure modify dictionary is complete."""
+    .. code-block:: python
 
-        pass
+        import statemodify as stm
 
-    def build_problem(self):
-        """Build the problem set from the input modify dictionary."""
-
-        return {
-            'num_vars': len(self.modify_dict["names"]),
-            'names': self.modify_dict["names"],
-            'bounds': self.modify_dict["bounds"]
+        # a dictionary to describe what you want to modify and the bounds for the LHS
+        setup_dict = {
+            "ids": [["10001", "10004"], ["10005", "10006"]],
+            "bounds": [[0.5, 1.5], [0.5, 1.5]]
         }
 
-    def generate_samples(self):
-        """Generate samples."""
+        output_directory = "<your desired output directory>"
+        scenario = "<your scenario name>"
 
-        # generate our sample
-        return latin.sample(problem=self.problem,
-                            N=self.n_samples,
-                            seed=self.seed_value).T
+        # sample id for the current run
+        sample_id = 0
 
+        # sample array for each parameter
+        sample = np.array([0.39, -0.42])
 
-def modify_single_ddm(modify_dict,
-                      sample_id,
-                      output_dir,
-                      scenario,
-                      n_samples,
-                      seed_value,
-                      template_file: str = pkg_resources.resource_filename("statemodify", "data/template.ddm"),
-                      query_field: str = "id"):
+        # seed value for reproducibility if so desired
+        seed_value = None
 
-    # instantiate
-    mod = ModifyDdm(modify_dict=modify_dict,
-                    n_samples=n_samples,
-                    seed_value=seed_value,
-                    template_file=template_file,
-                    query_field=query_field
-    )
+        # number of rows to skip in file after comment
+        skip_rows = 1
 
-    # copy template data frame for alteration
-    df, header = mod.generate_data()
+        # name of field to query
+        query_field = "id"
+
+        # number of jobs to launch in parallel; -1 is all but 1 processor used
+        n_jobs = -1
+
+        # generate a batch of files using generated LHS
+        stm.modify_single_ddm(modify_dict=modify_dict,
+                              query_field=query_field,
+                              sample=sample,
+                              sample_id=sample_id,
+                              output_dir=output_dir,
+                              scenario=scenario,
+                              skip_rows=skip_rows,
+                              template_file=None,
+                              factor_method="multiply")
+
+    """
+
+    # instantiate specification class
+    mod = ModifyDdm(query_field=query_field,
+                    skip_rows=skip_rows,
+                    template_file=template_file)
 
     # strip the query field of any whitespace
-    df[mod.query_field] = df[mod.query_field].str.strip()
+    mod.template_df[mod.query_field] = mod.template_df[mod.query_field].str.strip()
+
+    # validate user provided sample bounds to ensure they are within a feasible range
+    utx.validate_bounds(bounds_list=modify_dict["bounds"],
+                        min_value=mod.MIN_BOUND_VALUE,
+                        max_value=mod.MAX_BOUND_VALUE)
 
     # modify value columns associated structures based on the sample draw
-    for index, i in enumerate(mod.modify_dict["names"]):
+    for index, i in enumerate(modify_dict["names"]):
 
         # extract target ids to modify
-        id_list = mod.modify_dict["ids"][index]
+        id_list = modify_dict["ids"][index]
 
         # extract factors from sample for the subset and sample
-        factor = mod.modify_dict["samples"][index][sample_id]
+        factor = sample[index]
 
-        df[mod.value_columns] = utx.apply_adjustment_factor(df, mod.value_columns, mod.query_field, id_list, factor)
+        # apply adjustment
+        mod.template_df[mod.value_columns] = utx.apply_adjustment_factor(data_df=mod.template_df,
+                                                                         value_columns=mod.value_columns,
+                                                                         query_field=mod.query_field,
+                                                                         target_ids=id_list,
+                                                                         factor=factor,
+                                                                         factor_method=factor_method)
 
     # reconstruct precision
-    df[mod.value_columns] = df[mod.value_columns].round(4)
+    mod.template_df[mod.value_columns] = mod.template_df[mod.value_columns].round(4)
 
     # convert all fields to str type
-    df = df.astype(str)
+    mod.template_df = mod.template_df.astype(str)
 
     # add formatted data to output string
-    data = utx.construct_data_string(df, mod.column_list, mod.column_widths, mod.column_alignment)
+    data = utx.construct_data_string(mod.template_df, mod.column_list, mod.column_widths, mod.column_alignment)
 
     # write output file
     output_file = utx.construct_outfile_name(mod.template_file, output_dir, scenario, sample_id)
 
     with open(output_file, "w") as out:
         # write header
-        out.write(header)
+        out.write(mod.template_header)
 
         # write data
         out.write(data)
