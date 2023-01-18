@@ -35,7 +35,7 @@ data_types:
   "id": !!python/name:str
   "name": !!python/name:str
   "struct": !!python/name:str
-  "admin": !!python/name:numpy.float64
+  "admin": !!python/name:str
   "decree": !!python/name:numpy.float64
   "on_off": !!python/name:int
 

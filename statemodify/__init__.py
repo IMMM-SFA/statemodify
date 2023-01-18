@@ -1,4 +1,5 @@
 from .ddm import *
+from .ddr import *
 from .eva import *
 from .xdd import *
 from .sampler import *

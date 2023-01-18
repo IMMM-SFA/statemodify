@@ -15,12 +15,12 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                       scenario: str,
                       sample: np.array,
                       sample_id: int = 0,
-                      skip_rows: int = 1,
+                      skip_rows: int = 0,
                       template_file: Union[None, str] = None,
-                      factor_method: str = "add",
+                      factor_method: str = "multiply",
                       data_specification_file: Union[None, str] = None,
-                      min_bound_value: float = -0.5,
-                      max_bound_value: float = 1.0) -> None:
+                      min_bound_value: float = 0.5,
+                      max_bound_value: float = 1.5) -> None:
     """Modify StateMod water rights (.ddr) file from sample provided by the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
@@ -94,7 +94,7 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         seed_value = None
 
         # number of rows to skip in file after comment
-        skip_rows = 1
+        skip_rows = 0
 
         # name of field to query
         query_field = "id"
@@ -111,7 +111,7 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                               scenario=scenario,
                               skip_rows=skip_rows,
                               template_file=None,
-                              factor_method="add",
+                              factor_method="multiply",
                               data_specification_file=None,
                               min_bound_value=-0.5,
                               max_bound_value=1.0)
@@ -119,11 +119,11 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     """
 
     # select the appropriate template file
-    template_file = utx.select_template_file(template_file, extension="eva")
+    template_file = utx.select_template_file(template_file, extension="ddr")
 
     # read in data specification yaml
     data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                 extension="eva")
+                                                                 extension="ddr")
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
     # instantiate data specification and validation class
@@ -170,10 +170,14 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                                                               factor_method=factor_method)
 
     # reconstruct precision
-    template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(4)
+    template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(2)
 
     # convert all fields to str type
     template_df = template_df.astype(str)
+
+    # ensure a precision of 2 by adding in trailing 0s
+    for column in file_spec.value_columns:
+        template_df[column] = template_df[column].str.split(".").apply(lambda x: f"{x[0]}.{modify.add_zero_padding(x[-1], precision=2)}")
 
     # add formatted data to output string
     data = modify.construct_data_string(template_df,
@@ -198,15 +202,14 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                scenario: str,
                sampling_method: str = "LHS",
                n_samples: int = 1,
-               skip_rows: int = 1,
+               skip_rows: int = 0,
                n_jobs: int = -1,
                seed_value: Union[None, int] = None,
                template_file: Union[None, str] = None,
-               factor_method: str = "add",
+               factor_method: str = "multiply",
                data_specification_file: Union[None, str] = None,
-               min_bound_value: float = -0.5,
-               max_bound_value: float = 1.0
-               ) -> None:
+               min_bound_value: float = 0.5,
+               max_bound_value: float = 1.5) -> None:
     """Parallelized modification of StateMod water rights (.ddr) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
@@ -285,7 +288,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         seed_value = None
 
         # number of rows to skip in file after comment
-        skip_rows = 1
+        skip_rows = 0
 
         # name of field to query
         query_field = "id"
@@ -304,7 +307,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                        n_jobs=n_jobs,
                        seed_value=seed_value,
                        template_file=None,
-                       factor_method="add",
+                       factor_method="multiply",
                        data_specification_file=None,
                        min_bound_value=-0.5,
                        max_bound_value=1.0)
