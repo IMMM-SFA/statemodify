@@ -5,7 +5,7 @@ comment_indicator: "#"
 
 # Field specification in the file as a dictionary to hold the values for each field
 data_dict:
-  "prefix": []
+  "year": []
   "id": []
   "oct": []
   "nov": []
@@ -19,10 +19,11 @@ data_dict:
   "jul": []
   "aug": []
   "sep": []
+  "total": []
 
 # Define the column widths for the output file as a dictionary
 column_widths:
-  "prefix": 5
+  "year": 5
   "id": 12
   "oct": 8
   "nov": 8
@@ -36,10 +37,11 @@ column_widths:
   "jul": 8
   "aug": 8
   "sep": 8
+  "total": 10
 
 # Expected column alignment
 column_alignment:
-  "prefix": "left"
+  "year": "left"
   "id": "left"
   "oct": "right"
   "nov": "right"
@@ -53,10 +55,11 @@ column_alignment:
   "jul": "right"
   "aug": "right"
   "sep": "right"
+  "total": "right"
 
 # Expected data types for each field
 data_types:
-  "prefix": !!python/name:str
+  "year": !!python/name:int
   "id": !!python/name:str
   "oct": !!python/name:numpy.float64
   "nov": !!python/name:numpy.float64
@@ -70,10 +73,11 @@ data_types:
   "jul": !!python/name:numpy.float64
   "aug": !!python/name:numpy.float64
   "sep": !!python/name:numpy.float64
+  "total": !!python/name:numpy.float64
 
 # List of columns to process
 column_list:
-  - "prefix"
+  - "year"
   - "id"
   - "oct"
   - "nov"
@@ -87,6 +91,7 @@ column_list:
   - "jul"
   - "aug"
   - "sep"
+  - "total"
 
 # List of value columns that may be modified
 value_columns:
@@ -102,3 +107,4 @@ value_columns:
   - "jul"
   - "aug"
   - "sep"
+  - "total"

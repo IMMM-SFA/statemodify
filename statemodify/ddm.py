@@ -168,10 +168,13 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                                                                               factor_method=factor_method)
 
     # reconstruct precision
-    template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(4)
+    template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(0).astype(np.int64)
 
     # convert all fields to str type
     template_df = template_df.astype(str)
+
+    # add in trailing decimal
+    template_df[file_spec.value_columns] = template_df[file_spec.value_columns] + "."
 
     # add formatted data to output string
     data = modify.construct_data_string(template_df,
@@ -204,9 +207,9 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                data_specification_file: Union[None, str] = None,
                min_bound_value: float = 0.5,
                max_bound_value: float = 1.5) -> None:
-    """Modify StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample from the user.
-    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
-    modify are specified in the `modify_dict` argument. The user must specify bounds for each field name.
+    """Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
+    from the user. Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields
+    where ids to modify are specified in the `modify_dict` argument. The user must specify bounds for each field name.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
@@ -269,7 +272,7 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             "names": ["municipal", "standard"],
-            "ids": [["10001", "10004"], ["10005", "10006"]],
+            "ids": [["3600507", "3600603"], ["3600649_D", "3600662_D"]],
             "bounds": [[0.5, 1.5], [0.5, 1.5]]
         }
 

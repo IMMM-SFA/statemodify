@@ -12,14 +12,14 @@ class TestDdm(unittest.TestCase):
 
     VALID_MODIFY_DICT = {
         "names": ["municipal", "standard"],
-        "ids": [["10001", "10004"], ["10005", "10006"]],
+        "ids": [["3600507", "3600603"], ["3600649_D", "3600662_D"]],
         "bounds": [[0.5, 1.5], [0.5, 1.5]]
     }
 
     DDM_COMP_FILE_NAME = "template_scenario-test_sample-0.ddm"
     DDM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", DDM_COMP_FILE_NAME))
 
-    def test_modify_single_eva_run(self):
+    def test_modify_single_ddm_run(self):
         """Ensure the single file processor runs and generates the expected output."""
 
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -44,7 +44,7 @@ class TestDdm(unittest.TestCase):
             # ensure equality
             self.assertEqual(comp_data, sim_data, msg="Simulated data for DDM file does not match what was expected.")
 
-    def test_modify_eva_run(self):
+    def test_modify_ddm_run(self):
         """Ensure the parallel function runs and generates an expected output."""
 
         with tempfile.TemporaryDirectory() as tmp_dir:
