@@ -112,7 +112,10 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                               scenario=scenario,
                               skip_rows=skip_rows,
                               template_file=None,
-                              factor_method="multiply")
+                              factor_method="multiply",
+                              data_specification_file=None,
+                              min_bound_value=-0.5,
+                              max_bound_value=1.0)
 
     """
 
@@ -305,7 +308,7 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                        n_jobs=n_jobs,
                        seed_value=seed_value,
                        template_file=None,
-                       factor_method="add",
+                       factor_method="multiply",
                        data_specification_file=None,
                        min_bound_value=-0.5,
                        max_bound_value=1.0)
