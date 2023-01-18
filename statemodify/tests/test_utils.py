@@ -9,7 +9,7 @@ import statemodify.utils as utx
 class TestUtils(unittest.TestCase):
     """Tests to ensure functionality and stability of utils.py."""
 
-    TEST_YAML = pkg_resources.resource_filename("statemodify", "data/ddm_data_specification.yml")
+    TEST_YAML = pkg_resources.resource_filename("statemodify", "data/eva_data_specification.yml")
 
     def test_select_template_file(self):
         """Test template file retrieval."""
