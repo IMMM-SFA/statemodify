@@ -4,127 +4,9 @@ from typing import Union, Dict, List
 import numpy as np
 from joblib import Parallel, delayed
 
-import statemodify.utils as utx
+import statemodify.modify as modify
 import statemodify.sampler as sampler
-
-
-class ModifyEva:
-    """Data specifics for the StateMod evapotranspiration files (.eva) file specification."""
-
-    # set minimum and maximum feasible sampling bounds in feet per month
-    MIN_BOUND_VALUE: float = -0.5
-    MAX_BOUND_VALUE: float = 1.0
-
-    def __init__(self,
-                 query_field: str,
-                 skip_rows: int = 1,
-                 template_file: Union[None, str] = None):
-
-        """Data specifics for the StateMod evapotranspiration files (.eva) file specification.
-
-
-        :param query_field:         Field name to use for target query.
-        :type query_field:          str
-
-        :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-        :type skip_rows:            int, optional
-
-        :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                    default template in this package will be used.
-        :type template_file:        Union[None, str]
-
-        """
-
-        self.query_field = query_field
-        self.skip_rows = skip_rows
-
-        # character indicating row is a comment
-        self.comment = "#"
-
-        # dictionary to hold values for each field
-        self.data_dict = {"prefix": [],
-                          "id": [],
-                          "oct": [],
-                          "nov": [],
-                          "dec": [],
-                          "jan": [],
-                          "feb": [],
-                          "mar": [],
-                          "apr": [],
-                          "may": [],
-                          "jun": [],
-                          "jul": [],
-                          "aug": [],
-                          "sep": []}
-
-        # define the column widths for the output file
-        self.column_widths = {"prefix": 5,
-                              "id": 12,
-                              "oct": 8,
-                              "nov": 8,
-                              "dec": 8,
-                              "jan": 8,
-                              "feb": 8,
-                              "mar": 8,
-                              "apr": 8,
-                              "may": 8,
-                              "jun": 8,
-                              "jul": 8,
-                              "aug": 8,
-                              "sep": 8}
-
-        # expected column alignment
-        self.column_alignment = {"prefix": "left",
-                                  "id": "left",
-                                  "oct": "right",
-                                  "nov": "right",
-                                  "dec": "right",
-                                  "jan": "right",
-                                  "feb": "right",
-                                  "mar": "right",
-                                  "apr": "right",
-                                  "may": "right",
-                                  "jun": "right",
-                                  "jul": "right",
-                                  "aug": "right",
-                                  "sep": "right"}
-
-        # expected data types for each field
-        self.data_types = {"prefix": str,
-                           "id": str,
-                           "oct": np.float64,
-                           "nov": np.float64,
-                           "dec": np.float64,
-                           "jan": np.float64,
-                           "feb": np.float64,
-                           "mar": np.float64,
-                           "apr": np.float64,
-                           "may": np.float64,
-                           "jun": np.float64,
-                           "jul": np.float64,
-                           "aug": np.float64,
-                           "sep": np.float64}
-
-        # list of columns to process
-        self.column_list = ["prefix", "id", "oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep"]
-
-        # list of value columns that may be modified
-        self.value_columns = ["oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep"]
-
-        # template file selection
-        if template_file is None:
-            self.template_file = pkg_resources.resource_filename("statemodify", "data/template.eva")
-        else:
-            self.template_file = template_file
-
-        # prepare template data frame for alteration
-        self.template_df, self.template_header = utx.prep_data(field_dict=self.data_dict,
-                                                               template_file=self.template_file,
-                                                               column_list=self.column_list,
-                                                               column_widths=self.column_widths,
-                                                               data_types=self.data_types,
-                                                               comment=self.comment,
-                                                               skip_rows=self.skip_rows)
+import statemodify.utils as utx
 
 
 def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
@@ -135,39 +17,54 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                       sample_id: int = 0,
                       skip_rows: int = 1,
                       template_file: Union[None, str] = None,
-                      factor_method: str = "add") -> None:
+                      factor_method: str = "add",
+                      data_specification_file: Union[None, str] = None,
+                      min_bound_value: float = -0.5,
+                      max_bound_value: float = 1.0) -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
-    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
-    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    Samples are processed in parallel. Modification is targeted at ids chosen by the user to
+    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
-    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
-    :type modify_dict:          Dict[str, List[Union[str, float]]]
+    :param modify_dict:                 Dictionary of parameters to setup the sampler.  See following example.
+    :type modify_dict:                  Dict[str, List[Union[str, float]]]
 
-    :param query_field:         Field name to use for target query.
-    :type query_field:          str
+    :param query_field:                 Field name to use for target query.
+    :type query_field:                  str
 
-    :param sample:              An array of samples for each parameter.
-    :type sample:               np.array
+    :param sample:                      An array of samples for each parameter.
+    :type sample:                       np.array
 
-    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
-    :type sample_id:            int
+    :param sample_id:                   Numeric ID of sample that is being processed. Defaults to 0.
+    :type sample_id:                    int
 
-    :param output_dir:          Path to output directory.
-    :type output_dir:           str
+    :param output_dir:                  Path to output directory.
+    :type output_dir:                   str
 
-    :param scenario:            Scenario name.
-    :type scenario:             str
+    :param scenario:                    Scenario name.
+    :type scenario:                     str
 
-    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-    :type skip_rows:            int, optional
+    :param skip_rows:                   Number of rows to skip after the commented fields end; default 1
+    :type skip_rows:                    int, optional
 
-    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
-                                default template in this package will be used.
-    :type template_file:        Union[None, str]
+    :param template_file:               If a full path to a template file is provided it will be used.  Otherwise, the
+                                        default template in this package will be used.
+    :type template_file:                Union[None, str]
 
-    :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
-                                Defaults to 'add'.
-    :type factor_method:        str
+    :param factor_method:               Method by which to apply the factor. Options 'add', 'multiply'.
+                                        Defaults to 'add'.
+    :type factor_method:                str
+
+    :param data_specification_file:     If a full path to a data specification template is provided it will be used.
+                                        Otherwise, the default file in the package is used.
+    :type data_specification_file:      Union[None, str]
+
+    :param min_bound_value:             Minimum feasible sampling bounds in feet per month.
+                                        Minimum allowable value:  -0.5
+    :type min_bound_value:              float
+
+    :param max_bound_value:             Maximum feasible sampling bounds in feet per month.
+                                        Maximum allowable value:  1.0
+    :type max_bound_value:              float
 
     :return: None
     :rtype: None
@@ -214,22 +111,46 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                               scenario=scenario,
                               skip_rows=skip_rows,
                               template_file=None,
-                              factor_method="add")
+                              factor_method="add",
+                              data_specification_file=None,
+                              min_bound_value=-0.5,
+                              max_bound_value=1.0)
 
     """
 
-    # instantiate specification class
-    mod = ModifyEva(query_field=query_field,
-                    skip_rows=skip_rows,
-                    template_file=template_file)
+    # select the appropriate template file
+    template_file = utx.select_template_file(template_file, extension="eva")
+
+    # read in data specification yaml
+    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                 extension="eva")
+    data_spec_dict = utx.yaml_to_dict(data_specification_file)
+
+    # instantiate data specification and validation class
+    file_spec = modify.Modify(comment_indicator=data_spec_dict["comment_indicator"],
+                              data_dict=data_spec_dict["data_dict"],
+                              column_widths=data_spec_dict["column_widths"],
+                              column_alignment=data_spec_dict["column_alignment"],
+                              data_types=data_spec_dict["data_types"],
+                              column_list=data_spec_dict["column_list"],
+                              value_columns=data_spec_dict["value_columns"])
+
+    # prepare template data frame for alteration
+    template_df, template_header = modify.prep_data(field_dict=file_spec.data_dict,
+                                                    template_file=template_file,
+                                                    column_list=file_spec.column_list,
+                                                    column_widths=file_spec.column_widths,
+                                                    data_types=file_spec.data_types,
+                                                    comment=file_spec.comment_indicator,
+                                                    skip_rows=skip_rows)
 
     # strip the query field of any whitespace
-    mod.template_df[mod.query_field] = mod.template_df[mod.query_field].str.strip()
+    template_df[query_field] = template_df[query_field].str.strip()
 
     # validate user provided sample bounds to ensure they are within a feasible range
-    utx.validate_bounds(bounds_list=modify_dict["bounds"],
-                        min_value=mod.MIN_BOUND_VALUE,
-                        max_value=mod.MAX_BOUND_VALUE)
+    modify.validate_bounds(bounds_list=modify_dict["bounds"],
+                           min_value=min_bound_value,
+                           max_value=max_bound_value)
 
     # modify value columns associated structures based on the sample draw
     for index, i in enumerate(modify_dict["names"]):
@@ -241,28 +162,31 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         factor = sample[index]
 
         # apply adjustment
-        mod.template_df[mod.value_columns] = utx.apply_adjustment_factor(data_df=mod.template_df,
-                                                                         value_columns=mod.value_columns,
-                                                                         query_field=mod.query_field,
-                                                                         target_ids=id_list,
-                                                                         factor=factor,
-                                                                         factor_method=factor_method)
+        template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
+                                                                              value_columns=file_spec.value_columns,
+                                                                              query_field=query_field,
+                                                                              target_ids=id_list,
+                                                                              factor=factor,
+                                                                              factor_method=factor_method)
 
     # reconstruct precision
-    mod.template_df[mod.value_columns] = mod.template_df[mod.value_columns].round(4)
+    template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(4)
 
     # convert all fields to str type
-    mod.template_df = mod.template_df.astype(str)
+    template_df = template_df.astype(str)
 
     # add formatted data to output string
-    data = utx.construct_data_string(mod.template_df, mod.column_list, mod.column_widths, mod.column_alignment)
+    data = modify.construct_data_string(template_df,
+                                        file_spec.column_list,
+                                        file_spec.column_widths,
+                                        file_spec.column_alignment)
 
     # write output file
-    output_file = utx.construct_outfile_name(mod.template_file, output_dir, scenario, sample_id)
+    output_file = modify.construct_outfile_name(template_file, output_dir, scenario, sample_id)
 
     with open(output_file, "w") as out:
         # write header
-        out.write(mod.template_header)
+        out.write(template_header)
 
         # write data
         out.write(data)
@@ -278,10 +202,14 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                n_jobs: int = -1,
                seed_value: Union[None, int] = None,
                template_file: Union[None, str] = None,
-               factor_method: str = "add") -> None:
+               factor_method: str = "add",
+               data_specification_file: Union[None, str] = None,
+               min_bound_value: float = -0.5,
+               max_bound_value: float = 1.0
+               ) -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
-    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
-    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    Samples are processed in parallel. Modification is targeted at ids chosen by the user to
+    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
@@ -319,6 +247,18 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
     :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
                                 Defaults to 'add'.
     :type factor_method:        str
+
+    :param data_specification_file:     If a full path to a data specification template is provided it will be used.
+                                        Otherwise, the default file in the package is used.
+    :type data_specification_file:      Union[None, str]
+
+    :param min_bound_value:             Minimum feasible sampling bounds in feet per month.
+                                        Minimum allowable value:  -0.5
+    :type min_bound_value:              float
+
+    :param max_bound_value:             Maximum feasible sampling bounds in feet per month.
+                                        Maximum allowable value:  1.0
+    :type max_bound_value:              float
 
     :return: None
     :rtype: None
@@ -364,7 +304,10 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                        n_jobs=n_jobs,
                        seed_value=seed_value,
                        template_file=None,
-                       factor_method="add")
+                       factor_method="add",
+                       data_specification_file=None,
+                       min_bound_value=-0.5,
+                       max_bound_value=1.0)
 
     """
 
@@ -386,4 +329,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                                                                  scenario=scenario,
                                                                                  skip_rows=skip_rows,
                                                                                  template_file=template_file,
-                                                                                 factor_method=factor_method) for sample_id, sample in enumerate(sample_array))
+                                                                                 factor_method=factor_method,
+                                                                                 data_specification_file=data_specification_file,
+                                                                                 min_bound_value=min_bound_value,
+                                                                                 max_bound_value=max_bound_value) for sample_id, sample in enumerate(sample_array))
