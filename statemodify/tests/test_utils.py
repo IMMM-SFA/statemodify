@@ -20,7 +20,6 @@ class TestUtils(unittest.TestCase):
                          template_file_custom,
                          msg="Failure for YAML file selection.")
 
-
     def test_select_template_file(self):
         """Test template file retrieval."""
 
