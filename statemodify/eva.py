@@ -22,8 +22,8 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                       min_bound_value: float = -0.5,
                       max_bound_value: float = 1.0) -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
-    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
-    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    Samples are processed in parallel. Modification is targeted at ids chosen by the user to
+    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
 
     :param modify_dict:                 Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:                  Dict[str, List[Union[str, float]]]
@@ -119,10 +119,11 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     """
 
     # select the appropriate template file
-    template_file = utx.select_template_file(template_file)
+    template_file = utx.select_template_file(template_file, extension="eva")
 
     # read in data specification yaml
-    data_specification_file = utx.select_data_specification_file(data_specification_file)
+    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                 extension="eva")
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
     # instantiate data specification and validation class
@@ -201,7 +202,11 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                n_jobs: int = -1,
                seed_value: Union[None, int] = None,
                template_file: Union[None, str] = None,
-               factor_method: str = "add") -> None:
+               factor_method: str = "add",
+               data_specification_file: Union[None, str] = None,
+               min_bound_value: float = -0.5,
+               max_bound_value: float = 1.0
+               ) -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
@@ -242,6 +247,18 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
     :param factor_method:       Method by which to apply the factor. Options 'add', 'multiply'.
                                 Defaults to 'add'.
     :type factor_method:        str
+
+    :param data_specification_file:     If a full path to a data specification template is provided it will be used.
+                                        Otherwise, the default file in the package is used.
+    :type data_specification_file:      Union[None, str]
+
+    :param min_bound_value:             Minimum feasible sampling bounds in feet per month.
+                                        Minimum allowable value:  -0.5
+    :type min_bound_value:              float
+
+    :param max_bound_value:             Maximum feasible sampling bounds in feet per month.
+                                        Maximum allowable value:  1.0
+    :type max_bound_value:              float
 
     :return: None
     :rtype: None
@@ -287,7 +304,10 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                        n_jobs=n_jobs,
                        seed_value=seed_value,
                        template_file=None,
-                       factor_method="add")
+                       factor_method="add",
+                       data_specification_file=None,
+                       min_bound_value=-0.5,
+                       max_bound_value=1.0)
 
     """
 
@@ -309,4 +329,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                                                                  scenario=scenario,
                                                                                  skip_rows=skip_rows,
                                                                                  template_file=template_file,
-                                                                                 factor_method=factor_method) for sample_id, sample in enumerate(sample_array))
+                                                                                 factor_method=factor_method,
+                                                                                 data_specification_file=data_specification_file,
+                                                                                 min_bound_value=min_bound_value,
+                                                                                 max_bound_value=max_bound_value) for sample_id, sample in enumerate(sample_array))
