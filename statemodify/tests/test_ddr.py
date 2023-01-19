@@ -17,7 +17,9 @@ class TestDdr(unittest.TestCase):
         "bounds": [[0.5, 1.5], [0.5, 1.5]],
         # turn id on or off completely or for a given period
         # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
-        "on_off": [[-1977, 1], [0, 1977]]
+        "on_off": [[-1977, 1], [0, 1977]],
+        # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
+        "admin": [[None, 2], [0, 1]]
     }
 
     DDR_COMP_FILE_NAME = "template_scenario-test_sample-0.ddr"
@@ -35,9 +37,6 @@ class TestDdr(unittest.TestCase):
                                            query_field="id")
 
         pd.testing.assert_frame_equal(TestDdr.COMP_DF, df)
-
-
-
 
     def test_modify_single_ddr_run(self):
         """Ensure the single file processor runs and generates the expected output."""
