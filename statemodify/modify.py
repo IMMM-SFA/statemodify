@@ -1,14 +1,9 @@
 import os
-import pkg_resources
 from dataclasses import dataclass
-from typing import Union, Dict, List
+from typing import Dict, List
 
 import numpy as np
 import pandas as pd
-from joblib import Parallel, delayed
-
-import statemodify.utils as utx
-import statemodify.sampler as sampler
 
 
 def set_alignment(value: str,
@@ -351,7 +346,7 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
     :param factor:                          Value to multiply the selected value columns by.
     :type factor:                           float
 
-    :param factor_method:                   Method by which to apply the factor. Options 'add', 'multiply'.
+    :param factor_method:                   Method by which to apply the factor. Options 'add', 'multiply', 'assign'.
                                             Defaults to 'add'.
     :type factor_method:                    str
 
@@ -365,7 +360,8 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
 
     elif factor_method == "multiply":
         return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
-
+    elif factor_method == "assign":
+        return (data_df[value_columns] * 0 + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
     else:
         raise KeyError(f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply').")
 

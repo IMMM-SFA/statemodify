@@ -177,10 +177,16 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # strip the query field of any whitespace
     template_df[query_field] = template_df[query_field].str.strip()
 
+    modify_dict = sampler.validate_modify_dict(modify_dict=modify_dict,
+                                               fill=True)
+
     # validate user provided sample bounds to ensure they are within a feasible range
     modify.validate_bounds(bounds_list=modify_dict["bounds"],
                            min_value=min_bound_value,
                            max_value=max_bound_value)
+
+    # detect if values key in modify dict
+    use_values = "values" in modify_dict
 
     # modify value columns associated structures based on the sample draw
     for index, i in enumerate(modify_dict["names"]):
@@ -188,8 +194,16 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # extract target ids to modify
         id_list = modify_dict["ids"][index]
 
-        # extract factors from sample for the subset and sample
-        factor = sample[index]
+        if use_values:
+
+            # extract values to set on the target feature
+            factor = modify_dict["values"][index]
+            factor_method = "assign"
+
+        else:
+
+            # extract factors from sample for the subset and sample
+            factor = sample[index]
 
         # apply adjustment
         template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
