@@ -1,0 +1,110 @@
+# Assumptions for template file contents and parsing for the StateMod municipal, industrial, transbasin Demands (.ddm)
+
+# Character(s) indicating the line in the file is a comment.
+comment_indicator: "#"
+
+# Field specification in the file as a dictionary to hold the values for each field
+data_dict:
+  "year": []
+  "id": []
+  "oct": []
+  "nov": []
+  "dec": []
+  "jan": []
+  "feb": []
+  "mar": []
+  "apr": []
+  "may": []
+  "jun": []
+  "jul": []
+  "aug": []
+  "sep": []
+  "total": []
+
+# Define the column widths for the output file as a dictionary
+column_widths:
+  "year": 5
+  "id": 12
+  "oct": 8
+  "nov": 8
+  "dec": 8
+  "jan": 8
+  "feb": 8
+  "mar": 8
+  "apr": 8
+  "may": 8
+  "jun": 8
+  "jul": 8
+  "aug": 8
+  "sep": 8
+  "total": 10
+
+# Expected column alignment
+column_alignment:
+  "year": "left"
+  "id": "left"
+  "oct": "right"
+  "nov": "right"
+  "dec": "right"
+  "jan": "right"
+  "feb": "right"
+  "mar": "right"
+  "apr": "right"
+  "may": "right"
+  "jun": "right"
+  "jul": "right"
+  "aug": "right"
+  "sep": "right"
+  "total": "right"
+
+# Expected data types for each field
+data_types:
+  "year": !!python/name:int
+  "id": !!python/name:str
+  "oct": !!python/name:numpy.float64
+  "nov": !!python/name:numpy.float64
+  "dec": !!python/name:numpy.float64
+  "jan": !!python/name:numpy.float64
+  "feb": !!python/name:numpy.float64
+  "mar": !!python/name:numpy.float64
+  "apr": !!python/name:numpy.float64
+  "may": !!python/name:numpy.float64
+  "jun": !!python/name:numpy.float64
+  "jul": !!python/name:numpy.float64
+  "aug": !!python/name:numpy.float64
+  "sep": !!python/name:numpy.float64
+  "total": !!python/name:numpy.float64
+
+# List of columns to process
+column_list:
+  - "year"
+  - "id"
+  - "oct"
+  - "nov"
+  - "dec"
+  - "jan"
+  - "feb"
+  - "mar"
+  - "apr"
+  - "may"
+  - "jun"
+  - "jul"
+  - "aug"
+  - "sep"
+  - "total"
+
+# List of value columns that may be modified
+value_columns:
+  - "oct"
+  - "nov"
+  - "dec"
+  - "jan"
+  - "feb"
+  - "mar"
+  - "apr"
+  - "may"
+  - "jun"
+  - "jul"
+  - "aug"
+  - "sep"
+  - "total"
