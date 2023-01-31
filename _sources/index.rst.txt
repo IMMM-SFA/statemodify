@@ -1,12 +1,53 @@
-Welcome to statemodify!
-=========================
+Welcome to **statemodify**!
+--------------------------------
 
-```statemodify```:  A package to modify StateMod's input and output files for exploratory modeling
+**statemodify** is a python-based framework that provides users with a way to easily interact with StateMod in a linux-based environment. As demonstrated in Figure 1, the **statemodify** framework is comprised of 4 key steps:
 
-```statemodify``` enables researchers to:
+.. raw:: html
 
-- Modify input files to support exploratory analyses with StateMod
-- Quickly process output files into easy-to-use Pandas dataframes
+  <ol>
+  <li>The user will first be able to initialize a cluster in a clean environment, download and compile a StateMod executable, and download/import all other python packages that are required.</li>
+  <li><p>Next, the user will step through a series of methods that are created to facilitate manipulating and overwriting the historical StateMod files to represent plausible future conditions. For example:</p>
+  <ul>
+
+    <li><b>.xbm</b> files (monthly streamflow): can be overwritten with synthetic streamflows that are simultaneously generated across five key Colorado west-slope basins that represent plausible future flood/drought conditions. We currently implement a multi-basin Hidden Markov Model-based approach to generate these flows.</li>
+    <li><b>.iwr</b> files (monthly irrigation): can be overwritten in conjunction with <b>.xbm</b> files to maintain that irrigation demands will decrease with increasing flow.</li>
+    <li><b>.ddm</b>/<b>.eva</b>/<b>.opr</b> (demand, evaporation, operating rules): can be manipulated with multipliers (i.e. impose a 20% increase in municipal demands, increase reservoir evaporation, adjust operating rules)</li>
+    <li><b>.ddr</b> (water rights): can be manipulated to turn on/off users, and to change the seniority of users)</li>
+    <li><b>.res</b> (reservoir): can be manipulated to increase/decrease storage at specific reservoirs in each basin.</li>
+  </ul>
+
+  <p>The above are examples of methods that have been applied within our studies, but <b>statemodify</b> is flexible enough to accommodate new methods.</p></li>
+
+  <li>Once the input files are generated, we supply scripts that allow the user to run StateMod with a set of input files that represent plausible futures in parallel instances.</li>
+  <li>Finally, we store all relevant output in highly compressible parquet files that can be easily opened in Pandas dataframes. We also provide simple code to inspect shortages for specified users across futures.</li>
+  </ol>
+
+.. figure:: images/figure_1.png
+  :alt: **statemodify** workflow
+
+  Figure 1: The statemodify framework is comprised of four key steps (1) initializing an environment to run StateMod, (2) creating alternative plausible futures across five key West Slope Basins in Colorado, (3) running StateMod across all generated scenarios and (4) compiling results in compact data frames for easy visualization.
+
+Why do we need **statemodify**?
+--------------------------------
+
+Current Conditions
+++++++++++++++++++++++++++++
+
+In the Western United States, and particularly the Colorado River Basin, a recent study used tree-ring reconstructions to suggest that the megadrought that has been occurring in the Southwest over the past 22 years is the regions worst drought since about 800 AD (Williams et al., 2022). The recent trend of warming and reduced soil moisture in the Southwest US is becoming highly challenging from a water systems planning and management perspective for the Colorado River Basin. Given the wide recognition that the river is completely over-allocated, the most recent drought highlights the difficulty of sustaining the flow requirements as dictated by the Colorado Compact. Thus, there has been an increasing focus in utilizing exploratory modeling efforts to help actively inform Compact discussions and to clarify how vulnerable water systems in this region are to plausible future scenarios that may be characterized by changing climate and human-system dynamics.
+
+Planning and Management Models
++++++++++++++++++++++++++++++++
+
+The Colorado Water Conservation Board (CWCB) and the Division of Water Resources (DWR) have jointly developed Colorado's Decision Support System (CDSS), a collection of databases, data viewing and management tools, and models to support water resources planning in Colorado's major water basins (Malers et al., 2001). The CDSS is made up of a central database with water resources data (HydroBase), a public website where the data can be accessed, a Geographic Information System (GIS) for viewing and analyzing the data, and a consumptive use model (StateCU) that estimates consumptive use by each irrigation unit in a basin. The outputs from StateCU are then input to the State of Colorado's Stream Simulation Model (StateMod), a generic network-based water system model for water accounting and allocation, and the final component of CDSS. StateMod was developed to support comprehensive assessments of water demand, allocation, and use, as well as reservoir operations. It represents all of the major sub-basins within the state of Colorado (i.e., Parsons & Bennett, 2006; White, Yampa, Upper Colorado, Gunnison, Dolores, San Juan, and San Miguel CWCB, 2012). StateMod replicates each basin's unique application and enforcement of the prior appropriation doctrine and accounts for all of the consumptive use within the basins. To do so, it relies on the detailed historic demand and operation records contained in HydroBase that include individual water right information for all consumptive use, data on water structures (wells, ditches, reservoirs, and tunnels), and streamflow data. Further, StateMod uses irrigation consumptive use data output from StateCU, which calculates water consumption based on soil moisture, crop type, irrigated acreage, and conveyance and application efficiencies for each individual irrigation unit in the region.
+
+The Utility of StateMod
++++++++++++++++++++++++++++++++
+
+StateMod is one of the few highly resolved, open source, regional water allocation models that currently exists. Detailed, fine-scale inputs allow StateMod to resolve the effect of all users and water rights on water availability, which can, in turn, be used to simulate hypothetical scenarios to assess the impacts of changes in hydrology, water rights, or infrastructure on any and all represented water rights. A variety of studies have been conducted utilizing StateMod in an exploratory analysis (see Hadjimichael et al., 2020a, b). In order to facilitate these analyses, many methods have been developed to create templates from historical StateMod input files and adjust them (and their dependencies) to create new input files that represent plausible futures. The user can then run many StateMod simulations (i.e. thousands of future scenarios) in parallel and analyze the results.
+
+Prior to these studies, StateMod’s utility to be run efficiently in exploratory settings was limited, primarily due to the difficulty of adjusting the input files to represent future scenarios. Thus, we are proposing the development of a package called **statemodify** that neatly deploys this functionality and allows users of all coding levels to be able to interact with StateMod at a deeper and more exploratory level. By making StateMod more accessible, we also provide a better avenue for it to be used to actively inform current planning and management in the Colorado River basin by more general planners and decision-makers.
+
 
 Documentation
 --------------------------

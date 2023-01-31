@@ -228,8 +228,8 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#core-api">
-   Core API
+  <a class="reference internal nav-link" href="#input-modification">
+   Input Modification
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -238,8 +238,131 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-modify-single-eva">
+     statemodify.modify_single_eva
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-modify-ddm">
      statemodify.modify_ddm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-modify-ddr">
+     statemodify.modify_ddr
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output-modification">
+   Output Modification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-convert-xdd">
+     statemodify.convert_xdd
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling">
+   Sampling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-build-problem-dict">
+     statemodify.build_problem_dict
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-generate-samples">
+     statemodify.generate_samples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-validate-modify-dict">
+     statemodify.validate_modify_dict
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modification">
+   Modification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-set-alignment">
+     statemodify.set_alignment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-pad-with-spaces">
+     statemodify.pad_with_spaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-add-zero-padding">
+     statemodify.add_zero_padding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-populate-dict">
+     statemodify.populate_dict
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-prep-data">
+     statemodify.prep_data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-construct-outfile-name">
+     statemodify.construct_outfile_name
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-construct-data-string">
+     statemodify.construct_data_string
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-apply-adjustment-factor">
+     statemodify.apply_adjustment_factor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-validate-bounds">
+     statemodify.validate_bounds
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-modify">
+     statemodify.Modify
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utilities">
+   Utilities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-yaml-to-dict">
+     statemodify.yaml_to_dict
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-select-template-file">
+     statemodify.select_template_file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-select-data-specification-file">
+     statemodify.select_data_specification_file
     </a>
    </li>
   </ul>
@@ -265,8 +388,8 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#core-api">
-   Core API
+  <a class="reference internal nav-link" href="#input-modification">
+   Input Modification
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -275,8 +398,131 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-modify-single-eva">
+     statemodify.modify_single_eva
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-modify-ddm">
      statemodify.modify_ddm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-modify-ddr">
+     statemodify.modify_ddr
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output-modification">
+   Output Modification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-convert-xdd">
+     statemodify.convert_xdd
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling">
+   Sampling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-build-problem-dict">
+     statemodify.build_problem_dict
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-generate-samples">
+     statemodify.generate_samples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-validate-modify-dict">
+     statemodify.validate_modify_dict
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modification">
+   Modification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-set-alignment">
+     statemodify.set_alignment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-pad-with-spaces">
+     statemodify.pad_with_spaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-add-zero-padding">
+     statemodify.add_zero_padding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-populate-dict">
+     statemodify.populate_dict
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-prep-data">
+     statemodify.prep_data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-construct-outfile-name">
+     statemodify.construct_outfile_name
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-construct-data-string">
+     statemodify.construct_data_string
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-apply-adjustment-factor">
+     statemodify.apply_adjustment_factor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-validate-bounds">
+     statemodify.validate_bounds
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-modify">
+     statemodify.Modify
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utilities">
+   Utilities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-yaml-to-dict">
+     statemodify.yaml_to_dict
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-select-template-file">
+     statemodify.select_template_file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-select-data-specification-file">
+     statemodify.select_data_specification_file
     </a>
    </li>
   </ul>
@@ -292,30 +538,46 @@
                 
   <div class="section" id="python-api">
 <span id="pythonapi"></span><h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h1>
-<p><em>statemodify</em> offers a programmatic API in Python.</p>
+<p><strong>statemodify</strong> offers a programmatic API in Python.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For questions or request for support, please reach out to the development team.
 Your feedback is much appreciated in evolving this API!</p>
 </div>
-<div class="section" id="core-api">
-<h2>Core API<a class="headerlink" href="#core-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="input-modification">
+<h2>Input Modification<a class="headerlink" href="#input-modification" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="statemodify-modify-eva">
 <h3>statemodify.modify_eva<a class="headerlink" href="#statemodify-modify-eva" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="statemodify.modify_eva">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_eva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/eva.html#modify_eva"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_eva" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_eva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/eva.html#modify_eva"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_eva" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
-Samples are processed in parallel. Modification is targeted at ‘municipal’ and ‘standard’ fields where ids to
-modify are specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
+Samples are processed in parallel. Modification is targeted at ids chosen by the user to
+modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to use for target query.</p></li>
 <li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
 <li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
 <li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+Defaults to None.</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+default template in this package will be used.</p></li>
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+Defaults to ‘add’.</p></li>
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
+Otherwise, the default file in the package is used.</p></li>
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
+Minimum allowable value:  -0.5</p></li>
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
+Maximum allowable value:  1.0</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -323,6 +585,404 @@ modify are specified in the <cite>modify_dict</cite> argument.  The user must sp
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
+
+<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
+<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;10005&quot;</span><span class="p">,</span> <span class="s2">&quot;10006&quot;</span><span class="p">]],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+<span class="p">}</span>
+
+<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="c1"># the number of samples you wish to generate</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># seed value for reproducibility if so desired</span>
+<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># number of rows to skip in file after comment</span>
+<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># name of field to query</span>
+<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+
+<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># generate a batch of files using generated LHS</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+               <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
+               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+               <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
+               <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+               <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
+               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+               <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
+               <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+               <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-modify-single-eva">
+<h3>statemodify.modify_single_eva<a class="headerlink" href="#statemodify-modify-single-eva" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.modify_single_eva">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_single_eva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/eva.html#modify_single_eva"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_single_eva" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
+Samples are processed in parallel. Modification is targeted at ids chosen by the user to
+modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to use for target query.</p></li>
+<li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise, the
+default template in this package will be used.</p></li>
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+Defaults to ‘add’.</p></li>
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
+Otherwise, the default file in the package is used.</p></li>
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
+Minimum allowable value:  -0.5</p></li>
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
+Maximum allowable value:  1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
+
+<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
+<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;10005&quot;</span><span class="p">,</span> <span class="s2">&quot;10006&quot;</span><span class="p">]],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+<span class="p">}</span>
+
+<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="c1"># sample id for the current run</span>
+<span class="n">sample_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># sample array for each parameter</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.39</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.42</span><span class="p">])</span>
+
+<span class="c1"># seed value for reproducibility if so desired</span>
+<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># number of rows to skip in file after comment</span>
+<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># name of field to query</span>
+<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+
+<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># generate a batch of files using generated LHS</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_single_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+                      <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
+                      <span class="n">sample</span><span class="o">=</span><span class="n">sample</span><span class="p">,</span>
+                      <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+                      <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                      <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                      <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
+                      <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span>
+                      <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+                      <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-modify-ddm">
+<h3>statemodify.modify_ddm<a class="headerlink" href="#statemodify-modify-ddm" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.modify_ddm">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddm.html#modify_ddm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
+from the user. Samples are processed in parallel. Modification is targeted at ‘municipal’ and ‘standard’ fields
+where ids to modify are specified in the <cite>modify_dict</cite> argument. The user must specify bounds for each field name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to use for target query.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+Defaults to None.</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+default template in this package will be used.</p></li>
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+Defaults to ‘add’.</p></li>
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
+Otherwise, the default file in the package is used.</p></li>
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
+Minimum allowable value:  0.5</p></li>
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
+Maximum allowable value:  1.5</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
+
+<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
+<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;municipal&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;3600507&quot;</span><span class="p">,</span> <span class="s2">&quot;3600603&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;3600649_D&quot;</span><span class="p">,</span> <span class="s2">&quot;3600662_D&quot;</span><span class="p">]],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]]</span>
+<span class="p">}</span>
+
+<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="c1"># the number of samples you wish to generate</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># seed value for reproducibility if so desired</span>
+<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># number of rows to skip in file after comment</span>
+<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># name of field to query</span>
+<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+
+<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># generate a batch of files using generated LHS</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+               <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
+               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+               <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
+               <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+               <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
+               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+               <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
+               <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span>
+               <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-modify-ddr">
+<h3>statemodify.modify_ddr<a class="headerlink" href="#statemodify-modify-ddr" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.modify_ddr">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddr.html#modify_ddr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parallelized modification of StateMod water rights (.ddr) using a Latin Hypercube Sample from the user.
+Samples are processed in parallel. Modification is targeted at ids chosen by the user to
+modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to use for target query.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+Defaults to None.</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+default template in this package will be used.</p></li>
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+Defaults to ‘add’.</p></li>
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
+Otherwise, the default file in the package is used.</p></li>
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
+Minimum allowable value:  -0.5</p></li>
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
+Maximum allowable value:  1.0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
+
+<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
+<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># ids can either be &#39;struct&#39; or &#39;id&#39; values</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;3600507.01&quot;</span><span class="p">,</span> <span class="s2">&quot;3600507.02&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;3600642.04&quot;</span><span class="p">,</span> <span class="s2">&quot;3600642.05&quot;</span><span class="p">]],</span>
+
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]],</span>
+
+    <span class="c1"># turn id on or off completely or for a given period</span>
+    <span class="c1"># if 0 = off, 1 = on, YYYY = on for years &gt;= YYYY, -YYYY = off for years &gt; YYYY; see file header</span>
+    <span class="s2">&quot;on_off&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1977</span><span class="p">]],</span>
+
+    <span class="c1"># apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change</span>
+    <span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+    <span class="c1"># optionally, pass values that you want to be set for each user group; this overrides bounds</span>
+    <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="c1"># the number of samples you wish to generate</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># seed value for reproducibility if so desired</span>
+<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># number of rows to skip in file after comment</span>
+<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># name of field to query</span>
+<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+
+<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># generate a batch of files using generated LHS</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddr</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+               <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
+               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+               <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
+               <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+               <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
+               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+               <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
+               <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span>
+               <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="output-modification">
+<h2>Output Modification<a class="headerlink" href="#output-modification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="statemodify-convert-xdd">
+<h3>statemodify.convert_xdd<a class="headerlink" href="#statemodify-convert-xdd" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.convert_xdd">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">convert_xdd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./output'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdd_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'**/*.xdd'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xdd.html#convert_xdd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.convert_xdd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert StateMod output .xdd files to compressed, columnar .parquet files which easily interoperate
+with pandas dataframes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to a folder where outputs should be written; default “./output”</p></li>
+<li><p><strong>allow_overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If False, abort if files already exist in the output_path; default False</p></li>
+<li><p><strong>xdd_files</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – File(s) or glob(s) to the .xdd files to convert; default “<a href="#id1"><span class="problematic" id="id2">**</span></a>/<a href="#id3"><span class="problematic" id="id4">*</span></a>.xdd”</p></li>
+<li><p><strong>id_subset</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – List of structure IDs to convert, or None for all; default None</p></li>
+<li><p><strong>parallel_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – How many files to process in parallel; default 4</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
+
+<span class="n">stm</span><span class="o">.</span><span class="n">xdd</span><span class="o">.</span><span class="n">convert_xdd</span><span class="p">(</span>
+    <span class="c1"># path to a directory where output .parquet files should be written</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;./output&quot;</span><span class="p">,</span>
+    <span class="c1"># whether to abort if .parquet files already exist at the output_path</span>
+    <span class="n">allow_overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="c1"># path, glob, or a list of paths/globs to the .xdd files you want to convert</span>
+    <span class="n">xdd_files</span><span class="o">=</span><span class="s2">&quot;**/*.xdd&quot;</span><span class="p">,</span>
+    <span class="c1"># if the output .parquet files should only contain a subset of structure ids, list them here; None for all</span>
+    <span class="n">id_subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># how many .xdd files to convert in paralllel; optimally you will want 2-4 CPUs per parallel process</span>
+    <span class="n">parallel_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># look for your output .parquet files at the output_path!</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="sampling">
+<h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="statemodify-build-problem-dict">
+<h3>statemodify.build_problem_dict<a class="headerlink" href="#statemodify-build-problem-dict" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.build_problem_dict">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">build_problem_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/sampler.html#build_problem_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.build_problem_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the problem set from the input modify dictionary provided by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
+<li><p><strong>fill</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If True, fill in missing names using the index of the ids list. Default False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary ready for use by SALib sample generators</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><p></p></dd>
@@ -336,44 +996,282 @@ modify are specified in the <cite>modify_dict</cite> argument.  The user must sp
     <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
 <span class="p">}</span>
 
-<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
-
-<span class="c1"># the number of samples you wish to generate</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="c1"># seed value for reproducibility if so desired</span>
-<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">setup_dict</span><span class="p">,</span>
-               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
-               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
-               <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-               <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="c1"># generate problem dictionary to use with SALib sampling components</span>
+<span class="n">problem_dict</span> <span class="o">=</span> <span class="n">stm</span><span class="o">.</span><span class="n">build_problem_dict</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 </div>
-<div class="section" id="statemodify-modify-ddm">
-<h3>statemodify.modify_ddm<a class="headerlink" href="#statemodify-modify-ddm" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="statemodify-generate-samples">
+<h3>statemodify.generate_samples<a class="headerlink" href="#statemodify-generate-samples" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="statemodify.modify_ddm">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/Users/d3y010/repos/github/statemodify/statemodify/data/template.ddm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddm.html#modify_ddm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify StateMod .ddm data file using a Latin Hypercube Sample from the user.  Samples are processed in parallel.
-Modification is targeted at ‘municipal’ and ‘standard’ fields where ids to modify are specified in the <cite>modify_dict</cite>
-argument.  The user must specify bounds for each field name.</p>
+<dt class="sig sig-object py" id="statemodify.generate_samples">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/sampler.html#generate_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an array of statistically generated samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>problem_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
 <li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility. Defaults to None.</p></li>
-<li><p><strong>template_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Path to the DDM template file, optional. Defaults to a DDM template included in the statemodify package.</p></li>
-<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Field used for mapping parameters to DDM, optional. Defaults to “id”.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Array of samples</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-validate-modify-dict">
+<h3>statemodify.validate_modify_dict<a class="headerlink" href="#statemodify-validate-modify-dict" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.validate_modify_dict">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">validate_modify_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('ids',</span> <span class="pre">'bounds',</span> <span class="pre">'names')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/sampler.html#validate_modify_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.validate_modify_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate user input modify dictionary to ensure all necessary elements are present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
+<li><p><strong>required_keys</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Keys required to be present in the input dictionary.</p></li>
+<li><p><strong>fill</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If True, fill in missing names using the index of the ids list. Default False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary of validated parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="modification">
+<h2>Modification<a class="headerlink" href="#modification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="statemodify-set-alignment">
+<h3>statemodify.set_alignment<a class="headerlink" href="#statemodify-set-alignment" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.set_alignment">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">set_alignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_spaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#set_alignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.set_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set left or right alignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Value to evaluate.</p></li>
+<li><p><strong>n_spaces</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of spaces to buffer the value by. If less than the length
+of the value, no spaces will be added to the padding.</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Either ‘left’ or ‘right’ alignment for the value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Value with string padding.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-pad-with-spaces">
+<h3>statemodify.pad_with_spaces<a class="headerlink" href="#statemodify-pad-with-spaces" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.pad_with_spaces">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">pad_with_spaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#pad_with_spaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.pad_with_spaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pad a string with the number of spaces specified by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Value to evaluate.</p></li>
+<li><p><strong>expected_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Expected width of the field.</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Either ‘left’ or ‘right’ alignment for the value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Value with string padding.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-add-zero-padding">
+<h3>statemodify.add_zero_padding<a class="headerlink" href="#statemodify-add-zero-padding" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.add_zero_padding">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">add_zero_padding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#add_zero_padding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.add_zero_padding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some fields expect zero padding that gets rounded off by pandas.
+This method adds that back in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Float value from file that is represented as a string.</p></li>
+<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Precision to account for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero padded string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-populate-dict">
+<h3>statemodify.populate_dict<a class="headerlink" href="#statemodify-populate-dict" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.populate_dict">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">populate_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_widths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#populate_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.populate_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate the input dictionary with values from each line based on column widths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Line of data as a string from the input file.</p></li>
+<li><p><strong>field_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary holding values for each field.</p></li>
+<li><p><strong>column_widths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary of column names to expected widths.</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – List of columns to process.</p></li>
+<li><p><strong>data_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary of column names to data types.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Populated data dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-prep-data">
+<h3>statemodify.prep_data<a class="headerlink" href="#statemodify-prep-data" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.prep_data">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">prep_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_widths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#prep_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.prep_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ingest statemod file and format into a data frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary holding values for each field.</p></li>
+<li><p><strong>template_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Statemod input file to parse.</p></li>
+<li><p><strong>column_widths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary of column names to expected widths.</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – List of columns to process.</p></li>
+<li><p><strong>data_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary of column names to data types.</p></li>
+<li><p><strong>comment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Characters leading string indicating ignoring a line.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of uncommented rows of data to skip.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[0] data frame of data from file
+[1] header data from file</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-construct-outfile-name">
+<h3>statemodify.construct_outfile_name<a class="headerlink" href="#statemodify-construct-outfile-name" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.construct_outfile_name">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">construct_outfile_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#construct_outfile_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.construct_outfile_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct output file name from input template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Statemod input file to parse.</p></li>
+<li><p><strong>output_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Output directory to save outputs to.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – ID of sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Full path with file name and extension for the modified output file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-construct-data-string">
+<h3>statemodify.construct_data_string<a class="headerlink" href="#statemodify-construct-data-string" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.construct_data_string">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">construct_data_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_widths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_alignment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#construct_data_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.construct_data_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format line and construct data string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – ID of sample.</p></li>
+<li><p><strong>column_widths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary of column names to expected widths.</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – List of columns to process.</p></li>
+<li><p><strong>column_alignment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Dictionary of column names to their expected alignment (e.g., right, left).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Formatted data string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-apply-adjustment-factor">
+<h3>statemodify.apply_adjustment_factor<a class="headerlink" href="#statemodify-apply-adjustment-factor" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.apply_adjustment_factor">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">apply_adjustment_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#apply_adjustment_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.apply_adjustment_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply adjustment to template file values for target ids using a sample factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> (<em>pd.DataFrame</em>) – Data frame of data content from file.</p></li>
+<li><p><strong>value_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – Value columns that may be modified.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to conduct queries for.</p></li>
+<li><p><strong>target_ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – Ids associated in query field to modify.</p></li>
+<li><p><strong>factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Value to multiply the selected value columns by.</p></li>
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’, ‘assign’.
+Defaults to ‘add’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A data frame of modified values to replace the original data with.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-validate-bounds">
+<h3>statemodify.validate_bounds<a class="headerlink" href="#statemodify-validate-bounds" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.validate_bounds">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">validate_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#validate_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.validate_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure sample bounds provided by the user conform to a feasible range of values in feet per month.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bounds_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em>) – List of bounds to use for each parameter.</p></li>
+<li><p><strong>min_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimum value of bounds that is feasible. Default -0.5.</p></li>
+<li><p><strong>max_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum value of bounds that is feasible. Default 1.0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -387,38 +1285,109 @@ argument.  The user must specify bounds for each field name.</p>
 </dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
 
-<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
-<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;municipal&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;7200764&quot;</span><span class="p">,</span> <span class="s2">&quot;7200813CH&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;7200764_I&quot;</span><span class="p">,</span> <span class="s2">&quot;7200818&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
-<span class="p">}</span>
+<span class="c1"># list of bounds to use for each parameter</span>
+<span class="n">bounds_list</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
 
-<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
-
-<span class="c1"># the number of samples you wish to generate</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="c1"># seed value for reproducibility if so desired</span>
-<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="c1"># my template file.  If none passed into the `modify_ddm` function, the default file will be used.</span>
-<span class="n">template_file</span> <span class="o">=</span> <span class="s2">&quot;&lt;your ddm template file&gt;&quot;</span>
-
-<span class="c1"># the field that you want to use to query and modify the data</span>
-<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
-
-<span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">setup_dict</span><span class="p">,</span>
-               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
-               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
-               <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-               <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
-               <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-               <span class="n">template_file</span><span class="o">=</span><span class="n">template_file</span><span class="p">)</span>
+<span class="c1"># validate bounds</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">validate_bounds</span><span class="p">(</span><span class="n">bounds_list</span><span class="o">=</span><span class="n">bounds_list</span><span class="p">,</span>
+                    <span class="n">min_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+                    <span class="n">max_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-modify">
+<h3>statemodify.Modify<a class="headerlink" href="#statemodify-modify" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.Modify">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">Modify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comment_indicator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_widths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_alignment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/modify.html#Modify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.Modify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modification template for data transformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comment_indicator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Character(s) indicating the line in the file is a comment. Defualt “#”</p></li>
+<li><p><strong>data_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>None</em><em>]</em><em>]</em>) – Field specification in the file as a dictionary to hold the values for each field</p></li>
+<li><p><strong>column_widths</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – Column widths for the output file as a dictionary.</p></li>
+<li><p><strong>column_alignment</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Expected column alignment.</p></li>
+<li><p><strong>data_types</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><em>type</em></a><em>]</em>) – Expected data types for each field</p></li>
+<li><p><strong>column_list</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – List of columns to process.</p></li>
+<li><p><strong>value_columns</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – List of columns that may be modified.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="statemodify-yaml-to-dict">
+<h3>statemodify.yaml_to_dict<a class="headerlink" href="#statemodify-yaml-to-dict" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.yaml_to_dict">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">yaml_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/utils.html#yaml_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.yaml_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read in a YAML file and convert to a typed dictionary.
+NOTE:  code can be executed from the YAML file due to the use of UnsafeLoader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>yaml_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Full path with file name and extension to the input YAML file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary of typed elements of the YAML file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-select-template-file">
+<h3>statemodify.select_template_file<a class="headerlink" href="#statemodify-select-template-file" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.select_template_file">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">select_template_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/utils.html#select_template_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.select_template_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select either the default template file or a user provided one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+default template in this package will be used.</p></li>
+<li><p><strong>extension</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Extension of the target template file with no dot.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Template file path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-select-data-specification-file">
+<h3>statemodify.select_data_specification_file<a class="headerlink" href="#statemodify-select-data-specification-file" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.select_data_specification_file">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">select_data_specification_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/utils.html#select_data_specification_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.select_data_specification_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select either the default template file or a user provided one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>yaml_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a YAML file is provided it will be used.  Otherwise the
+default file in this package will be used.</p></li>
+<li><p><strong>extension</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Extension of the target template file with no dot.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Template file path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
