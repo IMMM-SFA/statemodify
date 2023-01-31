@@ -36,7 +36,9 @@ class TestDdr(unittest.TestCase):
     }
 
     DDR_COMP_FILE_NAME = "template_scenario-test_sample-0.ddr"
+    DDR_COMP_FILE_NAME_VALUES = "template_scenario-test_sample-0_values.ddr"
     DDR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", DDR_COMP_FILE_NAME))
+    DDR_COMP_FULLPATH_VALUES = pkg_resources.resource_filename("statemodify", os.path.join("data", DDR_COMP_FILE_NAME_VALUES))
     SETUP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
                             "on_off": [0, 1, 1, 1]})
     COMP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
@@ -55,7 +57,6 @@ class TestDdr(unittest.TestCase):
         """Ensure the single file processor runs and generates the expected output."""
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            tmp_dir = "/Users/d3y010/Desktop"
 
             stm.modify_single_ddr(modify_dict=TestDdr.VALID_MODIFY_DICT,
                                   query_field="id",
@@ -82,8 +83,6 @@ class TestDdr(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
 
-            tmp_dir = "/Users/d3y010/Desktop"
-
             stm.modify_single_ddr(modify_dict=TestDdr.VALID_MODIFY_DICT_VALUES,
                                   query_field="id",
                                   sample=np.array([1.19646919, 0.78613933]),
@@ -94,7 +93,7 @@ class TestDdr(unittest.TestCase):
                                   template_file=None)
 
             # get contents of comparison file
-            with open(TestDdr.DDR_COMP_FULLPATH) as comp:
+            with open(TestDdr.DDR_COMP_FULLPATH_VALUES) as comp:
                 comp_data = comp.read()
 
             # get contents of generated file
@@ -104,12 +103,10 @@ class TestDdr(unittest.TestCase):
             # ensure equality
             self.assertEqual(comp_data, sim_data, msg="Simulated data for DDM file does not match what was expected.")
 
-
     def test_modify_ddr_run(self):
         """Ensure the parallel function runs and generates an expected output."""
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            tmp_dir = "/Users/d3y010/Desktop"
 
             # generate a batch of files using generated LHS
             stm.modify_ddr(modify_dict=TestDdr.VALID_MODIFY_DICT,
