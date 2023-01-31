@@ -1,15 +1,19 @@
-from typing import Union, Dict, List
+from typing import Union, Dict, List, Tuple
 
 import numpy as np
 from SALib.sample import latin
 
 
 def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
+                         required_keys: Tuple[str] = ("ids", "bounds", "names"),
                          fill: bool = False) -> dict:
     """Validate user input modify dictionary to ensure all necessary elements are present.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
+
+    :param required_keys:       Keys required to be present in the input dictionary.
+    :type required_keys:        Tuple[str]
 
     :param fill:                If True, fill in missing names using the index of the ids list. Default False.
     :type fill:                 bool
@@ -19,8 +23,8 @@ def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
-    # note: names is last to setup the conditional later
-    required_keys = ("ids", "bounds", "names")
+    # ensure names is in the tuple and add it as the last entry
+    required_keys = tuple([i for i in required_keys if i != "names"] + ["names"])
 
     for key in required_keys:
         if (key not in modify_dict) and (key == "names") and (fill is True):

@@ -43,14 +43,15 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                       query_field: str,
                       output_dir: str,
                       scenario: str,
-                      sample: np.array,
+                      sample: np.array = np.array([]),
                       sample_id: int = 0,
                       skip_rows: int = 0,
                       template_file: Union[None, str] = None,
                       factor_method: str = "multiply",
                       data_specification_file: Union[None, str] = None,
                       min_bound_value: float = 0.5,
-                      max_bound_value: float = 1.5) -> None:
+                      max_bound_value: float = 1.5,
+                      use_values: bool = False) -> None:
     """Modify StateMod water rights (.ddr) file from sample provided by the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
@@ -96,6 +97,10 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                         Maximum allowable value:  1.0
     :type max_bound_value:              float
 
+    :param use_values:                  If values is present in the modify dictionary, use them instead of the sampler.
+                                        Defaults to False.
+    :type use_values:                   bool
+
     :return: None
     :rtype: None
 
@@ -107,8 +112,20 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
+            # ids can either be 'struct' or 'id' values
+            "ids": [["3600507.01", "3600507.02"], ["3600642.04", "3600642.05"]],
+
+            "bounds": [[0.5, 1.5], [0.5, 1.5]],
+
+            # turn id on or off completely or for a given period
+            # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
+            "on_off": [[-1977, 1], [0, 1977]],
+
+            # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
+            "admin": [[None, 2], [0, 1]]
+
+            # optionally, pass values that you want to be set for each user group; this overrides bounds
+            "values": [0.7, 1.4]
         }
 
         output_directory = "<your desired output directory>"
@@ -144,7 +161,8 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                               factor_method="multiply",
                               data_specification_file=None,
                               min_bound_value=-0.5,
-                              max_bound_value=1.0)
+                              max_bound_value=1.0,
+                              use_values=False)
 
     """
 
@@ -177,16 +195,12 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # strip the query field of any whitespace
     template_df[query_field] = template_df[query_field].str.strip()
 
-    modify_dict = sampler.validate_modify_dict(modify_dict=modify_dict,
-                                               fill=True)
+    if use_values is False:
 
-    # validate user provided sample bounds to ensure they are within a feasible range
-    modify.validate_bounds(bounds_list=modify_dict["bounds"],
-                           min_value=min_bound_value,
-                           max_value=max_bound_value)
-
-    # detect if values key in modify dict
-    use_values = "values" in modify_dict
+        # validate user provided sample bounds to ensure they are within a feasible range
+        modify.validate_bounds(bounds_list=modify_dict["bounds"],
+                               min_value=min_bound_value,
+                               max_value=max_bound_value)
 
     # modify value columns associated structures based on the sample draw
     for index, i in enumerate(modify_dict["names"]):
@@ -198,7 +212,6 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
 
             # extract values to set on the target feature
             factor = modify_dict["values"][index]
-            factor_method = "assign"
 
         else:
 
@@ -324,8 +337,20 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
+            # ids can either be 'struct' or 'id' values
+            "ids": [["3600507.01", "3600507.02"], ["3600642.04", "3600642.05"]],
+
+            "bounds": [[0.5, 1.5], [0.5, 1.5]],
+
+            # turn id on or off completely or for a given period
+            # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
+            "on_off": [[-1977, 1], [0, 1977]],
+
+            # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
+            "admin": [[None, 2], [0, 1]]
+
+            # optionally, pass values that you want to be set for each user group; this overrides bounds
+            "values": [0.7, 1.4]
         }
 
         output_directory = "<your desired output directory>"
@@ -364,14 +389,35 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
-    # build a problem dictionary for use by SALib
-    problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
+    # ensure all desired fields are present
+    modify_dict = sampler.validate_modify_dict(modify_dict=modify_dict,
+                                               required_keys=("ids", "names"),
+                                               fill=True)
 
-    # generate a sample array
-    sample_array = sampler.generate_samples(problem_dict=problem_dict,
-                                            n_samples=n_samples,
-                                            sampling_method=sampling_method,
-                                            seed_value=seed_value)
+    # detect if values key in modify dict
+    use_values = "values" in modify_dict
+
+    if use_values:
+
+        # set n_jobs to 1 for a serial run
+        n_jobs = 1
+
+        # change factor method to assign
+        factor_method = "assign"
+
+        # sample array proxy
+        sample_array = np.array([0])
+
+    else:
+
+        # build a problem dictionary for use by SALib
+        problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
+
+        # generate a sample array
+        sample_array = sampler.generate_samples(problem_dict=problem_dict,
+                                                n_samples=n_samples,
+                                                sampling_method=sampling_method,
+                                                seed_value=seed_value)
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_ddr)(modify_dict=modify_dict,
