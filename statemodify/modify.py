@@ -385,7 +385,7 @@ def validate_bounds(bounds_list: List[List[float]],
 
     :example:
 
-        .. code-block:: python
+    .. code-block:: python
 
         import statemodify as stm
 

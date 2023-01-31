@@ -189,6 +189,7 @@ class XddConverter:
             df = df[df['structure_id'].isin(id_subset)]
         df.to_parquet(f"{output_path}/{Path(file).stem}.parquet")
 
+
 def convert_xdd(
     *,
     output_path: Union[str, Path] = "./output",
