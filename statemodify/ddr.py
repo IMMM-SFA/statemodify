@@ -69,7 +69,7 @@ def apply_seniority_modification(df: pd.DataFrame,
             if set_value is not None:
 
                 # update existing value with value from dictionary
-                df.loc[df[query_field] == target_id, "admin"] = modify_dict["admin"][index][subindex]
+                df.loc[df[query_field] == target_id, "admin"] = set_value
 
     return df
 

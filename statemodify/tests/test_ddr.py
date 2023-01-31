@@ -42,6 +42,10 @@ class TestDdr(unittest.TestCase):
                             "on_off": [0, 1, 1, 1]})
     COMP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
                             "on_off": [-1977, 1, 0, 1]})
+    SETUP_DF_ADMIN = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
+                                   "admin": [0, 10, 9, 8]})
+    COMP_DF_ADMIN = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
+                                  "admin": [0, 2, 0, 8]})
 
     def test_apply_on_off_modification(self):
         """Ensure output matches expected."""
@@ -51,6 +55,15 @@ class TestDdr(unittest.TestCase):
                                            query_field="id")
 
         pd.testing.assert_frame_equal(TestDdr.COMP_DF, df)
+
+    def test_apply_seniority_modification(self):
+        """Ensure output matches expected."""
+
+        df = stm.apply_seniority_modification(df=TestDdr.SETUP_DF_ADMIN,
+                                              modify_dict=TestDdr.VALID_MODIFY_DICT,
+                                              query_field="id")
+
+        pd.testing.assert_frame_equal(TestDdr.COMP_DF_ADMIN, df)
 
     def test_modify_single_ddr_run(self):
         """Ensure the single file processor runs and generates the expected output."""
