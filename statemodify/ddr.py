@@ -39,6 +39,41 @@ def apply_on_off_modification(df: pd.DataFrame,
     return df
 
 
+def apply_seniority_modification(df: pd.DataFrame,
+                                 modify_dict: dict,
+                                 query_field: str) -> pd.DataFrame:
+    """Apply seniority modification as specified by the user.  Used with the water demand (.ddr) modification.
+
+    :param df:                          Data frame of extracted content from the source file.
+    :type df:                           pd.DataFrame
+
+    :param modify_dict:                 Dictionary of parameters to setup the sampler.  See following example.
+    :type modify_dict:                  Dict[str, List[Union[str, float]]]
+
+    :param query_field:                 Field name to use for target query.
+    :type query_field:                  str
+
+    :return:                            Modified input.
+    :rtype:                             pd.DataFrame
+
+    """
+
+    # for each id group
+    for index, id_group in enumerate(modify_dict["ids"]):
+
+        # for each id in group
+        for subindex, target_id in enumerate(id_group):
+
+            set_value = modify_dict["admin"][index][subindex]
+
+            if set_value is not None:
+
+                # update existing value with value from dictionary
+                df.loc[df[query_field] == target_id, "admin"] = modify_dict["admin"][index][subindex]
+
+    return df
+
+
 def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                       query_field: str,
                       output_dir: str,
@@ -229,11 +264,17 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # reconstruct precision
     template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(2)
 
-    # if the user provides an "on_off" field as part of the modify dictionary, apply them
+    # if the user provides an "on_off" key as part of the modify dictionary, apply them
     if "on_off" in modify_dict:
         template_df = apply_on_off_modification(df=template_df,
                                                 modify_dict=modify_dict,
                                                 query_field=query_field)
+
+    # if the user provides an "admin" key as part of the modify dictionary, apply them
+    if "admin" in modify_dict:
+        template_df = apply_seniority_modification(df=template_df,
+                                                   modify_dict=modify_dict,
+                                                   query_field=query_field)
 
     # convert all fields to str type
     template_df = template_df.astype(str)

@@ -19,7 +19,8 @@ class TestDdr(unittest.TestCase):
         # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
         "on_off": [[-1977, 1], [0, 1977]],
         # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
-        "admin": [[None, 2], [0, 1]]
+        "admin": [[None, 2], [0, 1]],
+        "names": ["group_1", "group_2"]
     }
 
     VALID_MODIFY_DICT_VALUES = {
@@ -28,8 +29,6 @@ class TestDdr(unittest.TestCase):
         # turn id on or off completely or for a given period
         # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
         "on_off": [[-1977, 1], [0, 1977]],
-        # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
-        "admin": [[None, 2], [0, 1]],
         # optionally, pass values that you want to be set for each user group; this overrides bounds
         "values": [0.7, 1.4],
         "names": ["group_1", "group_2"]
