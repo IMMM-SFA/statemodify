@@ -49,6 +49,21 @@ StateMod is one of the few highly resolved, open source, regional water allocati
 Prior to these studies, StateMod’s utility to be run efficiently in exploratory settings was limited, primarily due to the difficulty of adjusting the input files to represent future scenarios. Thus, we are proposing the development of a package called **statemodify** that neatly deploys this functionality and allows users of all coding levels to be able to interact with StateMod at a deeper and more exploratory level. By making StateMod more accessible, we also provide a better avenue for it to be used to actively inform current planning and management in the Colorado River basin by more general planners and decision-makers.
 
 
+References
+---------------------------
+
+CWCB (2012). Colorado River water availability study Phase I Report: Colorado Water Conservation Board.
+
+Hadjimichael, A., Quinn, J., Wilson, E., Reed, P., Basdekas, L., Yates, D., & Garrison, M. (2020). Defining robustness, vulnerabilities, and consequential scenarios for diverse stakeholder interests in institutionally complex river basins. Earth's Future, 8(7), e2020EF001503.
+
+Hadjimichael, A., Quinn, J., & Reed, P. (2020). Advancing diagnostic model evaluation to better understand water shortage mechanisms in institutionally complex river basins. Water Resources Research, 56(10), e2020WR028079.
+
+Malers, S. A., Bennett, R. R., & Nutting-Lane, C. (2000). Colorado's decision support systems: Data-centered water resources planning and administration. In Watershed Management and Operations Management 2000 (pp. 1-9).
+
+Parsons, R., & Bennett, R. (2006). Reservoir operations management using a water resources model. In Operating Reservoirs in Changing Conditions (pp. 304-311).
+
+
+
 Documentation
 --------------------------
 
