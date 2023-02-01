@@ -43,9 +43,9 @@ class TestDdr(unittest.TestCase):
     COMP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
                             "on_off": [-1977, 1, 0, 1]})
     SETUP_DF_ADMIN = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
-                                   "admin": [0, 10, 9, 8]})
+                                   "admin": ["0.00000", "10.00000", "9.00000", "8.00000"]})
     COMP_DF_ADMIN = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
-                                  "admin": [0, 2, 0, 8]})
+                                  "admin": ["0.00000", "2.00000", "0.00000", "8.00000"]})
 
     def test_apply_on_off_modification(self):
         """Ensure output matches expected."""
