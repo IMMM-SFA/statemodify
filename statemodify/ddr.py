@@ -68,6 +68,21 @@ def apply_seniority_modification(df: pd.DataFrame,
 
             if set_value is not None:
 
+                set_value = str(set_value)
+
+                len_set_value = len(set_value)
+
+                if len_set_value > 10:
+                    raise ValueError(f"Value of DDR admin seniority field is too large.  Can only be max 10 characters.")
+
+                if len_set_value <= 5:
+
+                    # ensure 5 zeros follow the decimal for integer values
+                    set_value = modify.add_zero_padding(f"{set_value}.", 5)
+
+                else:
+                    set_value = modify.add_zero_padding(f"{set_value}.", 10 - len_set_value)
+
                 # update existing value with value from dictionary
                 df.loc[df[query_field] == target_id, "admin"] = set_value
 
