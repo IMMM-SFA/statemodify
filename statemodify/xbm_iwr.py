@@ -192,9 +192,9 @@ def generate_flows(sample: np.array,
     return annual_q_s
 
 
-def calculate_xbm_array_monthly(df: pd.DataFrame,
-                               value_fields: List[str],
-                               year_field: str = "year") -> np.array:
+def calculate_array_monthly(df: pd.DataFrame,
+                            value_fields: List[str],
+                            year_field: str = "year") -> np.array:
     """Create an array of month rows and site columns for each year in the data frame.
 
     :param df:                          Input template data frame
@@ -222,8 +222,8 @@ def calculate_xbm_array_monthly(df: pd.DataFrame,
     return np.array(out_list)
 
 
-def calculate_xbm_array_annual(monthly_arr: np.array) -> np.array:
-    """Calculate annual xbm values.
+def calculate_array_annual(monthly_arr: np.array) -> np.array:
+    """Calculate annual values.
 
     :param monthly_arr:                     Array of monthly xbm values
     :type monthly_arr:                      np.array
@@ -241,6 +241,46 @@ def calculate_xbm_array_annual(monthly_arr: np.array) -> np.array:
         annual_arr[i, :] = np.sum(monthly_arr[i * 12:(i + 1) * 12], 0)
 
     return annual_arr
+
+
+def calculate_annual_sum(arr: np.array, axis: int = 1) -> np.array():
+    """Calculate annual sum of input array.
+
+    :param arr:                     Input 2D array where year, site
+    :type arr:                      np.array
+
+    :param axis:                    Axis to sum over. Default: 1
+    :type axis:                     int
+
+    :return:                        Array of sums
+    :rtype:                         np.array
+
+    """
+
+    return np.sum(arr, axis)
+
+
+def calculate_annual_mean_fractions(arr_annual: np.array,
+                                    arr_sum: np.array) -> np.array:
+    """Calculate annual mean fractions of total values.
+
+    :param arr_annual:                          Array of annual values per site
+    :type arr_annual:                           np.array
+
+    :param arr_sum:                             Array of annual sums
+    :type arr_sum:                              np.array
+
+    :return:                                    Array of fractions
+    :rtype:                                     np.array
+
+    """
+
+    iwr_fractions = np.zeros(np.shape(arr_annual))
+
+    for i in range(np.shape(arr_annual)[0]):
+        iwr_fractions[i, :] = arr_annual[i, :] / arr_sum[i]
+
+    return np.mean(iwr_fractions, 0)
 
 
 def generate_iwr_data(skip_rows=1,
@@ -263,6 +303,32 @@ def generate_iwr_data(skip_rows=1,
                               data_types=data_spec_dict["data_types"],
                               column_list=data_spec_dict["column_list"],
                               value_columns=data_spec_dict["value_columns"])
+
+    # prepare template data frame for alteration
+    template_df, template_header = modify.prep_data(field_dict=file_spec.data_dict,
+                                                    template_file=template_file,
+                                                    column_list=file_spec.column_list,
+                                                    column_widths=file_spec.column_widths,
+                                                    data_types=file_spec.data_types,
+                                                    comment=file_spec.comment_indicator,
+                                                    skip_rows=skip_rows)
+
+    # calculate the iwr monthly data array
+    iwr_data_array_monthly = calculate_array_monthly(df=template_df,
+                                                     value_fields=data_spec_dict["value_columns"],
+                                                     year_field="year")
+
+    # generate the iwr yearly data array
+    iwr_data_array_annual = calculate_array_annual(iwr_data_array_monthly)
+
+    # calculate annual sum
+    iwr_annual_sum = calculate_annual_sum(iwr_data_array_annual, 1)
+
+    # calculate annual mean fractions
+    iwr_fractions_mean = calculate_annual_mean_fractions(iwr_data_array_annual, iwr_annual_sum)
+
+    return iwr_data_array_monthly, iwr_data_array_annual, iwr_annual_sum, iwr_fractions_mean
+
 
 
 def generate_xbm_data(skip_rows=1,
@@ -297,12 +363,14 @@ def generate_xbm_data(skip_rows=1,
                                                     replace_dict={"********": np.nan})
 
     # calculate the xbm monthly data array
-    xbm_data_array_monthly = calculate_xbm_array_monthly(df=template_df,
-                                                         value_fields=data_spec_dict["value_columns"],
-                                                         year_field="year")
+    xbm_data_array_monthly = calculate_array_monthly(df=template_df,
+                                                     value_fields=data_spec_dict["value_columns"],
+                                                     year_field="year")
 
     # generate the xbm yearly data array
-    xbm_data_array_yearly = calculate_xbm_array_annual(xbm_data_array_monthly)
+    xbm_data_array_annual = calculate_array_annual(xbm_data_array_monthly)
+
+    return xbm_data_array_annual, xbm_data_array_monthly
 
 
 
@@ -314,8 +382,6 @@ def create_iwr_data_frames(filename, firstLine, numSites, abbrev):
     # split data on periods
     with open(filename, 'r') as f:
         all_split_data = [x.split('.') for x in f.readlines()]
-
-    f.close()
 
     numYears = int((len(all_split_data) - firstLine) / numSites)
     MonthlyIWR = np.zeros([12 * numYears, numSites])
@@ -479,27 +545,32 @@ def flow_disaggregation(basin_name: str,
                                 n_sites=n_sites,
                                 n_years=n_years)
 
-    # create annual and monthly streamflow dataframes from xbm file
-    create_xbm_data_frames(xbm_file, start_xbm, n_sites, site_abbrev)
+    # # create annual and monthly streamflow dataframes from xbm file
+    # create_xbm_data_frames(xbm_file, start_xbm, n_sites, site_abbrev)
+    #
+    # # load annual and monthly flow files
+    #
+    # # TODO: why is monthly never used?  Does it need to be in here?
+    # MonthlyQ_h = np.array(pd.read_csv('./Data/' + site_abbrev + '2015_StateMod/MonthlyQ.csv', header=None))
+    # AnnualQ_h = np.array(pd.read_csv('./Data/' + site_abbrev + '2015_Statemod/AnnualQ.csv', header=None))
+    #
+    # # Create annual and monthly irrigation dataframes from IWR files
+    # create_iwr_data_frames(iwr_file, start_iwr, n_iwr_sites, site_abbrev)
+    #
+    # # load historical (_h) irrigation demand data
+    # AnnualIWR_h = np.loadtxt('./Data/' + site_abbrev + '2015_StateMod/AnnualIWR.csv', delimiter=',')
+    # MonthlyIWR_h = np.loadtxt('./Data/' + site_abbrev + '2015_StateMod/MonthlyIWR.csv', delimiter=',')
+    #
+    #
+    #
+    # IWRsums_h = np.sum(AnnualIWR_h, 1)
+    # IWRfractions_h = np.zeros(np.shape(AnnualIWR_h))
+    # for i in range(np.shape(AnnualIWR_h)[0]):
+    #     IWRfractions_h[i, :] = AnnualIWR_h[i, :] / IWRsums_h[i]
+    #
+    # IWRfractions_h = np.mean(IWRfractions_h, 0)
 
-    # load annual and monthly flow files
 
-    # TODO: why is monthly never used?  Does it need to be in here?
-    MonthlyQ_h = np.array(pd.read_csv('./Data/' + site_abbrev + '2015_StateMod/MonthlyQ.csv', header=None))
-    AnnualQ_h = np.array(pd.read_csv('./Data/' + site_abbrev + '2015_Statemod/AnnualQ.csv', header=None))
-
-    # Create annual and monthly irrigation dataframes from IWR files
-    create_iwr_data_frames(iwr_file, start_iwr, n_iwr_sites, site_abbrev)
-
-    # load historical (_h) irrigation demand data
-    AnnualIWR_h = np.loadtxt('./Data/' + site_abbrev + '2015_StateMod/AnnualIWR.csv', delimiter=',')
-    MonthlyIWR_h = np.loadtxt('./Data/' + site_abbrev + '2015_StateMod/MonthlyIWR.csv', delimiter=',')
-    IWRsums_h = np.sum(AnnualIWR_h, 1)
-    IWRfractions_h = np.zeros(np.shape(AnnualIWR_h))
-    for i in range(np.shape(AnnualIWR_h)[0]):
-        IWRfractions_h[i, :] = AnnualIWR_h[i, :] / IWRsums_h[i]
-
-    IWRfractions_h = np.mean(IWRfractions_h, 0)
 
     # model annual irrigation demand anomaly as function of annual flow anomaly at last node
     BetaIWR, muIWR, sigmaIWR = fit_iwr_model(AnnualQ_h, AnnualIWR_h)
