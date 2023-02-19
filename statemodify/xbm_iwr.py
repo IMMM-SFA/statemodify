@@ -1,7 +1,7 @@
 import os
 import pkg_resources as pkg
 from random import random
-from typing import List
+from typing import List, Union
 
 import numpy as np
 import pandas as pd
@@ -283,39 +283,163 @@ def calculate_annual_mean_fractions(arr_annual: np.array,
     return np.mean(iwr_fractions, 0)
 
 
-def generate_iwr_data(skip_rows=1,
-                      template_file=None,
-                      data_specification_file=None):
+class GenerateIwrData:
 
-    # select the appropriate template file
-    template_file = utx.select_template_file(template_file, extension="iwr")
+    def __init__(self,
+                 skip_rows: int = 1,
+                 template_file: Union[None, str] = None,
+                 data_specification_file: Union[None, str] = None):
+        """Generate IWR data from user desired input template and file specification.  Defaults used if none provided.
 
-    # read in data specification yaml
-    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                 extension="iwr")
-    data_spec_dict = utx.yaml_to_dict(data_specification_file)
+        :param skip_rows:                                       Number of rows after comments to skip. Default 1.
+        :type skip_rows:                                        int
 
-    # instantiate data specification and validation class
-    file_spec = modify.Modify(comment_indicator=data_spec_dict["comment_indicator"],
-                              data_dict=data_spec_dict["data_dict"],
-                              column_widths=data_spec_dict["column_widths"],
-                              column_alignment=data_spec_dict["column_alignment"],
-                              data_types=data_spec_dict["data_types"],
-                              column_list=data_spec_dict["column_list"],
-                              value_columns=data_spec_dict["value_columns"])
+        :param template_file:                                   File to use as template.  Default None.
+        :type template_file:                                    Union[None, str]
 
-    # prepare template data frame for alteration
-    template_df, template_header = modify.prep_data(field_dict=file_spec.data_dict,
-                                                    template_file=template_file,
-                                                    column_list=file_spec.column_list,
-                                                    column_widths=file_spec.column_widths,
-                                                    data_types=file_spec.data_types,
-                                                    comment=file_spec.comment_indicator,
-                                                    skip_rows=skip_rows)
+        :param data_specification_file:                         Data specification YAML file.  Default None.
+        :type data_specification_file:                          Union[None, str]
+
+        :return template_file:                                  Selected template file path.
+        :rtype template_file:                                   str
+
+        :return data_specification_file:                        Selected data specification YAML file path.
+        :rtype data_specification_file:                         str
+
+        :return data_spec_dict:                                 Dictionary of data specification.
+        :rtype data_spec_dict:                                  dict
+
+        :return file_spec:                                      File modification specs.
+        :rtype file_spec:                                       class
+
+        :return template_df:                                    Processed data from file.
+        :rtype template_df:                                     pd.DataFrame
+
+        :return: template_header:                               Header for input template file.
+        :rtype: template_header:                                list
+
+        """
+
+        # select the appropriate template file
+        self.template_file = utx.select_template_file(template_file, extension="iwr")
+
+        # read in data specification yaml
+        self.data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                          extension="iwr")
+        self.data_spec_dict = utx.yaml_to_dict(self.data_specification_file)
+
+        # instantiate data specification and validation class
+        self.file_spec = modify.Modify(comment_indicator=self.data_spec_dict["comment_indicator"],
+                                       data_dict=self.data_spec_dict["data_dict"],
+                                       column_widths=self.data_spec_dict["column_widths"],
+                                       column_alignment=self.data_spec_dict["column_alignment"],
+                                       data_types=self.data_spec_dict["data_types"],
+                                       column_list=self.data_spec_dict["column_list"],
+                                       value_columns=self.data_spec_dict["value_columns"])
+
+        # prepare template data frame for alteration
+        self.template_df, self.template_header = modify.prep_data(field_dict=self.file_spec.data_dict,
+                                                                  template_file=self.template_file,
+                                                                  column_list=self.file_spec.column_list,
+                                                                  column_widths=self.file_spec.column_widths,
+                                                                  data_types=self.file_spec.data_types,
+                                                                  comment=self.file_spec.comment_indicator,
+                                                                  skip_rows=skip_rows)
+
+
+class GenerateXbmData:
+
+    def __init__(self,
+                 skip_rows: int = 1,
+                 template_file: Union[None, str] = None,
+                 data_specification_file: Union[None, str] = None):
+        """Generate XBM data from user desired input template and file specification.  Defaults used if none provided.
+
+        :param skip_rows:                                       Number of rows after comments to skip. Default 1.
+        :type skip_rows:                                        int
+
+        :param template_file:                                   File to use as template.  Default None.
+        :type template_file:                                    Union[None, str]
+
+        :param data_specification_file:                         Data specification YAML file.  Default None.
+        :type data_specification_file:                          Union[None, str]
+
+        :return template_file:                                  Selected template file path.
+        :rtype template_file:                                   str
+
+        :return data_specification_file:                        Selected data specification YAML file path.
+        :rtype data_specification_file:                         str
+
+        :return data_spec_dict:                                 Dictionary of data specification.
+        :rtype data_spec_dict:                                  dict
+
+        :return file_spec:                                      File modification specs.
+        :rtype file_spec:                                       class
+
+        :return template_df:                                    Processed data from file.
+        :rtype template_df:                                     pd.DataFrame
+
+        :return: template_header:                               Header for input template file.
+        :rtype: template_header:                                list
+
+        """
+
+        # select the appropriate template file
+        self.template_file = utx.select_template_file(template_file, extension="xbm")
+
+        # read in data specification yaml
+        self.data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                          extension="xbm")
+        self.data_spec_dict = utx.yaml_to_dict(self.data_specification_file)
+
+        # instantiate data specification and validation class
+        self.file_spec = modify.Modify(comment_indicator=self.data_spec_dict["comment_indicator"],
+                                       data_dict=self.data_spec_dict["data_dict"],
+                                       column_widths=self.data_spec_dict["column_widths"],
+                                       column_alignment=self.data_spec_dict["column_alignment"],
+                                       data_types=self.data_spec_dict["data_types"],
+                                       column_list=self.data_spec_dict["column_list"],
+                                       value_columns=self.data_spec_dict["value_columns"])
+
+        # prepare template data frame for alteration
+        self.template_df, self.template_header = modify.prep_data(field_dict=self.file_spec.data_dict,
+                                                                  template_file=self.template_file,
+                                                                  column_list=self.file_spec.column_list,
+                                                                  column_widths=self.file_spec.column_widths,
+                                                                  data_types=self.file_spec.data_types,
+                                                                  comment=self.file_spec.comment_indicator,
+                                                                  skip_rows=skip_rows,
+                                                                  replace_dict={"********": np.nan})
+
+
+def hmm_modification(xbm_skip_rows: int = 1,
+                     iwr_skip_rows: int = 1,
+                     xbm_template_file: Union[None, str] = None,
+                     iwr_template_file: Union[None, str] = None,
+                     xbm_data_specification_file: Union[None, str] = None,
+                     iwr_data_specification_file: Union[None, str] = None):
+
+    # instantiate xbm template data and specification
+    xbm = GenerateXbmData(skip_rows=xbm_skip_rows,
+                          template_file=xbm_template_file,
+                          data_specification_file=xbm_data_specification_file)
+
+    # instantiate iwr template data and specification
+    iwr = GenerateIwrData(skip_rows=iwr_skip_rows,
+                          template_file=iwr_template_file,
+                          data_specification_file=iwr_data_specification_file)
+
+    # calculate the xbm monthly data array
+    xbm_data_array_monthly = calculate_array_monthly(df=xbm.template_df,
+                                                     value_fields=xbm.data_spec_dict["value_columns"],
+                                                     year_field="year")
+
+    # generate the xbm yearly data array
+    xbm_data_array_annual = calculate_array_annual(xbm_data_array_monthly)
 
     # calculate the iwr monthly data array
-    iwr_data_array_monthly = calculate_array_monthly(df=template_df,
-                                                     value_fields=data_spec_dict["value_columns"],
+    iwr_data_array_monthly = calculate_array_monthly(df=iwr.template_df,
+                                                     value_fields=iwr.data_spec_dict["value_columns"],
                                                      year_field="year")
 
     # generate the iwr yearly data array
@@ -326,55 +450,6 @@ def generate_iwr_data(skip_rows=1,
 
     # calculate annual mean fractions
     iwr_fractions_mean = calculate_annual_mean_fractions(iwr_data_array_annual, iwr_annual_sum)
-
-    return iwr_data_array_monthly, iwr_data_array_annual, iwr_annual_sum, iwr_fractions_mean
-
-
-
-def generate_xbm_data(skip_rows=1,
-                      template_file=None,
-                      data_specification_file=None):
-
-    # select the appropriate template file
-    template_file = utx.select_template_file(template_file, extension="xbm")
-
-    # read in data specification yaml
-    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                 extension="xbm")
-    data_spec_dict = utx.yaml_to_dict(data_specification_file)
-
-    # instantiate data specification and validation class
-    file_spec = modify.Modify(comment_indicator=data_spec_dict["comment_indicator"],
-                              data_dict=data_spec_dict["data_dict"],
-                              column_widths=data_spec_dict["column_widths"],
-                              column_alignment=data_spec_dict["column_alignment"],
-                              data_types=data_spec_dict["data_types"],
-                              column_list=data_spec_dict["column_list"],
-                              value_columns=data_spec_dict["value_columns"])
-
-    # prepare template data frame for alteration
-    template_df, template_header = modify.prep_data(field_dict=file_spec.data_dict,
-                                                    template_file=template_file,
-                                                    column_list=file_spec.column_list,
-                                                    column_widths=file_spec.column_widths,
-                                                    data_types=file_spec.data_types,
-                                                    comment=file_spec.comment_indicator,
-                                                    skip_rows=skip_rows,
-                                                    replace_dict={"********": np.nan})
-
-    # calculate the xbm monthly data array
-    xbm_data_array_monthly = calculate_array_monthly(df=template_df,
-                                                     value_fields=data_spec_dict["value_columns"],
-                                                     year_field="year")
-
-    # generate the xbm yearly data array
-    xbm_data_array_annual = calculate_array_annual(xbm_data_array_monthly)
-
-    return xbm_data_array_annual, xbm_data_array_monthly
-
-
-
-
 
 
 
