@@ -1,11 +1,15 @@
 import os
 import pkg_resources as pkg
 from random import random
+from typing import List
 
 import numpy as np
 import pandas as pd
 from scipy import stats as ss
 from hmmlearn import hmm
+
+import statemodify.utils as utx
+import statemodify.modify as modify
 
 
 def generate_samples():
@@ -188,32 +192,122 @@ def generate_flows(sample: np.array,
     return annual_q_s
 
 
-def create_xbm_data_frames(filename, firstLine, numSites, abbrev):
+def calculate_xbm_array_monthly(df: pd.DataFrame,
+                               value_fields: List[str],
+                               year_field: str = "year") -> np.array:
+    """Create an array of month rows and site columns for each year in the data frame.
 
-    # split data on periods
-    with open(filename, 'r') as f:
-        all_split_data = [x.split('.') for x in f.readlines()]
+    :param df:                          Input template data frame
+    :type df:                           pd.DataFrame
 
-    f.close()
+    :param value_fields:                Month fields in data
+    :type value_fields:                 List[str]
 
-    numYears = int((len(all_split_data) - firstLine) / numSites)
-    MonthlyQ = np.zeros([12 * numYears, numSites])
-    for i in range(numYears):
-        for j in range(numSites):
-            index = firstLine + i * numSites + j
-            all_split_data[index][0] = all_split_data[index][0].split()[2]
-            MonthlyQ[i * 12:(i + 1) * 12, j] = np.asfarray(all_split_data[index][0:12], float)
+    :param year_field:                  Name of the year field
+    :type year_field:                   str
 
-    np.savetxt('./Data/' + abbrev + '2015_StateMod/MonthlyQ.csv', MonthlyQ, fmt='%d', delimiter=',')
+    :return:                            Array of value for month, site
+    :rtype:                             np.array
 
-    # calculate annual flows
-    AnnualQ = np.zeros([numYears, numSites])
-    for i in range(numYears):
-        AnnualQ[i, :] = np.sum(MonthlyQ[i * 12:(i + 1) * 12], 0)
+    """
 
-    np.savetxt('./Data/' + abbrev + '2015_Statemod/AnnualQ.csv', AnnualQ, fmt='%d', delimiter=',')
+    out_list = []
+    for year in df[year_field].sort_values().unique():
 
-    return None
+        for month in value_fields:
+            v = df.loc[df[year_field] == year][month]
+
+            out_list.append(v.astype(np.int64))
+
+    return np.array(out_list)
+
+
+def calculate_xbm_array_annual(monthly_arr: np.array) -> np.array:
+    """Calculate annual xbm values.
+
+    :param monthly_arr:                     Array of monthly xbm values
+    :type monthly_arr:                      np.array
+
+    :return:                                Array of year, site
+    :rtype:                                 np.array
+
+    """
+
+    n_years = int(monthly_arr.shape[0] / 12)
+    n_sites = monthly_arr.shape[1]
+
+    annual_arr = np.zeros([n_years, n_sites])
+    for i in range(n_years):
+        annual_arr[i, :] = np.sum(monthly_arr[i * 12:(i + 1) * 12], 0)
+
+    return annual_arr
+
+
+def generate_iwr_data(skip_rows=1,
+                      template_file=None,
+                      data_specification_file=None):
+
+    # select the appropriate template file
+    template_file = utx.select_template_file(template_file, extension="iwr")
+
+    # read in data specification yaml
+    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                 extension="iwr")
+    data_spec_dict = utx.yaml_to_dict(data_specification_file)
+
+    # instantiate data specification and validation class
+    file_spec = modify.Modify(comment_indicator=data_spec_dict["comment_indicator"],
+                              data_dict=data_spec_dict["data_dict"],
+                              column_widths=data_spec_dict["column_widths"],
+                              column_alignment=data_spec_dict["column_alignment"],
+                              data_types=data_spec_dict["data_types"],
+                              column_list=data_spec_dict["column_list"],
+                              value_columns=data_spec_dict["value_columns"])
+
+
+def generate_xbm_data(skip_rows=1,
+                      template_file=None,
+                      data_specification_file=None):
+
+    # select the appropriate template file
+    template_file = utx.select_template_file(template_file, extension="xbm")
+
+    # read in data specification yaml
+    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                 extension="xbm")
+    data_spec_dict = utx.yaml_to_dict(data_specification_file)
+
+    # instantiate data specification and validation class
+    file_spec = modify.Modify(comment_indicator=data_spec_dict["comment_indicator"],
+                              data_dict=data_spec_dict["data_dict"],
+                              column_widths=data_spec_dict["column_widths"],
+                              column_alignment=data_spec_dict["column_alignment"],
+                              data_types=data_spec_dict["data_types"],
+                              column_list=data_spec_dict["column_list"],
+                              value_columns=data_spec_dict["value_columns"])
+
+    # prepare template data frame for alteration
+    template_df, template_header = modify.prep_data(field_dict=file_spec.data_dict,
+                                                    template_file=template_file,
+                                                    column_list=file_spec.column_list,
+                                                    column_widths=file_spec.column_widths,
+                                                    data_types=file_spec.data_types,
+                                                    comment=file_spec.comment_indicator,
+                                                    skip_rows=skip_rows,
+                                                    replace_dict={"********": np.nan})
+
+    # calculate the xbm monthly data array
+    xbm_data_array_monthly = calculate_xbm_array_monthly(df=template_df,
+                                                         value_fields=data_spec_dict["value_columns"],
+                                                         year_field="year")
+
+    # generate the xbm yearly data array
+    xbm_data_array_yearly = calculate_xbm_array_annual(xbm_data_array_monthly)
+
+
+
+
+
 
 
 def create_iwr_data_frames(filename, firstLine, numSites, abbrev):
