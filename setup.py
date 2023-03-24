@@ -35,6 +35,7 @@ setup(
         'pyarrow>=10.0.1',
         'SALib>1.4.5',
         'tqdm>=4.64.1',
-        'pyyaml>=6.0.0'
+        'pyyaml>=6.0.0',
+        'pygame>=2.3.0'
     ],
 )
