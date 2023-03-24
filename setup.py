@@ -16,7 +16,7 @@ setup(
     packages=find_packages(),
     url='https://github.com/IMMM-SFA/statemodify',
     license='BSD-2-Clause',
-    author='',
+    author='Rohini S. Gupta, Chris R. Vernon',
     author_email='',
     description="A package to modify StateMod's input and output files for exploratory modeling",
     long_description=readme(),
