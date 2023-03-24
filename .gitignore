@@ -1,6 +1,9 @@
 # pycharm
 .idea/
 
+# other
+_static
+
 # system
 .DS_Store
 

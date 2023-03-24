@@ -1,7 +1,12 @@
+import os
 import pkg_resources
 from typing import Union
 
 import yaml
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import pygame
+from pygame.locals import QUIT, KEYDOWN
 
 
 def yaml_to_dict(yaml_file: str) -> dict:
@@ -62,3 +67,62 @@ def select_data_specification_file(yaml_file: Union[None, str],
         return pkg_resources.resource_filename("statemodify", f"data/{extension}_data_specification.yml")
     else:
         return yaml_file
+
+
+def credits():
+    """Run credit reel."""
+
+    credit_list = ["statemodify",
+                   " ",
+                   "A gift to you ",
+                   "and yours from: ",
+                   " ",
+                   "Rohini S. Gupta",
+                   "and",
+                   "Chris R. Vernon"]
+
+    pygame.init()
+    pygame.display.set_caption('End credits')
+    screen = pygame.display.set_mode((800, 600))
+    screen_r = screen.get_rect()
+    font = pygame.font.Font(pkg_resources.resource_filename("statemodify", "data/EightBit-Atari-Regular.ttf"), 26)
+    music_file = pkg_resources.resource_filename("statemodify", "data/corrina.midi")
+
+    clock = pygame.time.Clock()
+
+    pygame.mixer.music.load(music_file)
+    pygame.mixer.music.play()
+
+    background_image = pygame.image.load(pkg_resources.resource_filename("statemodify", "data/background.png"))
+
+    content = []
+    for index, line in enumerate(credit_list):
+        ft = font.render(line, 1, (255, 255, 255))  # white font
+
+        placement = ft.get_rect(centerx=screen_r.centerx, y=screen_r.bottom + index * 45)
+        content.append((placement, ft))
+
+    while True:
+        for e in pygame.event.get():
+            if e.type == QUIT or e.type == KEYDOWN and e.key == pygame.K_ESCAPE:
+                break
+
+        screen.blit(background_image, (0, 0))
+
+        for r, s in content:
+            r.move_ip(0, -1)
+            screen.blit(s, r)
+
+        if not screen_r.collidelistall([r for (r, _) in content]):
+            break
+
+        pygame.display.flip()
+
+        # fps designation
+        clock.tick(25)
+
+    pygame.mixer.music.stop()
+    pygame.mixer.quit()
+    pygame.quit()
+
+    return None
