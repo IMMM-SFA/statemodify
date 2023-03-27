@@ -16,12 +16,12 @@ setup(
     packages=find_packages(),
     url='https://github.com/IMMM-SFA/statemodify',
     license='BSD-2-Clause',
-    author='',
+    author='Rohini S. Gupta, Chris R. Vernon',
     author_email='',
     description="A package to modify StateMod's input and output files for exploratory modeling",
     long_description=readme(),
     long_description_content_type="text/markdown",
-    python_requires='>=3.8.*, <4',
+    python_requires='>=3.8',
     include_package_data=True,
     install_requires=[
         'joblib>=1.1.0',
@@ -35,6 +35,7 @@ setup(
         'pyarrow>=10.0.1',
         'SALib>1.4.5',
         'tqdm>=4.64.1',
-        'pyyaml>=6.0.0'
+        'pyyaml>=6.0.0',
+        'pygame>=2.3.0'
     ],
 )
