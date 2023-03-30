@@ -12,6 +12,7 @@ import statsmodels.api as sm
 
 import statemodify.utils as utx
 import statemodify.modify as modify
+import statemodify.sampler as sampler
 
 
 class GenerateIwrData:
@@ -143,17 +144,41 @@ class GenerateXbmData:
                                                                   replace_dict={"********": np.nan})
 
 
-def generate_samples(load: bool = True):
+def get_samples(generate: bool = False,
+                n_samples: int = 1,
+                sampling_method: str = "LHS",
+                seed_value: Union[None, int] = None):
     """Generate or load Latin Hypercube Samples (LHS).
+
+    TODO:  READ IN PARAMETER BOUND YAML TO BUILD PROBLEM DICT
 
     Currently, this reads in an input file of precalculated samples.  This should happen
     on-demand and be given a seed value if reproducibility is needed.
 
+    :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
+                                Currently supports the following method:  "LHS" for Latin Hypercube Sampling
+    :type sampling_method:      str
+
+    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.
+    :type n_samples:            int, optional
+
+    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.
+                                Defaults to None.
+    :type seed_value:           Union[None, int], optional
+
     """
 
-    target_file = pkg.resource_filename("statemodify", os.path.join("data", "LHsamples_CO.txt"))
+    problem_dict = {}
 
-    return np.loadtxt(target_file)
+    if generate:
+        return sampler.generate_samples(problem_dict=problem_dict,
+                                        n_samples=n_samples,
+                                        sampling_method=sampling_method,
+                                        seed_value=seed_value)
+    
+    else:
+        target_file = pkg.resource_filename("statemodify", os.path.join("data", "LHsamples_CO.txt"))
+        return np.loadtxt(target_file)
 
 
 def generate_dry_state_means(load: bool = True):
@@ -845,7 +870,7 @@ def modify_xbm_iwr(output_dir: str,
     """
 
     # generate an array of samples to process
-    sample_array = generate_samples()
+    sample_array = get_samples()
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[0],

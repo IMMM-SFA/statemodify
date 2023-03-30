@@ -1,4 +1,3 @@
-import itertools
 from glob import glob
 from pathlib import Path
 from typing import Union, List, Type
