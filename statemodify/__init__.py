@@ -5,5 +5,6 @@ from .xdd import *
 from .sampler import *
 from .utils import *
 from .modify import *
+from .xbm_iwr import *
 
 __version__ = "0.0.0"

@@ -1,4 +1,3 @@
-import pkg_resources
 from typing import Union, Dict, List
 
 import numpy as np
