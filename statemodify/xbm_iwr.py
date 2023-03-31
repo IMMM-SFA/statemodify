@@ -144,13 +144,12 @@ class GenerateXbmData:
                                                                   replace_dict={"********": np.nan})
 
 
-def get_samples(generate: bool = False,
+def get_samples(param_dict: dict,
+                basin_name: str,
                 n_samples: int = 1,
                 sampling_method: str = "LHS",
                 seed_value: Union[None, int] = None):
     """Generate or load Latin Hypercube Samples (LHS).
-
-    TODO:  READ IN PARAMETER BOUND YAML TO BUILD PROBLEM DICT
 
     Currently, this reads in an input file of precalculated samples.  This should happen
     on-demand and be given a seed value if reproducibility is needed.
@@ -168,20 +167,23 @@ def get_samples(generate: bool = False,
 
     """
 
-    problem_dict = {}
+    problem_dict = {'num_vars': 7,
+                    'names': ['mu0', 'sigma0', 'mu1', 'sigma1', 'p00', 'p11', 'iwr_multiplier'],
+                    'bounds': [[param_dict["mu0"]["lower"], param_dict["mu0"]["upper"]],
+                               [param_dict["sigma0"]["lower"], param_dict["sigma0"]["upper"]],
+                               [param_dict["mu1"]["lower"], param_dict["mu1"]["upper"]],
+                               [param_dict["sigma1"]["lower"], param_dict["sigma1"]["upper"]],
+                               [param_dict["p00"]["lower"], param_dict["p00"]["upper"]],
+                               [param_dict["p11"]["lower"], param_dict["p11"]["upper"]],
+                               [param_dict["iwr_multiplier"][basin_name]["lower"], param_dict["iwr_multiplier"][basin_name]["upper"]]]}
 
-    if generate:
-        return sampler.generate_samples(problem_dict=problem_dict,
-                                        n_samples=n_samples,
-                                        sampling_method=sampling_method,
-                                        seed_value=seed_value)
-    
-    else:
-        target_file = pkg.resource_filename("statemodify", os.path.join("data", "LHsamples_CO.txt"))
-        return np.loadtxt(target_file)
+    return sampler.generate_samples(problem_dict=problem_dict,
+                                    n_samples=n_samples,
+                                    sampling_method=sampling_method,
+                                    seed_value=seed_value)
 
 
-def generate_dry_state_means(load: bool = True):
+def generate_dry_state_means():
     """Generate or load dry state means.
 
     Currently, this reads in an input file of precalculated samples.  This should happen
@@ -807,7 +809,7 @@ def modify_single_xbm_iwr(mu_0: float,
 
 def modify_xbm_iwr(output_dir: str,
                    scenario: str = "",
-                   n_sites: int = 208,
+                   basin_name: str = "Upper_Colorado",
                    n_years: int = 105,
                    n_basins: int = 5,
                    xbm_skip_rows: int = 1,
@@ -816,10 +818,10 @@ def modify_xbm_iwr(output_dir: str,
                    iwr_template_file: Union[None, str] = None,
                    xbm_data_specification_file: Union[None, str] = None,
                    iwr_data_specification_file: Union[None, str] = None,
-                   historical_column: int = 0,
                    months_in_year: int = 12,
                    seed_value: Union[None, int] = None,
-                   n_jobs: int = -1):
+                   n_jobs: int = -1,
+                   n_samples: int = 1):
     """Generate flows for all samples for all basins in parallel to build modified XBM and IWR files.
 
     :param output_dir:                      Path to output directory.
@@ -828,8 +830,13 @@ def modify_xbm_iwr(output_dir: str,
     :param scenario:                        Scenario name.
     :type scenario:                         str
 
-    :param n_sites:                         number of sites
-    :type n_sites:                          int
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
 
     :param n_years:                         number of years
     :type n_years:                          int
@@ -855,35 +862,42 @@ def modify_xbm_iwr(output_dir: str,
     :param iwr_data_specification_file:     Specification YAML file for XBM format
     :type iwr_data_specification_file:      Union[None, str]
 
-    :param historical_column:               Index of year to use for historical data
-    :type historical_column:                int
-
     :param months_in_year:                  Number of months in year
     :type months_in_year:                   int
 
     :param seed_value:                      Integer to use for random seed or None if not desired
     :type seed_value:                       Union[None, int] = None)
 
-    :param n_jobs:              Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.
-    :type n_jobs:               int
+    :param n_jobs:                          Number of jobs to process in parallel.  Defaults to -1 meaning
+                                            all but 1 processor.
+    :type n_jobs:                           int
+
+    :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.
+    :type n_samples:                        int
+
 
     """
 
+    yaml_file = pkg.resource_filename("statemodify", "data/parameter_definitions.yml")
+    param_dict = utx.yaml_to_dict(yaml_file)
+
     # generate an array of samples to process
-    sample_array = get_samples()
+    sample_array = sampler.generate_sample_all_params(n_samples=n_samples,
+                                                      seed_value=seed_value)
 
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[0],
-                                                                                     sigma_0=sample[1],
-                                                                                     mu_1=sample[2],
-                                                                                     sigma_1=sample[3],
-                                                                                     p00=sample[4],
-                                                                                     p11=sample[5],
-                                                                                     iwr_multiplier=sample[7],
+    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[param_dict["mu_0"]["index"]],
+                                                                                     sigma_0=sample[param_dict["sigma_0"]["index"]],
+                                                                                     mu_1=sample[param_dict["mu_1"]["index"]],
+                                                                                     sigma_1=sample[param_dict["sigma_1"]["index"]],
+                                                                                     p00=sample[param_dict["p00"]["index"]],
+                                                                                     p11=sample[param_dict["p11"]["index"]],
+                                                                                     iwr_multiplier=sample[param_dict["iwr_multiplier"][basin_name]["index"]],
+                                                                                     n_sites=param_dict["xbm_site_metadata"][basin_name]["n_sites"],
+                                                                                     historical_column=param_dict["xbm_site_metadata"][basin_name]["historical_column"],
                                                                                      output_dir=output_dir,
                                                                                      scenario=scenario,
                                                                                      sample_id=sample_id,
-                                                                                     n_sites=n_sites,
                                                                                      n_years=n_years,
                                                                                      n_basins=n_basins,
                                                                                      xbm_skip_rows=xbm_skip_rows,
@@ -892,7 +906,6 @@ def modify_xbm_iwr(output_dir: str,
                                                                                      iwr_template_file=iwr_template_file,
                                                                                      xbm_data_specification_file=xbm_data_specification_file,
                                                                                      iwr_data_specification_file=iwr_data_specification_file,
-                                                                                     historical_column=historical_column,
                                                                                      months_in_year=months_in_year,
                                                                                      seed_value=seed_value) for sample_id, sample in enumerate(sample_array))
 

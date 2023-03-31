@@ -1,7 +1,10 @@
+import pkg_resources
 from typing import Union, Dict, List, Tuple
 
 import numpy as np
 from SALib.sample import latin
+
+import statemodify.utils as utx
 
 
 def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
@@ -112,3 +115,89 @@ def generate_samples(problem_dict: dict,
 
     else:
         raise KeyError(f"Selected sampling method is not currently supported.  Please file a feature request here: https://github.com/IMMM-SFA/statemodify/issues")
+
+
+def generate_sample_all_params(n_samples: int = 1,
+                               sampling_method: str = "LHS",
+                               seed_value: Union[None, int] = None):
+    """Generate samples for all parameters.
+
+    :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
+                                Currently supports the following method:  "LHS" for Latin Hypercube Sampling
+    :type sampling_method:      str
+
+    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.
+    :type n_samples:            int, optional
+
+    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.
+                                Defaults to None.
+    :type seed_value:           Union[None, int], optional
+
+    """
+
+
+    yaml_file = pkg_resources.resource_filename("statemodify", "data/parameter_definitions.yml")
+    param_dict = utx.yaml_to_dict(yaml_file)
+
+    problem_dict = {'num_vars': 7,
+                    'names': ['mu0',
+                              'sigma0',
+                              'mu1',
+                              'sigma1',
+                              'p00',
+                              'p11',
+                              'evap',
+                              'rstorage',
+                              'powerplants',
+                              'envflows',
+                              'oilgas',
+                              'tribal',
+                              'aspinall',
+                              'iwr_multiplier_cm',
+                              'iwr_multiplier_gm',
+                              'iwr_multiplier_sj',
+                              'iwr_multiplier_ym',
+                              'iwr_multiplier_wm',
+                              'trans_multiplier_cm',
+                              'trans_multiplier_gm',
+                              'trans_multiplier_sj',
+                              'trans_multiplier_ym',
+                              'trans_multiplier_wm',
+                              'muni_multiplier_cm',
+                              'muni_multiplier_gm',
+                              'muni_multiplier_sj',
+                              'muni_multiplier_ym',
+                              'muni_multiplier_wm'],
+                    'bounds': [[param_dict["mu0"]["lower"], param_dict["mu0"]["upper"]],
+                               [param_dict["sigma0"]["lower"], param_dict["sigma0"]["upper"]],
+                               [param_dict["mu1"]["lower"], param_dict["mu1"]["upper"]],
+                               [param_dict["sigma1"]["lower"], param_dict["sigma1"]["upper"]],
+                               [param_dict["p00"]["lower"], param_dict["p00"]["upper"]],
+                               [param_dict["p11"]["lower"], param_dict["p11"]["upper"]],
+                               [param_dict["evap"]["lower"], param_dict["evap"]["upper"]],
+                               [param_dict["rstorage"]["lower"], param_dict["rstorage"]["upper"]],
+                               [param_dict["powerplants"]["lower"], param_dict["powerplants"]["upper"]],
+                               [param_dict["envflows"]["lower"], param_dict["envflows"]["upper"]],
+                               [param_dict["oilgas"]["lower"], param_dict["oilgas"]["upper"]],
+                               [param_dict["tribal"]["lower"], param_dict["tribal"]["upper"]],
+                               [param_dict["aspinall"]["lower"], param_dict["aspinall"]["upper"]],
+                               [param_dict["iwr_multiplier"]["Upper_Colorado"]["lower"], param_dict["iwr_multiplier"]["Upper_Colorado"]["upper"]],
+                               [param_dict["iwr_multiplier"]["Gunnison"]["lower"], param_dict["iwr_multiplier"]["Gunnison"]["upper"]],
+                               [param_dict["iwr_multiplier"]["San_Juan"]["lower"], param_dict["iwr_multiplier"]["San_Juan"]["upper"]],
+                               [param_dict["iwr_multiplier"]["Yampa"]["lower"], param_dict["iwr_multiplier"]["Yampa"]["upper"]],
+                               [param_dict["iwr_multiplier"]["White"]["lower"], param_dict["iwr_multiplier"]["White"]["upper"]],
+                               [param_dict["trans_multiplier"]["Upper_Colorado"]["lower"], param_dict["trans_multiplier"]["Upper_Colorado"]["upper"]],
+                               [param_dict["trans_multiplier"]["Gunnison"]["lower"], param_dict["trans_multiplier"]["Gunnison"]["upper"]],
+                               [param_dict["trans_multiplier"]["San_Juan"]["lower"], param_dict["trans_multiplier"]["San_Juan"]["upper"]],
+                               [param_dict["trans_multiplier"]["Yampa"]["lower"], param_dict["trans_multiplier"]["Yampa"]["upper"]],
+                               [param_dict["trans_multiplier"]["White"]["lower"], param_dict["trans_multiplier"]["White"]["upper"]],
+                               [param_dict["muni_multiplier"]["Upper_Colorado"]["lower"], param_dict["muni_multiplier"]["Upper_Colorado"]["upper"]],
+                               [param_dict["muni_multiplier"]["Gunnison"]["lower"], param_dict["muni_multiplier"]["Gunnison"]["upper"]],
+                               [param_dict["muni_multiplier"]["San_Juan"]["lower"], param_dict["muni_multiplier"]["San_Juan"]["upper"]],
+                               [param_dict["muni_multiplier"]["Yampa"]["lower"], param_dict["muni_multiplier"]["Yampa"]["upper"]],
+                               [param_dict["muni_multiplier"]["White"]["lower"], param_dict["muni_multiplier"]["White"]["upper"]]]}
+
+    return generate_samples(problem_dict=problem_dict,
+                            n_samples=n_samples,
+                            sampling_method=sampling_method,
+                            seed_value=seed_value)
