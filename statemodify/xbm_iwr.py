@@ -2,6 +2,7 @@ import os
 import pkg_resources as pkg
 import random
 from typing import List, Union
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -499,12 +500,17 @@ def generate_flows(dry_state_means: np.array,
     log_annual_q_s = np.zeros([n_years, n_basins])
 
     states = np.empty([np.shape(log_annual_q_s)[0]])
-    if random.random() <= unconditional_dry:
-        states[0] = 0
-        log_annual_q_s[0, :] = np.random.multivariate_normal(np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled)
-    else:
-        states[0] = 1
-        log_annual_q_s[0, :] = np.random.multivariate_normal(np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled)
+
+    # prevent runtime error being raised:  RuntimeWarning: covariance is not positive-semidefinite.
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+
+        if random.random() <= unconditional_dry:
+            states[0] = 0
+            log_annual_q_s[0, :] = np.random.multivariate_normal(np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled)
+        else:
+            states[0] = 1
+            log_annual_q_s[0, :] = np.random.multivariate_normal(np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled)
 
     # generate remaining state trajectory and log space flows
     for j in range(1, np.shape(log_annual_q_s)[0]):
@@ -513,10 +519,13 @@ def generate_flows(dry_state_means: np.array,
         else:
             states[j] = 1 - states[j - 1]
 
-        if states[j] == 0:
-            log_annual_q_s[j, :] = np.random.multivariate_normal(np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled)
-        else:
-            log_annual_q_s[j, :] = np.random.multivariate_normal(np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", RuntimeWarning)
+
+            if states[j] == 0:
+                log_annual_q_s[j, :] = np.random.multivariate_normal(np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled)
+            else:
+                log_annual_q_s[j, :] = np.random.multivariate_normal(np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled)
 
     # convert log-space flows to real-space flows
     annual_q_s = np.exp(log_annual_q_s) - 1
