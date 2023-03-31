@@ -34,6 +34,10 @@ statemodify.modify_ddr
 
 .. autofunction:: statemodify.modify_ddr
 
+statemodify.modify_xbm_iwr
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.modify_xbm_iwr
 
 Output Modification
 ---------------------------------

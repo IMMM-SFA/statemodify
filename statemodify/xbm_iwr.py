@@ -875,6 +875,36 @@ def modify_xbm_iwr(output_dir: str,
     :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.
     :type n_samples:                        int
 
+    :example:
+
+    .. code-block:: python
+
+        import statemodify as stm
+
+
+        output_directory = "<your desired output directory>"
+        scenario = "<your scenario name>"
+
+        # basin name to process
+        basin_name = "Upper_Colorado"
+
+        # seed value for reproducibility if so desired
+        seed_value = None
+
+        # number of jobs to launch in parallel; -1 is all but 1 processor used
+        n_jobs = -1
+
+        # number of samples to generate
+        n_samples = 100
+
+        # generate a batch of files using generated LHS
+        stm.modify_xbm_iwr(output_dir=output_directory,
+                           scenario=scenario,
+                           basin_name=basin_name,
+                           seed_value=seed_value,
+                           n_jobs=n_jobs,
+                           n_samples=n_samples)
+
 
     """
 
