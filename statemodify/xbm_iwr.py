@@ -553,22 +553,25 @@ def generate_modified_file(source_object: object,
 
     # format for overwriting original data in data frame
     arr_shape = monthly_data_array.shape
-    monthly_q_s_frame = monthly_data_array.reshape(arr_shape[0] * arr_shape[1], arr_shape[3])
+    monthly_q_s_frame = monthly_data_array.reshape(arr_shape[0] * arr_shape[1], arr_shape[2])
 
     # reconstruct precision
-    source_object.template_df[file_spec.value_columns] = monthly_q_s_frame.round(0).astype(np.int64)
+    source_object.template_df[file_spec["value_columns"]] = monthly_q_s_frame.round(0).astype(np.int64)
+
+    # recalculate total column
+    source_object.template_df["total"] = source_object.template_df[file_spec["value_columns"]].sum(axis=1).astype(np.int64)
 
     # convert all fields to str type
     source_object.template_df = source_object.template_df.astype(str)
 
     # add in trailing decimal
-    source_object.template_df[file_spec.value_columns] = source_object.template_df[file_spec.value_columns] + "."
+    source_object.template_df[file_spec["value_columns"] + ["total"]] = source_object.template_df[file_spec["value_columns"] + ["total"]] + "."
 
     # add formatted data to output string
     data = modify.construct_data_string(source_object.template_df,
-                                        file_spec.column_list,
-                                        file_spec.column_widths,
-                                        file_spec.column_alignment)
+                                        file_spec["column_list"],
+                                        file_spec["column_widths"],
+                                        file_spec["column_alignment"])
 
     # write output file
     output_file = modify.construct_outfile_name(source_object.template_file,
@@ -916,10 +919,10 @@ def modify_xbm_iwr(output_dir: str,
                                                       seed_value=seed_value)
 
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[param_dict["mu_0"]["index"]],
-                                                                                     sigma_0=sample[param_dict["sigma_0"]["index"]],
-                                                                                     mu_1=sample[param_dict["mu_1"]["index"]],
-                                                                                     sigma_1=sample[param_dict["sigma_1"]["index"]],
+    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[param_dict["mu0"]["index"]],
+                                                                                     sigma_0=sample[param_dict["sigma0"]["index"]],
+                                                                                     mu_1=sample[param_dict["mu1"]["index"]],
+                                                                                     sigma_1=sample[param_dict["sigma1"]["index"]],
                                                                                      p00=sample[param_dict["p00"]["index"]],
                                                                                      p11=sample[param_dict["p11"]["index"]],
                                                                                      iwr_multiplier=sample[param_dict["iwr_multiplier"][basin_name]["index"]],

@@ -139,7 +139,7 @@ def generate_sample_all_params(n_samples: int = 1,
     yaml_file = pkg_resources.resource_filename("statemodify", "data/parameter_definitions.yml")
     param_dict = utx.yaml_to_dict(yaml_file)
 
-    problem_dict = {'num_vars': 7,
+    problem_dict = {'num_vars': 28,
                     'names': ['mu0',
                               'sigma0',
                               'mu1',
