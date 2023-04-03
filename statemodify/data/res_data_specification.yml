@@ -1,0 +1,96 @@
+# Assumptions for template file contents and parsing for the StateMod reservoir file (.res)
+
+# Character(s) indicating the line in the file is a comment.
+comment_indicator: "#"
+
+# Field specification in the file as a dictionary to hold the values for each field
+data_dict:
+  "prefix": []
+  "id": []
+  "oct": []
+  "nov": []
+  "dec": []
+  "jan": []
+  "feb": []
+  "mar": []
+  "apr": []
+  "may": []
+  "jun": []
+  "jul": []
+  "aug": []
+  "sep": []
+
+# Define the column widths for the output file as a dictionary
+column_start_index:
+  "volmin": 8,
+  "volmax": 0,
+  "ownname": 0,
+  "ownmax": 0,
+  "sto_1": 0,
+
+
+# Expected column alignment
+column_alignment:
+  "prefix": "left"
+  "id": "left"
+  "oct": "right"
+  "nov": "right"
+  "dec": "right"
+  "jan": "right"
+  "feb": "right"
+  "mar": "right"
+  "apr": "right"
+  "may": "right"
+  "jun": "right"
+  "jul": "right"
+  "aug": "right"
+  "sep": "right"
+
+# Expected data types for each field
+data_types:
+  "prefix": !!python/name:str
+  "id": !!python/name:str
+  "oct": !!python/name:numpy.float64
+  "nov": !!python/name:numpy.float64
+  "dec": !!python/name:numpy.float64
+  "jan": !!python/name:numpy.float64
+  "feb": !!python/name:numpy.float64
+  "mar": !!python/name:numpy.float64
+  "apr": !!python/name:numpy.float64
+  "may": !!python/name:numpy.float64
+  "jun": !!python/name:numpy.float64
+  "jul": !!python/name:numpy.float64
+  "aug": !!python/name:numpy.float64
+  "sep": !!python/name:numpy.float64
+
+# List of columns to process
+column_list:
+  - "prefix"
+  - "id"
+  - "oct"
+  - "nov"
+  - "dec"
+  - "jan"
+  - "feb"
+  - "mar"
+  - "apr"
+  - "may"
+  - "jun"
+  - "jul"
+  - "aug"
+  - "sep"
+
+# List of value columns that may be modified
+value_columns:
+  - "oct"
+  - "nov"
+  - "dec"
+  - "jan"
+  - "feb"
+  - "mar"
+  - "apr"
+  - "may"
+  - "jun"
+  - "jul"
+  - "aug"
+  - "sep"
