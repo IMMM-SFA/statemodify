@@ -13,3 +13,6 @@ column_start_index:
 
 # Content in line to identify when a line no longer is an account to be modified
 terminate_string: "Evaporation"
+
+# Column width for the structure id
+id_column_width: 12

@@ -10,8 +10,7 @@ import statemodify.utils as utx
 
 
 def get_reservoir_structure_ids(template_file: Union[None, str] = None,
-                                data_specification_file: Union[None, str] = None,
-                                column_width: int = 12):
+                                data_specification_file: Union[None, str] = None):
     """Generate a list of structure ids that are in the input file.
 
     :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
@@ -21,9 +20,6 @@ def get_reservoir_structure_ids(template_file: Union[None, str] = None,
     :param data_specification_file:     If a full path to a data specification template is provided it will be used.
                                         Otherwise, the default file in the package is used.
     :type data_specification_file:      Union[None, str]
-
-    :param column_width:                Column width to search for at the beginning of each line for the structure id.
-    :type column_width:                 int
 
     :returns:                           List of structure ids
     :rtype:                             List
@@ -44,7 +40,7 @@ def get_reservoir_structure_ids(template_file: Union[None, str] = None,
             if line[0] == data_spec_dict["comment_indicator"]:
                 pass
             else:
-                x = line[0:column_width]
+                x = line[0:data_spec_dict["id_column_width"]].strip()
                 if len(x) > 0:
                     content.append(x)
 
@@ -87,6 +83,37 @@ def modify_single_res(output_dir: str,
     :param skip_rows:           Number of rows to skip after the commented fields end; default 1
     :type skip_rows:            int, optional
 
+    :example:
+
+    .. code-block:: python
+
+        import statemodify as stm
+
+
+        output_directory = "<your desired output directory>"
+        scenario = "<your scenario name>"
+
+        # basin name to process
+        basin_name = "Gunnison"
+
+        # seed value for reproducibility if so desired
+        seed_value = 0
+
+        # number of jobs to launch in parallel; -1 is all but 1 processor used
+        n_jobs = 2
+
+        # number of samples to generate
+        n_samples = 2
+
+
+        stm.modify_res(output_dir=output_directory,
+                       scenario=scenario,
+                       basin_name=basin_name,
+                       target_structure_id_list=None,
+                       seed_value=seed_value,
+                       n_jobs=n_jobs,
+                       n_samples=n_samples)
+
     """
 
     # select the appropriate template file
@@ -97,18 +124,19 @@ def modify_single_res(output_dir: str,
                                                                  extension="res")
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
-    column_widths = data_spec_dict["column_widths"]
+    column_widths = data_spec_dict["column_start_index"]
 
     if target_structure_id_list is None:
         target_structure_id_list = get_reservoir_structure_ids(template_file=template_file,
                                                                data_specification_file=data_specification_file)
-
+    capture = False
+    account_capture = False
     content = []
     with open(template_file) as get:
         for index, line in enumerate(get):
 
             # capture header
-            if line[0] == data_spec_dict["comment_indicator"] or skip_rows != 0:
+            if line[0] == data_spec_dict["comment_indicator"] or skip_rows > 0:
                 content.append(line)
 
             # account for any additional non-commented lines that need to be skipped before starting data collection
@@ -119,7 +147,7 @@ def modify_single_res(output_dir: str,
             else:
 
                 # get segment of line that usually houses structure id
-                structure_id_segement = line[0:column_widths["id"]].strip()
+                structure_id_segement = line[0:data_spec_dict["id_column_width"]].strip()
 
                 # if reservoir start line found trigger capture
                 if (len(structure_id_segement) > 0) and (capture is False) and (data_spec_dict["terminate_string"] not in line):
