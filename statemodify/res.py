@@ -1,11 +1,51 @@
 import os
-import pkg_resources
 from typing import Union, List
 
 import numpy as np
-import pandas as pd
 
 import statemodify.utils as utx
+
+
+def get_reservoir_structure_ids(template_file: Union[None, str] = None,
+                                data_specification_file: Union[None, str] = None,
+                                column_width: int = 12):
+    """Generate a list of structure ids that are in the input file.
+
+    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
+                                default template in this package will be used.
+    :type template_file:        Union[None, str]
+
+    :param data_specification_file:     If a full path to a data specification template is provided it will be used.
+                                        Otherwise, the default file in the package is used.
+    :type data_specification_file:      Union[None, str]
+
+    :param column_width:                Column width to search for at the beginning of each line for the structure id.
+    :type column_width:                 int
+
+    :returns:                           List of structure ids
+    :rtype:                             List
+
+    """
+
+    # select the appropriate template file
+    template_file = utx.select_template_file(template_file, extension="res")
+
+    # read in data specification yaml
+    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
+                                                                 extension="res")
+    data_spec_dict = utx.yaml_to_dict(data_specification_file)
+
+    content = []
+    with open(template_file) as get:
+        for line in get:
+            if line[0] == data_spec_dict["comment_indicator"]:
+                pass
+            else:
+                x = line[0:column_width]
+                if len(x) > 0:
+                    content.append(x)
+
+    return content
 
 
 def modify_single_res(output_dir: str,
@@ -18,20 +58,17 @@ def modify_single_res(output_dir: str,
                       skip_rows: int = 0):
     """Modify a single reservoir (.res) file based on a user provided sample.
 
-    :param sample:              An array of samples for each parameter.
-    :type sample:               np.array
-
-    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
-    :type sample_id:            int
-
     :param output_dir:          Path to output directory.
     :type output_dir:           str
 
     :param scenario:            Scenario name.
     :type scenario:             str
 
-    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
-    :type skip_rows:            int, optional
+    :param sample:              An array of samples for each parameter.
+    :type sample:               np.array
+
+    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
+    :type sample_id:            int
 
     :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
                                 default template in this package will be used.
@@ -44,7 +81,11 @@ def modify_single_res(output_dir: str,
     :param target_structure_id_list:    Structure id list to process.  If None, all structure ids will be processed.
     :type target_structure_id_list:     Union[None, List[str]]
 
+    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
+    :type skip_rows:            int, optional
+
     """
+
     # select the appropriate template file
     template_file = utx.select_template_file(template_file, extension="res")
 
@@ -54,6 +95,10 @@ def modify_single_res(output_dir: str,
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
     column_widths = data_spec_dict["column_widths"]
+
+    if target_structure_id_list is None:
+        target_structure_id_list = get_reservoir_structure_ids(template_file=template_file,
+                                                               data_specification_file=data_specification_file)
 
     content = []
     with open(template_file) as get:
