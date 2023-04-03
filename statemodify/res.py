@@ -8,16 +8,43 @@ import pandas as pd
 import statemodify.utils as utx
 
 
-def modify_single_res(target_structure_id_list: List[str],
-                      output_dir: str,
+def modify_single_res(output_dir: str,
                       scenario: str,
                       sample: np.array,
                       sample_id: int = 0,
                       template_file: Union[None, str] = None,
                       data_specification_file: Union[None, str] = None,
-                      skip_rows: int = 0,
-                      terminate_string: str = "Evaporation"):
+                      target_structure_id_list: Union[None, List[str]] = None,
+                      skip_rows: int = 0):
+    """Modify a single reservoir (.res) file based on a user provided sample.
 
+    :param sample:              An array of samples for each parameter.
+    :type sample:               np.array
+
+    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.
+    :type sample_id:            int
+
+    :param output_dir:          Path to output directory.
+    :type output_dir:           str
+
+    :param scenario:            Scenario name.
+    :type scenario:             str
+
+    :param skip_rows:           Number of rows to skip after the commented fields end; default 1
+    :type skip_rows:            int, optional
+
+    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
+                                default template in this package will be used.
+    :type template_file:        Union[None, str]
+
+    :param data_specification_file:     If a full path to a data specification template is provided it will be used.
+                                        Otherwise, the default file in the package is used.
+    :type data_specification_file:      Union[None, str]
+
+    :param target_structure_id_list:    Structure id list to process.  If None, all structure ids will be processed.
+    :type target_structure_id_list:     Union[None, List[str]]
+
+    """
     # select the appropriate template file
     template_file = utx.select_template_file(template_file, extension="res")
 
@@ -37,7 +64,7 @@ def modify_single_res(target_structure_id_list: List[str],
                 content.append(line)
 
             # account for any additional non-commented lines that need to be skipped before starting data collection
-            elif skip_rows >0:
+            elif skip_rows > 0:
                 content.append(line)
                 skip_rows -= 1
 
@@ -47,7 +74,7 @@ def modify_single_res(target_structure_id_list: List[str],
                 structure_id_segement = line[0:column_widths["id"]].strip()
 
                 # if reservoir start line found trigger capture
-                if (len(structure_id_segement) > 0) and (capture is False) and (terminate_string not in line):
+                if (len(structure_id_segement) > 0) and (capture is False) and (data_spec_dict["terminate_string"] not in line):
 
                     # keep content
                     content.append(line)
@@ -59,7 +86,7 @@ def modify_single_res(target_structure_id_list: List[str],
                     structure_id = structure_id_segement
 
                 # if capturing line
-                elif (len(structure_id_segement) == 0) and (capture is True) and (terminate_string not in line) and (
+                elif (len(structure_id_segement) == 0) and (capture is True) and (data_spec_dict["terminate_string"] not in line) and (
                         structure_id in target_structure_id_list):
 
                     # line contains the
@@ -88,13 +115,13 @@ def modify_single_res(target_structure_id_list: List[str],
                     else:
                         account_list.append(line)
 
-                elif (len(structure_id_segement) == 0) and (capture is True) and (terminate_string in line) and (
+                elif (len(structure_id_segement) == 0) and (capture is True) and (data_spec_dict["terminate_string"] in line) and (
                         structure_id in target_structure_id_list):
 
                     # compile accounts
                     for acct_line in account_list:
                         # get original values
-                        ownmax_initial = acct_line[24:32]
+                        ownmax_initial = acct_line[column_widths["ownname"]:column_widths["ownmax"]]
                         ownmax_initial_length = len(ownmax_initial)
 
                         # break out account volume by total number of accounts in equal shares
@@ -104,8 +131,8 @@ def modify_single_res(target_structure_id_list: List[str],
                         n_space_padding = ownmax_initial_length - len(ownmax_modified)
                         ownmax_modified = f"{' ' * n_space_padding}{ownmax_modified}"
 
-                        # place back in string and write for ownmax and rsto
-                        acct_line = acct_line[:24] + ownmax_modified + ownmax_modified + acct_line[40:]
+                        # place back in string and write for ownmax and sto_1
+                        acct_line = acct_line[:column_widths["ownname"]] + ownmax_modified + ownmax_modified + acct_line[column_widths["sto_1"]:]
                         content.append(acct_line)
 
                     account_capture = False
