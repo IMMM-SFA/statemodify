@@ -18,4 +18,4 @@ terminate_string: "Evaporation"
 id_column_width: 12
 
 # Ignore modifying structure ids with the following content due to non-reservoir node
-ignore_structre_with_content: ["_Call", "_Ex"]
+ignore_structure_with_content: ["_Call", "_Ex"]

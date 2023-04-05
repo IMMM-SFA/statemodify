@@ -131,7 +131,7 @@ def modify_single_res(output_dir: str,
                                                                data_specification_file=data_specification_file)
 
     # do not modify any in no modify list
-    ignore_parts = data_spec_dict["ignore_structre_with_content"]
+    ignore_parts = data_spec_dict["ignore_structure_with_content"]
     target_structure_id_list = [i for i in target_structure_id_list if f"_{i.split('_')[-1]}" not in ignore_parts]
 
     capture = False
