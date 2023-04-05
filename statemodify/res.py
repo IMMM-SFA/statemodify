@@ -196,19 +196,24 @@ def modify_single_res(output_dir: str,
 
                     # compile accounts
                     for acct_line in account_list:
-                        # get original values
+                        # get original values for ownmax and sto-1
                         ownmax_initial = acct_line[column_widths["ownname"]:column_widths["ownmax"]]
                         ownmax_initial_length = len(ownmax_initial)
 
+                        sto_initial = acct_line[column_widths["ownmax"]:column_widths["sto_1"]]
+                        sto_initial_length = len(sto_initial)
+
                         # break out account volume by total number of accounts in equal shares
                         ownmax_modified = f"{int(float(ownmax_initial) * sample)}."
+                        sto_modified = f"{int(float(sto_initial) * sample)}."
 
                         # reapply space padding
                         n_space_padding = ownmax_initial_length - len(ownmax_modified)
                         ownmax_modified = f"{' ' * n_space_padding}{ownmax_modified}"
+                        sto_modified = f"{' ' * (sto_initial_length - len(sto_modified))}{sto_modified}"
 
                         # place back in string and write for ownmax and sto_1
-                        acct_line = acct_line[:column_widths["ownname"]] + ownmax_modified + ownmax_modified + acct_line[column_widths["sto_1"]:]
+                        acct_line = acct_line[:column_widths["ownname"]] + ownmax_modified + sto_modified + acct_line[column_widths["sto_1"]:]
                         content.append(acct_line)
 
                     account_capture = False
