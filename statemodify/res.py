@@ -129,6 +129,11 @@ def modify_single_res(output_dir: str,
     if target_structure_id_list is None:
         target_structure_id_list = get_reservoir_structure_ids(template_file=template_file,
                                                                data_specification_file=data_specification_file)
+
+    # do not modify any in no modify list
+    ignore_parts = data_spec_dict["ignore_structre_with_content"]
+    target_structure_id_list = [i for i in target_structure_id_list if f"_{i.split('_')[-1]}" not in ignore_parts]
+
     capture = False
     account_capture = False
     content = []
