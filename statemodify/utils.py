@@ -1,3 +1,4 @@
+import glob
 import os
 import pkg_resources
 from typing import Union
@@ -52,21 +53,14 @@ def select_template_file(basin_name: str,
 
     if template_file is None:
 
-        if extension in ("ddr", "eva"):
-            version = "2015"
-        elif extension in ("ddm", "iwr", "res", "rsp"):
-            version = "2015B"
-        elif extension == "xbm":
-            version = "2015x"
-        else:
-            version = "template"
-
         # get basin abbreviation from basin name
         spec_file = pkg_resources.resource_filename("statemodify", "data/basin_specification.yml")
         basin_spec = yaml_to_dict(spec_file)
         basin_abbrev = basin_spec[basin_name]["abbrev"]
 
-        return pkg_resources.resource_filename("statemodify", f"data/{basin_abbrev}{version}.{extension}")
+        data_dir = pkg_resources.resource_filename("statemodify", "data")
+        return glob.glob(os.path.join(data_dir, f"{basin_abbrev}*.{extension}"))[0]
+
     else:
         return template_file
 
