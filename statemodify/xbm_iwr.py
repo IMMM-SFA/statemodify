@@ -752,10 +752,16 @@ def modify_single_xbm_iwr(mu_0: float,
 
     # reshape monthly flows at all sites all years
     MonthlyQ_all = MonthlyQ_h.reshape(n_years, months_in_year, n_sites)
-    MonthlyQ_all_ratios = np.zeros(np.shape(MonthlyQ_all))
+
+    # if zeros are in the data, make them temporarily ones to prevent true divide
+    zero_value_indices = np.where(MonthlyQ_all == 0)
+    MonthlyQ_all[zero_value_indices] = 1
 
     # Divide monthly flows at each site by the monthly flow at the last node
     MonthlyQ_all_ratios = MonthlyQ_all / MonthlyQ_all[:, :, -1][:, :, np.newaxis]
+
+    # revert back to zero
+    MonthlyQ_all[zero_value_indices] = 0
 
     # Get historical flow ratios for last node monthly
     last_node_breakdown = MonthlyQ_all[:, :, -1] / AnnualQ_h[:, -1][:, np.newaxis]
