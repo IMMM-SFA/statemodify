@@ -6,5 +6,6 @@ from .sampler import *
 from .utils import *
 from .modify import *
 from .xbm_iwr import *
+from .res import *
 
 __version__ = "0.0.0"

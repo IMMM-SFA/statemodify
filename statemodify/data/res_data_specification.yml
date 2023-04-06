@@ -1,0 +1,21 @@
+# Assumptions for template file contents and parsing for the StateMod reservoir file (.res)
+
+# Character(s) indicating the line in the file is a comment.
+comment_indicator: "#"
+
+# Define the start index in line for each property
+column_start_index:
+  "volmin": 32
+  "volmax": 40
+  "ownname": 24
+  "ownmax": 32
+  "sto_1": 40
+
+# Content in line to identify when a line no longer is an account to be modified
+terminate_string: "Evaporation"
+
+# Column width for the structure id
+id_column_width: 12
+
+# Ignore modifying structure ids with the following content due to non-reservoir node
+ignore_structure_with_content: ["_Call", "_Ex"]
