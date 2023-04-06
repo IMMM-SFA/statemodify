@@ -16,7 +16,7 @@ class TestDdm(unittest.TestCase):
         "bounds": [[0.5, 1.5], [0.5, 1.5]]
     }
 
-    DDM_COMP_FILE_NAME = "template_scenario-test_sample-0.ddm"
+    DDM_COMP_FILE_NAME = "cm2015B_scenario-test_sample-0.ddm"
     DDM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", DDM_COMP_FILE_NAME))
 
     def test_modify_single_ddm_run(self):
@@ -30,6 +30,7 @@ class TestDdm(unittest.TestCase):
                                   sample_id=0,
                                   output_dir=tmp_dir,
                                   scenario="test",
+                                  basin_name="Upper_Colorado",
                                   skip_rows=1,
                                   template_file=None)
 
@@ -54,6 +55,7 @@ class TestDdm(unittest.TestCase):
                            query_field="id",
                            output_dir=tmp_dir,
                            scenario="test",
+                           basin_name="Upper_Colorado",
                            sampling_method="LHS",
                            n_samples=1,
                            skip_rows=1,
