@@ -1,0 +1,40 @@
+# StateMod Response File
+#
+# This file is Step 5 of the White River StateMod model development.
+# Step 1 = wm2015.rsp file with StateMod option 1
+# Step 2 = Mixed Station Model
+# Step 3 = wm2015x.rsp file with StateMod option 9
+# Step 4 = wm2015H.rsp file with StateMod option 2
+# Step 5 = This .rsp  file with StateMod option 2
+# For addition details, please refer to the ReadMe.txt and the users mnaul documentation
+#
+# wm2015B.rsp
+#
+#
+# Name                                                                  Description (optional)
+#---------------                                                        ----------------------
+Control                                 = wm2015.ctl
+River_Network                           = wm2015.rin
+Reservoir_Station                       = wm2015B.res
+Diversion_Station                       = wm2015.dds
+StreamGage_Station                      = wm2015.ris
+Instreamflow_Station                    = wm2015.ifs
+Instreamflow_Right                      = wm2015.ifr
+Reservoir_Right                         = wm2015.rer
+Diversion_Right                         = wm2015.ddr
+Operational_Right                       = wm2015B.opr
+Evaporation_Annual                      = wm2015.eva
+Stream_Base_Monthly                     = wm2015x.xbm
+Diversion_Demand_Monthly                = wm2015B.ddm
+Instreamflow_Demand_AverageMonthly      = wm2015.ifa
+DelayTable_Monthly                      = wm2015.dly
+Reservoir_Target_Monthly                = wm2015B.tar
+IrrigationPractice_Yearly               = wm2015B.ipy
+ConsumptiveWaterRequirement_Monthly     = wm2015B.iwr
+StateCU_Structure                       = wm2015.str
+Reservoir_Historic_Monthly              = wm2015.eom
+StreamEstimate_Coefficients             = wm2015.rib
+StreamGage_Historic_Monthly             = wm2015.rih
+Diversion_Historic_Monthly              = wm2015.ddh
+Network                                 = ..\Network\wm2015.net
+

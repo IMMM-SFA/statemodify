@@ -19,10 +19,19 @@ import statemodify.sampler as sampler
 class GenerateIwrData:
 
     def __init__(self,
+                 basin_name: str,
                  skip_rows: int = 1,
                  template_file: Union[None, str] = None,
                  data_specification_file: Union[None, str] = None):
         """Generate IWR data from user desired input template and file specification.  Defaults used if none provided.
+
+        :param basin_name:                      Name of basin for either:
+                                                    Upper_Colorado
+                                                    Yampa
+                                                    San_Juan
+                                                    Gunnison
+                                                    White
+        :type basin_name:                       str
 
         :param skip_rows:                                       Number of rows after comments to skip. Default 1.
         :type skip_rows:                                        int
@@ -54,7 +63,9 @@ class GenerateIwrData:
         """
 
         # select the appropriate template file
-        self.template_file = utx.select_template_file(template_file, extension="iwr")
+        self.template_file = utx.select_template_file(basin_name=basin_name,
+                                                      template_file=template_file,
+                                                      extension="iwr")
 
         # read in data specification yaml
         self.data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
@@ -83,10 +94,19 @@ class GenerateIwrData:
 class GenerateXbmData:
 
     def __init__(self,
+                 basin_name: str,
                  skip_rows: int = 1,
                  template_file: Union[None, str] = None,
                  data_specification_file: Union[None, str] = None):
         """Generate XBM data from user desired input template and file specification.  Defaults used if none provided.
+
+        :param basin_name:                      Name of basin for either:
+                                                    Upper_Colorado
+                                                    Yampa
+                                                    San_Juan
+                                                    Gunnison
+                                                    White
+        :type basin_name:                       str
 
         :param skip_rows:                                       Number of rows after comments to skip. Default 1.
         :type skip_rows:                                        int
@@ -118,7 +138,9 @@ class GenerateXbmData:
         """
 
         # select the appropriate template file
-        self.template_file = utx.select_template_file(template_file, extension="xbm")
+        self.template_file = utx.select_template_file(basin_name=basin_name,
+                                                      template_file=template_file,
+                                                      extension="xbm")
 
         # read in data specification yaml
         self.data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
@@ -607,6 +629,7 @@ def modify_single_xbm_iwr(mu_0: float,
                           iwr_multiplier: float,
                           output_dir: str,
                           scenario: str = "",
+                          basin_name: str = "Upper_Colorado",
                           sample_id: int = 0,
                           n_sites: int = 208,
                           n_years: int = 105,
@@ -652,6 +675,14 @@ def modify_single_xbm_iwr(mu_0: float,
     :param scenario:                        Scenario name.
     :type scenario:                         str
 
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
+
     :param n_sites:                         number of sites
     :type n_sites:                          int
 
@@ -696,12 +727,14 @@ def modify_single_xbm_iwr(mu_0: float,
         np.random.seed(seed_value)
 
     # instantiate xbm template data and specification
-    xbm = GenerateXbmData(skip_rows=xbm_skip_rows,
+    xbm = GenerateXbmData(basin_name=basin_name,
+                          skip_rows=xbm_skip_rows,
                           template_file=xbm_template_file,
                           data_specification_file=xbm_data_specification_file)
 
     # instantiate iwr template data and specification
-    iwr = GenerateIwrData(skip_rows=iwr_skip_rows,
+    iwr = GenerateIwrData(basin_name=basin_name,
+                          skip_rows=iwr_skip_rows,
                           template_file=iwr_template_file,
                           data_specification_file=iwr_data_specification_file)
 

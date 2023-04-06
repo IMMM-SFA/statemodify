@@ -1,0 +1,29 @@
+#
+# StateMod Response File
+#
+# Type                                    Name
+# ______________________________________  ________________________________________________________________________
+Control                                 = sj2015.ctl
+River_Network                           = sj2015.rin
+Reservoir_Station                       = sj2015.res
+Diversion_Station                       = sj2015.dds
+StreamGage_Station                      = sj2015.ris
+Instreamflow_Station                    = sj2015.ifs
+Instreamflow_Right                      = sj2015.ifr
+Reservoir_Right                         = sj2015.rer
+Diversion_Right                         = sj2015.ddr
+Operational_Right                       = sj2015B.opr
+Evaporation_Annual                      = sj2015.eva
+Stream_Base_Monthly                     = sj2015x.xbm
+Diversion_Demand_Monthly                = sj2015B.ddm
+Instreamflow_Demand_AverageMonthly      = sj2015B.ifa
+DelayTable_Monthly                      = sj2015.dly
+Reservoir_Target_Monthly                = sj2015B.tar
+ConsumptiveWaterRequirement_Monthly     = sj2015B.iwr
+IrrigationPractice_Yearly               = sj2015B.ipy
+StateCU_Structure                       = sj2015.str
+Reservoir_Historic_Monthly              = sj2015.eom
+StreamEstimate_Coefficients             = sj2015.rib
+StreamGage_Historic_Monthly             = sj2015.rih
+Diversion_Historic_Monthly              = sj2015.ddh
+Plan_Data                               = sj2015.pln
