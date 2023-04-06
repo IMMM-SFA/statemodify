@@ -8,7 +8,7 @@ import statemodify as stm
 
 class TestXbmIwr(unittest.TestCase):
 
-    COMP_FILE_NAME = "template_scenario-test_sample-0.res"
+    COMP_FILE_NAME = "gm2015B_scenario-test_sample-0.res"
     COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", COMP_FILE_NAME))
 
     def test_modify_xbm_iwr_run(self):
