@@ -13,6 +13,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                       query_field: str,
                       output_dir: str,
                       scenario: str,
+                      basin_name: str,
                       sample: np.array,
                       sample_id: int = 0,
                       skip_rows: int = 1,
@@ -42,6 +43,14 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
     :param scenario:                    Scenario name.
     :type scenario:                     str
+
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
 
     :param skip_rows:                   Number of rows to skip after the commented fields end; default 1
     :type skip_rows:                    int, optional
@@ -102,6 +111,9 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # number of jobs to launch in parallel; -1 is all but 1 processor used
         n_jobs = -1
 
+        # basin to process
+        basin_name = "Upper_Colorado"
+
         # generate a batch of files using generated LHS
         stm.modify_single_eva(modify_dict=modify_dict,
                               query_field=query_field,
@@ -109,6 +121,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
                               sample_id=sample_id,
                               output_dir=output_dir,
                               scenario=scenario,
+                              basin_name=basin_name,
                               skip_rows=skip_rows,
                               template_file=None,
                               factor_method="add",
@@ -119,7 +132,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     """
 
     # select the appropriate template file
-    template_file = utx.select_template_file(template_file, extension="eva")
+    template_file = utx.select_template_file(basin_name, template_file, extension="eva")
 
     # read in data specification yaml
     data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
@@ -196,6 +209,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                query_field: str,
                output_dir: str,
                scenario: str,
+               basin_name: str,
                sampling_method: str = "LHS",
                n_samples: int = 1,
                skip_rows: int = 1,
@@ -222,6 +236,14 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
     :param scenario:            Scenario name.
     :type scenario:             str
+
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
 
     :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
                                 Currently supports the following method:  "LHS" for Latin Hypercube Sampling
@@ -293,11 +315,15 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
         # number of jobs to launch in parallel; -1 is all but 1 processor used
         n_jobs = -1
 
+        # basin to process
+        basin_name = "Upper_Colorado"
+
         # generate a batch of files using generated LHS
         stm.modify_eva(modify_dict=modify_dict,
                        query_field=query_field,
                        output_dir=output_dir,
                        scenario=scenario,
+                       basin_name=basin_name,
                        sampling_method="LHS",
                        n_samples=n_samples,
                        skip_rows=skip_rows,
@@ -327,6 +353,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                                                                  sample_id=sample_id,
                                                                                  output_dir=output_dir,
                                                                                  scenario=scenario,
+                                                                                 basin_name=basin_name,
                                                                                  skip_rows=skip_rows,
                                                                                  template_file=template_file,
                                                                                  factor_method=factor_method,
