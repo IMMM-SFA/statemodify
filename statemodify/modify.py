@@ -1,14 +1,9 @@
 import os
-import pkg_resources
 from dataclasses import dataclass
-from typing import Union, Dict, List
+from typing import Dict, List
 
 import numpy as np
 import pandas as pd
-from joblib import Parallel, delayed
-
-import statemodify.utils as utx
-import statemodify.sampler as sampler
 
 
 def set_alignment(value: str,
@@ -131,7 +126,8 @@ def populate_dict(line: str,
                   field_dict: dict,
                   column_widths: dict,
                   column_list: list,
-                  data_types: dict) -> dict:
+                  data_types: dict,
+                  replace_dict: dict) -> dict:
     """Populate the input dictionary with values from each line based on column widths.
 
     :param line:                    Line of data as a string from the input file.
@@ -149,6 +145,10 @@ def populate_dict(line: str,
     :param data_types:              Dictionary of column names to data types.
     :type data_types:               dict
 
+    :param replace_dict:            Dictionary of value with replacement when necessary.
+                                    For example, {"********", ""}
+    :type replace_dict:             dict
+
     :return:                        Populated data dictionary.
 
     """
@@ -164,6 +164,9 @@ def populate_dict(line: str,
 
         # extract portion of the line based on the known column width
         string_extraction = line[start_index: end_index]
+
+        if string_extraction in replace_dict:
+            string_extraction = replace_dict[string_extraction]
 
         # convert to desired data type
         out_string = data_types[i](string_extraction)
@@ -183,7 +186,8 @@ def prep_data(field_dict: dict,
               column_widths: dict,
               data_types: dict,
               comment: str = "#",
-              skip_rows: int = 0):
+              skip_rows: int = 0,
+              replace_dict: dict = {}):
     """Ingest statemod file and format into a data frame.
 
     :param field_dict:              Dictionary holding values for each field.
@@ -207,6 +211,10 @@ def prep_data(field_dict: dict,
     :param skip_rows:               The number of uncommented rows of data to skip.
     :type skip_rows:                int
 
+    :param replace_dict:            Dictionary of value with replacement when necessary.
+                                    For example, {"********", ""}
+    :type replace_dict:             dict
+
     :return:                        [0] data frame of data from file
                                     [1] header data from file
 
@@ -223,7 +231,7 @@ def prep_data(field_dict: dict,
             if capture:
 
                 # populate dictionary with data content
-                field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types)
+                field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types, replace_dict)
 
             else:
 
@@ -233,7 +241,7 @@ def prep_data(field_dict: dict,
                     # if you are not skipping any rows that are not comments
                     if skip_rows == 0:
 
-                        field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types)
+                        field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types, replace_dict)
                         capture = True
 
                     else:
@@ -351,7 +359,7 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
     :param factor:                          Value to multiply the selected value columns by.
     :type factor:                           float
 
-    :param factor_method:                   Method by which to apply the factor. Options 'add', 'multiply'.
+    :param factor_method:                   Method by which to apply the factor. Options 'add', 'multiply', 'assign'.
                                             Defaults to 'add'.
     :type factor_method:                    str
 
@@ -365,7 +373,8 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
 
     elif factor_method == "multiply":
         return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
-
+    elif factor_method == "assign":
+        return (data_df[value_columns] * 0 + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
     else:
         raise KeyError(f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply').")
 
@@ -389,7 +398,7 @@ def validate_bounds(bounds_list: List[List[float]],
 
     :example:
 
-        .. code-block:: python
+    .. code-block:: python
 
         import statemodify as stm
 

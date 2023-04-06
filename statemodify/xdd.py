@@ -1,4 +1,3 @@
-import itertools
 from glob import glob
 from pathlib import Path
 from typing import Union, List, Type
@@ -188,6 +187,7 @@ class XddConverter:
         if id_subset is not None:
             df = df[df['structure_id'].isin(id_subset)]
         df.to_parquet(f"{output_path}/{Path(file).stem}.parquet")
+
 
 def convert_xdd(
     *,

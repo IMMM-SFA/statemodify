@@ -92,7 +92,8 @@ class TestModify(unittest.TestCase):
                                  field_dict=self.FIELD_DICT,
                                  column_widths=self.COLUMN_WIDTHS,
                                  column_list=self.COLUMN_LIST,
-                                 data_types=self.DATA_TYPES)
+                                 data_types=self.DATA_TYPES,
+                                 replace_dict={})
 
         self.assertEqual(self.COMP_DATA, d)
 

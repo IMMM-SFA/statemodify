@@ -1,0 +1,53 @@
+# Assumptions for template file contents and parsing for the StateMod water rights (.ddr)
+
+# Character(s) indicating the line in the file is a comment.
+comment_indicator: "#"
+
+# Field specification in the file as a dictionary to hold the values for each field
+data_dict:
+  "id": []
+  "name": []
+  "struct": []
+  "admin": []
+  "decree": []
+  "on_off": []
+
+# Define the column widths for the output file as a dictionary
+column_widths:
+  "id": 12
+  "name": 24
+  "struct": 12
+  "admin": 16
+  "decree": 8
+  "on_off": 8
+
+# Expected column alignment
+column_alignment:
+  "id": "left"
+  "name": "left"
+  "struct": "left"
+  "admin": "right"
+  "decree": "right"
+  "on_off": "right"
+
+# Expected data types for each field
+data_types:
+  "id": !!python/name:str
+  "name": !!python/name:str
+  "struct": !!python/name:str
+  "admin": !!python/name:str
+  "decree": !!python/name:numpy.float64
+  "on_off": !!python/name:int
+
+# List of columns to process
+column_list:
+  - "id"
+  - "name"
+  - "struct"
+  - "admin"
+  - "decree"
+  - "on_off"
+
+# List of value columns that may be modified
+value_columns:
+  - "decree"
