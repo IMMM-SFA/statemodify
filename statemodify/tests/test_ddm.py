@@ -17,7 +17,7 @@ class TestDdm(unittest.TestCase):
     }
 
     DDM_COMP_FILE_NAME = "cm2015B_scenario-test_sample-0.ddm"
-    DDM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", DDM_COMP_FILE_NAME))
+    DDM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", DDM_COMP_FILE_NAME))
 
     def test_modify_single_ddm_run(self):
         """Ensure the single file processor runs and generates the expected output."""

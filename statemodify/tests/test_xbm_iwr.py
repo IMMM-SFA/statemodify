@@ -9,9 +9,9 @@ import statemodify as stm
 class TestXbmIwr(unittest.TestCase):
 
     XBM_COMP_FILE_NAME = "cm2015x_scenario-test_sample-0.xbm"
-    XBM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", XBM_COMP_FILE_NAME))
+    XBM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", XBM_COMP_FILE_NAME))
     IWR_COMP_FILE_NAME = "cm2015B_scenario-test_sample-0.iwr"
-    IWR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", IWR_COMP_FILE_NAME))
+    IWR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", IWR_COMP_FILE_NAME))
 
     def test_modify_xbm_iwr_run(self):
         """Ensure the single file processor runs and generates the expected output."""

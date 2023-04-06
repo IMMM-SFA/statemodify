@@ -16,7 +16,7 @@ class TestEva(unittest.TestCase):
     }
 
     EVA_COMP_FILE_NAME = "cm2015_scenario-test_sample-0.eva"
-    EVA_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", EVA_COMP_FILE_NAME))
+    EVA_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", EVA_COMP_FILE_NAME))
 
     def test_modify_single_eva_run(self):
         """Ensure the single file processor runs and generates the expected output."""

@@ -15,15 +15,6 @@ class TestUtils(unittest.TestCase):
     def test_select_template_file(self):
         """Test template file retrieval."""
 
-        template_file_custom = utx.select_template_file("/test/eva_data_specification.yml")
-
-        self.assertEqual("/test/eva_data_specification.yml",
-                         template_file_custom,
-                         msg="Failure for YAML file selection.")
-
-    def test_select_template_file(self):
-        """Test template file retrieval."""
-
         basin_name = "Upper_Colorado"
         template_file_custom = os.path.basename(utx.select_template_file(basin_name, None, "eva"))
 
