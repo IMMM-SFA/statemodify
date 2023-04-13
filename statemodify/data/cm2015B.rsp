@@ -1,0 +1,49 @@
+# cm2015B.rsp  (Baseline Simulation)
+#
+# This file is Step 4 of the Colorado River StateMod model development.
+# Step 1 = cm2015.rsp file with StateMod option 1
+# Step 2 = Mixed Station Model
+# Step 3 = This (cm2015x).rsp file with StateMod option 9
+# Step 4 = cm2015H.rsp file with StateMod option 2
+# Step 5 = use cm2015B.rsp  file with StateMod option 2 - Simulates current operations over entire period
+# For addition details, please refer to the ReadMe.txt and the users manual documentation
+#
+# StateMod Response File
+#
+# Type                                    Name
+# ______________________________________  ________________________________________________________________________                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+# CONTROL DATA
+Control                                 = cm2015.ctl  
+# RIVER NETWORK 
+River_Network                           = cm2015.rin 
+Network                                 = ..\Network\cm2015.net
+# CONSUMPTIVE USE DATA
+StateCU_Structure                       = cm2015.str  
+ConsumptiveWaterRequirement_Monthly     = cm2015B.iwr 
+IrrigationPractice_Yearly               = cm2015B.ipy
+# STREAM GAGE DATA
+StreamEstimate_Coefficients             = cm2015.rib                                                                                                                                                                                                                                                
+StreamGage_Historic_Monthly             = cm2015.rih                                                                                                                                                                                                                                       
+StreamGage_Station                      = cm2015.ris    
+Stream_Base_Monthly                     = cm2015x.xbm
+# DIVERSION DATA
+Diversion_Station                       = cm2015.dds    
+Diversion_Right                         = cm2015B.ddr
+Diversion_Demand_Monthly                = cm2015B.ddm 
+Diversion_Historic_Monthly              = cm2015.ddh 
+# RESERVOIR DATA 
+Evaporation_Annual                      = cm2015.eva 
+Reservoir_Historic_Monthly              = cm2015.eom 
+Reservoir_Target_Monthly                = cm2015B.tar
+Reservoir_Station                       = cm2015B.res 
+Reservoir_Right                         = cm2015B.rer                                                                                                                                                                                                                                            
+# INSTREAM FLOW DATA  
+Instreamflow_Demand_AverageMonthly      = cm2015.ifa                                                                                                                                                                                                                                             
+Instreamflow_Demand_Monthly             = cm2015B.ifm    
+Instreamflow_Right                      = cm2015.ifr                                                                                                                                                                                                                                                   
+Instreamflow_Station                    = cm2015.ifs 
+# OPERATIONs & PLAN DATA
+Operational_Right                       = cm2015B.opr                                                                                                                                                                                                                                                   
+Plan_Data                               = cm2015.pln 
+# DELAY TABLE DATA
+DelayTable_Monthly                      = cm2015.dly        

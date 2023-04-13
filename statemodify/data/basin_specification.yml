@@ -1,0 +1,20 @@
+# basin specific information
+Upper_Colorado:
+  abbrev: cm
+  n_sites: 208
+
+Gunnison:
+  abbrev: gm
+  n_sites: 139
+
+San_Juan:
+  abbrev: sj
+  n_sites: 165
+
+Yampa:
+  abbrev: ym
+  n_sites: 94
+
+White:
+  abbrev: wm
+  n_sites: 43

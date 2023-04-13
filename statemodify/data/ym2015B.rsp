@@ -1,0 +1,44 @@
+#
+# ym2015B.rsp
+#
+# StateMod Response File
+# for the Yampa River Basin StateMod model
+# This file is Step 6 of the Yampa River StateMod model development.
+# Step 1 = use ym2015.rsp file with StateMod option 1
+# Step 2 = Mixed Station Model
+# Step 3 = ym2015x.rsp file with StateMod option 9
+# Step 4 = TSTool with ShiftTroutCreek.TSTool command file
+# Step 5 = use ym2015H.rsp file with StateMod option 2
+# Step 6 = this .rsp  file with StateMod option 2
+# For addition details, please refer to the ReadMe.txt and the users manaul documentation
+#
+#
+# Name                                                                  Description (optional)
+#---------------                                                        ----------------------
+Control                                 = ym2015.ctl
+River_Network                           = ym2015.rin
+Reservoir_Station                       = ym2015B.res
+Diversion_Station                       = ym2015.dds
+StreamGage_Station                      = ym2015.ris
+Instreamflow_Station                    = ym2015.ifs
+Instreamflow_Right                      = ym2015.ifr
+Reservoir_Right                         = ym2015B.rer
+Diversion_Right                         = ym2015.ddr
+Operational_Right                       = ym2015B.opr
+Evaporation_Annual                      = ym2015.eva
+Stream_Base_Monthly                     = ym2015x_mod.xbm
+Diversion_Demand_Monthly                = ym2015B.ddm
+Instreamflow_Demand_AverageMonthly      = ym2015.ifa
+DelayTable_Monthly                      = ym2015.dly
+Reservoir_Target_Monthly                = ym2015B.tar
+IrrigationPractice_Yearly               = ym2015B.ipy
+ConsumptiveWaterRequirement_Monthly     = ym2015B.iwr
+StateCU_Structure                       = ym2015.str
+Reservoir_Historic_Monthly              = ym2015.eom
+StreamEstimate_Coefficients             = ym2015.rib
+StreamGage_Historic_Monthly             = ym2015.rih
+Diversion_Historic_Monthly              = ym2015.ddh
+Network                                 = ..\Network\ym2015.net
+# PLAN DATA
+Plan_Data                               = ym2015.pln
+

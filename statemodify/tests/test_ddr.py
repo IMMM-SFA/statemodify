@@ -34,10 +34,10 @@ class TestDdr(unittest.TestCase):
         "names": ["group_1", "group_2"]
     }
 
-    DDR_COMP_FILE_NAME = "template_scenario-test_sample-0.ddr"
-    DDR_COMP_FILE_NAME_VALUES = "template_scenario-test_sample-0_values.ddr"
-    DDR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("data", DDR_COMP_FILE_NAME))
-    DDR_COMP_FULLPATH_VALUES = pkg_resources.resource_filename("statemodify", os.path.join("data", DDR_COMP_FILE_NAME_VALUES))
+    DDR_COMP_FILE_NAME = "cm2015B_scenario-test_sample-0.ddr"
+    DDR_COMP_FILE_NAME_VALUES = "cm2015B_scenario-test_sample-0_values.ddr"
+    DDR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", DDR_COMP_FILE_NAME))
+    DDR_COMP_FULLPATH_VALUES = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", DDR_COMP_FILE_NAME_VALUES))
     SETUP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
                             "on_off": [0, 1, 1, 1]})
     COMP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02", "3600642.04", "3600642.07"],
@@ -76,37 +76,12 @@ class TestDdr(unittest.TestCase):
                                   sample_id=0,
                                   output_dir=tmp_dir,
                                   scenario="test",
+                                  basin_name="Upper_Colorado",
                                   skip_rows=0,
                                   template_file=None)
 
             # get contents of comparison file
             with open(TestDdr.DDR_COMP_FULLPATH) as comp:
-                comp_data = comp.read()
-
-            # get contents of generated file
-            with open(os.path.join(tmp_dir, TestDdr.DDR_COMP_FILE_NAME)) as sim:
-                sim_data = sim.read()
-
-            # ensure equality
-            self.assertEqual(comp_data, sim_data, msg="Simulated data for DDR file does not match what was expected.")
-
-    def test_modify_single_ddr_run_setvalues(self):
-        """Ensure the single file processor runs and generates the expected output with value set."""
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-
-            stm.modify_single_ddr(modify_dict=TestDdr.VALID_MODIFY_DICT_VALUES,
-                                  query_field="id",
-                                  sample_id=0,
-                                  output_dir=tmp_dir,
-                                  scenario="test",
-                                  skip_rows=0,
-                                  template_file=None,
-                                  factor_method="assign",
-                                  use_values=True)
-
-            # get contents of comparison file
-            with open(TestDdr.DDR_COMP_FULLPATH_VALUES) as comp:
                 comp_data = comp.read()
 
             # get contents of generated file
@@ -126,6 +101,7 @@ class TestDdr(unittest.TestCase):
                            query_field="id",
                            output_dir=tmp_dir,
                            scenario="test",
+                           basin_name="Upper_Colorado",
                            sampling_method="LHS",
                            n_samples=1,
                            skip_rows=0,

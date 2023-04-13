@@ -9,9 +9,18 @@ import statemodify.sampler as sampler
 import statemodify.utils as utx
 
 
-def get_reservoir_structure_ids(template_file: Union[None, str] = None,
+def get_reservoir_structure_ids(basin_name: str,
+                                template_file: Union[None, str] = None,
                                 data_specification_file: Union[None, str] = None):
     """Generate a list of structure ids that are in the input file.
+
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
 
     :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
                                 default template in this package will be used.
@@ -27,7 +36,7 @@ def get_reservoir_structure_ids(template_file: Union[None, str] = None,
     """
 
     # select the appropriate template file
-    template_file = utx.select_template_file(template_file, extension="res")
+    template_file = utx.select_template_file(basin_name, template_file, extension="res")
 
     # read in data specification yaml
     data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
@@ -49,6 +58,7 @@ def get_reservoir_structure_ids(template_file: Union[None, str] = None,
 
 def modify_single_res(output_dir: str,
                       scenario: str,
+                      basin_name: str,
                       sample: np.array,
                       sample_id: int = 0,
                       template_file: Union[None, str] = None,
@@ -62,6 +72,14 @@ def modify_single_res(output_dir: str,
 
     :param scenario:            Scenario name.
     :type scenario:             str
+
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
 
     :param sample:              An array of samples for each parameter.
     :type sample:               np.array
@@ -83,41 +101,10 @@ def modify_single_res(output_dir: str,
     :param skip_rows:           Number of rows to skip after the commented fields end; default 1
     :type skip_rows:            int, optional
 
-    :example:
-
-    .. code-block:: python
-
-        import statemodify as stm
-
-
-        output_directory = "<your desired output directory>"
-        scenario = "<your scenario name>"
-
-        # basin name to process
-        basin_name = "Gunnison"
-
-        # seed value for reproducibility if so desired
-        seed_value = 0
-
-        # number of jobs to launch in parallel; -1 is all but 1 processor used
-        n_jobs = 2
-
-        # number of samples to generate
-        n_samples = 2
-
-
-        stm.modify_res(output_dir=output_directory,
-                       scenario=scenario,
-                       basin_name=basin_name,
-                       target_structure_id_list=None,
-                       seed_value=seed_value,
-                       n_jobs=n_jobs,
-                       n_samples=n_samples)
-
     """
 
     # select the appropriate template file
-    template_file = utx.select_template_file(template_file, extension="res")
+    template_file = utx.select_template_file(basin_name, template_file, extension="res")
 
     # read in data specification yaml
     data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
@@ -127,7 +114,8 @@ def modify_single_res(output_dir: str,
     column_widths = data_spec_dict["column_start_index"]
 
     if target_structure_id_list is None:
-        target_structure_id_list = get_reservoir_structure_ids(template_file=template_file,
+        target_structure_id_list = get_reservoir_structure_ids(basin_name=basin_name,
+                                                               template_file=template_file,
                                                                data_specification_file=data_specification_file)
 
     # do not modify any in no modify list
@@ -297,6 +285,36 @@ def modify_res(output_dir: str,
     :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.
     :type n_samples:                        int
 
+    :example:
+
+    .. code-block:: python
+
+        import statemodify as stm
+
+
+        output_directory = "<your desired output directory>"
+        scenario = "<your scenario name>"
+
+        # basin name to process
+        basin_name = "Gunnison"
+
+        # seed value for reproducibility if so desired
+        seed_value = 0
+
+        # number of jobs to launch in parallel; -1 is all but 1 processor used
+        n_jobs = 2
+
+        # number of samples to generate
+        n_samples = 2
+
+        stm.modify_res(output_dir=output_directory,
+                       scenario=scenario,
+                       basin_name=basin_name,
+                       target_structure_id_list=None,
+                       seed_value=seed_value,
+                       n_jobs=n_jobs,
+                       n_samples=n_samples)
+
     """
 
     yaml_file = pkg_resources.resource_filename("statemodify", "data/parameter_definitions.yml")
@@ -309,6 +327,7 @@ def modify_res(output_dir: str,
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_res)(output_dir=output_dir,
                                                                                  scenario=scenario,
+                                                                                 basin_name=basin_name,
                                                                                  sample=sample[param_dict["rstorage"]["index"]],
                                                                                  sample_id=sample_id,
                                                                                  template_file=template_file,

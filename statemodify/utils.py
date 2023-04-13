@@ -1,3 +1,4 @@
+import glob
 import os
 import pkg_resources
 from typing import Union
@@ -25,9 +26,18 @@ def yaml_to_dict(yaml_file: str) -> dict:
         return yaml.load(yml, Loader=yaml.UnsafeLoader)
 
 
-def select_template_file(template_file: Union[None, str],
+def select_template_file(basin_name: str,
+                         template_file: Union[None, str],
                          extension: Union[None, str] = None) -> str:
     """Select either the default template file or a user provided one.
+
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
 
     :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the
                                 default template in this package will be used.
@@ -42,7 +52,15 @@ def select_template_file(template_file: Union[None, str],
     """
 
     if template_file is None:
-        return pkg_resources.resource_filename("statemodify", f"data/template.{extension}")
+
+        # get basin abbreviation from basin name
+        spec_file = pkg_resources.resource_filename("statemodify", "data/basin_specification.yml")
+        basin_spec = yaml_to_dict(spec_file)
+        basin_abbrev = basin_spec[basin_name]["abbrev"]
+
+        data_dir = pkg_resources.resource_filename("statemodify", "data")
+        return glob.glob(os.path.join(data_dir, f"{basin_abbrev}*.{extension}"))[0]
+
     else:
         return template_file
 
@@ -74,8 +92,8 @@ def credits():
 
     credit_list = ["statemodify",
                    " ",
-                   "A gift to you ",
-                   "and yours from: ",
+                   "A gift to you",
+                   "and yours from:",
                    " ",
                    "Rohini S. Gupta",
                    "and",
