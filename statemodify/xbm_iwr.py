@@ -859,7 +859,8 @@ def modify_xbm_iwr(output_dir: str,
                    months_in_year: int = 12,
                    seed_value: Union[None, int] = None,
                    n_jobs: int = -1,
-                   n_samples: int = 1):
+                   n_samples: int = 1,
+                   save_sample: bool = False):
     """Generate flows for all samples for all basins in parallel to build modified XBM and IWR files.
 
     :param output_dir:                      Path to output directory.
@@ -913,6 +914,10 @@ def modify_xbm_iwr(output_dir: str,
     :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.
     :type n_samples:                        int
 
+    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written
+                                to the output directory.
+    :type save_sample:          bool
+
     :example:
 
     .. code-block:: python
@@ -941,7 +946,8 @@ def modify_xbm_iwr(output_dir: str,
                            basin_name=basin_name,
                            seed_value=seed_value,
                            n_jobs=n_jobs,
-                           n_samples=n_samples)
+                           n_samples=n_samples,
+                           save_sample=False)
 
 
     """
@@ -952,6 +958,11 @@ def modify_xbm_iwr(output_dir: str,
     # generate an array of samples to process
     sample_array = sampler.generate_sample_all_params(n_samples=n_samples,
                                                       seed_value=seed_value)
+
+    # if the user chooses, write the sample to file
+    if save_sample:
+        sample_file = os.path.join(output_dir, f"xbm-iwr_{n_samples}-samples_scenario-{scenario}.npy")
+        np.save(sample_file, sample_array)
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[param_dict["mu0"]["index"]],
