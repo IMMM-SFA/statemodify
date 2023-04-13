@@ -1,3 +1,4 @@
+import os
 from typing import Union, Dict, List
 
 import numpy as np
@@ -222,7 +223,8 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                factor_method: str = "multiply",
                data_specification_file: Union[None, str] = None,
                min_bound_value: float = 0.5,
-               max_bound_value: float = 1.5) -> None:
+               max_bound_value: float = 1.5,
+               save_sample: bool = False) -> None:
     """Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
     from the user. Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields
     where ids to modify are specified in the `modify_dict` argument. The user must specify bounds for each field name.
@@ -284,6 +286,10 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                                         Maximum allowable value:  1.5
     :type max_bound_value:              float
 
+    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written
+                                to the output directory.
+    :type save_sample:          bool
+
     :return: None
     :rtype: None
 
@@ -336,7 +342,8 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                        factor_method="multiply",
                        data_specification_file=None,
                        min_bound_value=-0.5,
-                       max_bound_value=1.0)
+                       max_bound_value=1.0,
+                       save_sample=False)
 
     """
 
@@ -348,6 +355,11 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                                             n_samples=n_samples,
                                             sampling_method=sampling_method,
                                             seed_value=seed_value)
+
+    # if the user chooses, write the sample to file
+    if save_sample:
+        sample_file = os.path.join(output_dir, f"ddm_{n_samples}-samples_scenario-{scenario}.npy")
+        np.save(sample_file, sample_array)
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_ddm)(modify_dict=modify_dict,

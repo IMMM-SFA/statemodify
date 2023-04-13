@@ -238,7 +238,8 @@ def modify_res(output_dir: str,
                skip_rows: int = 0,
                seed_value: Union[None, int] = None,
                n_jobs: int = -1,
-               n_samples: int = 1):
+               n_samples: int = 1,
+               save_sample: bool = False):
     """Modify a single reservoir (.res) file based on a user provided sample.
 
     :param output_dir:          Path to output directory.
@@ -285,6 +286,10 @@ def modify_res(output_dir: str,
     :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.
     :type n_samples:                        int
 
+    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written
+                                to the output directory.
+    :type save_sample:          bool
+
     :example:
 
     .. code-block:: python
@@ -313,7 +318,8 @@ def modify_res(output_dir: str,
                        target_structure_id_list=None,
                        seed_value=seed_value,
                        n_jobs=n_jobs,
-                       n_samples=n_samples)
+                       n_samples=n_samples,
+                       save_sample=False)
 
     """
 
@@ -323,6 +329,11 @@ def modify_res(output_dir: str,
     # generate an array of samples to process
     sample_array = sampler.generate_sample_all_params(n_samples=n_samples,
                                                       seed_value=seed_value)
+
+    # if the user chooses, write the sample to file
+    if save_sample:
+        sample_file = os.path.join(output_dir, f"res_{n_samples}-samples_scenario-{scenario}.npy")
+        np.save(sample_file, sample_array)
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_res)(output_dir=output_dir,
