@@ -205,6 +205,58 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-with-statemodify">
+   Getting started with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statemodify
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installation">
+     Installation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-modified-inputs-for-statemod">
+   Generate modified inputs for StateMod
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modify-ddm-files">
+     Modify DDM files
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-statemod">
+   Run StateMod
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compile-outputs">
+   Compile outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-outputs">
+   Visualize outputs
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -217,6 +269,58 @@
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-with-statemodify">
+   Getting started with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statemodify
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installation">
+     Installation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-modified-inputs-for-statemod">
+   Generate modified inputs for StateMod
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modify-ddm-files">
+     Modify DDM files
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-statemod">
+   Run StateMod
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compile-outputs">
+   Compile outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-outputs">
+   Visualize outputs
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -225,6 +329,114 @@
                 
   <div class="section" id="quickstarter">
 <h1>Quickstarter<a class="headerlink" href="#quickstarter" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-started-with-statemodify">
+<h2>Getting started with <code class="docutils literal notranslate"><span class="pre">statemodify</span></code><a class="headerlink" href="#getting-started-with-statemodify" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>See instructions to install <code class="docutils literal notranslate"><span class="pre">statemodify</span></code> here: <a class="reference external" href="https://immm-sfa.github.io/statemodify/getting-started/installation.html">install
+statemodify</a></p>
+</div>
+</div>
+<div class="section" id="generate-modified-inputs-for-statemod">
+<h2>Generate modified inputs for StateMod<a class="headerlink" href="#generate-modified-inputs-for-statemod" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
+
+<span class="c1"># setup</span>
+<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;quickstarter&quot;</span>
+
+<span class="c1"># the number of samples you wish to generate</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># seed value for reproducibility if so desired</span>
+<span class="n">seed_value</span> <span class="o">=</span> <span class="mi">777</span>
+</pre></div>
+</div>
+<div class="section" id="modify-ddm-files">
+<h3>Modify DDM files<a class="headerlink" href="#modify-ddm-files" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
+<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;municipal&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;3600507&quot;</span><span class="p">,</span> <span class="s2">&quot;3600603&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;3600649_D&quot;</span><span class="p">,</span> <span class="s2">&quot;3600662_D&quot;</span><span class="p">]],</span>
+  <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+<span class="p">}</span>
+
+<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;quickstarter&quot;</span>
+
+<span class="c1"># the number of samples you wish to generate</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># seed value for reproducibility if so desired</span>
+<span class="n">seed_value</span> <span class="o">=</span> <span class="mi">777</span>
+
+<span class="c1"># number of rows to skip in file after comment</span>
+<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># name of field to query</span>
+<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+
+<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># basin to process</span>
+<span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span>
+
+<span class="c1"># generate a batch of files using generated LHS</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">setup_dict</span><span class="p">,</span>
+             <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
+             <span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+             <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+             <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+             <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
+             <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+             <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
+             <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+             <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
+             <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span>
+             <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+             <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+             <span class="n">save_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-statemod">
+<h2>Run StateMod<a class="headerlink" href="#run-statemod" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>ls
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">quickstarter</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-outputs">
+<h2>Compile outputs<a class="headerlink" href="#compile-outputs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># stm.convert_xdd(</span>
+
+<span class="c1">#     # path to a directory where output .parquet files should be written</span>
+<span class="c1">#     output_path=&quot;./output&quot;,</span>
+
+<span class="c1">#     # whether to abort if .parquet files already exist at the output_path</span>
+<span class="c1">#     allow_overwrite=False,</span>
+
+<span class="c1">#     # path, glob, or a list of paths/globs to the .xdd files you want to convert</span>
+<span class="c1">#     xdd_files=&quot;**/*.xdd&quot;,</span>
+
+<span class="c1">#     # if the output .parquet files should only contain a subset of structure ids, list them here; None for all</span>
+<span class="c1">#     id_subset=None,</span>
+
+<span class="c1">#     # how many .xdd files to convert in paralllel; optimally you will want 2-4 CPUs per parallel process</span>
+<span class="c1">#     parallel_jobs=4,</span>
+<span class="c1"># )</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-outputs">
+<h2>Visualize outputs<a class="headerlink" href="#visualize-outputs" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 

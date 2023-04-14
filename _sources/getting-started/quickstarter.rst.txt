@@ -1,2 +1,123 @@
 Quickstarter
-==============
+=====================================
+
+Getting started with ``statemodify``
+------------------------------------
+
+Installation
+~~~~~~~~~~~~
+
+See instructions to install ``statemodify`` here: `install
+statemodify <https://immm-sfa.github.io/statemodify/getting-started/installation.html>`__
+
+Generate modified inputs for StateMod
+-------------------------------------
+
+.. code:: ipython3
+
+    import statemodify as stm
+    
+    # setup
+    output_directory = "."
+    scenario = "quickstarter"
+    
+    # the number of samples you wish to generate
+    n_samples = 4
+    
+    # seed value for reproducibility if so desired
+    seed_value = 777
+
+
+Modify DDM files
+~~~~~~~~~~~~~~~~
+
+.. code:: ipython3
+
+    # a dictionary to describe what you want to modify and the bounds for the LHS
+    setup_dict = {
+      "names": ["municipal", "standard"],
+      "ids": [["3600507", "3600603"], ["3600649_D", "3600662_D"]],
+      "bounds": [[0.5, 1.0], [0.5, 1.0]]
+    }
+    
+    output_directory = "."
+    scenario = "quickstarter"
+    
+    # the number of samples you wish to generate
+    n_samples = 4
+    
+    # seed value for reproducibility if so desired
+    seed_value = 777
+    
+    # number of rows to skip in file after comment
+    skip_rows = 1
+    
+    # name of field to query
+    query_field = "id"
+    
+    # number of jobs to launch in parallel; -1 is all but 1 processor used
+    n_jobs = 4
+    
+    # basin to process
+    basin_name = "Upper_Colorado"
+    
+    # generate a batch of files using generated LHS
+    stm.modify_ddm(modify_dict=setup_dict,
+                 query_field=query_field,
+                 output_dir=output_directory,
+                 scenario=scenario,
+                 basin_name=basin_name,
+                 sampling_method="LHS",
+                 n_samples=n_samples,
+                 skip_rows=skip_rows,
+                 n_jobs=n_jobs,
+                 seed_value=seed_value,
+                 template_file=None,
+                 factor_method="multiply",
+                 data_specification_file=None,
+                 min_bound_value=-0.5,
+                 max_bound_value=1.0,
+                 save_sample=False)
+
+
+Run StateMod
+------------
+
+.. code:: ipython3
+
+    ! ls
+
+
+.. parsed-literal::
+
+    quickstarter.ipynb
+
+
+Compile outputs
+---------------
+
+.. code:: ipython3
+
+    # stm.convert_xdd(
+        
+    #     # path to a directory where output .parquet files should be written
+    #     output_path="./output",
+        
+    #     # whether to abort if .parquet files already exist at the output_path
+    #     allow_overwrite=False,
+        
+    #     # path, glob, or a list of paths/globs to the .xdd files you want to convert
+    #     xdd_files="**/*.xdd",
+        
+    #     # if the output .parquet files should only contain a subset of structure ids, list them here; None for all
+    #     id_subset=None,
+        
+    #     # how many .xdd files to convert in paralllel; optimally you will want 2-4 CPUs per parallel process
+    #     parallel_jobs=4,
+    # )
+
+
+Visualize outputs
+-----------------
+
+
