@@ -92,23 +92,6 @@
    Quickstarter
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../getting-started/tutorial.html">
-   Tutorial
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  User Guides
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../examples/modify-inputs.html">
-   Modify Inputs
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -220,10 +203,16 @@
               <div>
                 
   <h1>Source code for statemodify.utils</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYGAME_HIDE_SUPPORT_PROMPT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;hide&quot;</span>
+<span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="n">QUIT</span><span class="p">,</span> <span class="n">KEYDOWN</span>
 
 
 <div class="viewcode-block" id="yaml_to_dict"><a class="viewcode-back" href="../../reference/api.html#statemodify.yaml_to_dict">[docs]</a><span class="k">def</span> <span class="nf">yaml_to_dict</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -242,9 +231,18 @@
         <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">yml</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">UnsafeLoader</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="select_template_file"><a class="viewcode-back" href="../../reference/api.html#statemodify.select_template_file">[docs]</a><span class="k">def</span> <span class="nf">select_template_file</span><span class="p">(</span><span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+<div class="viewcode-block" id="select_template_file"><a class="viewcode-back" href="../../reference/api.html#statemodify.select_template_file">[docs]</a><span class="k">def</span> <span class="nf">select_template_file</span><span class="p">(</span><span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
                          <span class="n">extension</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Select either the default template file or a user provided one.</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
 
 <span class="sd">    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the</span>
 <span class="sd">                                default template in this package will be used.</span>
@@ -259,7 +257,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">template_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;data/template.</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># get basin abbreviation from basin name</span>
+        <span class="n">spec_file</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/basin_specification.yml&quot;</span><span class="p">)</span>
+        <span class="n">basin_spec</span> <span class="o">=</span> <span class="n">yaml_to_dict</span><span class="p">(</span><span class="n">spec_file</span><span class="p">)</span>
+        <span class="n">basin_abbrev</span> <span class="o">=</span> <span class="n">basin_spec</span><span class="p">[</span><span class="n">basin_name</span><span class="p">][</span><span class="s2">&quot;abbrev&quot;</span><span class="p">]</span>
+
+        <span class="n">data_dir</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">basin_abbrev</span><span class="si">}</span><span class="s2">*.</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">template_file</span></div>
 
@@ -284,6 +290,65 @@
         <span class="k">return</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;data/</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">_data_specification.yml&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">yaml_file</span></div>
+
+
+<div class="viewcode-block" id="credits"><a class="viewcode-back" href="../../reference/api.html#statemodify.credits">[docs]</a><span class="k">def</span> <span class="nf">credits</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run credit reel.&quot;&quot;&quot;</span>
+
+    <span class="n">credit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot; &quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;A gift to you&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;and yours from:&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot; &quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Rohini S. Gupta&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;and&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Chris R. Vernon&quot;</span><span class="p">]</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;End credits&#39;</span><span class="p">)</span>
+    <span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
+    <span class="n">screen_r</span> <span class="o">=</span> <span class="n">screen</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/EightBit-Atari-Regular.ttf&quot;</span><span class="p">),</span> <span class="mi">26</span><span class="p">)</span>
+    <span class="n">music_file</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/corrina.midi&quot;</span><span class="p">)</span>
+
+    <span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">music</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">music_file</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">music</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+
+    <span class="n">background_image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/background.png&quot;</span><span class="p">))</span>
+
+    <span class="n">content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">credit_list</span><span class="p">):</span>
+        <span class="n">ft</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>  <span class="c1"># white font</span>
+
+        <span class="n">placement</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">centerx</span><span class="o">=</span><span class="n">screen_r</span><span class="o">.</span><span class="n">centerx</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">screen_r</span><span class="o">.</span><span class="n">bottom</span> <span class="o">+</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+        <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">placement</span><span class="p">,</span> <span class="n">ft</span><span class="p">))</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">QUIT</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">background_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">move_ip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">screen_r</span><span class="o">.</span><span class="n">collidelistall</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">content</span><span class="p">]):</span>
+            <span class="k">break</span>
+
+        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+        <span class="c1"># fps designation</span>
+        <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">music</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
 </pre></div>
 
               </div>
@@ -298,7 +363,7 @@
     <footer class="footer">
   <p>
     
-      By Rohini S. Gupta<br/>
+      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
     
         &copy; Copyright 2023, Battelle Memorial Institute.<br/>
   </p>

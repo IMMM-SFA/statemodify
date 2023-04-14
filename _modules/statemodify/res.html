@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>statemodify.res &#8212; statemodify documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo_statemodify.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/quickstarter.html">
+   Quickstarter
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/api.html">
+   Python API
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contributing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/contributing.html">
+   Contributing to
+   <strong>
+    statemodify
+   </strong>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/IMMM-SFA/statemodify"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/IMMM-SFA/statemodify/issues/new?title=Issue%20on%20page%20%2F_modules/statemodify/res.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for statemodify.res</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+
+<span class="kn">import</span> <span class="nn">statemodify.sampler</span> <span class="k">as</span> <span class="nn">sampler</span>
+<span class="kn">import</span> <span class="nn">statemodify.utils</span> <span class="k">as</span> <span class="nn">utx</span>
+
+
+<div class="viewcode-block" id="get_reservoir_structure_ids"><a class="viewcode-back" href="../../reference/api.html#statemodify.get_reservoir_structure_ids">[docs]</a><span class="k">def</span> <span class="nf">get_reservoir_structure_ids</span><span class="p">(</span><span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                <span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a list of structure ids that are in the input file.</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
+
+<span class="sd">    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the</span>
+<span class="sd">                                default template in this package will be used.</span>
+<span class="sd">    :type template_file:        Union[None, str]</span>
+
+<span class="sd">    :param data_specification_file:     If a full path to a data specification template is provided it will be used.</span>
+<span class="sd">                                        Otherwise, the default file in the package is used.</span>
+<span class="sd">    :type data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :returns:                           List of structure ids</span>
+<span class="sd">    :rtype:                             List</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># select the appropriate template file</span>
+    <span class="n">template_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_template_file</span><span class="p">(</span><span class="n">basin_name</span><span class="p">,</span> <span class="n">template_file</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;res&quot;</span><span class="p">)</span>
+
+    <span class="c1"># read in data specification yaml</span>
+    <span class="n">data_specification_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_data_specification_file</span><span class="p">(</span><span class="n">yaml_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">,</span>
+                                                                 <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;res&quot;</span><span class="p">)</span>
+    <span class="n">data_spec_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="n">data_specification_file</span><span class="p">)</span>
+
+    <span class="n">content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">get</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">get</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;comment_indicator&quot;</span><span class="p">]:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;id_column_width&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">content</span></div>
+
+
+<div class="viewcode-block" id="modify_single_res"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_single_res">[docs]</a><span class="k">def</span> <span class="nf">modify_single_res</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">sample</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                      <span class="n">sample_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                      <span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">target_structure_id_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify a single reservoir (.res) file based on a user provided sample.</span>
+
+<span class="sd">    :param output_dir:          Path to output directory.</span>
+<span class="sd">    :type output_dir:           str</span>
+
+<span class="sd">    :param scenario:            Scenario name.</span>
+<span class="sd">    :type scenario:             str</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
+
+<span class="sd">    :param sample:              An array of samples for each parameter.</span>
+<span class="sd">    :type sample:               np.array</span>
+
+<span class="sd">    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.</span>
+<span class="sd">    :type sample_id:            int</span>
+
+<span class="sd">    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the</span>
+<span class="sd">                                default template in this package will be used.</span>
+<span class="sd">    :type template_file:        Union[None, str]</span>
+
+<span class="sd">    :param data_specification_file:     If a full path to a data specification template is provided it will be used.</span>
+<span class="sd">                                        Otherwise, the default file in the package is used.</span>
+<span class="sd">    :type data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :param target_structure_id_list:    Structure id list to process.  If None, all structure ids will be processed.</span>
+<span class="sd">    :type target_structure_id_list:     Union[None, List[str]]</span>
+
+<span class="sd">    :param skip_rows:           Number of rows to skip after the commented fields end; default 1</span>
+<span class="sd">    :type skip_rows:            int, optional</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># select the appropriate template file</span>
+    <span class="n">template_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_template_file</span><span class="p">(</span><span class="n">basin_name</span><span class="p">,</span> <span class="n">template_file</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;res&quot;</span><span class="p">)</span>
+
+    <span class="c1"># read in data specification yaml</span>
+    <span class="n">data_specification_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_data_specification_file</span><span class="p">(</span><span class="n">yaml_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">,</span>
+                                                                 <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;res&quot;</span><span class="p">)</span>
+    <span class="n">data_spec_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="n">data_specification_file</span><span class="p">)</span>
+
+    <span class="n">column_widths</span> <span class="o">=</span> <span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_start_index&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">target_structure_id_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">target_structure_id_list</span> <span class="o">=</span> <span class="n">get_reservoir_structure_ids</span><span class="p">(</span><span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+                                                               <span class="n">template_file</span><span class="o">=</span><span class="n">template_file</span><span class="p">,</span>
+                                                               <span class="n">data_specification_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">)</span>
+
+    <span class="c1"># do not modify any in no modify list</span>
+    <span class="n">ignore_parts</span> <span class="o">=</span> <span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;ignore_structure_with_content&quot;</span><span class="p">]</span>
+    <span class="n">target_structure_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">target_structure_id_list</span> <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ignore_parts</span><span class="p">]</span>
+
+    <span class="n">capture</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">account_capture</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">get</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">get</span><span class="p">):</span>
+
+            <span class="c1"># capture header</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;comment_indicator&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">skip_rows</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="c1"># account for any additional non-commented lines that need to be skipped before starting data collection</span>
+            <span class="k">elif</span> <span class="n">skip_rows</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">skip_rows</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="c1"># get segment of line that usually houses structure id</span>
+                <span class="n">structure_id_segement</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;id_column_width&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+                <span class="c1"># if reservoir start line found trigger capture</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">structure_id_segement</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">capture</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;terminate_string&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+
+                    <span class="c1"># keep content</span>
+                    <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+                    <span class="c1"># set to capture next lines</span>
+                    <span class="n">capture</span> <span class="o">=</span> <span class="kc">True</span>
+
+                    <span class="c1"># assign structure id for current reservoir</span>
+                    <span class="n">structure_id</span> <span class="o">=</span> <span class="n">structure_id_segement</span>
+
+                <span class="c1"># if capturing line</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">structure_id_segement</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">capture</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;terminate_string&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+                        <span class="n">structure_id</span> <span class="ow">in</span> <span class="n">target_structure_id_list</span><span class="p">):</span>
+
+                    <span class="c1"># line contains the</span>
+                    <span class="k">if</span> <span class="n">account_capture</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+
+                        <span class="c1"># get original value</span>
+                        <span class="n">volmax_initial</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;volmin&quot;</span><span class="p">]:</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;volmax&quot;</span><span class="p">]]</span>
+                        <span class="n">volmax_initial_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">volmax_initial</span><span class="p">)</span>
+
+                        <span class="c1"># modify the original value with the multiplier from the sample</span>
+                        <span class="n">volmax_modified</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">volmax_initial</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+                        <span class="c1"># reapply space padding</span>
+                        <span class="n">n_space_padding</span> <span class="o">=</span> <span class="n">volmax_initial_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">volmax_modified</span><span class="p">)</span>
+                        <span class="n">volmax_modified</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_space_padding</span><span class="si">}{</span><span class="n">volmax_modified</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                        <span class="c1"># place back in string</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;volmin&quot;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">volmax_modified</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;volmax&quot;</span><span class="p">]:]</span>
+                        <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+                        <span class="c1"># initialize list for all accounts for follow</span>
+                        <span class="n">account_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+                        <span class="n">account_capture</span> <span class="o">=</span> <span class="kc">True</span>
+
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">account_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">structure_id_segement</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">capture</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;terminate_string&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+                        <span class="n">structure_id</span> <span class="ow">in</span> <span class="n">target_structure_id_list</span><span class="p">):</span>
+
+                    <span class="c1"># compile accounts</span>
+                    <span class="k">for</span> <span class="n">acct_line</span> <span class="ow">in</span> <span class="n">account_list</span><span class="p">:</span>
+                        <span class="c1"># get original values for ownmax and sto-1</span>
+                        <span class="n">ownmax_initial</span> <span class="o">=</span> <span class="n">acct_line</span><span class="p">[</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;ownname&quot;</span><span class="p">]:</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;ownmax&quot;</span><span class="p">]]</span>
+                        <span class="n">ownmax_initial_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ownmax_initial</span><span class="p">)</span>
+
+                        <span class="n">sto_initial</span> <span class="o">=</span> <span class="n">acct_line</span><span class="p">[</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;ownmax&quot;</span><span class="p">]:</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;sto_1&quot;</span><span class="p">]]</span>
+                        <span class="n">sto_initial_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sto_initial</span><span class="p">)</span>
+
+                        <span class="c1"># break out account volume by total number of accounts in equal shares</span>
+                        <span class="n">ownmax_modified</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ownmax_initial</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                        <span class="n">sto_modified</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sto_initial</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+                        <span class="c1"># reapply space padding</span>
+                        <span class="n">n_space_padding</span> <span class="o">=</span> <span class="n">ownmax_initial_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">ownmax_modified</span><span class="p">)</span>
+                        <span class="n">ownmax_modified</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_space_padding</span><span class="si">}{</span><span class="n">ownmax_modified</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="n">sto_modified</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sto_initial_length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">sto_modified</span><span class="p">))</span><span class="si">}{</span><span class="n">sto_modified</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                        <span class="c1"># place back in string and write for ownmax and sto_1</span>
+                        <span class="n">acct_line</span> <span class="o">=</span> <span class="n">acct_line</span><span class="p">[:</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;ownname&quot;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">ownmax_modified</span> <span class="o">+</span> <span class="n">sto_modified</span> <span class="o">+</span> <span class="n">acct_line</span><span class="p">[</span><span class="n">column_widths</span><span class="p">[</span><span class="s2">&quot;sto_1&quot;</span><span class="p">]:]</span>
+                        <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acct_line</span><span class="p">)</span>
+
+                    <span class="n">account_capture</span> <span class="o">=</span> <span class="kc">False</span>
+
+                    <span class="n">capture</span> <span class="o">=</span> <span class="kc">False</span>
+
+                    <span class="c1"># append environmental line</span>
+                    <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="n">capture</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># write modified output file</span>
+    <span class="n">template_file_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">template_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">template_file_base</span><span class="si">}</span><span class="s2">_scenario-</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">.res&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="modify_res"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_res">[docs]</a><span class="k">def</span> <span class="nf">modify_res</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Gunnison&quot;</span><span class="p">,</span>
+               <span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">target_structure_id_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+               <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+               <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+               <span class="n">save_sample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify a single reservoir (.res) file based on a user provided sample.</span>
+
+<span class="sd">    :param output_dir:          Path to output directory.</span>
+<span class="sd">    :type output_dir:           str</span>
+
+<span class="sd">    :param scenario:            Scenario name.</span>
+<span class="sd">    :type scenario:             str</span>
+
+<span class="sd">    :param sample:              An array of samples for each parameter.</span>
+<span class="sd">    :type sample:               np.array</span>
+
+<span class="sd">    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.</span>
+<span class="sd">    :type sample_id:            int</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
+
+<span class="sd">    :param template_file:       If a full path to a template file is provided it will be used.  Otherwise the</span>
+<span class="sd">                                default template in this package will be used.</span>
+<span class="sd">    :type template_file:        Union[None, str]</span>
+
+<span class="sd">    :param data_specification_file:     If a full path to a data specification template is provided it will be used.</span>
+<span class="sd">                                        Otherwise, the default file in the package is used.</span>
+<span class="sd">    :type data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :param target_structure_id_list:    Structure id list to process.  If None, all structure ids will be processed.</span>
+<span class="sd">    :type target_structure_id_list:     Union[None, List[str]]</span>
+
+<span class="sd">    :param skip_rows:           Number of rows to skip after the commented fields end; default 1</span>
+<span class="sd">    :type skip_rows:            int, optional</span>
+
+<span class="sd">    :param seed_value:                      Integer to use for random seed or None if not desired</span>
+<span class="sd">    :type seed_value:                       Union[None, int] = None)</span>
+
+<span class="sd">    :param n_jobs:                          Number of jobs to process in parallel.  Defaults to -1 meaning</span>
+<span class="sd">                                            all but 1 processor.</span>
+<span class="sd">    :type n_jobs:                           int</span>
+
+<span class="sd">    :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.</span>
+<span class="sd">    :type n_samples:                        int</span>
+
+<span class="sd">    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written</span>
+<span class="sd">                                to the output directory.</span>
+<span class="sd">    :type save_sample:          bool</span>
+
+<span class="sd">    :example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import statemodify as stm</span>
+
+
+<span class="sd">        output_directory = &quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="sd">        scenario = &quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="sd">        # basin name to process</span>
+<span class="sd">        basin_name = &quot;Gunnison&quot;</span>
+
+<span class="sd">        # seed value for reproducibility if so desired</span>
+<span class="sd">        seed_value = 0</span>
+
+<span class="sd">        # number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="sd">        n_jobs = 2</span>
+
+<span class="sd">        # number of samples to generate</span>
+<span class="sd">        n_samples = 2</span>
+
+<span class="sd">        stm.modify_res(output_dir=output_directory,</span>
+<span class="sd">                       scenario=scenario,</span>
+<span class="sd">                       basin_name=basin_name,</span>
+<span class="sd">                       target_structure_id_list=None,</span>
+<span class="sd">                       seed_value=seed_value,</span>
+<span class="sd">                       n_jobs=n_jobs,</span>
+<span class="sd">                       n_samples=n_samples,</span>
+<span class="sd">                       save_sample=False)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">yaml_file</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/parameter_definitions.yml&quot;</span><span class="p">)</span>
+    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">)</span>
+
+    <span class="c1"># generate an array of samples to process</span>
+    <span class="n">sample_array</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate_sample_all_params</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                                                      <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+
+    <span class="c1"># if the user chooses, write the sample to file</span>
+    <span class="k">if</span> <span class="n">save_sample</span><span class="p">:</span>
+        <span class="n">sample_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;res_</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">-samples_scenario-</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">.npy&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sample_file</span><span class="p">,</span> <span class="n">sample_array</span><span class="p">)</span>
+
+    <span class="c1"># generate all files in parallel</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;loky&quot;</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">modify_single_res</span><span class="p">)(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                                                                                 <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                                                                                 <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+                                                                                 <span class="n">sample</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;rstorage&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                 <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+                                                                                 <span class="n">template_file</span><span class="o">=</span><span class="n">template_file</span><span class="p">,</span>
+                                                                                 <span class="n">data_specification_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">,</span>
+                                                                                 <span class="n">target_structure_id_list</span><span class="o">=</span><span class="n">target_structure_id_list</span><span class="p">,</span>
+                                                                                 <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">)</span> <span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_array</span><span class="p">))</span></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
+    
+        &copy; Copyright 2023, Battelle Memorial Institute.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

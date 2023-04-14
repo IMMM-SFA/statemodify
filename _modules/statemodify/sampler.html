@@ -92,23 +92,6 @@
    Quickstarter
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../getting-started/tutorial.html">
-   Tutorial
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  User Guides
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../examples/modify-inputs.html">
-   Modify Inputs
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -220,13 +203,16 @@
               <div>
                 
   <h1>Source code for statemodify.sampler</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">SALib.sample</span> <span class="kn">import</span> <span class="n">latin</span>
 
+<span class="kn">import</span> <span class="nn">statemodify.utils</span> <span class="k">as</span> <span class="nn">utx</span>
 
-<span class="k">def</span> <span class="nf">validate_modify_dict</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
+
+<div class="viewcode-block" id="validate_modify_dict"><a class="viewcode-back" href="../../reference/api.html#statemodify.validate_modify_dict">[docs]</a><span class="k">def</span> <span class="nf">validate_modify_dict</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
                          <span class="n">required_keys</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ids&quot;</span><span class="p">,</span> <span class="s2">&quot;bounds&quot;</span><span class="p">,</span> <span class="s2">&quot;names&quot;</span><span class="p">),</span>
                          <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate user input modify dictionary to ensure all necessary elements are present.</span>
@@ -256,7 +242,7 @@
         <span class="k">elif</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">modify_dict</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing the following key in user provided modify dictionary:  &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">modify_dict</span>
+    <span class="k">return</span> <span class="n">modify_dict</span></div>
 
 
 <div class="viewcode-block" id="build_problem_dict"><a class="viewcode-back" href="../../reference/api.html#statemodify.build_problem_dict">[docs]</a><span class="k">def</span> <span class="nf">build_problem_dict</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
@@ -334,6 +320,92 @@
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Selected sampling method is not currently supported.  Please file a feature request here: https://github.com/IMMM-SFA/statemodify/issues&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_sample_all_params"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_sample_all_params">[docs]</a><span class="k">def</span> <span class="nf">generate_sample_all_params</span><span class="p">(</span><span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                               <span class="n">sampling_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
+                               <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate samples for all parameters.</span>
+
+<span class="sd">    :param sampling_method:     Sampling method.  Uses SALib&#39;s implementation (see https://salib.readthedocs.io/en/latest/).</span>
+<span class="sd">                                Currently supports the following method:  &quot;LHS&quot; for Latin Hypercube Sampling</span>
+<span class="sd">    :type sampling_method:      str</span>
+
+<span class="sd">    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.</span>
+<span class="sd">    :type n_samples:            int, optional</span>
+
+<span class="sd">    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.</span>
+<span class="sd">                                Defaults to None.</span>
+<span class="sd">    :type seed_value:           Union[None, int], optional</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">yaml_file</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/parameter_definitions.yml&quot;</span><span class="p">)</span>
+    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">)</span>
+
+    <span class="n">problem_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;num_vars&#39;</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+                    <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mu0&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;sigma0&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;mu1&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;sigma1&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;p00&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;p11&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;evap&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;rstorage&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;powerplants&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;envflows&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;oilgas&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;tribal&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;aspinall&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;iwr_multiplier_cm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;iwr_multiplier_gm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;iwr_multiplier_sj&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;iwr_multiplier_ym&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;iwr_multiplier_wm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;trans_multiplier_cm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;trans_multiplier_gm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;trans_multiplier_sj&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;trans_multiplier_ym&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;trans_multiplier_wm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;muni_multiplier_cm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;muni_multiplier_gm&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;muni_multiplier_sj&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;muni_multiplier_ym&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;muni_multiplier_wm&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu0&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu0&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma0&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma0&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu1&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu1&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma1&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma1&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p00&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p00&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p11&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p11&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;evap&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;evap&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;rstorage&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;rstorage&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;powerplants&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;powerplants&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;envflows&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;envflows&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;oilgas&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;oilgas&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;tribal&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;tribal&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;aspinall&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;aspinall&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Gunnison&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Gunnison&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;San_Juan&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;San_Juan&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Yampa&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Yampa&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;White&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;White&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Gunnison&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Gunnison&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;San_Juan&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;San_Juan&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Yampa&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Yampa&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;White&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;trans_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;White&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Gunnison&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Gunnison&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;San_Juan&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;San_Juan&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Yampa&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;Yampa&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;White&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;muni_multiplier&quot;</span><span class="p">][</span><span class="s2">&quot;White&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]]]}</span>
+
+    <span class="k">return</span> <span class="n">generate_samples</span><span class="p">(</span><span class="n">problem_dict</span><span class="o">=</span><span class="n">problem_dict</span><span class="p">,</span>
+                            <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                            <span class="n">sampling_method</span><span class="o">=</span><span class="n">sampling_method</span><span class="p">,</span>
+                            <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span></div>
 </pre></div>
 
               </div>
@@ -348,7 +420,7 @@
     <footer class="footer">
   <p>
     
-      By Rohini S. Gupta<br/>
+      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
     
         &copy; Copyright 2023, Battelle Memorial Institute.<br/>
   </p>

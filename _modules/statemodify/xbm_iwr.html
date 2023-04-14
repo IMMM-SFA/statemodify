@@ -1,0 +1,1225 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>statemodify.xbm_iwr &#8212; statemodify documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo_statemodify.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/quickstarter.html">
+   Quickstarter
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/api.html">
+   Python API
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contributing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/contributing.html">
+   Contributing to
+   <strong>
+    statemodify
+   </strong>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/IMMM-SFA/statemodify"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/IMMM-SFA/statemodify/issues/new?title=Issue%20on%20page%20%2F_modules/statemodify/xbm_iwr.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for statemodify.xbm_iwr</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">pkg</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">ss</span>
+<span class="kn">from</span> <span class="nn">hmmlearn</span> <span class="kn">import</span> <span class="n">hmm</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="kn">import</span> <span class="nn">statemodify.utils</span> <span class="k">as</span> <span class="nn">utx</span>
+<span class="kn">import</span> <span class="nn">statemodify.modify</span> <span class="k">as</span> <span class="nn">modify</span>
+<span class="kn">import</span> <span class="nn">statemodify.sampler</span> <span class="k">as</span> <span class="nn">sampler</span>
+
+
+<div class="viewcode-block" id="GenerateIwrData"><a class="viewcode-back" href="../../reference/api.html#statemodify.GenerateIwrData">[docs]</a><span class="k">class</span> <span class="nc">GenerateIwrData</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate IWR data from user desired input template and file specification.  Defaults used if none provided.</span>
+
+<span class="sd">        :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                    Upper_Colorado</span>
+<span class="sd">                                                    Yampa</span>
+<span class="sd">                                                    San_Juan</span>
+<span class="sd">                                                    Gunnison</span>
+<span class="sd">                                                    White</span>
+<span class="sd">        :type basin_name:                       str</span>
+
+<span class="sd">        :param skip_rows:                                       Number of rows after comments to skip. Default 1.</span>
+<span class="sd">        :type skip_rows:                                        int</span>
+
+<span class="sd">        :param template_file:                                   File to use as template.  Default None.</span>
+<span class="sd">        :type template_file:                                    Union[None, str]</span>
+
+<span class="sd">        :param data_specification_file:                         Data specification YAML file.  Default None.</span>
+<span class="sd">        :type data_specification_file:                          Union[None, str]</span>
+
+<span class="sd">        :return template_file:                                  Selected template file path.</span>
+<span class="sd">        :rtype template_file:                                   str</span>
+
+<span class="sd">        :return data_specification_file:                        Selected data specification YAML file path.</span>
+<span class="sd">        :rtype data_specification_file:                         str</span>
+
+<span class="sd">        :return data_spec_dict:                                 Dictionary of data specification.</span>
+<span class="sd">        :rtype data_spec_dict:                                  dict</span>
+
+<span class="sd">        :return file_spec:                                      File modification specs.</span>
+<span class="sd">        :rtype file_spec:                                       class</span>
+
+<span class="sd">        :return template_df:                                    Processed data from file.</span>
+<span class="sd">        :rtype template_df:                                     pd.DataFrame</span>
+
+<span class="sd">        :return: template_header:                               Header for input template file.</span>
+<span class="sd">        :rtype: template_header:                                list</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># select the appropriate template file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_template_file</span><span class="p">(</span><span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+                                                      <span class="n">template_file</span><span class="o">=</span><span class="n">template_file</span><span class="p">,</span>
+                                                      <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;iwr&quot;</span><span class="p">)</span>
+
+        <span class="c1"># read in data specification yaml</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_specification_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_data_specification_file</span><span class="p">(</span><span class="n">yaml_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">,</span>
+                                                                          <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;iwr&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_specification_file</span><span class="p">)</span>
+
+        <span class="c1"># instantiate data specification and validation class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">Modify</span><span class="p">(</span><span class="n">comment_indicator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;comment_indicator&quot;</span><span class="p">],</span>
+                                       <span class="n">data_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;data_dict&quot;</span><span class="p">],</span>
+                                       <span class="n">column_widths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_widths&quot;</span><span class="p">],</span>
+                                       <span class="n">column_alignment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_alignment&quot;</span><span class="p">],</span>
+                                       <span class="n">data_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;data_types&quot;</span><span class="p">],</span>
+                                       <span class="n">column_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_list&quot;</span><span class="p">],</span>
+                                       <span class="n">value_columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">])</span>
+
+        <span class="c1"># prepare template data frame for alteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_header</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">prep_data</span><span class="p">(</span><span class="n">field_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">data_dict</span><span class="p">,</span>
+                                                                  <span class="n">template_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_file</span><span class="p">,</span>
+                                                                  <span class="n">column_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">column_list</span><span class="p">,</span>
+                                                                  <span class="n">column_widths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">column_widths</span><span class="p">,</span>
+                                                                  <span class="n">data_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">data_types</span><span class="p">,</span>
+                                                                  <span class="n">comment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">comment_indicator</span><span class="p">,</span>
+                                                                  <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GenerateXbmData"><a class="viewcode-back" href="../../reference/api.html#statemodify.GenerateXbmData">[docs]</a><span class="k">class</span> <span class="nc">GenerateXbmData</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate XBM data from user desired input template and file specification.  Defaults used if none provided.</span>
+
+<span class="sd">        :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                    Upper_Colorado</span>
+<span class="sd">                                                    Yampa</span>
+<span class="sd">                                                    San_Juan</span>
+<span class="sd">                                                    Gunnison</span>
+<span class="sd">                                                    White</span>
+<span class="sd">        :type basin_name:                       str</span>
+
+<span class="sd">        :param skip_rows:                                       Number of rows after comments to skip. Default 1.</span>
+<span class="sd">        :type skip_rows:                                        int</span>
+
+<span class="sd">        :param template_file:                                   File to use as template.  Default None.</span>
+<span class="sd">        :type template_file:                                    Union[None, str]</span>
+
+<span class="sd">        :param data_specification_file:                         Data specification YAML file.  Default None.</span>
+<span class="sd">        :type data_specification_file:                          Union[None, str]</span>
+
+<span class="sd">        :return template_file:                                  Selected template file path.</span>
+<span class="sd">        :rtype template_file:                                   str</span>
+
+<span class="sd">        :return data_specification_file:                        Selected data specification YAML file path.</span>
+<span class="sd">        :rtype data_specification_file:                         str</span>
+
+<span class="sd">        :return data_spec_dict:                                 Dictionary of data specification.</span>
+<span class="sd">        :rtype data_spec_dict:                                  dict</span>
+
+<span class="sd">        :return file_spec:                                      File modification specs.</span>
+<span class="sd">        :rtype file_spec:                                       class</span>
+
+<span class="sd">        :return template_df:                                    Processed data from file.</span>
+<span class="sd">        :rtype template_df:                                     pd.DataFrame</span>
+
+<span class="sd">        :return: template_header:                               Header for input template file.</span>
+<span class="sd">        :rtype: template_header:                                list</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># select the appropriate template file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_template_file</span><span class="p">(</span><span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+                                                      <span class="n">template_file</span><span class="o">=</span><span class="n">template_file</span><span class="p">,</span>
+                                                      <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;xbm&quot;</span><span class="p">)</span>
+
+        <span class="c1"># read in data specification yaml</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_specification_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_data_specification_file</span><span class="p">(</span><span class="n">yaml_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">,</span>
+                                                                          <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;xbm&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_specification_file</span><span class="p">)</span>
+
+        <span class="c1"># instantiate data specification and validation class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">Modify</span><span class="p">(</span><span class="n">comment_indicator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;comment_indicator&quot;</span><span class="p">],</span>
+                                       <span class="n">data_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;data_dict&quot;</span><span class="p">],</span>
+                                       <span class="n">column_widths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_widths&quot;</span><span class="p">],</span>
+                                       <span class="n">column_alignment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_alignment&quot;</span><span class="p">],</span>
+                                       <span class="n">data_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;data_types&quot;</span><span class="p">],</span>
+                                       <span class="n">column_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;column_list&quot;</span><span class="p">],</span>
+                                       <span class="n">value_columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">])</span>
+
+        <span class="c1"># prepare template data frame for alteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_header</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">prep_data</span><span class="p">(</span><span class="n">field_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">data_dict</span><span class="p">,</span>
+                                                                  <span class="n">template_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_file</span><span class="p">,</span>
+                                                                  <span class="n">column_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">column_list</span><span class="p">,</span>
+                                                                  <span class="n">column_widths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">column_widths</span><span class="p">,</span>
+                                                                  <span class="n">data_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">data_types</span><span class="p">,</span>
+                                                                  <span class="n">comment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_spec</span><span class="o">.</span><span class="n">comment_indicator</span><span class="p">,</span>
+                                                                  <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
+                                                                  <span class="n">replace_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;********&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_samples"><a class="viewcode-back" href="../../reference/api.html#statemodify.get_samples">[docs]</a><span class="k">def</span> <span class="nf">get_samples</span><span class="p">(</span><span class="n">param_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">sampling_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
+                <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load Latin Hypercube Samples (LHS).</span>
+
+<span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
+<span class="sd">    on-demand and be given a seed value if reproducibility is needed.</span>
+
+<span class="sd">    :param sampling_method:     Sampling method.  Uses SALib&#39;s implementation (see https://salib.readthedocs.io/en/latest/).</span>
+<span class="sd">                                Currently supports the following method:  &quot;LHS&quot; for Latin Hypercube Sampling</span>
+<span class="sd">    :type sampling_method:      str</span>
+
+<span class="sd">    :param n_samples:           Number of LHS samples to generate, optional. Defaults to 1.</span>
+<span class="sd">    :type n_samples:            int, optional</span>
+
+<span class="sd">    :param seed_value:          Seed value to use when generating samples for the purpose of reproducibility.</span>
+<span class="sd">                                Defaults to None.</span>
+<span class="sd">    :type seed_value:           Union[None, int], optional</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">problem_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;num_vars&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+                    <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mu0&#39;</span><span class="p">,</span> <span class="s1">&#39;sigma0&#39;</span><span class="p">,</span> <span class="s1">&#39;mu1&#39;</span><span class="p">,</span> <span class="s1">&#39;sigma1&#39;</span><span class="p">,</span> <span class="s1">&#39;p00&#39;</span><span class="p">,</span> <span class="s1">&#39;p11&#39;</span><span class="p">,</span> <span class="s1">&#39;iwr_multiplier&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu0&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu0&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma0&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma0&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu1&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu1&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma1&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma1&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p00&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p00&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p11&quot;</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p11&quot;</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]],</span>
+                               <span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="n">basin_name</span><span class="p">][</span><span class="s2">&quot;lower&quot;</span><span class="p">],</span> <span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="n">basin_name</span><span class="p">][</span><span class="s2">&quot;upper&quot;</span><span class="p">]]]}</span>
+
+    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate_samples</span><span class="p">(</span><span class="n">problem_dict</span><span class="o">=</span><span class="n">problem_dict</span><span class="p">,</span>
+                                    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                                    <span class="n">sampling_method</span><span class="o">=</span><span class="n">sampling_method</span><span class="p">,</span>
+                                    <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_dry_state_means"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_dry_state_means">[docs]</a><span class="k">def</span> <span class="nf">generate_dry_state_means</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load dry state means.</span>
+
+<span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
+<span class="sd">    on-demand and be given a seed value if reproducibility is needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;dry_state_means.txt&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_wet_state_means"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_wet_state_means">[docs]</a><span class="k">def</span> <span class="nf">generate_wet_state_means</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load wet state means.</span>
+
+<span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
+<span class="sd">    on-demand and be given a seed value if reproducibility is needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;wet_state_means.txt&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_dry_covariance_matrix"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_dry_covariance_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_dry_covariance_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load dry covariance matrix.</span>
+
+<span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
+<span class="sd">    on-demand and be given a seed value if reproducibility is needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;covariance_matrix_dry.txt&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_wet_covariance_matrix"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_wet_covariance_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_wet_covariance_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load wet covariance matrix.</span>
+
+<span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
+<span class="sd">    on-demand and be given a seed value if reproducibility is needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;covariance_matrix_wet.txt&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_transition_matrix"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_transition_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_transition_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load transition matrix.</span>
+
+<span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
+<span class="sd">    on-demand and be given a seed value if reproducibility is needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;transition_matrix.txt&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calculate_array_monthly"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_array_monthly">[docs]</a><span class="k">def</span> <span class="nf">calculate_array_monthly</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                            <span class="n">value_fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                            <span class="n">year_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;year&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an array of month rows and site columns for each year in the data frame.</span>
+
+<span class="sd">    :param df:                          Input template data frame</span>
+<span class="sd">    :type df:                           pd.DataFrame</span>
+
+<span class="sd">    :param value_fields:                Month fields in data</span>
+<span class="sd">    :type value_fields:                 List[str]</span>
+
+<span class="sd">    :param year_field:                  Name of the year field</span>
+<span class="sd">    :type year_field:                   str</span>
+
+<span class="sd">    :return:                            Array of value for month, site</span>
+<span class="sd">    :rtype:                             np.array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">out_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">year_field</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+
+        <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">value_fields</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">year_field</span><span class="p">]</span> <span class="o">==</span> <span class="n">year</span><span class="p">][</span><span class="n">month</span><span class="p">]</span>
+
+            <span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calculate_array_annual"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_array_annual">[docs]</a><span class="k">def</span> <span class="nf">calculate_array_annual</span><span class="p">(</span><span class="n">monthly_arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate annual values.</span>
+
+<span class="sd">    :param monthly_arr:                     Array of monthly xbm values</span>
+<span class="sd">    :type monthly_arr:                      np.array</span>
+
+<span class="sd">    :return:                                Array of year, site</span>
+<span class="sd">    :rtype:                                 np.array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">n_years</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">monthly_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">n_sites</span> <span class="o">=</span> <span class="n">monthly_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">annual_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_years</span><span class="p">,</span> <span class="n">n_sites</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_years</span><span class="p">):</span>
+        <span class="n">annual_arr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">monthly_arr</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">12</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">annual_arr</span></div>
+
+
+<div class="viewcode-block" id="calculate_annual_sum"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_annual_sum">[docs]</a><span class="k">def</span> <span class="nf">calculate_annual_sum</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate annual sum of input array.</span>
+
+<span class="sd">    :param arr:                     Input 2D array where year, site</span>
+<span class="sd">    :type arr:                      np.array</span>
+
+<span class="sd">    :param axis:                    Axis to sum over. Default: 1</span>
+<span class="sd">    :type axis:                     int</span>
+
+<span class="sd">    :return:                        Array of sums</span>
+<span class="sd">    :rtype:                         np.array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calculate_annual_mean_fractions"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_annual_mean_fractions">[docs]</a><span class="k">def</span> <span class="nf">calculate_annual_mean_fractions</span><span class="p">(</span><span class="n">arr_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                                    <span class="n">arr_sum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate annual mean fractions of total values.</span>
+
+<span class="sd">    :param arr_annual:                          Array of annual values per site</span>
+<span class="sd">    :type arr_annual:                           np.array</span>
+
+<span class="sd">    :param arr_sum:                             Array of annual sums</span>
+<span class="sd">    :type arr_sum:                              np.array</span>
+
+<span class="sd">    :return:                                    Array of fractions</span>
+<span class="sd">    :rtype:                                     np.array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">iwr_fractions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">arr_annual</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">arr_annual</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">iwr_fractions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">arr_annual</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">arr_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iwr_fractions</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fit_iwr_model"><a class="viewcode-back" href="../../reference/api.html#statemodify.fit_iwr_model">[docs]</a><span class="k">def</span> <span class="nf">fit_iwr_model</span><span class="p">(</span><span class="n">xbm_data_array_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                  <span class="n">iwr_data_array_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model annual irrigation demand anomaly as a function of annual flow anomaly at last node.</span>
+
+<span class="sd">    :param xbm_data_array_annual:                       Annual flow from XBM</span>
+<span class="sd">    :type xbm_data_array_annual:                        np.array</span>
+
+<span class="sd">    :param iwr_data_array_annual:                       Annual data from IWR</span>
+<span class="sd">    :type iwr_data_array_annual:                        np.array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">IWRsums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">iwr_data_array_annual</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Qsums</span> <span class="o">=</span> <span class="n">xbm_data_array_annual</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">Qsums_prime</span> <span class="o">=</span> <span class="n">Qsums</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Qsums</span><span class="p">)</span>
+    <span class="n">IWRsums_prime</span> <span class="o">=</span> <span class="n">IWRsums</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">IWRsums</span><span class="p">)</span>
+
+    <span class="c1"># fit model of IWR anomalies as function of Q anomalies</span>
+    <span class="c1"># (no intercept b/c using anomalies)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Qsums_prime</span><span class="p">,</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">Qsums_prime</span><span class="p">),</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">IWRsums_prime</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+    <span class="c1"># find mean and st dev of residuals, which are normally distributed</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span></div>
+
+
+<div class="viewcode-block" id="generate_hmm_inputs"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_hmm_inputs">[docs]</a><span class="k">def</span> <span class="nf">generate_hmm_inputs</span><span class="p">(</span><span class="n">template_file</span><span class="p">,</span> <span class="n">n_basins</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate HMM input files for all basins.&quot;&quot;&quot;</span>
+    <span class="n">annual_q_h_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">template_file</span><span class="p">))</span>
+    <span class="n">log_annual_q_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">annual_q_h_all</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># add 1 because some sites have 0 flow</span>
+
+    <span class="c1"># fit multi-site HMM to approximately last 2/3 of historical record</span>
+    <span class="n">hmm_model</span> <span class="o">=</span> <span class="n">hmm</span><span class="o">.</span><span class="n">GMMHMM</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">log_annual_q_h</span><span class="p">[</span><span class="mi">30</span><span class="p">::,</span> <span class="p">:])</span>
+
+    <span class="c1"># Pull out some model parameters</span>
+    <span class="n">mus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hmm_model</span><span class="o">.</span><span class="n">means_</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hmm_model</span><span class="o">.</span><span class="n">transmat_</span><span class="p">)</span>
+    <span class="n">hidden_states</span> <span class="o">=</span> <span class="n">hmm_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">log_annual_q_h</span><span class="p">)</span>
+
+    <span class="c1"># Dry state doesn&#39;t always come first,but we want it to be, so flip if it isn&#39;t</span>
+    <span class="k">if</span> <span class="n">mus</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mus</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">mus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">mus</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+        <span class="n">covariance_matrix_dry</span> <span class="o">=</span> <span class="n">hmm_model</span><span class="o">.</span><span class="n">covars_</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_basins</span><span class="p">,</span> <span class="n">n_basins</span><span class="p">)</span>
+        <span class="n">covariance_matrix_wet</span> <span class="o">=</span> <span class="n">hmm_model</span><span class="o">.</span><span class="n">covars_</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_basins</span><span class="p">,</span> <span class="n">n_basins</span><span class="p">)</span>
+        <span class="n">hidden_states</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">hidden_states</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">covariance_matrix_dry</span> <span class="o">=</span> <span class="n">hmm_model</span><span class="o">.</span><span class="n">covars_</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_basins</span><span class="p">,</span> <span class="n">n_basins</span><span class="p">)</span>
+        <span class="n">covariance_matrix_wet</span> <span class="o">=</span> <span class="n">hmm_model</span><span class="o">.</span><span class="n">covars_</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_basins</span><span class="p">,</span> <span class="n">n_basins</span><span class="p">)</span>
+
+        <span class="c1"># Redefine variables</span>
+    <span class="n">dry_state_means</span> <span class="o">=</span> <span class="n">mus</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">wet_state_means</span> <span class="o">=</span> <span class="n">mus</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">transition_matrix</span> <span class="o">=</span> <span class="n">p</span>
+
+    <span class="k">return</span> <span class="n">dry_state_means</span><span class="p">,</span> <span class="n">wet_state_means</span><span class="p">,</span> <span class="n">covariance_matrix_dry</span><span class="p">,</span> <span class="n">covariance_matrix_wet</span><span class="p">,</span> <span class="n">transition_matrix</span></div>
+
+
+<div class="viewcode-block" id="generate_flows"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_flows">[docs]</a><span class="k">def</span> <span class="nf">generate_flows</span><span class="p">(</span><span class="n">dry_state_means</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                   <span class="n">wet_state_means</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                   <span class="n">covariance_matrix_dry</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                   <span class="n">covariance_matrix_wet</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                   <span class="n">transition_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                   <span class="n">mu_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">sigma_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">mu_1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">sigma_1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">p00</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">p11</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">n_basins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                   <span class="n">n_years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">105</span><span class="p">,</span>
+                   <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate synthetic streamflow data using a Hidden Markov Model (HMM).</span>
+
+<span class="sd">    :param dry_state_means: mean streamflow values for dry state</span>
+<span class="sd">    :type dry_state_means: np.array</span>
+
+<span class="sd">    :param wet_state_means: mean streamflow values for wet state</span>
+<span class="sd">    :type wet_state_means: np.array</span>
+
+<span class="sd">    :param covariance_matrix_dry: covariance matrix for dry state</span>
+<span class="sd">    :type covariance_matrix_dry: np.array</span>
+
+<span class="sd">    :param covariance_matrix_wet: covariance matrix for wet state</span>
+<span class="sd">    :type covariance_matrix_wet: np.array</span>
+
+<span class="sd">    :param transition_matrix: transition matrix for HMM</span>
+<span class="sd">    :type transition_matrix: np.array</span>
+
+<span class="sd">    :param mu_0: mean multiplier for dry state</span>
+<span class="sd">    :type mu_0: float</span>
+
+<span class="sd">    :param sigma_0: covariance multiplier for dry state</span>
+<span class="sd">    :type sigma_0: float</span>
+
+<span class="sd">    :param mu_1: mean multiplier for wet state</span>
+<span class="sd">    :type mu_1: float</span>
+
+<span class="sd">    :param sigma_1: covariance multiplier for wet state</span>
+<span class="sd">    :type sigma_1: float</span>
+
+<span class="sd">    :param p00: transition matrix multiplier for dry state</span>
+<span class="sd">    :type p00: float</span>
+
+<span class="sd">    :param p11: transition matrix multiplier for wet state</span>
+<span class="sd">    :type p11: float</span>
+
+<span class="sd">    :param n_basins: number of sites to generate data for</span>
+<span class="sd">    :type n_basins: int</span>
+
+<span class="sd">    :param n_years: number of years to generate data for</span>
+<span class="sd">    :type n_years: int</span>
+
+<span class="sd">    :param seed_value: random seed value</span>
+<span class="sd">    :type seed_value: Union[None, int]</span>
+
+<span class="sd">    :return: synthetic streamflow data</span>
+<span class="sd">    :rtype: np.array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># set random seed if desired</span>
+    <span class="k">if</span> <span class="n">seed_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
+
+    <span class="c1"># Apply mean multipliers</span>
+    <span class="n">dry_state_means_sampled</span> <span class="o">=</span> <span class="n">dry_state_means</span> <span class="o">*</span> <span class="n">mu_0</span>
+    <span class="n">wet_state_means_sampled</span> <span class="o">=</span> <span class="n">wet_state_means</span> <span class="o">*</span> <span class="n">mu_1</span>
+
+    <span class="c1"># Apply covariance multipliers</span>
+    <span class="n">covariance_matrix_dry_sampled</span> <span class="o">=</span> <span class="n">covariance_matrix_dry</span> <span class="o">*</span> <span class="n">sigma_0</span> <span class="o">*</span> <span class="n">sigma_0</span>
+    <span class="n">covariance_matrix_wet_sampled</span> <span class="o">=</span> <span class="n">covariance_matrix_wet</span> <span class="o">*</span> <span class="n">sigma_1</span> <span class="o">*</span> <span class="n">sigma_1</span>
+
+    <span class="c1"># Apply transition matrix multipliers</span>
+    <span class="n">transition_matrix_sampled</span> <span class="o">=</span> <span class="n">transition_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">p00</span>
+    <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">p11</span>
+    <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># calculate stationary distribution to determine unconditional probabilities</span>
+    <span class="n">eigenvals</span><span class="p">,</span> <span class="n">eigenvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">transition_matrix_sampled</span><span class="p">))</span>
+    <span class="n">one_eigval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eigenvals</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">eigenvecs</span><span class="p">[:,</span> <span class="n">one_eigval</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eigenvecs</span><span class="p">[:,</span> <span class="n">one_eigval</span><span class="p">])</span>
+    <span class="n">unconditional_dry</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">unconditional_wet</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">log_annual_q_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_years</span><span class="p">,</span> <span class="n">n_basins</span><span class="p">])</span>
+
+    <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">log_annual_q_s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]])</span>
+
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">unconditional_dry</span><span class="p">:</span>
+        <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">log_annual_q_s</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dry_state_means_sampled</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">covariance_matrix_dry_sampled</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">log_annual_q_s</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">wet_state_means_sampled</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">covariance_matrix_wet_sampled</span><span class="p">)</span>
+
+    <span class="c1"># generate remaining state trajectory and log space flows</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">log_annual_q_s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">transition_matrix_sampled</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])]:</span>
+            <span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">states</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">log_annual_q_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dry_state_means_sampled</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">covariance_matrix_dry_sampled</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log_annual_q_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">wet_state_means_sampled</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">covariance_matrix_wet_sampled</span><span class="p">)</span>
+
+    <span class="c1"># convert log-space flows to real-space flows</span>
+    <span class="n">annual_q_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_annual_q_s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">annual_q_s</span></div>
+
+
+<div class="viewcode-block" id="generate_modified_file"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_modified_file">[docs]</a><span class="k">def</span> <span class="nf">generate_modified_file</span><span class="p">(</span><span class="n">source_object</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                           <span class="n">monthly_data_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                           <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="n">sample_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate modified template data frame.</span>
+
+<span class="sd">    :param source_object:       Instantiated object containing the source data and file specifics.</span>
+<span class="sd">    :type source_object:        object</span>
+
+<span class="sd">    :param monthly_data_array:  Array of monthly data per year and site matching the shape of the input</span>
+<span class="sd">                                value columns.</span>
+<span class="sd">    :type monthly_data_array:   np.array</span>
+
+<span class="sd">    :param sample_id:           Numeric ID of sample that is being processed. Defaults to 0.</span>
+<span class="sd">    :type sample_id:            int</span>
+
+<span class="sd">    :param output_dir:          Path to output directory.</span>
+<span class="sd">    :type output_dir:           str</span>
+
+<span class="sd">    :param scenario:            Scenario name.</span>
+<span class="sd">    :type scenario:             str</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">file_spec</span> <span class="o">=</span> <span class="n">source_object</span><span class="o">.</span><span class="n">data_spec_dict</span>
+
+    <span class="c1"># format for overwriting original data in data frame</span>
+    <span class="n">arr_shape</span> <span class="o">=</span> <span class="n">monthly_data_array</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">monthly_q_s_frame</span> <span class="o">=</span> <span class="n">monthly_data_array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">arr_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">arr_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arr_shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># reconstruct precision</span>
+    <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">monthly_q_s_frame</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="c1"># recalculate total column</span>
+    <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="c1"># convert all fields to str type</span>
+    <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span> <span class="o">=</span> <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="c1"># add in trailing decimal</span>
+    <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+
+    <span class="c1"># add formatted data to output string</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">construct_data_string</span><span class="p">(</span><span class="n">source_object</span><span class="o">.</span><span class="n">template_df</span><span class="p">,</span>
+                                        <span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;column_list&quot;</span><span class="p">],</span>
+                                        <span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;column_widths&quot;</span><span class="p">],</span>
+                                        <span class="n">file_spec</span><span class="p">[</span><span class="s2">&quot;column_alignment&quot;</span><span class="p">])</span>
+
+    <span class="c1"># write output file</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">construct_outfile_name</span><span class="p">(</span><span class="n">source_object</span><span class="o">.</span><span class="n">template_file</span><span class="p">,</span>
+                                                <span class="n">output_dir</span><span class="p">,</span>
+                                                <span class="n">scenario</span><span class="p">,</span>
+                                                <span class="n">sample_id</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+        <span class="c1"># write header</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source_object</span><span class="o">.</span><span class="n">template_header</span><span class="p">)</span>
+
+        <span class="c1"># write data</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output_file</span></div>
+
+
+<div class="viewcode-block" id="modify_single_xbm_iwr"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_single_xbm_iwr">[docs]</a><span class="k">def</span> <span class="nf">modify_single_xbm_iwr</span><span class="p">(</span><span class="n">mu_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">sigma_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">mu_1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">sigma_1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">p00</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">p11</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">iwr_multiplier</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                          <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">,</span>
+                          <span class="n">sample_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                          <span class="n">n_sites</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">208</span><span class="p">,</span>
+                          <span class="n">n_years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">105</span><span class="p">,</span>
+                          <span class="n">n_basins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                          <span class="n">xbm_skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="n">iwr_skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="n">xbm_template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="n">iwr_template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="n">xbm_data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="n">iwr_data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="n">historical_column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                          <span class="n">months_in_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
+                          <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate synthetic streamflow data using a Hidden Markov Model (HMM).</span>
+
+<span class="sd">    :param mu_0:                            mean multiplier for dry state</span>
+<span class="sd">    :type mu_0:                             float</span>
+
+<span class="sd">    :param sigma_0:                         covariance multiplier for dry state</span>
+<span class="sd">    :type sigma_0:                          float</span>
+
+<span class="sd">    :param mu_1:                            mean multiplier for wet state</span>
+<span class="sd">    :type mu_1:                             float</span>
+
+<span class="sd">    :param sigma_1:                         covariance multiplier for wet state</span>
+<span class="sd">    :type sigma_1:                          float</span>
+
+<span class="sd">    :param p00:                             probability of staying in dry state</span>
+<span class="sd">    :type p00:                              float</span>
+
+<span class="sd">    :param p11:                             probability of staying in wet state</span>
+<span class="sd">    :type p11:                              float</span>
+
+<span class="sd">    :param iwr_multiplier:                  irrigation water requirement multiplier</span>
+<span class="sd">    :type iwr_multiplier:                   float</span>
+
+<span class="sd">    :param sample_id:                       Numeric ID of sample that is being processed. Defaults to 0.</span>
+<span class="sd">    :type sample_id:                        int</span>
+
+<span class="sd">    :param output_dir:                      Path to output directory.</span>
+<span class="sd">    :type output_dir:                       str</span>
+
+<span class="sd">    :param scenario:                        Scenario name.</span>
+<span class="sd">    :type scenario:                         str</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
+
+<span class="sd">    :param n_sites:                         number of sites</span>
+<span class="sd">    :type n_sites:                          int</span>
+
+<span class="sd">    :param n_years:                         number of years</span>
+<span class="sd">    :type n_years:                          int</span>
+
+<span class="sd">    :param n_basins:                        number of basins in HMM inputs</span>
+<span class="sd">    :type n_basins:                         int</span>
+
+<span class="sd">    :param xbm_skip_rows:                   number of rows to skip in XBM template file</span>
+<span class="sd">    :type xbm_skip_rows:                    int</span>
+
+<span class="sd">    :param iwr_skip_rows:                   number of rows to skip in IWR template file</span>
+<span class="sd">    :type iwr_skip_rows:                    int</span>
+
+<span class="sd">    :param xbm_template_file:               Template file to build XBM adjustment off of</span>
+<span class="sd">    :type xbm_template_file:                Union[None, str]</span>
+
+<span class="sd">    :param iwr_template_file:               Template file to build IWR adjustment off of</span>
+<span class="sd">    :type iwr_template_file:                Union[None, str]</span>
+
+<span class="sd">    :param xbm_data_specification_file:     Specification YAML file for XBM format</span>
+<span class="sd">    :type xbm_data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :param iwr_data_specification_file:     Specification YAML file for XBM format</span>
+<span class="sd">    :type iwr_data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :param historical_column:               Index of year to use for historical data</span>
+<span class="sd">    :type historical_column:                int</span>
+
+<span class="sd">    :param months_in_year:                  Number of months in year</span>
+<span class="sd">    :type months_in_year:                   int</span>
+
+<span class="sd">    :param seed_value:                      Integer to use for random seed or None if not desired</span>
+<span class="sd">    :type seed_value:                       Union[None, int] = None)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># set random seed if desired</span>
+    <span class="k">if</span> <span class="n">seed_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
+
+    <span class="c1"># instantiate xbm template data and specification</span>
+    <span class="n">xbm</span> <span class="o">=</span> <span class="n">GenerateXbmData</span><span class="p">(</span><span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+                          <span class="n">skip_rows</span><span class="o">=</span><span class="n">xbm_skip_rows</span><span class="p">,</span>
+                          <span class="n">template_file</span><span class="o">=</span><span class="n">xbm_template_file</span><span class="p">,</span>
+                          <span class="n">data_specification_file</span><span class="o">=</span><span class="n">xbm_data_specification_file</span><span class="p">)</span>
+
+    <span class="c1"># instantiate iwr template data and specification</span>
+    <span class="n">iwr</span> <span class="o">=</span> <span class="n">GenerateIwrData</span><span class="p">(</span><span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
+                          <span class="n">skip_rows</span><span class="o">=</span><span class="n">iwr_skip_rows</span><span class="p">,</span>
+                          <span class="n">template_file</span><span class="o">=</span><span class="n">iwr_template_file</span><span class="p">,</span>
+                          <span class="n">data_specification_file</span><span class="o">=</span><span class="n">iwr_data_specification_file</span><span class="p">)</span>
+
+    <span class="c1"># calculate the xbm monthly data array</span>
+    <span class="n">MonthlyQ_h</span> <span class="o">=</span> <span class="n">calculate_array_monthly</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">xbm</span><span class="o">.</span><span class="n">template_df</span><span class="p">,</span>
+                                         <span class="n">value_fields</span><span class="o">=</span><span class="n">xbm</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">],</span>
+                                         <span class="n">year_field</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+
+    <span class="c1"># generate the xbm yearly data array</span>
+    <span class="n">AnnualQ_h</span> <span class="o">=</span> <span class="n">calculate_array_annual</span><span class="p">(</span><span class="n">MonthlyQ_h</span><span class="p">)</span>
+
+    <span class="c1"># calculate the iwr monthly data array</span>
+    <span class="n">MonthlyIWR_h</span> <span class="o">=</span> <span class="n">calculate_array_monthly</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">iwr</span><span class="o">.</span><span class="n">template_df</span><span class="p">,</span>
+                                           <span class="n">value_fields</span><span class="o">=</span><span class="n">iwr</span><span class="o">.</span><span class="n">data_spec_dict</span><span class="p">[</span><span class="s2">&quot;value_columns&quot;</span><span class="p">],</span>
+                                           <span class="n">year_field</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+
+    <span class="c1"># generate the iwr yearly data array</span>
+    <span class="n">AnnualIWR_h</span> <span class="o">=</span> <span class="n">calculate_array_annual</span><span class="p">(</span><span class="n">MonthlyIWR_h</span><span class="p">)</span>
+
+    <span class="c1"># calculate annual sum</span>
+    <span class="n">IWRsums_h</span> <span class="o">=</span> <span class="n">calculate_annual_sum</span><span class="p">(</span><span class="n">AnnualIWR_h</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># calculate annual mean fractions</span>
+    <span class="n">IWRfractions_h</span> <span class="o">=</span> <span class="n">calculate_annual_mean_fractions</span><span class="p">(</span><span class="n">AnnualIWR_h</span><span class="p">,</span> <span class="n">IWRsums_h</span><span class="p">)</span>
+
+    <span class="c1"># model annual irrigation demand anomaly as function of annual flow anomaly at last node</span>
+    <span class="n">BetaIWR</span><span class="p">,</span> <span class="n">muIWR</span><span class="p">,</span> <span class="n">sigmaIWR</span> <span class="o">=</span> <span class="n">fit_iwr_model</span><span class="p">(</span><span class="n">AnnualQ_h</span><span class="p">,</span> <span class="n">AnnualIWR_h</span><span class="p">)</span>
+
+    <span class="n">AnnualQ_s</span> <span class="o">=</span> <span class="n">generate_flows</span><span class="p">(</span><span class="n">dry_state_means</span><span class="o">=</span><span class="n">generate_dry_state_means</span><span class="p">(),</span>
+                               <span class="n">wet_state_means</span><span class="o">=</span><span class="n">generate_wet_state_means</span><span class="p">(),</span>
+                               <span class="n">covariance_matrix_dry</span><span class="o">=</span><span class="n">generate_dry_covariance_matrix</span><span class="p">(),</span>
+                               <span class="n">covariance_matrix_wet</span><span class="o">=</span><span class="n">generate_wet_covariance_matrix</span><span class="p">(),</span>
+                               <span class="n">transition_matrix</span><span class="o">=</span><span class="n">generate_transition_matrix</span><span class="p">(),</span>
+                               <span class="n">mu_0</span><span class="o">=</span><span class="n">mu_0</span><span class="p">,</span>
+                               <span class="n">sigma_0</span><span class="o">=</span><span class="n">sigma_0</span><span class="p">,</span>
+                               <span class="n">mu_1</span><span class="o">=</span><span class="n">mu_1</span><span class="p">,</span>
+                               <span class="n">sigma_1</span><span class="o">=</span><span class="n">sigma_1</span><span class="p">,</span>
+                               <span class="n">p00</span><span class="o">=</span><span class="n">p00</span><span class="p">,</span>
+                               <span class="n">p11</span><span class="o">=</span><span class="n">p11</span><span class="p">,</span>
+                               <span class="n">n_basins</span><span class="o">=</span><span class="n">n_basins</span><span class="p">,</span>
+                               <span class="n">n_years</span><span class="o">=</span><span class="n">n_years</span><span class="p">)</span>
+
+    <span class="c1"># calculate annual IWR anomalies based on annual flow anomalies at last node</span>
+    <span class="n">TotalAnnualIWRanomalies_s</span> <span class="o">=</span> <span class="n">BetaIWR</span> <span class="o">*</span> <span class="p">(</span><span class="n">AnnualQ_s</span><span class="p">[:,</span><span class="n">historical_column</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">AnnualQ_s</span><span class="p">[:,</span><span class="n">historical_column</span><span class="p">]))</span> <span class="o">+</span> \
+            <span class="n">ss</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">muIWR</span><span class="p">,</span> <span class="n">sigmaIWR</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">AnnualQ_s</span><span class="p">[:,</span><span class="n">historical_column</span><span class="p">]))</span>
+    <span class="n">TotalAnnualIWR_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">IWRsums_h</span><span class="p">)</span><span class="o">*</span><span class="n">iwr_multiplier</span> <span class="o">+</span> <span class="n">TotalAnnualIWRanomalies_s</span>
+    <span class="n">AnnualIWR_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">TotalAnnualIWR_s</span><span class="p">,</span> <span class="n">IWRfractions_h</span><span class="p">)</span>
+
+    <span class="c1"># reshape monthly flows at all sites all years</span>
+    <span class="n">MonthlyQ_all</span> <span class="o">=</span> <span class="n">MonthlyQ_h</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_years</span><span class="p">,</span> <span class="n">months_in_year</span><span class="p">,</span> <span class="n">n_sites</span><span class="p">)</span>
+
+    <span class="c1"># if zeros are in the data, make them temporarily ones to prevent true divide</span>
+    <span class="n">zero_value_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">MonthlyQ_all</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">MonthlyQ_all</span><span class="p">[</span><span class="n">zero_value_indices</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Divide monthly flows at each site by the monthly flow at the last node</span>
+    <span class="n">MonthlyQ_all_ratios</span> <span class="o">=</span> <span class="n">MonthlyQ_all</span> <span class="o">/</span> <span class="n">MonthlyQ_all</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="c1"># revert back to zero</span>
+    <span class="n">MonthlyQ_all</span><span class="p">[</span><span class="n">zero_value_indices</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Get historical flow ratios for last node monthly</span>
+    <span class="n">last_node_breakdown</span> <span class="o">=</span> <span class="n">MonthlyQ_all</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">AnnualQ_h</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">MonthlyQ_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_years</span><span class="p">,</span> <span class="n">n_sites</span><span class="p">,</span> <span class="n">months_in_year</span><span class="p">])</span>
+    <span class="n">MonthlyIWR_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_years</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">MonthlyIWR_h</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">months_in_year</span><span class="p">])</span>
+
+    <span class="c1"># disaggregate annual flows and demands at all sites using randomly selected neighbor from k nearest based on flow</span>
+    <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_years</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">AnnualQ_h</span><span class="p">)[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_years</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">AnnualQ_h</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">dists</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">dists</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">AnnualQ_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">historical_column</span><span class="p">]</span> <span class="o">-</span> <span class="n">AnnualQ_h</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="c1"># Create probabilities for assigning a nearest neighbor for the simulated years</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">AnnualQ_h</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))])</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">)):</span>
+        <span class="n">probs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">probs</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">probs</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">probs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">probs</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_years</span><span class="p">):</span>
+
+        <span class="c1"># select one of k nearest neighbors for each simulated year</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">dists</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:])[</span><span class="mi">0</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">AnnualQ_h</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))]</span>
+        <span class="n">randnum</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">randnum</span> <span class="o">&gt;</span> <span class="n">probs</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">randnum</span> <span class="o">&lt;=</span> <span class="n">probs</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">neighbor_index</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Use selected neighbors to downscale flows and demands each year at last nodw</span>
+        <span class="n">MonthlyQ_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">last_node_breakdown</span><span class="p">[</span><span class="n">neighbor_index</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">AnnualQ_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">historical_column</span><span class="p">]</span>
+
+        <span class="c1"># Find monthly flows at all other sites each year</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">months_in_year</span><span class="p">):</span>
+            <span class="n">MonthlyQ_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">MonthlyQ_all_ratios</span><span class="p">[</span><span class="n">neighbor_index</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">MonthlyQ_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">MonthlyIWR_h</span><span class="p">)[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">MonthlyIWR_h</span><span class="p">[</span><span class="n">neighbor_index</span> <span class="o">*</span> <span class="n">months_in_year</span><span class="p">:(</span><span class="n">neighbor_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">months_in_year</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">proportions</span> <span class="o">=</span> <span class="n">MonthlyIWR_h</span><span class="p">[</span><span class="n">neighbor_index</span> <span class="o">*</span> <span class="n">months_in_year</span><span class="p">:(</span><span class="n">neighbor_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">months_in_year</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                    <span class="n">MonthlyIWR_h</span><span class="p">[</span><span class="n">neighbor_index</span> <span class="o">*</span> <span class="n">months_in_year</span><span class="p">:(</span><span class="n">neighbor_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">months_in_year</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">proportions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">months_in_year</span><span class="p">])</span>
+
+            <span class="n">MonthlyIWR_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">proportions</span> <span class="o">*</span> <span class="n">AnnualIWR_s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+
+    <span class="c1"># generate modified output files</span>
+    <span class="n">xbm_new_file</span> <span class="o">=</span> <span class="n">generate_modified_file</span><span class="p">(</span><span class="n">source_object</span><span class="o">=</span><span class="n">xbm</span><span class="p">,</span>
+                                          <span class="n">monthly_data_array</span><span class="o">=</span><span class="n">MonthlyQ_s</span><span class="p">,</span>
+                                          <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                                          <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                                          <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">)</span>
+
+    <span class="n">iwr_new_file</span> <span class="o">=</span> <span class="n">generate_modified_file</span><span class="p">(</span><span class="n">source_object</span><span class="o">=</span><span class="n">iwr</span><span class="p">,</span>
+                                          <span class="n">monthly_data_array</span><span class="o">=</span><span class="n">MonthlyIWR_s</span><span class="p">,</span>
+                                          <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                                          <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                                          <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">xbm_new_file</span><span class="p">,</span> <span class="n">iwr_new_file</span></div>
+
+
+<div class="viewcode-block" id="modify_xbm_iwr"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_xbm_iwr">[docs]</a><span class="k">def</span> <span class="nf">modify_xbm_iwr</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                   <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span><span class="p">,</span>
+                   <span class="n">n_years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">105</span><span class="p">,</span>
+                   <span class="n">n_basins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                   <span class="n">xbm_skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                   <span class="n">iwr_skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                   <span class="n">xbm_template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">iwr_template_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">xbm_data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">iwr_data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">months_in_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
+                   <span class="n">seed_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="n">n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                   <span class="n">save_sample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate flows for all samples for all basins in parallel to build modified XBM and IWR files.</span>
+
+<span class="sd">    :param output_dir:                      Path to output directory.</span>
+<span class="sd">    :type output_dir:                       str</span>
+
+<span class="sd">    :param scenario:                        Scenario name.</span>
+<span class="sd">    :type scenario:                         str</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
+
+<span class="sd">    :param n_years:                         number of years</span>
+<span class="sd">    :type n_years:                          int</span>
+
+<span class="sd">    :param n_basins:                        number of basins in HMM inputs</span>
+<span class="sd">    :type n_basins:                         int</span>
+
+<span class="sd">    :param xbm_skip_rows:                   number of rows to skip in XBM template file</span>
+<span class="sd">    :type xbm_skip_rows:                    int</span>
+
+<span class="sd">    :param iwr_skip_rows:                   number of rows to skip in IWR template file</span>
+<span class="sd">    :type iwr_skip_rows:                    int</span>
+
+<span class="sd">    :param xbm_template_file:               Template file to build XBM adjustment off of</span>
+<span class="sd">    :type xbm_template_file:                Union[None, str]</span>
+
+<span class="sd">    :param iwr_template_file:               Template file to build IWR adjustment off of</span>
+<span class="sd">    :type iwr_template_file:                Union[None, str]</span>
+
+<span class="sd">    :param xbm_data_specification_file:     Specification YAML file for XBM format</span>
+<span class="sd">    :type xbm_data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :param iwr_data_specification_file:     Specification YAML file for XBM format</span>
+<span class="sd">    :type iwr_data_specification_file:      Union[None, str]</span>
+
+<span class="sd">    :param months_in_year:                  Number of months in year</span>
+<span class="sd">    :type months_in_year:                   int</span>
+
+<span class="sd">    :param seed_value:                      Integer to use for random seed or None if not desired</span>
+<span class="sd">    :type seed_value:                       Union[None, int] = None)</span>
+
+<span class="sd">    :param n_jobs:                          Number of jobs to process in parallel.  Defaults to -1 meaning</span>
+<span class="sd">                                            all but 1 processor.</span>
+<span class="sd">    :type n_jobs:                           int</span>
+
+<span class="sd">    :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.</span>
+<span class="sd">    :type n_samples:                        int</span>
+
+<span class="sd">    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written</span>
+<span class="sd">                                to the output directory.</span>
+<span class="sd">    :type save_sample:          bool</span>
+
+<span class="sd">    :example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import statemodify as stm</span>
+
+
+<span class="sd">        output_directory = &quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="sd">        scenario = &quot;&lt;your scenario name&gt;&quot;</span>
+
+<span class="sd">        # basin name to process</span>
+<span class="sd">        basin_name = &quot;Upper_Colorado&quot;</span>
+
+<span class="sd">        # seed value for reproducibility if so desired</span>
+<span class="sd">        seed_value = None</span>
+
+<span class="sd">        # number of jobs to launch in parallel; -1 is all but 1 processor used</span>
+<span class="sd">        n_jobs = -1</span>
+
+<span class="sd">        # number of samples to generate</span>
+<span class="sd">        n_samples = 100</span>
+
+<span class="sd">        # generate a batch of files using generated LHS</span>
+<span class="sd">        stm.modify_xbm_iwr(output_dir=output_directory,</span>
+<span class="sd">                           scenario=scenario,</span>
+<span class="sd">                           basin_name=basin_name,</span>
+<span class="sd">                           seed_value=seed_value,</span>
+<span class="sd">                           n_jobs=n_jobs,</span>
+<span class="sd">                           n_samples=n_samples,</span>
+<span class="sd">                           save_sample=False)</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">yaml_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="s2">&quot;data/parameter_definitions.yml&quot;</span><span class="p">)</span>
+    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">yaml_to_dict</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">)</span>
+
+    <span class="c1"># generate an array of samples to process</span>
+    <span class="n">sample_array</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate_sample_all_params</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                                                      <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+
+    <span class="c1"># if the user chooses, write the sample to file</span>
+    <span class="k">if</span> <span class="n">save_sample</span><span class="p">:</span>
+        <span class="n">sample_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;xbm-iwr_</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">-samples_scenario-</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">.npy&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sample_file</span><span class="p">,</span> <span class="n">sample_array</span><span class="p">)</span>
+
+    <span class="c1"># generate all files in parallel</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;loky&quot;</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">modify_single_xbm_iwr</span><span class="p">)(</span><span class="n">mu_0</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu0&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">sigma_0</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma0&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">mu_1</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;mu1&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">sigma_1</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;sigma1&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">p00</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p00&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">p11</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;p11&quot;</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">iwr_multiplier</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;iwr_multiplier&quot;</span><span class="p">][</span><span class="n">basin_name</span><span class="p">][</span><span class="s2">&quot;index&quot;</span><span class="p">]],</span>
+                                                                                     <span class="n">n_sites</span><span class="o">=</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;xbm_site_metadata&quot;</span><span class="p">][</span><span class="n">basin_name</span><span class="p">][</span><span class="s2">&quot;n_sites&quot;</span><span class="p">],</span>
+                                                                                     <span class="n">historical_column</span><span class="o">=</span><span class="n">param_dict</span><span class="p">[</span><span class="s2">&quot;xbm_site_metadata&quot;</span><span class="p">][</span><span class="n">basin_name</span><span class="p">][</span><span class="s2">&quot;historical_column&quot;</span><span class="p">],</span>
+                                                                                     <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                                                                                     <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                                                                                     <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+                                                                                     <span class="n">n_years</span><span class="o">=</span><span class="n">n_years</span><span class="p">,</span>
+                                                                                     <span class="n">n_basins</span><span class="o">=</span><span class="n">n_basins</span><span class="p">,</span>
+                                                                                     <span class="n">xbm_skip_rows</span><span class="o">=</span><span class="n">xbm_skip_rows</span><span class="p">,</span>
+                                                                                     <span class="n">iwr_skip_rows</span><span class="o">=</span><span class="n">iwr_skip_rows</span><span class="p">,</span>
+                                                                                     <span class="n">xbm_template_file</span><span class="o">=</span><span class="n">xbm_template_file</span><span class="p">,</span>
+                                                                                     <span class="n">iwr_template_file</span><span class="o">=</span><span class="n">iwr_template_file</span><span class="p">,</span>
+                                                                                     <span class="n">xbm_data_specification_file</span><span class="o">=</span><span class="n">xbm_data_specification_file</span><span class="p">,</span>
+                                                                                     <span class="n">iwr_data_specification_file</span><span class="o">=</span><span class="n">iwr_data_specification_file</span><span class="p">,</span>
+                                                                                     <span class="n">months_in_year</span><span class="o">=</span><span class="n">months_in_year</span><span class="p">,</span>
+                                                                                     <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span> <span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_array</span><span class="p">))</span></div>
+
+
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
+    
+        &copy; Copyright 2023, Battelle Memorial Institute.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

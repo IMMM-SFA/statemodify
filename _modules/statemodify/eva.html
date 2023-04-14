@@ -92,23 +92,6 @@
    Quickstarter
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../getting-started/tutorial.html">
-   Tutorial
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  User Guides
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../examples/modify-inputs.html">
-   Modify Inputs
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -220,7 +203,7 @@
               <div>
                 
   <h1>Source code for statemodify.eva</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -235,6 +218,7 @@
                       <span class="n">query_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                       <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                       <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                       <span class="n">sample</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                       <span class="n">sample_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                       <span class="n">skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -264,6 +248,14 @@
 
 <span class="sd">    :param scenario:                    Scenario name.</span>
 <span class="sd">    :type scenario:                     str</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
 
 <span class="sd">    :param skip_rows:                   Number of rows to skip after the commented fields end; default 1</span>
 <span class="sd">    :type skip_rows:                    int, optional</span>
@@ -324,6 +316,9 @@
 <span class="sd">        # number of jobs to launch in parallel; -1 is all but 1 processor used</span>
 <span class="sd">        n_jobs = -1</span>
 
+<span class="sd">        # basin to process</span>
+<span class="sd">        basin_name = &quot;Upper_Colorado&quot;</span>
+
 <span class="sd">        # generate a batch of files using generated LHS</span>
 <span class="sd">        stm.modify_single_eva(modify_dict=modify_dict,</span>
 <span class="sd">                              query_field=query_field,</span>
@@ -331,6 +326,7 @@
 <span class="sd">                              sample_id=sample_id,</span>
 <span class="sd">                              output_dir=output_dir,</span>
 <span class="sd">                              scenario=scenario,</span>
+<span class="sd">                              basin_name=basin_name,</span>
 <span class="sd">                              skip_rows=skip_rows,</span>
 <span class="sd">                              template_file=None,</span>
 <span class="sd">                              factor_method=&quot;add&quot;,</span>
@@ -341,7 +337,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># select the appropriate template file</span>
-    <span class="n">template_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_template_file</span><span class="p">(</span><span class="n">template_file</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;eva&quot;</span><span class="p">)</span>
+    <span class="n">template_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_template_file</span><span class="p">(</span><span class="n">basin_name</span><span class="p">,</span> <span class="n">template_file</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;eva&quot;</span><span class="p">)</span>
 
     <span class="c1"># read in data specification yaml</span>
     <span class="n">data_specification_file</span> <span class="o">=</span> <span class="n">utx</span><span class="o">.</span><span class="n">select_data_specification_file</span><span class="p">(</span><span class="n">yaml_file</span><span class="o">=</span><span class="n">data_specification_file</span><span class="p">,</span>
@@ -418,6 +414,7 @@
                <span class="n">query_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                <span class="n">sampling_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
                <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                <span class="n">skip_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -427,8 +424,8 @@
                <span class="n">factor_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
                <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">min_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
-               <span class="n">max_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
-               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+               <span class="n">max_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">save_sample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.</span>
 <span class="sd">    Samples are processed in parallel. Modification is targeted at ids chosen by the user to</span>
 <span class="sd">    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.</span>
@@ -444,6 +441,14 @@
 
 <span class="sd">    :param scenario:            Scenario name.</span>
 <span class="sd">    :type scenario:             str</span>
+
+<span class="sd">    :param basin_name:                      Name of basin for either:</span>
+<span class="sd">                                                Upper_Colorado</span>
+<span class="sd">                                                Yampa</span>
+<span class="sd">                                                San_Juan</span>
+<span class="sd">                                                Gunnison</span>
+<span class="sd">                                                White</span>
+<span class="sd">    :type basin_name:                       str</span>
 
 <span class="sd">    :param sampling_method:     Sampling method.  Uses SALib&#39;s implementation (see https://salib.readthedocs.io/en/latest/).</span>
 <span class="sd">                                Currently supports the following method:  &quot;LHS&quot; for Latin Hypercube Sampling</span>
@@ -482,6 +487,10 @@
 <span class="sd">                                        Maximum allowable value:  1.0</span>
 <span class="sd">    :type max_bound_value:              float</span>
 
+<span class="sd">    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written</span>
+<span class="sd">                                to the output directory.</span>
+<span class="sd">    :type save_sample:          bool</span>
+
 <span class="sd">    :return: None</span>
 <span class="sd">    :rtype: None</span>
 
@@ -515,11 +524,15 @@
 <span class="sd">        # number of jobs to launch in parallel; -1 is all but 1 processor used</span>
 <span class="sd">        n_jobs = -1</span>
 
+<span class="sd">        # basin to process</span>
+<span class="sd">        basin_name = &quot;Upper_Colorado&quot;</span>
+
 <span class="sd">        # generate a batch of files using generated LHS</span>
 <span class="sd">        stm.modify_eva(modify_dict=modify_dict,</span>
 <span class="sd">                       query_field=query_field,</span>
 <span class="sd">                       output_dir=output_dir,</span>
 <span class="sd">                       scenario=scenario,</span>
+<span class="sd">                       basin_name=basin_name,</span>
 <span class="sd">                       sampling_method=&quot;LHS&quot;,</span>
 <span class="sd">                       n_samples=n_samples,</span>
 <span class="sd">                       skip_rows=skip_rows,</span>
@@ -529,7 +542,8 @@
 <span class="sd">                       factor_method=&quot;add&quot;,</span>
 <span class="sd">                       data_specification_file=None,</span>
 <span class="sd">                       min_bound_value=-0.5,</span>
-<span class="sd">                       max_bound_value=1.0)</span>
+<span class="sd">                       max_bound_value=1.0,</span>
+<span class="sd">                       save_sample=False)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -542,6 +556,11 @@
                                             <span class="n">sampling_method</span><span class="o">=</span><span class="n">sampling_method</span><span class="p">,</span>
                                             <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
 
+    <span class="c1"># if the user chooses, write the sample to file</span>
+    <span class="k">if</span> <span class="n">save_sample</span><span class="p">:</span>
+        <span class="n">sample_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;eva_</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">-samples_scenario-</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">.npy&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sample_file</span><span class="p">,</span> <span class="n">sample_array</span><span class="p">)</span>
+
     <span class="c1"># generate all files in parallel</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;loky&quot;</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">modify_single_eva</span><span class="p">)(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
                                                                                  <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
@@ -549,6 +568,7 @@
                                                                                  <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
                                                                                  <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
                                                                                  <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                                                                                 <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
                                                                                  <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
                                                                                  <span class="n">template_file</span><span class="o">=</span><span class="n">template_file</span><span class="p">,</span>
                                                                                  <span class="n">factor_method</span><span class="o">=</span><span class="n">factor_method</span><span class="p">,</span>
@@ -569,7 +589,7 @@
     <footer class="footer">
   <p>
     
-      By Rohini S. Gupta<br/>
+      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
     
         &copy; Copyright 2023, Battelle Memorial Institute.<br/>
   </p>
