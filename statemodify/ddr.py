@@ -422,19 +422,23 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             # ids can either be 'struct' or 'id' values
-            "ids": [["3600507.01", "3600507.02"], ["3600642.04", "3600642.05"]],
+            "ids": ["3600507.01", "3600507.02"],
 
-            "bounds": [[0.5, 1.5], [0.5, 1.5]],
+            "bounds": [0.5, 1.5], # make this conditional... if not selected, then only use rank (admin) change not resample
+
 
             # turn id on or off completely or for a given period
             # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
-            "on_off": [[-1977, 1], [0, 1977]],
+            "on_off": [-1977, 1]
 
             # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
             "admin": [[None, 2], [0, 1]]
 
             # optionally, pass values that you want to be set for each user group; this overrides bounds
             "values": [0.7, 1.4]
+
+            # optionally if you only want to sample rank
+            - something that doesn't
         }
 
         output_directory = "<your desired output directory>"
