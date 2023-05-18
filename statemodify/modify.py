@@ -289,8 +289,8 @@ def construct_outfile_name(template_file: str,
     # split basename into filename and extension
     template_name_parts = os.path.splitext(template_basename)
 
-    # output file name
-    output_file = f"{template_name_parts[0]}_scenario-{scenario}_sample-{sample_id}{template_name_parts[-1]}"
+    # output file name == cm2015B_S{sampleid}_{sceanrio}.ext
+    output_file = f"{template_name_parts[0]}_S{sample_id}_{scenario}{template_name_parts[-1]}"
 
     return os.path.join(output_directory, output_file)
 
