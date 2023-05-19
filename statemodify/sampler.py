@@ -8,7 +8,7 @@ import statemodify.utils as utx
 
 
 def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
-                         required_keys: Tuple[str] = ("ids", "bounds"),
+                         required_keys: Tuple[str] = ("ids",),
                          fill: bool = False) -> dict:
     """Validate user input modify dictionary to ensure all necessary elements are present.
 

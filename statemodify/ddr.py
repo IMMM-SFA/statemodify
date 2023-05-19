@@ -94,10 +94,11 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                       skip_rows: int = 0,
                       template_file: Union[None, str] = None,
                       factor_method: str = "multiply",
+                      use_values: bool = False,
+                      use_sampling: bool = True,
                       data_specification_file: Union[None, str] = None,
                       min_bound_value: float = 0.5,
-                      max_bound_value: float = 1.5,
-                      use_values: bool = False) -> None:
+                      max_bound_value: float = 1.5) -> None:
     """Modify StateMod water rights (.ddr) file from sample provided by the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds if generating samples.
@@ -154,6 +155,10 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     :param use_values:                  If values is present in the modify dictionary, use it instead of the sampler.
                                         Defaults to False.
     :type use_values:                   bool
+
+    :param use_sampling:                If bounds are not present in the modify dictionary, then sampling will not be used.
+                                        Defaults to False.
+    :type use_sampling:                 bool
 
     :return: None
     :rtype: None
@@ -216,6 +221,8 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                               basin_name=basin_name,
                               skip_rows=skip_rows,
                               template_file=None,
+                              use_values=False,
+                              use_sampling=True,
                               factor_method="multiply",
                               data_specification_file=None,
                               min_bound_value=-0.5,
@@ -253,33 +260,34 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # strip the query field of any whitespace
     template_df[query_field] = template_df[query_field].str.strip()
 
-    if use_values is False:
-
-        # validate user provided sample bounds to ensure they are within a feasible range
-        modify.validate_bounds(bounds_list=[modify_dict["bounds"]],
-                               min_value=min_bound_value,
-                               max_value=max_bound_value)
-
     # extract target ids to modify
     id_list = modify_dict["ids"]
 
-    if use_values:
+    # if the user provided bounds or values to set the values of the data; otherwise leave as-is
+    if use_sampling or use_values:
 
-        # extract values to set on the target feature
-        factor = modify_dict["values"]
+        if use_values:
 
-    else:
+            # extract values to set on the target feature
+            factor = modify_dict["values"]
 
-        # extract factors from sample for the subset and sample
-        factor = sample
+        elif use_sampling:
 
-    # apply adjustment
-    template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
-                                                                          value_columns=file_spec.value_columns,
-                                                                          query_field=query_field,
-                                                                          target_ids=id_list,
-                                                                          factor=factor,
-                                                                          factor_method=factor_method)
+            # validate user provided sample bounds to ensure they are within a feasible range
+            modify.validate_bounds(bounds_list=[modify_dict["bounds"]],
+                                   min_value=min_bound_value,
+                                   max_value=max_bound_value)
+
+            # extract factors from sample for the subset and sample
+            factor = sample
+
+        # apply adjustment
+        template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
+                                                                              value_columns=file_spec.value_columns,
+                                                                              query_field=query_field,
+                                                                              target_ids=id_list,
+                                                                              factor=factor,
+                                                                              factor_method=factor_method)
 
     # reconstruct precision
     template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(2)
@@ -472,6 +480,9 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # detect if values key in modify dict
     use_values = "values" in modify_dict
 
+    # detect if bounds are in the modify dict
+    use_sampling = "bounds" in modify_dict
+
     if use_values:
 
         # set n_jobs to 1 for a serial run
@@ -483,7 +494,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # sample array proxy
         sample_array = np.array([0])
 
-    else:
+    elif use_sampling and use_values is False:
 
         # build a problem dictionary for use by SALib
         problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
@@ -494,10 +505,18 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                                 sampling_method=sampling_method,
                                                 seed_value=seed_value)
 
-    # if the user chooses, write the sample to file
-    if save_sample:
-        sample_file = os.path.join(output_dir, f"ddr_{n_samples}-samples_scenario-{scenario}.npy")
-        np.save(sample_file, sample_array)
+        # if the user chooses, write the sample to file
+        if save_sample:
+            sample_file = os.path.join(output_dir, f"ddr_{n_samples}-samples_scenario-{scenario}.npy")
+            np.save(sample_file, sample_array)
+
+    elif use_sampling is False and use_values is False:
+
+        # set n_jobs to 1 for a serial run
+        n_jobs = 1
+
+        # sample array proxy
+        sample_array = np.array([0])
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_ddr)(modify_dict=modify_dict,
@@ -511,6 +530,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                                                                  template_file=template_file,
                                                                                  factor_method=factor_method,
                                                                                  use_values=use_values,
+                                                                                 use_sampling=use_sampling,
                                                                                  data_specification_file=data_specification_file,
                                                                                  min_bound_value=min_bound_value,
                                                                                  max_bound_value=max_bound_value) for sample_id, sample in enumerate(sample_array))
