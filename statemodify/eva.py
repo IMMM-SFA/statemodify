@@ -86,8 +86,8 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
+            "ids": ["10001", "10004"],
+            "bounds": [-0.5, 1.0]
         }
 
         output_directory = "<your desired output directory>"
@@ -97,7 +97,7 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
         sample_id = 0
 
         # sample array for each parameter
-        sample = np.array([0.39, -0.42])
+        sample = np.array([0.39])
 
         # seed value for reproducibility if so desired
         seed_value = None
@@ -161,26 +161,20 @@ def modify_single_eva(modify_dict: Dict[str, List[Union[str, float]]],
     template_df[query_field] = template_df[query_field].str.strip()
 
     # validate user provided sample bounds to ensure they are within a feasible range
-    modify.validate_bounds(bounds_list=modify_dict["bounds"],
+    modify.validate_bounds(bounds_list=[modify_dict["bounds"]],
                            min_value=min_bound_value,
                            max_value=max_bound_value)
 
-    # modify value columns associated structures based on the sample draw
-    for index, i in enumerate(modify_dict["names"]):
+    # extract target ids to modify
+    id_list = modify_dict["ids"]
 
-        # extract target ids to modify
-        id_list = modify_dict["ids"][index]
-
-        # extract factors from sample for the subset and sample
-        factor = sample[index]
-
-        # apply adjustment
-        template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
-                                                                              value_columns=file_spec.value_columns,
-                                                                              query_field=query_field,
-                                                                              target_ids=id_list,
-                                                                              factor=factor,
-                                                                              factor_method=factor_method)
+    # apply adjustment
+    template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
+                                                                          value_columns=file_spec.value_columns,
+                                                                          query_field=query_field,
+                                                                          target_ids=id_list,
+                                                                          factor=sample,
+                                                                          factor_method=factor_method)
 
     # reconstruct precision
     template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(4)
@@ -223,7 +217,7 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                save_sample: bool = False) -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
-    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    modify and specified in the `modify_dict` argument.  The user must specify bounds for sampling.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
@@ -297,8 +291,8 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
+            "ids": ["10001", "10004"],
+            "bounds": [-0.5, 1.0]
         }
 
         output_directory = "<your desired output directory>"
