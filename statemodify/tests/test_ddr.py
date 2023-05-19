@@ -33,9 +33,7 @@ class TestDdr(unittest.TestCase):
     }
 
     DDR_COMP_FILE_NAME = "cm2015B_S0_test.ddr"
-    DDR_COMP_FILE_NAME_VALUES = "cm2015B_S0_test_values.ddr"
     DDR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", DDR_COMP_FILE_NAME))
-    DDR_COMP_FULLPATH_VALUES = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", DDR_COMP_FILE_NAME_VALUES))
     SETUP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02"],
                             "on_off": [0, 1]})
     COMP_DF = pd.DataFrame({"id": ["3600507.01", "3600507.02"],
