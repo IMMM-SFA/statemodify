@@ -281,94 +281,94 @@
 #>EndHeader
 #>
 2803590     HOT SPRINGS RES         2803590            1     11. 5           
-                              0.    990. 999999.      0.       1       1       0       3
-            Acc1            990.    990.       0       1
+                              0.    909. 999999.      0.       1       1       0       3
+            Acc1            909.    909.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1029.   41.00       0
             CAP-AREA  2 9999999.   41.00       0
 2803591     MCDONOUGH RES FIRST ENLT2803591            1     11. 5           
-                              0.   1740. 999999.      0.       1       1       0       3
-            Acc1           1740.   1740.       0       1
+                              0.   1597. 999999.      0.       1       1       0       3
+            Acc1           1597.   1597.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1808.   72.00       0
             CAP-AREA  2 9999999.   72.00       0
 2803592     MCDONOUGH RES NO 2      2803592            1     11. 5           
-                              0.   1707. 999999.      0.       1       1       0       3
-            Acc1           1707.   1707.       0       1
+                              0.   1567. 999999.      0.       1       1       0       3
+            Acc1           1567.   1567.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1774.   71.00       0
             CAP-AREA  2 9999999.   71.00       0
 2803593     NEEDLE CREEK RES        2803593            1     11. 5           
-                              0.   1249. 999999.      0.       1       1       0       3
-            Acc1           1249.   1249.       0       1
+                              0.   1147. 999999.      0.       1       1       0       3
+            Acc1           1147.   1147.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1298.   52.00       0
             CAP-AREA  2 9999999.   52.00       0
 2803594     UPPER DOME RESERVOIR    2803594            1     11. 5           
-                              0.    847. 999999.      0.       1       1       0       3
-            Acc1            847.    777.       0       1
+                              0.    777. 999999.      0.       1       1       0       3
+            Acc1            777.    714.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     880.   35.00       0
             CAP-AREA  2 9999999.   35.00       0
 2803595     VOUGA RESERVOIR         2803595            1     11. 5           
-                              0.   1395. 999999.      0.       1       1       0       3
-            Acc1           1395.   1395.       0       1
+                              0.   1281. 999999.      0.       1       1       0       3
+            Acc1           1281.   1281.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1450.   58.00       0
             CAP-AREA  2 9999999.   58.00       0
 2803617     LOWER DOME RESERVOIR    2803617            1     11. 5           
-                              0.     57. 999999.      0.       1       1       0       3
-            Acc1             57.     57.       0       1
+                              0.     53. 999999.      0.       1       1       0       3
+            Acc1             53.     53.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    60.00    2.00       0
             CAP-AREA  2 9999999.    2.00       0
 2803652     BOULDER LAKE            2803652            1     11. 5           
-                              0.    100. 999999.      0.       1       1       0       3
-            Acc1            100.    100.       0       1
+                              0.     91. 999999.      0.       1       1       0       3
+            Acc1             91.     91.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     104.    4.00       0
             CAP-AREA  2 9999999.    4.00       0
 2803674     PETERSON RESERVOIR      2803674            1     11. 5           
-                              0.    182. 999999.      0.       1       1       0       3
-            Acc1            182.    182.       0       1
+                              0.    167. 999999.      0.       1       1       0       3
+            Acc1            167.    167.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     190.    8.00       0
             CAP-AREA  2 9999999.    8.00       0
 28_ARG001   AGG_RES_Tomichi         28_ARG001          1     -1. 5           
-                              0.    150. 999999.      0.       1       1       0       3
-            AGG_RES_Tomi    150.    150.       0       1
+                              0.    137. 999999.      0.       1       1       0       3
+            AGG_RES_Tomi    137.    137.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     156.    6.00       0
             CAP-AREA  2 9999999.    6.00       0
 4003365     FRUIT GROWERS RES       4003365            1     -1. 5           
-                              0.   4370. 999999.      0.       2       1       0       3
-            Irrigation     4293.   4293.       0       1
-            Dead_Pool        77.     77.       0       1
+                              0.   4012. 999999.      0.       2       1       0       3
+            Irrigation     3941.   3941.       0       1
+            Dead_Pool        70.     70.       0       1
             Evaporation 10009           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    4792.     476       0
             CAP-AREA  2 9999999.     476       0
 4003395     FRUITLAND RESERVOIR     4003395            1     -1. 5           
-                              0.   7798. 999999.      0.       1       1       0       3
-            Irrigation     7798.   7798.       0       1
+                              0.   7158. 999999.      0.       1       1       0       3
+            Irrigation     7158.   7158.       0       1
             Evaporation 10009           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    9900.     200       0
             CAP-AREA  2 9999999.     200       0
 4003399     OVERLAND RES NO 1       4003399            1     -1. 5           
-                              0.   5968. 999999.      0.       2       1       0      11
-            Irrigation     5918.   5918.       0       1
-            Dead_Pool        50.     50.       0       1
+                              0.   5479. 999999.      0.       2       1       0      11
+            Irrigation     5433.   5433.       0       1
+            Dead_Pool        45.     45.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    52.00   19.00       0
@@ -382,11 +382,11 @@
             CAP-AREA  9    5828.     247       0
             CAP-AREA 10 9999999.     247       0
 4003416     PAONIA RESERVOIR        4003416            1     -1. 5           
-                              0.  18002.   1130.      0.       4       1       0      11
-            Fire_Mtn      12178.  12178.       0       1
-            Ragged_Mtn     1925.   1925.       0       1
-            Endangered_F   1444.   1444.       0       1
-            Dead_Pool      2454.   2454.       0       1
+                              0.  16526.   1130.      0.       4       1       0      11
+            Fire_Mtn      11179.  11179.       0       1
+            Ragged_Mtn     1767.   1767.       0       1
+            Endangered_F   1325.   1325.       0       1
+            Dead_Pool      2253.   2253.       0       1
             Evaporation 10011           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     184.   23.00       0
@@ -400,17 +400,17 @@
             CAP-AREA  9   20950.     333       0
             CAP-AREA 10 9999999.     333       0
 4003527     Gorsuch Reservoir       4003527            1     -1. 5           
-                              0.  24068. 999999.      0.       2       1       0       3
-            Irrigation    23105.      0.       0       1
-            Inactive        962.      0.       0       1
+                              0.  22093. 999999.      0.       2       1       0       3
+            Irrigation    21210.      0.       0       1
+            Inactive        883.      0.       0       1
             Evaporation 10009           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   25000.    2500       0
             CAP-AREA  2 9999999.    2500       0
 4003553     CRAWFORD RESERVOIR      4003553            1     -1. 5           
-                              0.  13858. 999999.      0.       2       1       0      11
-            Irrigation     9964.   9964.       0       1
-            Recreation     3894.   3894.       0       1
+                              0.  12721. 999999.      0.       2       1       0      11
+            Irrigation     9146.   9146.       0       1
+            Recreation     3574.   3574.       0       1
             Evaporation 10009           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     116.   13.00       0
@@ -424,102 +424,102 @@
             CAP-AREA  9   14633.     406       0
             CAP-AREA 10 9999999.     406       0
 40_ARG001   AGG_RES_Surface         40_ARG001          1     -1. 5           
-                              0.  22400. 999999.      0.       1       1       0       3
-            AGG_RES_Surf  22400.  22400.       0       1
+                              0.  20563. 999999.      0.       1       1       0       3
+            AGG_RES_Surf  20563.  20563.       0       1
             Evaporation 10009           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   23268.     931       0
             CAP-AREA  2 9999999.     931       0
 40_ARG002   AGG_RES_Ngunn           40_ARG002          1     -1. 5           
-                              0.  22400. 999999.      0.       1       1       0       3
-            AGG_RES_Ngun  22400.  22400.       0       1
+                              0.  20563. 999999.      0.       1       1       0       3
+            AGG_RES_Ngun  20563.  20563.       0       1
             Evaporation 10009           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   23268.     931       0
             CAP-AREA  2 9999999.     931       0
 40_ASG001   AGG_STOCK_Surface       40_ASG001          1     -1. 5           
-                              0.   1662. 999999.      0.       1       1       0       3
-            AGG_STOCK_Su   1662.   1662.       0       1
+                              0.   1526. 999999.      0.       1       1       0       3
+            AGG_STOCK_Su   1526.   1526.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1727.     173       0
             CAP-AREA  2 9999999.     173       0
 41_ARG001   AGG_RES_Uncomp          41_ARG001          1     -1. 5           
-                              0.   3105. 999999.      0.       1       1       0       3
-            AGG_RES_Unco   3105.   3105.       0       1
+                              0.   2850. 999999.      0.       1       1       0       3
+            AGG_RES_Unco   2850.   2850.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    3226.     129       0
             CAP-AREA  2 9999999.     129       0
 41_ASG001   AGG_STOCK_Uncomp        41_ASG001          1     -1. 5           
-                              0.   1662. 999999.      0.       1       1       0       3
-            AGG_STOCK_Un   1662.   1662.       0       1
+                              0.   1526. 999999.      0.       1       1       0       3
+            AGG_STOCK_Un   1526.   1526.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1727.     173       0
             CAP-AREA  2 9999999.     173       0
 41_Cerro    Cerro                   41_Cerro           1     11. 5           
-                              0.    625.      2.      0.       1       1       0       3
-            Project7        625.    625.       0       1
+                              0.    574.      2.      0.       1       1       0       3
+            Project7        574.    574.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     650.   28.00       0
             CAP-AREA  2 9999999.   28.00       0
 41_Fairvw   Fairview                41_Fairvw          1     -1. 5           
-                              0.    336. 999999.      0.       1       1       0       3
-            Project7        336.    336.       0       1
+                              0.    309. 999999.      0.       1       1       0       3
+            Project7        309.    309.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     350.   36.00       0
             CAP-AREA  2  999999.   36.00       0
 42_ARG001   AGG_RES_Kannah          42_ARG001          1     -1. 5           
-                              0.  17209. 999999.      0.       1       1       0       3
-            AGG_RES_Kann  17209.  17209.       0       1
+                              0.  15797. 999999.      0.       1       1       0       3
+            AGG_RES_Kann  15797.  15797.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   17876.     715       0
             CAP-AREA  2 9999999.     715       0
 42_ASG001   AGG_STOCK_Kannah        42_ASG001          1     -1. 5           
-                              0.   1662. 999999.      0.       1       1       0       3
-            AGG_STOCK_Ka   1662.   1662.       0       1
+                              0.   1526. 999999.      0.       1       1       0       3
+            AGG_STOCK_Ka   1526.   1526.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1727.     173       0
             CAP-AREA  2 9999999.     173       0
 5903602     Farris Creek Resevoir   5903602            1     -1. 5           
-                              0.   3051. 999999.      0.       1       1       0       3
-            Irrigation     2888.      0.       0       1
+                              0.   2801. 999999.      0.       1       1       0       3
+            Irrigation     2651.      0.       0       1
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    3000.   69.00       0
             CAP-AREA  2 9999999.   69.00       0
 5903660     Cunningham Gulch        5903660            1     -1. 5           
-                              0.     81. 999999.      0.       1       1       0       3
-            Irrigation       81.      0.       0       1
+                              0.     75. 999999.      0.       1       1       0       3
+            Irrigation       75.      0.       0       1
             Evaporation 10006           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    85.00   50.00       0
             CAP-AREA  2 9999999.   50.00       0
 5903663     Meridian Lake           5903663            1     -1. 5           
-                              0.   1328. 999999.      0.       2       1       0       3
-            Irrigation     1058.   1058.       0       1
-            F&W             269.    269.       0       1
+                              0.   1219. 999999.      0.       2       1       0       3
+            Irrigation      972.    972.       0       1
+            F&W             247.    247.       0       1
             Evaporation 10006           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1380.   50.00       0
             CAP-AREA  2 9999999.   50.00       0
 5903664     Rainbow Lake Reservoir  5903664            1     -1. 5           
-                              0.    192. 999999.      0.       1       1       0       3
-            Irrigation      192.      0.       0       1
+                              0.    176. 999999.      0.       1       1       0       3
+            Irrigation      176.      0.       0       1
             Evaporation 10006           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     200.   15.00       0
             CAP-AREA  2 9999999.   15.00       0
 5903666     TAYLOR PARK RESERVOIR   5903666            1     -1. 5           
-                              0. 104446.   1500.      0.       3       1       0      11
-            UVWUA        102241. 102241.       0       1
-            Dead_Pool      2204.   2204.       0       1
-            UGRWCD       102241.      0.       0       2
+                              0.  95878.   1500.      0.       3       1       0      11
+            UVWUA         93854.  93854.       0       1
+            Dead_Pool      2023.   2023.       0       1
+            UGRWCD        93854.      0.       0       2
             Evaporation 10010           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   20000.     639       0
@@ -533,17 +533,17 @@
             CAP-AREA  9  108490.    2060       0
             CAP-AREA 10 9999999.    2060       0
 59_ARG001   AGG_RES_East            59_ARG001          1     -1. 5           
-                              0.   9459. 999999.      0.       1       1       0       3
-            AGG_RES_East   9459.   9459.       0       1
+                              0.   8683. 999999.      0.       1       1       0       3
+            AGG_RES_East   8683.   8683.       0       1
             Evaporation 10006           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    9826.     393       0
             CAP-AREA  2 9999999.     393       0
 6203532     BLUE MESA RESERVOIR     6203532            1     -1. 5           
-                              0. 905733. 999999.      0.       3       1       0      11
-            USA          720629. 720629.       0       1
-            Dead_Pool    185103. 185103.       0       1
-            UVWUA        102241.      0.       0       2
+                              0. 831432. 999999.      0.       3       1       0      11
+            USA          661513. 661513.       0       1
+            Dead_Pool    169918. 169918.       0       1
+            UVWUA         93854.      0.       0       2
             Evaporation 10011           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   10000.     350       0
@@ -557,9 +557,9 @@
             CAP-AREA  9  940800.    9180       0
             CAP-AREA 10 9999999.    9180       0
 6203545     MORROW POINT RESERVOIR  6203545            1     11. 5           
-                              0. 114337. 999999.      0.       2       1       0      16
-            Acc1          40550.  40550.       0       1
-            Dead_Pool     73787.  73787.       0       1
+                              0. 104957. 999999.      0.       2       1       0      16
+            Acc1          37223.  37223.       0       1
+            Dead_Pool     67734.  67734.       0       1
             Evaporation 10011           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    5000.     111       0
@@ -578,9 +578,9 @@
             CAP-AREA 14  118764.     838       0
             CAP-AREA 15 9999999.     838       0
 6203548     SILVERJACK RESERVOIR    6203548            1     -1. 5           
-                              0.  13016.    280.      0.       2       1       0      11
-            Irrigation    12358.  12358.       0       1
-            Dead_Pool       657.    657.       0       1
+                              0.  11948.    280.      0.       2       1       0      11
+            Irrigation    11344.  11344.       0       1
+            Dead_Pool       603.    603.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1200.   62.00       0
@@ -594,8 +594,8 @@
             CAP-AREA  9   13900.     293       0
             CAP-AREA 10 9999999.     293       0
 6203578     CRYSTAL RESERVOIR       6203578            1     11. 5           
-                              0.  24295. 999999.      0.       1       1       0      15
-            Acc1          24295.  24295.       0       1
+                              0.  22302. 999999.      0.       1       1       0      15
+            Acc1          22302.  22302.       0       1
             Evaporation 10011           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2000.     151       0
@@ -613,34 +613,34 @@
             CAP-AREA 13   25236.     350       0
             CAP-AREA 14 9999999.     350       0
 62_ARG001   AGG_RES_Lake            62_ARG001          1     -1. 5           
-                              0.   6233. 999999.      0.       1       1       0       3
-            AGG_RES_Lake   6233.   6233.       0       1
+                              0.   5722. 999999.      0.       1       1       0       3
+            AGG_RES_Lake   5722.   5722.       0       1
             Evaporation 10011           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    6475.     259       0
             CAP-AREA  2 9999999.     259       0
 62_ARG002   AGG_RES_Main            62_ARG002          1     -1. 5           
-                              0.   6233. 999999.      0.       1       1       0       3
-            AGG_RES_Main   6233.   6233.       0       1
+                              0.   5722. 999999.      0.       1       1       0       3
+            AGG_RES_Main   5722.   5722.       0       1
             Evaporation 10011           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    6475.     259       0
             CAP-AREA  2 9999999.     259       0
 62_ASG001   AGG_STOCK_Main          62_ASG001          1     -1. 5           
-                              0.   1662. 999999.      0.       1       1       0       3
-            AGG_STOCK_Ma   1662.   1662.       0       1
+                              0.   1526. 999999.      0.       1       1       0       3
+            AGG_STOCK_Ma   1526.   1526.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1727.     173       0
             CAP-AREA  2 9999999.     173       0
 6803675     Ridgway                 6803675            1     -1. 5           
-                              0.  81318.    500.      0.       6       1       0      12
-            Project7      27052.  27052.       0       1
-            UVWUA         10782.  10782.       0       1
-            Recreation    18484.  18484.       0       1
-            Dead_Pool     24132.  24132.       0       1
-            Unallocated     866.    866.       0       1
-            Exchange      27052.      0.       0       1
+                              0.  74647.    500.      0.       6       1       0      12
+            Project7      24833.  24833.       0       1
+            UVWUA          9898.   9898.       0       1
+            Recreation    16968.  16968.       0       1
+            Dead_Pool     22152.  22152.       0       1
+            Unallocated     795.    795.       0       1
+            Exchange      24833.      0.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1430.   85.00       0
@@ -655,15 +655,15 @@
             CAP-AREA 10   85897.    1063       0
             CAP-AREA 11 9999999.    1063       0
 68_ARG001   AGG_RES_UpperUncomp     68_ARG001          1     -1. 5           
-                              0.   8047. 999999.      0.       1       1       0       3
-            AGG_RES_Uppe   8047.   8047.       0       1
+                              0.   7387. 999999.      0.       1       1       0       3
+            AGG_RES_Uppe   7387.   7387.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    8359.     334       0
             CAP-AREA  2 9999999.     334       0
 68_ASG001   AGG_STOCK_UpperUncomp   68_ASG001          1     -1. 5           
-                              0.   1662. 999999.      0.       1       1       0       3
-            AGG_STOCK_Up   1662.   1662.       0       1
+                              0.   1526. 999999.      0.       1       1       0       3
+            AGG_STOCK_Up   1526.   1526.       0       1
             Evaporation 10012           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1727.     173       0

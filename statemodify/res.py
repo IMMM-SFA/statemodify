@@ -222,7 +222,7 @@ def modify_single_res(output_dir: str,
 
     # write modified output file
     template_file_base = os.path.splitext(os.path.basename(template_file))[0]
-    output_file = os.path.join(output_dir, f"{template_file_base}_scenario-{scenario}_sample-{sample_id}.res")
+    output_file = os.path.join(output_dir, f"{template_file_base}_S{sample_id}_{scenario}.res")
 
     with open(output_file, "w") as out:
         for item in content:
