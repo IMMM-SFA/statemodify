@@ -161,7 +161,7 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
     template_df[query_field] = template_df[query_field].str.strip()
 
     # validate user provided sample bounds to ensure they are within a feasible range
-    modify.validate_bounds(bounds_list=modify_dict["bounds"],
+    modify.validate_bounds(bounds_list=[modify_dict["bounds"]],
                            min_value=min_bound_value,
                            max_value=max_bound_value)
 

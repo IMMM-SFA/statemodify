@@ -75,14 +75,17 @@ def build_problem_dict(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
+    # create a copy so we do not modify the original
+    setup_dict = modify_dict.copy()
+
     # ensure all keys are present in the user provided dictionary
-    modify_dict = validate_modify_dict(modify_dict=modify_dict,
-                                       fill=fill)
+    setup_dict = validate_modify_dict(modify_dict=setup_dict,
+                                      fill=fill)
 
     return {
-        'num_vars': len(modify_dict["names"]),
-        'names': modify_dict["names"],
-        'bounds': modify_dict["bounds"]
+        'num_vars': len(setup_dict["names"]),
+        'names': setup_dict["names"],
+        'bounds': setup_dict["bounds"]
     }
 
 

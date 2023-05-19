@@ -367,13 +367,12 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
     :rtype:                                 pd.DataFrame
 
     """
+    import joblib
+    joblib.dump(factor, "/Users/d3y010/Desktop/factor.joblib")
 
     # get only value
-    factor = factor[0]
-    target_ids = target_ids[0]
-
-    import joblib
-    joblib.dump([target_ids, query_field], "/Users/d3y010/Desktop/factor.joblib")
+    if type(factor) not in (int, float, np.int64, np.float64):
+        factor = factor[0]
 
     if factor_method == "add":
         return (data_df[value_columns] + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])

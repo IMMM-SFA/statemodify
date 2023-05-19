@@ -11,8 +11,8 @@ import statemodify as stm
 class TestDdm(unittest.TestCase):
 
     VALID_MODIFY_DICT = {
-        "ids": [["3600507", "3600603"]],
-        "bounds": [[0.5, 1.0], [0.5, 1.0]]
+        "ids": ["3600507", "3600603"],
+        "bounds": [0.5, 1.0]
     }
 
     DDM_COMP_FILE_NAME = "cm2015B_S0_test.ddm"
@@ -25,7 +25,7 @@ class TestDdm(unittest.TestCase):
 
             stm.modify_single_ddm(modify_dict=TestDdm.VALID_MODIFY_DICT,
                                   query_field="id",
-                                  sample=np.array([1.19646919]),
+                                  sample=np.array([0.84823459]),
                                   sample_id=0,
                                   output_dir=tmp_dir,
                                   scenario="test",
