@@ -8,7 +8,7 @@ import statemodify as stm
 class TestExtractXreData(unittest.TestCase):
 
     def test_extract_xre_data(self):
-        xre_file = pkg_resources.resource_filename("statemodify", os.path.join("data/gm2015H.xre"))
+        xre_file = pkg_resources.resource_filename("statemodify", os.path.join("data/gm2015B.xre"))
         structure_ID = '2803590'  # structure ID for reservoir of interest
         structure_name = 'Blue_Mesa'  # name of the reservoir
 

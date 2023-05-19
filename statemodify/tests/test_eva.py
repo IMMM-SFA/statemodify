@@ -15,7 +15,7 @@ class TestEva(unittest.TestCase):
         "bounds": [-0.5, 1.0]
     }
 
-    EVA_COMP_FILE_NAME = "cm2015_S0_test.eva"
+    EVA_COMP_FILE_NAME = "cm2015B_S0_test.eva"
     EVA_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", EVA_COMP_FILE_NAME))
 
     def test_modify_single_eva_run(self):
