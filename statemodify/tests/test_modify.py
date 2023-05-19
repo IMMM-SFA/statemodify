@@ -13,7 +13,7 @@ class TestModify(unittest.TestCase):
     COMP_NONE = "test"
     COMP_ZEROS = "0.10"
     COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
-    COMP_FILE = "/my/output/directory/file_scenario-test_sample-0.txt"
+    COMP_FILE = "/my/output/directory/file_S0_test.txt"
     COMP_STR = "item   focus\n"
     COMP_ADJ_DF_ADD = pd.DataFrame({"a": [10., 20.1], "b": [-1., -1.9]})
     COMP_ADJ_DF_MULTIPLY = pd.DataFrame({"a": [10., 2.], "b": [-1., -0.2]})
