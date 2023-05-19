@@ -317,9 +317,9 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
         basin_name = "Upper_Colorado"
 
         # generate a batch of files using generated LHS
-        stm.modify_eva(modify_dict=modify_dict,
+        stm.modify_eva(modify_dict=setup_dict,
                        query_field=query_field,
-                       output_dir=output_dir,
+                       output_dir=output_directory,
                        scenario=scenario,
                        basin_name=basin_name,
                        sampling_method="LHS",
