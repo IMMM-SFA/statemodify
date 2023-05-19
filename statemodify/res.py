@@ -326,9 +326,11 @@ def modify_res(output_dir: str,
     yaml_file = pkg_resources.resource_filename("statemodify", "data/parameter_definitions.yml")
     param_dict = utx.yaml_to_dict(yaml_file)
 
-    # generate an array of samples to process
+    # generate an array of samples to process and only keep the rstorage samples
     sample_array = sampler.generate_sample_all_params(n_samples=n_samples,
-                                                      seed_value=seed_value)
+                                                      seed_value=seed_value)[:, param_dict["rstorage"]["index"]]
+
+    # only keep the rstorage samples
 
     # if the user chooses, write the sample to file
     if save_sample:
@@ -339,7 +341,7 @@ def modify_res(output_dir: str,
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_res)(output_dir=output_dir,
                                                                                  scenario=scenario,
                                                                                  basin_name=basin_name,
-                                                                                 sample=sample[param_dict["rstorage"]["index"]],
+                                                                                 sample=sample,
                                                                                  sample_id=sample_id,
                                                                                  template_file=template_file,
                                                                                  data_specification_file=data_specification_file,
