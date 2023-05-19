@@ -18,7 +18,7 @@ class TestUtils(unittest.TestCase):
         basin_name = "Upper_Colorado"
         template_file_custom = os.path.basename(utx.select_template_file(basin_name, None, "eva"))
 
-        self.assertEqual("cm2015.eva", template_file_custom, msg="Failure for template file selection.")
+        self.assertEqual("cm2015B.eva", template_file_custom, msg="Failure for template file selection.")
 
     def test_yaml_str(self):
         """Test YAML return string."""

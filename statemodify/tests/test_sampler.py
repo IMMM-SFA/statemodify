@@ -8,30 +8,25 @@ import statemodify.sampler as sampler
 class TestSampler(unittest.TestCase):
 
     VALID_MODIFY_DICT = {
-        "names": ["municipal", "standard"],
-        "ids": [["10001", "10004"], ["10005", "10006"]],
-        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+        "ids": ["10001", "10004"],
+        'names': ['variable_0', 'variable_1'],
+        "bounds": [-1.0, 1.0]
     }
 
     INVALID_MODIFY_DICT = {
-        "ids": [["10001", "10004"], ["10005", "10006"]],
-        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+        "ids": ["10001", "10004"],
+        "bounds": [-1.0, 1.0]
     }
 
     VALID_MODIFY_DICT_NONAMES = {
-        "ids": [["10001", "10004"], ["10005", "10006"]],
-        "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+        "ids": ["10001", "10004"],
+        "bounds": [-1.0, 1.0]
     }
 
     PROBLEM_DICT = {
         'num_vars': 2,
-        'names': ['municipal', 'standard'],
+        'names': ['variable_0', 'variable_1'],
         'bounds': [[-1.0, 1.0], [-1.0, 1.0]]
-    }
-
-    FILL_COMP_DICT = {'ids': [['10001', '10004'], ['10005', '10006']],
-                      'bounds': [[-1.0, 1.0], [-1.0, 1.0]],
-                      'names': ['group_0', 'group_1']
     }
 
     def test_validate_modify_dict_fail(self):
@@ -39,13 +34,6 @@ class TestSampler(unittest.TestCase):
 
         with self.assertRaises(KeyError):
             d = sampler.validate_modify_dict(TestSampler.INVALID_MODIFY_DICT, fill=False)
-
-    def test_validate_modify_dict_fill(self):
-        """Ensure validation fills missing names."""
-
-        d = sampler.validate_modify_dict(TestSampler.VALID_MODIFY_DICT_NONAMES, fill=True)
-
-        self.assertEqual(TestSampler.FILL_COMP_DICT, d)
 
     def test_build_problem_dict(self):
         """Ensure expected output is generated."""

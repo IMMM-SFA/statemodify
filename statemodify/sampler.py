@@ -8,7 +8,7 @@ import statemodify.utils as utx
 
 
 def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
-                         required_keys: Tuple[str] = ("ids", "bounds", "names"),
+                         required_keys: Tuple[str] = ("ids",),
                          fill: bool = False) -> dict:
     """Validate user input modify dictionary to ensure all necessary elements are present.
 
@@ -29,13 +29,18 @@ def validate_modify_dict(modify_dict: Dict[str, List[Union[str, float]]],
     # ensure names is in the tuple and add it as the last entry
     required_keys = tuple([i for i in required_keys if i != "names"] + ["names"])
 
+    # create single value from ids as nested list
+    modify_dict["ids"] = [modify_dict["ids"]]
+
     for key in required_keys:
         if (key not in modify_dict) and (key == "names") and (fill is True):
-            print(f"NOTICE: Filling 'names' field for 'modify_dict' with generic names as they are not used in this function.")
-            modify_dict["names"] = [f"group_{index}" for index, i in enumerate(modify_dict["ids"])]
+            modify_dict["names"] = [f"variable_{index}" for index, i in enumerate(modify_dict["ids"])]
 
         elif key not in modify_dict:
             raise KeyError(f"Missing the following key in user provided modify dictionary:  '{key}'")
+
+    # duplicate the bound definition for all variables
+    modify_dict["bounds"] = [modify_dict["bounds"] for i in range(len(modify_dict["names"]))]
 
     return modify_dict
 
@@ -61,9 +66,8 @@ def build_problem_dict(modify_dict: Dict[str, List[Union[str, float]]],
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
-            "names": ["municipal", "standard"],
-            "ids": [["10001", "10004"], ["10005", "10006"]],
-            "bounds": [[-1.0, 1.0], [-1.0, 1.0]]
+            "ids": ["10001", "10004"],
+            "bounds": [-1.0, 1.0]
         }
 
         # generate problem dictionary to use with SALib sampling components
@@ -71,14 +75,17 @@ def build_problem_dict(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
+    # create a copy so we do not modify the original
+    setup_dict = modify_dict.copy()
+
     # ensure all keys are present in the user provided dictionary
-    modify_dict = validate_modify_dict(modify_dict=modify_dict,
-                                       fill=fill)
+    setup_dict = validate_modify_dict(modify_dict=setup_dict,
+                                      fill=fill)
 
     return {
-        'num_vars': len(modify_dict["names"]),
-        'names': modify_dict["names"],
-        'bounds': modify_dict["bounds"]
+        'num_vars': len(setup_dict["names"]),
+        'names': setup_dict["names"],
+        'bounds': setup_dict["bounds"]
     }
 
 

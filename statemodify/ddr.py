@@ -29,13 +29,10 @@ def apply_on_off_modification(df: pd.DataFrame,
 
     """
 
-    # for each id group
-    for index, id_group in enumerate(modify_dict["ids"]):
-
-        # for each id in group
-        for subindex, target_id in enumerate(id_group):
-            # update existing value with value from dictionary
-            df.loc[df[query_field] == target_id, "on_off"] = modify_dict["on_off"][index][subindex]
+    # for each id
+    for index, target_id in enumerate(modify_dict["ids"]):
+        # update existing value with value from dictionary
+        df.loc[df[query_field] == target_id, "on_off"] = modify_dict["on_off"][index]
 
     return df
 
@@ -59,33 +56,30 @@ def apply_seniority_modification(df: pd.DataFrame,
 
     """
 
-    # for each id group
-    for index, id_group in enumerate(modify_dict["ids"]):
+    # for each id
+    for index, target_id in enumerate(modify_dict["ids"]):
 
-        # for each id in group
-        for subindex, target_id in enumerate(id_group):
+        set_value = modify_dict["admin"][index]
 
-            set_value = modify_dict["admin"][index][subindex]
+        if set_value is not None:
 
-            if set_value is not None:
+            set_value = str(set_value)
 
-                set_value = str(set_value)
+            len_set_value = len(set_value)
 
-                len_set_value = len(set_value)
+            if len_set_value > 10:
+                raise ValueError(f"Value of DDR admin seniority field is too large.  Can only be max 10 characters.")
 
-                if len_set_value > 10:
-                    raise ValueError(f"Value of DDR admin seniority field is too large.  Can only be max 10 characters.")
+            if len_set_value <= 5:
 
-                if len_set_value <= 5:
+                # ensure 5 zeros follow the decimal for integer values
+                set_value = modify.add_zero_padding(f"{set_value}.", 5)
 
-                    # ensure 5 zeros follow the decimal for integer values
-                    set_value = modify.add_zero_padding(f"{set_value}.", 5)
+            else:
+                set_value = modify.add_zero_padding(f"{set_value}.", 10 - len_set_value)
 
-                else:
-                    set_value = modify.add_zero_padding(f"{set_value}.", 10 - len_set_value)
-
-                # update existing value with value from dictionary
-                df.loc[df[query_field] == target_id, "admin"] = set_value
+            # update existing value with value from dictionary
+            df.loc[df[query_field] == target_id, "admin"] = set_value
 
     return df
 
@@ -100,13 +94,14 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                       skip_rows: int = 0,
                       template_file: Union[None, str] = None,
                       factor_method: str = "multiply",
+                      use_values: bool = False,
+                      use_sampling: bool = True,
                       data_specification_file: Union[None, str] = None,
                       min_bound_value: float = 0.5,
-                      max_bound_value: float = 1.5,
-                      use_values: bool = False) -> None:
+                      max_bound_value: float = 1.5) -> None:
     """Modify StateMod water rights (.ddr) file from sample provided by the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
-    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    modify and specified in the `modify_dict` argument.  The user must specify bounds if generating samples.
 
     :param modify_dict:                 Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:                  Dict[str, List[Union[str, float]]]
@@ -157,9 +152,13 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                         Maximum allowable value:  1.0
     :type max_bound_value:              float
 
-    :param use_values:                  If values is present in the modify dictionary, use them instead of the sampler.
+    :param use_values:                  If values is present in the modify dictionary, use it instead of the sampler.
                                         Defaults to False.
     :type use_values:                   bool
+
+    :param use_sampling:                If bounds are not present in the modify dictionary, then sampling will not be used.
+                                        Defaults to False.
+    :type use_sampling:                 bool
 
     :return: None
     :rtype: None
@@ -173,19 +172,19 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             # ids can either be 'struct' or 'id' values
-            "ids": [["3600507.01", "3600507.02"], ["3600642.04", "3600642.05"]],
+            "ids": ["3600507.01", "3600507.02"],
 
-            "bounds": [[0.5, 1.5], [0.5, 1.5]],
+            "bounds": [0.5, 1.0],
 
             # turn id on or off completely or for a given period
             # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
-            "on_off": [[-1977, 1], [0, 1977]],
+            "on_off": [-1977, 1],
 
             # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
-            "admin": [[None, 2], [0, 1]]
+            "admin": [None, 0]
 
-            # optionally, pass values that you want to be set for each user group; this overrides bounds
-            "values": [0.7, 1.4]
+            # optionally, pass a value that you want to assign for all ids; this overrides bounds
+            "values": [0.7]
         }
 
         output_directory = "<your desired output directory>"
@@ -213,15 +212,17 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         basin_name = "Upper_Colorado"
 
         # generate a batch of files using generated LHS
-        stm.modify_single_ddr(modify_dict=modify_dict,
+        stm.modify_single_ddr(modify_dict=setup_dict,
                               query_field=query_field,
                               sample=sample,
                               sample_id=sample_id,
-                              output_dir=output_dir,
+                              output_dir=output_directory,
                               scenario=scenario,
                               basin_name=basin_name,
                               skip_rows=skip_rows,
                               template_file=None,
+                              use_values=False,
+                              use_sampling=True,
                               factor_method="multiply",
                               data_specification_file=None,
                               min_bound_value=-0.5,
@@ -259,28 +260,26 @@ def modify_single_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # strip the query field of any whitespace
     template_df[query_field] = template_df[query_field].str.strip()
 
-    if use_values is False:
+    # extract target ids to modify
+    id_list = modify_dict["ids"]
 
-        # validate user provided sample bounds to ensure they are within a feasible range
-        modify.validate_bounds(bounds_list=modify_dict["bounds"],
-                               min_value=min_bound_value,
-                               max_value=max_bound_value)
-
-    # modify value columns associated structures based on the sample draw
-    for index, i in enumerate(modify_dict["names"]):
-
-        # extract target ids to modify
-        id_list = modify_dict["ids"][index]
+    # if the user provided bounds or values to set the values of the data; otherwise leave as-is
+    if use_sampling or use_values:
 
         if use_values:
 
             # extract values to set on the target feature
-            factor = modify_dict["values"][index]
+            factor = modify_dict["values"]
 
-        else:
+        elif use_sampling:
+
+            # validate user provided sample bounds to ensure they are within a feasible range
+            modify.validate_bounds(bounds_list=[modify_dict["bounds"]],
+                                   min_value=min_bound_value,
+                                   max_value=max_bound_value)
 
             # extract factors from sample for the subset and sample
-            factor = sample[index]
+            factor = sample
 
         # apply adjustment
         template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
@@ -347,7 +346,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                save_sample: bool = False) -> None:
     """Parallelized modification of StateMod water rights (.ddr) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
-    modify and specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    modify and specified in the `modify_dict` argument.  The user must specify bounds to generate the sample.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
@@ -422,19 +421,19 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             # ids can either be 'struct' or 'id' values
-            "ids": [["3600507.01", "3600507.02"], ["3600642.04", "3600642.05"]],
+            "ids": ["3600507.01", "3600507.02"],
 
-            "bounds": [[0.5, 1.5], [0.5, 1.5]],
+            "bounds": [0.5, 1.0],
 
             # turn id on or off completely or for a given period
             # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
-            "on_off": [[-1977, 1], [0, 1977]],
+            "on_off": [-1977, 1]
 
             # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
             "admin": [[None, 2], [0, 1]]
 
-            # optionally, pass values that you want to be set for each user group; this overrides bounds
-            "values": [0.7, 1.4]
+            # optionally, pass a value that you want to assign for all ids; this overrides bounds
+            "values": [0.7]
         }
 
         output_directory = "<your desired output directory>"
@@ -459,9 +458,9 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         basin_name = "Upper_Colorado"
 
         # generate a batch of files using generated LHS
-        stm.modify_ddr(modify_dict=modify_dict,
+        stm.modify_ddr(modify_dict=setup_dict,
                        query_field=query_field,
-                       output_dir=output_dir,
+                       output_dir=output_directory,
                        scenario=scenario,
                        basin_name=basin_name,
                        sampling_method="LHS",
@@ -473,18 +472,16 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                        factor_method="multiply",
                        data_specification_file=None,
                        min_bound_value=-0.5,
-                       max_bound_value=1.0,
+                       max_bound_value=1.5,
                        save_sample=False)
 
     """
 
-    # ensure all desired fields are present
-    modify_dict = sampler.validate_modify_dict(modify_dict=modify_dict,
-                                               required_keys=("ids", "names"),
-                                               fill=True)
-
     # detect if values key in modify dict
     use_values = "values" in modify_dict
+
+    # detect if bounds are in the modify dict
+    use_sampling = "bounds" in modify_dict
 
     if use_values:
 
@@ -497,7 +494,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # sample array proxy
         sample_array = np.array([0])
 
-    else:
+    elif use_sampling and use_values is False:
 
         # build a problem dictionary for use by SALib
         problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
@@ -508,10 +505,18 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                                 sampling_method=sampling_method,
                                                 seed_value=seed_value)
 
-    # if the user chooses, write the sample to file
-    if save_sample:
-        sample_file = os.path.join(output_dir, f"ddr_{n_samples}-samples_scenario-{scenario}.npy")
-        np.save(sample_file, sample_array)
+        # if the user chooses, write the sample to file
+        if save_sample:
+            sample_file = os.path.join(output_dir, f"ddr_{n_samples}-samples_scenario-{scenario}.npy")
+            np.save(sample_file, sample_array)
+
+    elif use_sampling is False and use_values is False:
+
+        # set n_jobs to 1 for a serial run
+        n_jobs = 1
+
+        # sample array proxy
+        sample_array = np.array([0])
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_ddr)(modify_dict=modify_dict,
@@ -524,6 +529,8 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                                                                                  skip_rows=skip_rows,
                                                                                  template_file=template_file,
                                                                                  factor_method=factor_method,
+                                                                                 use_values=use_values,
+                                                                                 use_sampling=use_sampling,
                                                                                  data_specification_file=data_specification_file,
                                                                                  min_bound_value=min_bound_value,
                                                                                  max_bound_value=max_bound_value) for sample_id, sample in enumerate(sample_array))

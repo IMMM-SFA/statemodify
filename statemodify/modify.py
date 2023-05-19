@@ -289,8 +289,8 @@ def construct_outfile_name(template_file: str,
     # split basename into filename and extension
     template_name_parts = os.path.splitext(template_basename)
 
-    # output file name
-    output_file = f"{template_name_parts[0]}_scenario-{scenario}_sample-{sample_id}{template_name_parts[-1]}"
+    # output file name == cm2015B_S{sampleid}_{sceanrio}.ext
+    output_file = f"{template_name_parts[0]}_S{sample_id}_{scenario}{template_name_parts[-1]}"
 
     return os.path.join(output_directory, output_file)
 
@@ -368,13 +368,19 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
 
     """
 
+    # get only value
+    if type(factor) not in (int, float, np.int64, np.float64):
+        factor = factor[0]
+
     if factor_method == "add":
         return (data_df[value_columns] + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
 
     elif factor_method == "multiply":
         return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+
     elif factor_method == "assign":
         return (data_df[value_columns] * 0 + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+
     else:
         raise KeyError(f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply').")
 

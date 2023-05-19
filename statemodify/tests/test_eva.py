@@ -11,11 +11,11 @@ import statemodify as stm
 class TestEva(unittest.TestCase):
 
     VALID_MODIFY_DICT = {
-        "ids": [["10001", "10004"], ["10005", "10006"]],
-        "bounds": [[-0.5, 1.0], [-0.5, 1.0]]
+        "ids": ["10001", "10004"],
+        "bounds": [-0.5, 1.0]
     }
 
-    EVA_COMP_FILE_NAME = "cm2015_scenario-test_sample-0.eva"
+    EVA_COMP_FILE_NAME = "cm2015B_S0_test.eva"
     EVA_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", EVA_COMP_FILE_NAME))
 
     def test_modify_single_eva_run(self):
@@ -25,7 +25,7 @@ class TestEva(unittest.TestCase):
 
             stm.modify_single_eva(modify_dict=TestEva.VALID_MODIFY_DICT,
                                   query_field="id",
-                                  sample=np.array([0.54470378, -0.070791]),
+                                  sample=np.array([0.54470378]),
                                   sample_id=0,
                                   output_dir=tmp_dir,
                                   scenario="test",
