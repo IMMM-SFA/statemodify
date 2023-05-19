@@ -23,8 +23,8 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                       min_bound_value: float = 0.5,
                       max_bound_value: float = 1.5) -> None:
     """Modify StateMod municipal, industrial, transbasin Demands (.ddm) using a sample from the user.
-    Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields where ids to
-    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.
+    Samples are processed in parallel. Modification is targeted at ids to modify are specified in
+    the `modify_dict` argument. The user must specify bounds by which the samples will be generated.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
@@ -87,7 +87,7 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             "ids": ["10001", "10004"],
-            "bounds": [0.5, 1.5]
+            "bounds": [0.5, 1.0]
         }
 
         output_directory = "<your desired output directory>"
@@ -168,15 +168,12 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
     # extract target ids to modify
     id_list = modify_dict["ids"]
 
-    # extract factors from sample for the subset and sample
-    factor = sample
-
     # apply adjustment
     template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
                                                                           value_columns=file_spec.value_columns,
                                                                           query_field=query_field,
                                                                           target_ids=id_list,
-                                                                          factor=factor,
+                                                                          factor=sample,
                                                                           factor_method=factor_method)
 
     # reconstruct precision
@@ -222,8 +219,8 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                max_bound_value: float = 1.5,
                save_sample: bool = False) -> None:
     """Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
-    from the user. Samples are processed in parallel. Modification is targeted at 'municipal' and 'standard' fields
-    where ids to modify are specified in the `modify_dict` argument. The user must specify bounds for each field name.
+    from the user. Samples are processed in parallel. Modification is targeted at ids to modify are specified in
+    the `modify_dict` argument. The user must specify bounds by which the samples will be generated.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
     :type modify_dict:          Dict[str, List[Union[str, float]]]
@@ -298,7 +295,7 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         # a dictionary to describe what you want to modify and the bounds for the LHS
         setup_dict = {
             "ids": ["3600507", "3600603"],
-            "bounds": [0.5, 1.5]
+            "bounds": [0.5, 1.0]
         }
 
         output_directory = "<your desired output directory>"
@@ -325,7 +322,7 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         # generate a batch of files using generated LHS
         stm.modify_ddm(modify_dict=setup_dict,
                        query_field=query_field,
-                       output_dir=output_dir,
+                       output_dir=output_directory,
                        scenario=scenario,
                        basin_name=basin_name,
                        sampling_method="LHS",

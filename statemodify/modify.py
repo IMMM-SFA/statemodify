@@ -368,13 +368,22 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
 
     """
 
+    # get only value
+    factor = factor[0]
+    target_ids = target_ids[0]
+
+    import joblib
+    joblib.dump([target_ids, query_field], "/Users/d3y010/Desktop/factor.joblib")
+
     if factor_method == "add":
         return (data_df[value_columns] + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
 
     elif factor_method == "multiply":
         return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+
     elif factor_method == "assign":
         return (data_df[value_columns] * 0 + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+
     else:
         raise KeyError(f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply').")
 
