@@ -367,8 +367,6 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
     :rtype:                                 pd.DataFrame
 
     """
-    import joblib
-    joblib.dump(factor, "/Users/d3y010/Desktop/factor.joblib")
 
     # get only value
     if type(factor) not in (int, float, np.int64, np.float64):
