@@ -343,7 +343,8 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
                data_specification_file: Union[None, str] = None,
                min_bound_value: float = 0.5,
                max_bound_value: float = 1.5,
-               save_sample: bool = False) -> None:
+               save_sample: bool = False,
+               sample_array: Union[None, np.array] = None) -> None:
     """Parallelized modification of StateMod water rights (.ddr) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds to generate the sample.
@@ -408,6 +409,9 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written
                                 to the output directory.
     :type save_sample:          bool
+
+    :param sample_array:        Optionally provide array containing sample instead of generating it.
+    :type sample_array:         np.array
 
     :return: None
     :rtype: None
@@ -494,7 +498,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # sample array proxy
         sample_array = np.array([0])
 
-    elif use_sampling and use_values is False:
+    elif sample_array is None and use_sampling and use_values is False:
 
         # build a problem dictionary for use by SALib
         problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
@@ -510,13 +514,15 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
             sample_file = os.path.join(output_dir, f"ddr_{n_samples}-samples_scenario-{scenario}.npy")
             np.save(sample_file, sample_array)
 
-    elif use_sampling is False and use_values is False:
+    elif sample_array is None and use_sampling is False and use_values is False:
 
         # set n_jobs to 1 for a serial run
         n_jobs = 1
 
         # sample array proxy
         sample_array = np.array([0])
+
+    # otherwise use sample array from batch run
 
     # generate all files in parallel
     results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_ddr)(modify_dict=modify_dict,
