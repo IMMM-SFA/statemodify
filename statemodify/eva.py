@@ -214,7 +214,8 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                data_specification_file: Union[None, str] = None,
                min_bound_value: float = -0.5,
                max_bound_value: float = 1.0,
-               save_sample: bool = False) -> None:
+               save_sample: bool = False,
+               sample_array: Union[None, np.array] = None) -> None:
     """Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
     Samples are processed in parallel. Modification is targeted at ids chosen by the user to
     modify and specified in the `modify_dict` argument.  The user must specify bounds for sampling.
@@ -280,6 +281,9 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
                                 to the output directory.
     :type save_sample:          bool
 
+    :param sample_array:        Optionally provide array containing sample instead of generating it.
+    :type sample_array:         np.array
+
     :return: None
     :rtype: None
 
@@ -336,14 +340,16 @@ def modify_eva(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
-    # build a problem dictionary for use by SALib
-    problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
+    if sample_array is None:
 
-    # generate a sample array
-    sample_array = sampler.generate_samples(problem_dict=problem_dict,
-                                            n_samples=n_samples,
-                                            sampling_method=sampling_method,
-                                            seed_value=seed_value)
+        # build a problem dictionary for use by SALib
+        problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
+
+        # generate a sample array
+        sample_array = sampler.generate_samples(problem_dict=problem_dict,
+                                                n_samples=n_samples,
+                                                sampling_method=sampling_method,
+                                                seed_value=seed_value)
 
     # if the user chooses, write the sample to file
     if save_sample:

@@ -217,7 +217,8 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                data_specification_file: Union[None, str] = None,
                min_bound_value: float = 0.5,
                max_bound_value: float = 1.5,
-               save_sample: bool = False) -> None:
+               save_sample: bool = False,
+               sample_array: Union[None, np.array] = None) -> None:
     """Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
     from the user. Samples are processed in parallel. Modification is targeted at ids to modify are specified in
     the `modify_dict` argument. The user must specify bounds by which the samples will be generated.
@@ -283,6 +284,9 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                                 to the output directory.
     :type save_sample:          bool
 
+    :param sample_array:        Optionally provide array containing sample instead of generating it.
+    :type sample_array:         np.array
+
     :return: None
     :rtype: None
 
@@ -339,14 +343,16 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
 
     """
 
-    # build a problem dictionary for use by SALib
-    problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
+    if sample_array is None:
 
-    # generate a sample array
-    sample_array = sampler.generate_samples(problem_dict=problem_dict,
-                                            n_samples=n_samples,
-                                            sampling_method=sampling_method,
-                                            seed_value=seed_value)
+        # build a problem dictionary for use by SALib
+        problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
+
+        # generate a sample array
+        sample_array = sampler.generate_samples(problem_dict=problem_dict,
+                                                n_samples=n_samples,
+                                                sampling_method=sampling_method,
+                                                seed_value=seed_value)
 
     # if the user chooses, write the sample to file
     if save_sample:
