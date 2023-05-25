@@ -487,6 +487,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
     # detect if bounds are in the modify dict
     use_sampling = "bounds" in modify_dict
 
+    # if  use values is true, then override any sample settings
     if use_values:
 
         # set n_jobs to 1 for a serial run
@@ -498,6 +499,7 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
         # sample array proxy
         sample_array = np.array([0])
 
+    # if sample array not provided and you want to use sampling instead of inserting values
     elif sample_array is None and use_sampling and use_values is False:
 
         # build a problem dictionary for use by SALib
@@ -514,7 +516,8 @@ def modify_ddr(modify_dict: Dict[str, List[Union[str, float]]],
             sample_file = os.path.join(output_dir, f"ddr_{n_samples}-samples_scenario-{scenario}.npy")
             np.save(sample_file, sample_array)
 
-    elif sample_array is None and use_sampling is False and use_values is False:
+    # if sample array is not provided and you do not want to generate samples or insert values
+    elif use_sampling is False and use_values is False:
 
         # set n_jobs to 1 for a serial run
         n_jobs = 1

@@ -33,8 +33,24 @@ def generate_parameters(problem_dict: dict) -> dict:
     if len(missing_from_problem_set) > 0:
         raise KeyError(f"Missing the following required keys in the problem dictionary: {missing_from_problem_set}")
 
+    # check for missing bounds and remove from problem dict to generate samples
+    sample_dict = {
+        "n_samples": problem_dict["n_samples"],
+        "num_vars": problem_dict["num_vars"],
+        "names": problem_dict["names"],
+        "bounds": problem_dict["bounds"],
+    }
+
+    # list of indices for variables to remove
+    remove_indices = [index for index, i in enumerate(sample_dict["bounds"]) if i is None]
+
+    # update sample dict
+    sample_dict["num_vars"] = sample_dict["num_vars"] - len(remove_indices)
+    sample_dict["names"] = [i for index, i in enumerate(sample_dict["names"]) if index not in remove_indices]
+    sample_dict["bounds"] = [i for index, i in enumerate(sample_dict["bounds"]) if index not in remove_indices]
+
     # generate LHS sample over the problem set
-    param_values = latin.sample(problem_dict, problem_dict["n_samples"])
+    param_values = latin.sample(sample_dict, sample_dict["n_samples"])
 
     # output dictionary of arguments specifications per desired function
     function_parameters = {}
@@ -91,9 +107,11 @@ def generate_parameters(problem_dict: dict) -> dict:
         function_parameters[i] = parameter_dict[i]
 
         # get corresponding sample
-        fn_index = problem_dict["names"].index(i)
-        fn_sample = param_values[:, fn_index]
-        function_parameters[i]["sample_array"] = fn_sample
+        if i in sample_dict["names"]:
+            fn_sample = param_values[:, sample_dict["names"].index(i)]
+            function_parameters[i]["sample_array"] = fn_sample
+        else:
+            function_parameters[i]["sample_array"] = None
 
         # build modify dict
         fn_modify_dict = {}
@@ -102,7 +120,8 @@ def generate_parameters(problem_dict: dict) -> dict:
                 fn_modify_dict[x] = problem_dict[i][x]
 
         # add bounds to modify dict
-        fn_modify_dict["bounds"] = problem_dict["bounds"][fn_index]
+        if i in sample_dict["names"]:
+            fn_modify_dict["bounds"] = sample_dict["bounds"][sample_dict["names"].index(i)]
 
         # add modify dict to parameters
         function_parameters[i]["modify_dict"] = fn_modify_dict
