@@ -65,6 +65,36 @@ statemodify.validate_modify_dict
 
 .. autofunction:: statemodify.validate_modify_dict
 
+statemodify.hmm_multisite_fit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.hmm_multisite_fit
+
+statemodify.hmm_multisite_sample
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.hmm_multisite_sample
+
+statemodify.read_xre
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.read_xre
+
+statemodify.plot_flow_duration_curves
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.plot_flow_duration_curves
+
+statemodify.plot_res_quantiles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.plot_res_quantiles
+
+statemodify.plot_reservoir_boxes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: statemodify.plot_reservoir_boxes
+
 Modification
 ---------------------------------
 
