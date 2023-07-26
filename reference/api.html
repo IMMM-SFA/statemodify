@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Contributing to statemodify" href="contributing.html" />
-    <link rel="prev" title="Quickstarter" href="../getting-started/quickstarter.html" />
+    <link rel="prev" title="Modify Inputs" href="../examples/modify-inputs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,6 +92,23 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../getting-started/quickstarter.html">
    Quickstarter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../getting-started/tutorial.html">
+   Tutorial
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../examples/modify-inputs.html">
+   Modify Inputs
   </a>
  </li>
 </ul>
@@ -231,38 +248,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-ddm">
-     statemodify.modify_single_ddm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-modify-ddr">
      statemodify.modify_ddr
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-ddr">
-     statemodify.modify_single_ddr
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-modify-xbm-iwr">
      statemodify.modify_xbm_iwr
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-xbm-iwr">
-     statemodify.modify_single_xbm_iwr
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-res">
-     statemodify.modify_res
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-res">
-     statemodify.modify_single_res
     </a>
    </li>
   </ul>
@@ -295,32 +287,45 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-sample-all-params">
-     statemodify.generate_sample_all_params
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-validate-modify-dict">
      statemodify.validate_modify_dict
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-access">
-   Data Access
-  </a>
-  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-get-reservoir-structure-ids">
-     statemodify.get_reservoir_structure_ids
+    <a class="reference internal nav-link" href="#statemodify-hmm-multisite-fit">
+     statemodify.hmm_multisite_fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-hmm-multisite-sample">
+     statemodify.hmm_multisite_sample
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-read-xre">
+     statemodify.read_xre
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-plot-flow-duration-curves">
+     statemodify.plot_flow_duration_curves
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-plot-res-quantiles">
+     statemodify.plot_res_quantiles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-plot-reservoir-boxes">
+     statemodify.plot_reservoir_boxes
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modification-helpers">
-   Modification Helpers
+  <a class="reference internal nav-link" href="#modification">
+   Modification
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -393,98 +398,6 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-select-data-specification-file">
      statemodify.select_data_specification_file
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-credits">
-     statemodify.credits
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#xbm-and-iwr-specific">
-   XBM and IWR specific
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generateiwrdata">
-     statemodify.GenerateIwrData
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generatexbmdata">
-     statemodify.GenerateXbmData
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-get-samples">
-     statemodify.get_samples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-dry-state-means">
-     statemodify.generate_dry_state_means
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-wet-state-means">
-     statemodify.generate_wet_state_means
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-dry-covariance-matrix">
-     statemodify.generate_dry_covariance_matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-wet-covariance-matrix">
-     statemodify.generate_wet_covariance_matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-transition-matrix">
-     statemodify.generate_transition_matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-array-monthly">
-     statemodify.calculate_array_monthly
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-array-annual">
-     statemodify.calculate_array_annual
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-annual-sum">
-     statemodify.calculate_annual_sum
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-annual-mean-fractions">
-     statemodify.calculate_annual_mean_fractions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-fit-iwr-model">
-     statemodify.fit_iwr_model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-hmm-inputs">
-     statemodify.generate_hmm_inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-flows">
-     statemodify.generate_flows
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-modified-file">
-     statemodify.generate_modified_file
     </a>
    </li>
   </ul>
@@ -530,38 +443,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-ddm">
-     statemodify.modify_single_ddm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-modify-ddr">
      statemodify.modify_ddr
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-ddr">
-     statemodify.modify_single_ddr
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-modify-xbm-iwr">
      statemodify.modify_xbm_iwr
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-xbm-iwr">
-     statemodify.modify_single_xbm_iwr
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-res">
-     statemodify.modify_res
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-modify-single-res">
-     statemodify.modify_single_res
     </a>
    </li>
   </ul>
@@ -594,32 +482,45 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-sample-all-params">
-     statemodify.generate_sample_all_params
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#statemodify-validate-modify-dict">
      statemodify.validate_modify_dict
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-access">
-   Data Access
-  </a>
-  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-get-reservoir-structure-ids">
-     statemodify.get_reservoir_structure_ids
+    <a class="reference internal nav-link" href="#statemodify-hmm-multisite-fit">
+     statemodify.hmm_multisite_fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-hmm-multisite-sample">
+     statemodify.hmm_multisite_sample
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-read-xre">
+     statemodify.read_xre
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-plot-flow-duration-curves">
+     statemodify.plot_flow_duration_curves
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-plot-res-quantiles">
+     statemodify.plot_res_quantiles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statemodify-plot-reservoir-boxes">
+     statemodify.plot_reservoir_boxes
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modification-helpers">
-   Modification Helpers
+  <a class="reference internal nav-link" href="#modification">
+   Modification
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -694,98 +595,6 @@
      statemodify.select_data_specification_file
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-credits">
-     statemodify.credits
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#xbm-and-iwr-specific">
-   XBM and IWR specific
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generateiwrdata">
-     statemodify.GenerateIwrData
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generatexbmdata">
-     statemodify.GenerateXbmData
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-get-samples">
-     statemodify.get_samples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-dry-state-means">
-     statemodify.generate_dry_state_means
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-wet-state-means">
-     statemodify.generate_wet_state_means
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-dry-covariance-matrix">
-     statemodify.generate_dry_covariance_matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-wet-covariance-matrix">
-     statemodify.generate_wet_covariance_matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-transition-matrix">
-     statemodify.generate_transition_matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-array-monthly">
-     statemodify.calculate_array_monthly
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-array-annual">
-     statemodify.calculate_array_annual
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-annual-sum">
-     statemodify.calculate_annual_sum
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-calculate-annual-mean-fractions">
-     statemodify.calculate_annual_mean_fractions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-fit-iwr-model">
-     statemodify.fit_iwr_model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-hmm-inputs">
-     statemodify.generate_hmm_inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-flows">
-     statemodify.generate_flows
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statemodify-generate-modified-file">
-     statemodify.generate_modified_file
-    </a>
-   </li>
   </ul>
  </li>
 </ul>
@@ -811,10 +620,10 @@ Your feedback is much appreciated in evolving this API!</p>
 <h3>statemodify.modify_eva<a class="headerlink" href="#statemodify-modify-eva" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="statemodify.modify_eva">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_eva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/eva.html#modify_eva"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_eva" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_eva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/eva.html#modify_eva"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_eva" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify StateMod net reservoir evaporation annual data file (.eva) using a Latin Hypercube Sample from the user.
 Samples are processed in parallel. Modification is targeted at ids chosen by the user to
-modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
+modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for sampling.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -847,6 +656,7 @@ Minimum allowable value:  -0.5</p></li>
 Maximum allowable value:  1.0</p></li>
 <li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
+<li><p><strong>sample_array</strong> (<em>np.array</em>) – Optionally provide array containing sample instead of generating it.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -862,8 +672,8 @@ to the output directory.</p></li>
 
 <span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;10005&quot;</span><span class="p">,</span> <span class="s2">&quot;10006&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
@@ -888,9 +698,9 @@ to the output directory.</p></li>
 <span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span>
 
 <span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_eva</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">setup_dict</span><span class="p">,</span>
                <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
                <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
                <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
                <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
@@ -958,8 +768,8 @@ Maximum allowable value:  1.0</p></li>
 
 <span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;10005&quot;</span><span class="p">,</span> <span class="s2">&quot;10006&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
@@ -969,7 +779,7 @@ Maximum allowable value:  1.0</p></li>
 <span class="n">sample_id</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="c1"># sample array for each parameter</span>
-<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.39</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.42</span><span class="p">])</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.39</span><span class="p">])</span>
 
 <span class="c1"># seed value for reproducibility if so desired</span>
 <span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1009,10 +819,10 @@ Maximum allowable value:  1.0</p></li>
 <h3>statemodify.modify_ddm<a class="headerlink" href="#statemodify-modify-ddm" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="statemodify.modify_ddm">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddm.html#modify_ddm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddm" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddm.html#modify_ddm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
-from the user. Samples are processed in parallel. Modification is targeted at ‘municipal’ and ‘standard’ fields
-where ids to modify are specified in the <cite>modify_dict</cite> argument. The user must specify bounds for each field name.</p>
+from the user. Samples are processed in parallel. Modification is targeted at ids to modify are specified in
+the <cite>modify_dict</cite> argument. The user must specify bounds by which the samples will be generated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1045,6 +855,7 @@ Minimum allowable value:  0.5</p></li>
 Maximum allowable value:  1.5</p></li>
 <li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
+<li><p><strong>sample_array</strong> (<em>np.array</em>) – Optionally provide array containing sample instead of generating it.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1060,9 +871,8 @@ to the output directory.</p></li>
 
 <span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;municipal&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;3600507&quot;</span><span class="p">,</span> <span class="s2">&quot;3600603&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;3600649_D&quot;</span><span class="p">,</span> <span class="s2">&quot;3600662_D&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]]</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3600507&quot;</span><span class="p">,</span> <span class="s2">&quot;3600603&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
@@ -1087,9 +897,9 @@ to the output directory.</p></li>
 <span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span>
 
 <span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">setup_dict</span><span class="p">,</span>
                <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
                <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
                <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
                <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
@@ -1103,103 +913,6 @@ to the output directory.</p></li>
                <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
                <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
                <span class="n">save_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-modify-single-ddm">
-<h3>statemodify.modify_single_ddm<a class="headerlink" href="#statemodify-modify-single-ddm" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.modify_single_ddm">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_single_ddm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddm.html#modify_single_ddm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_single_ddm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify StateMod municipal, industrial, transbasin Demands (.ddm) using a sample from the user.
-Samples are processed in parallel. Modification is targeted at ‘municipal’ and ‘standard’ fields where ids to
-modify are specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to use for target query.</p></li>
-<li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
-Upper_Colorado
-Yampa
-San_Juan
-Gunnison
-White</p></li>
-<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
-default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
-Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
-Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
-Minimum allowable value:  0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
-Maximum allowable value:  1.5</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-<dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
-
-<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
-<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;municipal&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;10005&quot;</span><span class="p">,</span> <span class="s2">&quot;10006&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]]</span>
-<span class="p">}</span>
-
-<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
-
-<span class="c1"># sample id for the current run</span>
-<span class="n">sample_id</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="c1"># sample array for each parameter</span>
-<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.59</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">])</span>
-
-<span class="c1"># seed value for reproducibility if so desired</span>
-<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="c1"># number of rows to skip in file after comment</span>
-<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="c1"># name of field to query</span>
-<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
-
-<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
-<span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="c1"># basin to process</span>
-<span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span>
-
-<span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_single_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
-                      <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-                      <span class="n">sample</span><span class="o">=</span><span class="n">sample</span><span class="p">,</span>
-                      <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
-                      <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
-                      <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
-                      <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
-                      <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
-                      <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                      <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span>
-                      <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                      <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
-                      <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1209,10 +922,10 @@ Maximum allowable value:  1.5</p></li>
 <h3>statemodify.modify_ddr<a class="headerlink" href="#statemodify-modify-ddr" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="statemodify.modify_ddr">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddr.html#modify_ddr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddr" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_ddr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddr.html#modify_ddr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_ddr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parallelized modification of StateMod water rights (.ddr) using a Latin Hypercube Sample from the user.
 Samples are processed in parallel. Modification is targeted at ids chosen by the user to
-modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
+modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds to generate the sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1245,6 +958,7 @@ Minimum allowable value:  -0.5</p></li>
 Maximum allowable value:  1.0</p></li>
 <li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
+<li><p><strong>sample_array</strong> (<em>np.array</em>) – Optionally provide array containing sample instead of generating it.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1261,19 +975,19 @@ to the output directory.</p></li>
 <span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># ids can either be &#39;struct&#39; or &#39;id&#39; values</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;3600507.01&quot;</span><span class="p">,</span> <span class="s2">&quot;3600507.02&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;3600642.04&quot;</span><span class="p">,</span> <span class="s2">&quot;3600642.05&quot;</span><span class="p">]],</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3600507.01&quot;</span><span class="p">,</span> <span class="s2">&quot;3600507.02&quot;</span><span class="p">],</span>
 
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
 
     <span class="c1"># turn id on or off completely or for a given period</span>
     <span class="c1"># if 0 = off, 1 = on, YYYY = on for years &gt;= YYYY, -YYYY = off for years &gt; YYYY; see file header</span>
-    <span class="s2">&quot;on_off&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1977</span><span class="p">]],</span>
+    <span class="s2">&quot;on_off&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change</span>
     <span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 
-    <span class="c1"># optionally, pass values that you want to be set for each user group; this overrides bounds</span>
-    <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]</span>
+    <span class="c1"># optionally, pass a value that you want to assign for all ids; this overrides bounds</span>
+    <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
@@ -1298,9 +1012,9 @@ to the output directory.</p></li>
 <span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span>
 
 <span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddr</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
+<span class="n">stm</span><span class="o">.</span><span class="n">modify_ddr</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">setup_dict</span><span class="p">,</span>
                <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+               <span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
                <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
                <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
                <span class="n">sampling_method</span><span class="o">=</span><span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
@@ -1312,119 +1026,8 @@ to the output directory.</p></li>
                <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span>
                <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
-               <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
                <span class="n">save_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-modify-single-ddr">
-<h3>statemodify.modify_single_ddr<a class="headerlink" href="#statemodify-modify-single-ddr" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.modify_single_ddr">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_single_ddr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([],</span> <span class="pre">dtype=float64)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multiply'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bound_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/ddr.html#modify_single_ddr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_single_ddr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify StateMod water rights (.ddr) file from sample provided by the user.
-Samples are processed in parallel. Modification is targeted at ids chosen by the user to
-modify and specified in the <cite>modify_dict</cite> argument.  The user must specify bounds for each field name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Field name to use for target query.</p></li>
-<li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
-Upper_Colorado
-Yampa
-San_Juan
-Gunnison
-White</p></li>
-<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise, the
-default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
-Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
-Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
-Minimum allowable value:  -0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
-Maximum allowable value:  1.0</p></li>
-<li><p><strong>use_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If values is present in the modify dictionary, use them instead of the sampler.
-Defaults to False.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-<dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
-
-<span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
-<span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># ids can either be &#39;struct&#39; or &#39;id&#39; values</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;3600507.01&quot;</span><span class="p">,</span> <span class="s2">&quot;3600507.02&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;3600642.04&quot;</span><span class="p">,</span> <span class="s2">&quot;3600642.05&quot;</span><span class="p">]],</span>
-
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]],</span>
-
-    <span class="c1"># turn id on or off completely or for a given period</span>
-    <span class="c1"># if 0 = off, 1 = on, YYYY = on for years &gt;= YYYY, -YYYY = off for years &gt; YYYY; see file header</span>
-    <span class="s2">&quot;on_off&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1977</span><span class="p">]],</span>
-
-    <span class="c1"># apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change</span>
-    <span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
-
-    <span class="c1"># optionally, pass values that you want to be set for each user group; this overrides bounds</span>
-    <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
-
-<span class="c1"># sample id for the current run</span>
-<span class="n">sample_id</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="c1"># sample array for each parameter</span>
-<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.39</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.42</span><span class="p">])</span>
-
-<span class="c1"># seed value for reproducibility if so desired</span>
-<span class="n">seed_value</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="c1"># number of rows to skip in file after comment</span>
-<span class="n">skip_rows</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="c1"># name of field to query</span>
-<span class="n">query_field</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
-
-<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
-<span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="c1"># basin to process</span>
-<span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Upper_Colorado&quot;</span>
-
-<span class="c1"># generate a batch of files using generated LHS</span>
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_single_ddr</span><span class="p">(</span><span class="n">modify_dict</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">,</span>
-                      <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-                      <span class="n">sample</span><span class="o">=</span><span class="n">sample</span><span class="p">,</span>
-                      <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
-                      <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
-                      <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
-                      <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
-                      <span class="n">skip_rows</span><span class="o">=</span><span class="n">skip_rows</span><span class="p">,</span>
-                      <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                      <span class="n">factor_method</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span>
-                      <span class="n">data_specification_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                      <span class="n">min_bound_value</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
-                      <span class="n">max_bound_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">use_values</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1434,12 +1037,15 @@ Defaults to False.</p></li>
 <h3>statemodify.modify_xbm_iwr<a class="headerlink" href="#statemodify-modify-xbm-iwr" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="statemodify.modify_xbm_iwr">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_xbm_iwr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Upper_Colorado'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_years</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">105</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">months_in_year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#modify_xbm_iwr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_xbm_iwr" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_xbm_iwr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flow_realizations_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Upper_Colorado'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_years</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">105</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">months_in_year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomly_select_flow_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_sample_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#modify_xbm_iwr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_xbm_iwr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate flows for all samples for all basins in parallel to build modified XBM and IWR files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>flow_realizations_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Full path to the directory containing the flow realization files for each
+sample.  E.g., AnnualQ_s0.txt files produced by the ‘hmm_multisite_sample’
+function.</p></li>
 <li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
 <li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
@@ -1460,8 +1066,11 @@ White</p></li>
 <li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning
 all but 1 processor.</p></li>
 <li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Used if generate_samples is True.  Number of samples to generate.</p></li>
-<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
-to the output directory.</p></li>
+<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array
+will be written to the output directory.</p></li>
+<li><p><strong>randomly_select_flow_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to randomly select a realization sample from the flow files directory.</p></li>
+<li><p><strong>desired_sample_number</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – If ‘randomly_select_flow_sample’ is set to False, select a desired sample
+number as an integer</p></li>
 </ul>
 </dd>
 <dt class="field-even">Example</dt>
@@ -1471,6 +1080,7 @@ to the output directory.</p></li>
 
 
 <span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
+<span class="n">flow_realizations_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;directory where the flow realization files are kept&gt;&quot;</span>
 <span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
 
 <span class="c1"># basin name to process</span>
@@ -1487,155 +1097,16 @@ to the output directory.</p></li>
 
 <span class="c1"># generate a batch of files using generated LHS</span>
 <span class="n">stm</span><span class="o">.</span><span class="n">modify_xbm_iwr</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+                   <span class="n">flow_realizations_directory</span><span class="o">=</span><span class="n">flow_realizations_directory</span><span class="p">,</span>
                    <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
                    <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
                    <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
                    <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-                   <span class="n">save_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                   <span class="n">save_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">randomly_select_flow_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-modify-single-xbm-iwr">
-<h3>statemodify.modify_single_xbm_iwr<a class="headerlink" href="#statemodify-modify-single-xbm-iwr" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.modify_single_xbm_iwr">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_single_xbm_iwr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p00</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_multiplier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Upper_Colorado'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sites</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">208</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_years</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">105</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbm_data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">historical_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">months_in_year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#modify_single_xbm_iwr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_single_xbm_iwr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate synthetic streamflow data using a Hidden Markov Model (HMM).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mu_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – mean multiplier for dry state</p></li>
-<li><p><strong>sigma_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – covariance multiplier for dry state</p></li>
-<li><p><strong>mu_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – mean multiplier for wet state</p></li>
-<li><p><strong>sigma_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – covariance multiplier for wet state</p></li>
-<li><p><strong>p00</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – probability of staying in dry state</p></li>
-<li><p><strong>p11</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – probability of staying in wet state</p></li>
-<li><p><strong>iwr_multiplier</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – irrigation water requirement multiplier</p></li>
-<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
-Upper_Colorado
-Yampa
-San_Juan
-Gunnison
-White</p></li>
-<li><p><strong>n_sites</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of sites</p></li>
-<li><p><strong>n_years</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of years</p></li>
-<li><p><strong>n_basins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of basins in HMM inputs</p></li>
-<li><p><strong>xbm_skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of rows to skip in XBM template file</p></li>
-<li><p><strong>iwr_skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of rows to skip in IWR template file</p></li>
-<li><p><strong>xbm_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Template file to build XBM adjustment off of</p></li>
-<li><p><strong>iwr_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Template file to build IWR adjustment off of</p></li>
-<li><p><strong>xbm_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Specification YAML file for XBM format</p></li>
-<li><p><strong>iwr_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Specification YAML file for XBM format</p></li>
-<li><p><strong>historical_column</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Index of year to use for historical data</p></li>
-<li><p><strong>months_in_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of months in year</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-modify-res">
-<h3>statemodify.modify_res<a class="headerlink" href="#statemodify-modify-res" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.modify_res">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_res</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gunnison'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_structure_id_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/res.html#modify_res"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_res" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify a single reservoir (.res) file based on a user provided sample.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
-<li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
-Upper_Colorado
-Yampa
-San_Juan
-Gunnison
-White</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
-default template in this package will be used.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
-Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>target_structure_id_list</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em>) – Structure id list to process.  If None, all structure ids will be processed.</p></li>
-<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
-<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning
-all but 1 processor.</p></li>
-<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Used if generate_samples is True.  Number of samples to generate.</p></li>
-<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
-to the output directory.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statemodify</span> <span class="k">as</span> <span class="nn">stm</span>
-
-
-<span class="n">output_directory</span> <span class="o">=</span> <span class="s2">&quot;&lt;your desired output directory&gt;&quot;</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;&lt;your scenario name&gt;&quot;</span>
-
-<span class="c1"># basin name to process</span>
-<span class="n">basin_name</span> <span class="o">=</span> <span class="s2">&quot;Gunnison&quot;</span>
-
-<span class="c1"># seed value for reproducibility if so desired</span>
-<span class="n">seed_value</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="c1"># number of jobs to launch in parallel; -1 is all but 1 processor used</span>
-<span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="c1"># number of samples to generate</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">stm</span><span class="o">.</span><span class="n">modify_res</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
-               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
-               <span class="n">basin_name</span><span class="o">=</span><span class="n">basin_name</span><span class="p">,</span>
-               <span class="n">target_structure_id_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">,</span>
-               <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
-               <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-               <span class="n">save_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-modify-single-res">
-<h3>statemodify.modify_single_res<a class="headerlink" href="#statemodify-modify-single-res" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.modify_single_res">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">modify_single_res</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_structure_id_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/res.html#modify_single_res"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.modify_single_res" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify a single reservoir (.res) file based on a user provided sample.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
-Upper_Colorado
-Yampa
-San_Juan
-Gunnison
-White</p></li>
-<li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
-default template in this package will be used.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
-Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>target_structure_id_list</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em>) – Structure id list to process.  If None, all structure ids will be processed.</p></li>
-<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 </div>
@@ -1718,9 +1189,8 @@ with pandas dataframes.</p>
 
 <span class="c1"># a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="n">setup_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;municipal&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;10005&quot;</span><span class="p">,</span> <span class="s2">&quot;10006&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+    <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;10001&quot;</span><span class="p">,</span> <span class="s2">&quot;10004&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1"># generate problem dictionary to use with SALib sampling components</span>
@@ -1757,31 +1227,11 @@ Defaults to None.</p></li>
 </dd></dl>
 
 </div>
-<div class="section" id="statemodify-generate-sample-all-params">
-<h3>statemodify.generate_sample_all_params<a class="headerlink" href="#statemodify-generate-sample-all-params" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_sample_all_params">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_sample_all_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/sampler.html#generate_sample_all_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_sample_all_params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate samples for all parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
-Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
-Defaults to None.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
 <div class="section" id="statemodify-validate-modify-dict">
 <h3>statemodify.validate_modify_dict<a class="headerlink" href="#statemodify-validate-modify-dict" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="statemodify.validate_modify_dict">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">validate_modify_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('ids',</span> <span class="pre">'bounds',</span> <span class="pre">'names')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/sampler.html#validate_modify_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.validate_modify_dict" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">validate_modify_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modify_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('ids',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/sampler.html#validate_modify_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.validate_modify_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate user input modify dictionary to ensure all necessary elements are present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1801,43 +1251,100 @@ Defaults to None.</p></li>
 </dd></dl>
 
 </div>
-</div>
-<div class="section" id="data-access">
-<h2>Data Access<a class="headerlink" href="#data-access" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="statemodify-get-reservoir-structure-ids">
-<h3>statemodify.get_reservoir_structure_ids<a class="headerlink" href="#statemodify-get-reservoir-structure-ids" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="statemodify-hmm-multisite-fit">
+<h3>statemodify.hmm_multisite_fit<a class="headerlink" href="#statemodify-hmm-multisite-fit" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="statemodify.get_reservoir_structure_ids">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">get_reservoir_structure_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/res.html#get_reservoir_structure_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.get_reservoir_structure_ids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a list of structure ids that are in the input file.</p>
+<dt class="sig sig-object py" id="statemodify.hmm_multisite_fit">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">hmm_multisite_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/hmm.html#hmm_multisite_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.hmm_multisite_fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="statemodify-hmm-multisite-sample">
+<h3>statemodify.hmm_multisite_sample<a class="headerlink" href="#statemodify-hmm-multisite-sample" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.hmm_multisite_sample">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">hmm_multisite_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logAnnualQ_h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unconditional_dry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_state_means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wet_state_means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance_matrix_dry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance_matrix_wet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_alternatives</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/hmm.html#hmm_multisite_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.hmm_multisite_sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="statemodify-read-xre">
+<h3>statemodify.read_xre<a class="headerlink" href="#statemodify-read-xre" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.read_xre">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">read_xre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xre_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservoir_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/hmm.html#read_xre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.read_xre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads xre files generated by statemod using HMM data and historical data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of basin for either:
-Upper_Colorado
-Yampa
-San_Juan
-Gunnison
-White</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
-default template in this package will be used.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
-Otherwise, the default file in the package is used.</p></li>
+<li><p><strong>xre_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – str, path to xre files</p></li>
+<li><p><strong>reservoir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – str, name of reservoir that begins XRE file</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>List of structure ids</p>
+<dd class="field-even"><p>a numpy array with reservoir storage across all hmm realizations,
+a numpy array with reservoir storage from the historical record
+a numpy array with monthly means of storage from the hist record
+a numpy array with monthly 1st percentiles of storage of the hist record</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>List</p>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-plot-flow-duration-curves">
+<h3>statemodify.plot_flow_duration_curves<a class="headerlink" href="#statemodify-plot-flow-duration-curves" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.plot_flow_duration_curves">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">plot_flow_duration_curves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow_realizations_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figure_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/hmm.html#plot_flow_duration_curves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.plot_flow_duration_curves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots flow duration curves for historical and synthetic data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flow_realizations_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Full path to the directory containing the flow realization files for each
+sample.  E.g., AnnualQ_s0.txt files produced by the ‘hmm_multisite_sample’
+function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-plot-res-quantiles">
+<h3>statemodify.plot_res_quantiles<a class="headerlink" href="#statemodify-plot-res-quantiles" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.plot_res_quantiles">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">plot_res_quantiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hmm_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">historical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservoir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/hmm.html#plot_res_quantiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.plot_res_quantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots quantiles of the HMM data and the mean and 1st percentile of the historical record</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hmm_data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a numpy array with monthly storage data from HMM realizations</p></li>
+<li><p><strong>historical_mean</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a numpy array with the historical mean monthly storage</p></li>
+<li><p><strong>res_name</strong> – a string with the name of the reservoir</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="statemodify-plot-reservoir-boxes">
+<h3>statemodify.plot_reservoir_boxes<a class="headerlink" href="#statemodify-plot-reservoir-boxes" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="statemodify.plot_reservoir_boxes">
+<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">plot_reservoir_boxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hmm_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">historical_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservoir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/hmm.html#plot_reservoir_boxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.plot_reservoir_boxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>makes a boxplot comparing the historical record to the HMM realizations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hmm_data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a numpy array with monthly storage data from HMM realizations</p></li>
+<li><p><strong>historical_data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a numpy array with monthly storage data from hist data</p></li>
+<li><p><strong>reservoir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – a string with the name of the reservoir</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
 </div>
 </div>
-<div class="section" id="modification-helpers">
-<h2>Modification Helpers<a class="headerlink" href="#modification-helpers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="modification">
+<h2>Modification<a class="headerlink" href="#modification" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="statemodify-set-alignment">
 <h3>statemodify.set_alignment<a class="headerlink" href="#statemodify-set-alignment" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
@@ -2182,283 +1689,6 @@ default file in this package will be used.</p></li>
 </dd></dl>
 
 </div>
-<div class="section" id="statemodify-credits">
-<h3>statemodify.credits<a class="headerlink" href="#statemodify-credits" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.credits">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">credits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/utils.html#credits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.credits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run credit reel.</p>
-</dd></dl>
-
-</div>
-</div>
-<div class="section" id="xbm-and-iwr-specific">
-<h2>XBM and IWR specific<a class="headerlink" href="#xbm-and-iwr-specific" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="statemodify-generateiwrdata">
-<h3>statemodify.GenerateIwrData<a class="headerlink" href="#statemodify-generateiwrdata" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.GenerateIwrData">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">GenerateIwrData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#GenerateIwrData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.GenerateIwrData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="statemodify-generatexbmdata">
-<h3>statemodify.GenerateXbmData<a class="headerlink" href="#statemodify-generatexbmdata" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.GenerateXbmData">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">GenerateXbmData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_specification_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#GenerateXbmData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.GenerateXbmData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="statemodify-get-samples">
-<h3>statemodify.get_samples<a class="headerlink" href="#statemodify-get-samples" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.get_samples">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">get_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basin_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LHS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#get_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.get_samples" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate or load Latin Hypercube Samples (LHS).</p>
-<p>Currently, this reads in an input file of precalculated samples.  This should happen
-on-demand and be given a seed value if reproducibility is needed.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
-Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
-Defaults to None.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-dry-state-means">
-<h3>statemodify.generate_dry_state_means<a class="headerlink" href="#statemodify-generate-dry-state-means" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_dry_state_means">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_dry_state_means</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_dry_state_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_dry_state_means" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate or load dry state means.</p>
-<p>Currently, this reads in an input file of precalculated samples.  This should happen
-on-demand and be given a seed value if reproducibility is needed.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-wet-state-means">
-<h3>statemodify.generate_wet_state_means<a class="headerlink" href="#statemodify-generate-wet-state-means" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_wet_state_means">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_wet_state_means</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_wet_state_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_wet_state_means" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate or load wet state means.</p>
-<p>Currently, this reads in an input file of precalculated samples.  This should happen
-on-demand and be given a seed value if reproducibility is needed.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-dry-covariance-matrix">
-<h3>statemodify.generate_dry_covariance_matrix<a class="headerlink" href="#statemodify-generate-dry-covariance-matrix" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_dry_covariance_matrix">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_dry_covariance_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_dry_covariance_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_dry_covariance_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate or load dry covariance matrix.</p>
-<p>Currently, this reads in an input file of precalculated samples.  This should happen
-on-demand and be given a seed value if reproducibility is needed.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-wet-covariance-matrix">
-<h3>statemodify.generate_wet_covariance_matrix<a class="headerlink" href="#statemodify-generate-wet-covariance-matrix" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_wet_covariance_matrix">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_wet_covariance_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_wet_covariance_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_wet_covariance_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate or load wet covariance matrix.</p>
-<p>Currently, this reads in an input file of precalculated samples.  This should happen
-on-demand and be given a seed value if reproducibility is needed.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-transition-matrix">
-<h3>statemodify.generate_transition_matrix<a class="headerlink" href="#statemodify-generate-transition-matrix" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_transition_matrix">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_transition_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_transition_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_transition_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate or load transition matrix.</p>
-<p>Currently, this reads in an input file of precalculated samples.  This should happen
-on-demand and be given a seed value if reproducibility is needed.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-calculate-array-monthly">
-<h3>statemodify.calculate_array_monthly<a class="headerlink" href="#statemodify-calculate-array-monthly" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.calculate_array_monthly">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">calculate_array_monthly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'year'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#calculate_array_monthly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.calculate_array_monthly" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an array of month rows and site columns for each year in the data frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input template data frame</p></li>
-<li><p><strong>value_fields</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Month fields in data</p></li>
-<li><p><strong>year_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the year field</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of value for month, site</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-calculate-array-annual">
-<h3>statemodify.calculate_array_annual<a class="headerlink" href="#statemodify-calculate-array-annual" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.calculate_array_annual">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">calculate_array_annual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monthly_arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#calculate_array_annual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.calculate_array_annual" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate annual values.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>monthly_arr</strong> (<em>np.array</em>) – Array of monthly xbm values</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of year, site</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-calculate-annual-sum">
-<h3>statemodify.calculate_annual_sum<a class="headerlink" href="#statemodify-calculate-annual-sum" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.calculate_annual_sum">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">calculate_annual_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#calculate_annual_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.calculate_annual_sum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate annual sum of input array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>arr</strong> (<em>np.array</em>) – Input 2D array where year, site</p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Axis to sum over. Default: 1</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of sums</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-calculate-annual-mean-fractions">
-<h3>statemodify.calculate_annual_mean_fractions<a class="headerlink" href="#statemodify-calculate-annual-mean-fractions" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.calculate_annual_mean_fractions">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">calculate_annual_mean_fractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr_annual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr_sum</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#calculate_annual_mean_fractions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.calculate_annual_mean_fractions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate annual mean fractions of total values.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>arr_annual</strong> (<em>np.array</em>) – Array of annual values per site</p></li>
-<li><p><strong>arr_sum</strong> (<em>np.array</em>) – Array of annual sums</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of fractions</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-fit-iwr-model">
-<h3>statemodify.fit_iwr_model<a class="headerlink" href="#statemodify-fit-iwr-model" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.fit_iwr_model">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">fit_iwr_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xbm_data_array_annual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iwr_data_array_annual</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#fit_iwr_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.fit_iwr_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Model annual irrigation demand anomaly as a function of annual flow anomaly at last node.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>xbm_data_array_annual</strong> (<em>np.array</em>) – Annual flow from XBM</p></li>
-<li><p><strong>iwr_data_array_annual</strong> (<em>np.array</em>) – Annual data from IWR</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-hmm-inputs">
-<h3>statemodify.generate_hmm_inputs<a class="headerlink" href="#statemodify-generate-hmm-inputs" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_hmm_inputs">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_hmm_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_hmm_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_hmm_inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate HMM input files for all basins.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-flows">
-<h3>statemodify.generate_flows<a class="headerlink" href="#statemodify-generate-flows" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_flows">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_flows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dry_state_means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wet_state_means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance_matrix_dry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance_matrix_wet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p00</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_basins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_years</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">105</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_flows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_flows" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate synthetic streamflow data using a Hidden Markov Model (HMM).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dry_state_means</strong> (<em>np.array</em>) – mean streamflow values for dry state</p></li>
-<li><p><strong>wet_state_means</strong> (<em>np.array</em>) – mean streamflow values for wet state</p></li>
-<li><p><strong>covariance_matrix_dry</strong> (<em>np.array</em>) – covariance matrix for dry state</p></li>
-<li><p><strong>covariance_matrix_wet</strong> (<em>np.array</em>) – covariance matrix for wet state</p></li>
-<li><p><strong>transition_matrix</strong> (<em>np.array</em>) – transition matrix for HMM</p></li>
-<li><p><strong>mu_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – mean multiplier for dry state</p></li>
-<li><p><strong>sigma_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – covariance multiplier for dry state</p></li>
-<li><p><strong>mu_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – mean multiplier for wet state</p></li>
-<li><p><strong>sigma_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – covariance multiplier for wet state</p></li>
-<li><p><strong>p00</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – transition matrix multiplier for dry state</p></li>
-<li><p><strong>p11</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – transition matrix multiplier for wet state</p></li>
-<li><p><strong>n_basins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of sites to generate data for</p></li>
-<li><p><strong>n_years</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of years to generate data for</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>]</em>) – random seed value</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>synthetic streamflow data</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="statemodify-generate-modified-file">
-<h3>statemodify.generate_modified_file<a class="headerlink" href="#statemodify-generate-modified-file" title="Permalink to this headline">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="statemodify.generate_modified_file">
-<span class="sig-prename descclassname"><span class="pre">statemodify.</span></span><span class="sig-name descname"><span class="pre">generate_modified_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monthly_data_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/statemodify/xbm_iwr.html#generate_modified_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statemodify.generate_modified_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate modified template data frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>source_object</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – Instantiated object containing the source data and file specifics.</p></li>
-<li><p><strong>monthly_data_array</strong> (<em>np.array</em>) – Array of monthly data per year and site matching the shape of the input
-value columns.</p></li>
-<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Scenario name.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
 </div>
 </div>
 
@@ -2468,11 +1698,11 @@ value columns.</p></li>
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../getting-started/quickstarter.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../examples/modify-inputs.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Quickstarter</p>
+            <p class="prev-next-title">Modify Inputs</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="contributing.html" title="next page">
@@ -2489,7 +1719,7 @@ value columns.</p></li>
     <footer class="footer">
   <p>
     
-      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
+      By Rohini S. Gupta<br/>
     
         &copy; Copyright 2023, Battelle Memorial Institute.<br/>
   </p>

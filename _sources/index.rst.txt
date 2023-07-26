@@ -73,6 +73,13 @@ Documentation
 
    getting-started/installation
    getting-started/quickstarter
+   getting-started/tutorial
+
+.. toctree::
+   :maxdepth: 1
+   :caption: User Guides
+
+   examples/modify-inputs
 
 .. toctree::
    :maxdepth: 1

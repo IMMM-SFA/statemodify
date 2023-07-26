@@ -92,6 +92,23 @@
    Quickstarter
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../getting-started/tutorial.html">
+   Tutorial
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../examples/modify-inputs.html">
+   Modify Inputs
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -214,7 +231,7 @@
 <span class="kn">import</span> <span class="nn">statemodify.utils</span> <span class="k">as</span> <span class="nn">utx</span>
 
 
-<div class="viewcode-block" id="modify_single_ddm"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_single_ddm">[docs]</a><span class="k">def</span> <span class="nf">modify_single_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
+<span class="k">def</span> <span class="nf">modify_single_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
                       <span class="n">query_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                       <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                       <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -228,8 +245,8 @@
                       <span class="n">min_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
                       <span class="n">max_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify StateMod municipal, industrial, transbasin Demands (.ddm) using a sample from the user.</span>
-<span class="sd">    Samples are processed in parallel. Modification is targeted at &#39;municipal&#39; and &#39;standard&#39; fields where ids to</span>
-<span class="sd">    modify are specified in the `modify_dict` argument.  The user must specify bounds for each field name.</span>
+<span class="sd">    Samples are processed in parallel. Modification is targeted at ids to modify are specified in</span>
+<span class="sd">    the `modify_dict` argument. The user must specify bounds by which the samples will be generated.</span>
 
 <span class="sd">    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.</span>
 <span class="sd">    :type modify_dict:          Dict[str, List[Union[str, float]]]</span>
@@ -291,9 +308,8 @@
 
 <span class="sd">        # a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="sd">        setup_dict = {</span>
-<span class="sd">            &quot;names&quot;: [&quot;municipal&quot;, &quot;standard&quot;],</span>
-<span class="sd">            &quot;ids&quot;: [[&quot;10001&quot;, &quot;10004&quot;], [&quot;10005&quot;, &quot;10006&quot;]],</span>
-<span class="sd">            &quot;bounds&quot;: [[0.5, 1.5], [0.5, 1.5]]</span>
+<span class="sd">            &quot;ids&quot;: [&quot;10001&quot;, &quot;10004&quot;],</span>
+<span class="sd">            &quot;bounds&quot;: [0.5, 1.0]</span>
 <span class="sd">        }</span>
 
 <span class="sd">        output_directory = &quot;&lt;your desired output directory&gt;&quot;</span>
@@ -321,7 +337,7 @@
 <span class="sd">        basin_name = &quot;Upper_Colorado&quot;</span>
 
 <span class="sd">        # generate a batch of files using generated LHS</span>
-<span class="sd">        stm.modify_single_ddm(modify_dict=modify_dict,</span>
+<span class="sd">        stm.modify_single_ddm(modify_dict=setup_dict,</span>
 <span class="sd">                              query_field=query_field,</span>
 <span class="sd">                              sample=sample,</span>
 <span class="sd">                              sample_id=sample_id,</span>
@@ -367,26 +383,20 @@
     <span class="n">template_df</span><span class="p">[</span><span class="n">query_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_df</span><span class="p">[</span><span class="n">query_field</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
     <span class="c1"># validate user provided sample bounds to ensure they are within a feasible range</span>
-    <span class="n">modify</span><span class="o">.</span><span class="n">validate_bounds</span><span class="p">(</span><span class="n">bounds_list</span><span class="o">=</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;bounds&quot;</span><span class="p">],</span>
+    <span class="n">modify</span><span class="o">.</span><span class="n">validate_bounds</span><span class="p">(</span><span class="n">bounds_list</span><span class="o">=</span><span class="p">[</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;bounds&quot;</span><span class="p">]],</span>
                            <span class="n">min_value</span><span class="o">=</span><span class="n">min_bound_value</span><span class="p">,</span>
                            <span class="n">max_value</span><span class="o">=</span><span class="n">max_bound_value</span><span class="p">)</span>
 
-    <span class="c1"># modify value columns associated structures based on the sample draw</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;names&quot;</span><span class="p">]):</span>
+    <span class="c1"># extract target ids to modify</span>
+    <span class="n">id_list</span> <span class="o">=</span> <span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span>
 
-        <span class="c1"># extract target ids to modify</span>
-        <span class="n">id_list</span> <span class="o">=</span> <span class="n">modify_dict</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
-
-        <span class="c1"># extract factors from sample for the subset and sample</span>
-        <span class="n">factor</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-
-        <span class="c1"># apply adjustment</span>
-        <span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">apply_adjustment_factor</span><span class="p">(</span><span class="n">data_df</span><span class="o">=</span><span class="n">template_df</span><span class="p">,</span>
-                                                                              <span class="n">value_columns</span><span class="o">=</span><span class="n">file_spec</span><span class="o">.</span><span class="n">value_columns</span><span class="p">,</span>
-                                                                              <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
-                                                                              <span class="n">target_ids</span><span class="o">=</span><span class="n">id_list</span><span class="p">,</span>
-                                                                              <span class="n">factor</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span>
-                                                                              <span class="n">factor_method</span><span class="o">=</span><span class="n">factor_method</span><span class="p">)</span>
+    <span class="c1"># apply adjustment</span>
+    <span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">modify</span><span class="o">.</span><span class="n">apply_adjustment_factor</span><span class="p">(</span><span class="n">data_df</span><span class="o">=</span><span class="n">template_df</span><span class="p">,</span>
+                                                                          <span class="n">value_columns</span><span class="o">=</span><span class="n">file_spec</span><span class="o">.</span><span class="n">value_columns</span><span class="p">,</span>
+                                                                          <span class="n">query_field</span><span class="o">=</span><span class="n">query_field</span><span class="p">,</span>
+                                                                          <span class="n">target_ids</span><span class="o">=</span><span class="n">id_list</span><span class="p">,</span>
+                                                                          <span class="n">factor</span><span class="o">=</span><span class="n">sample</span><span class="p">,</span>
+                                                                          <span class="n">factor_method</span><span class="o">=</span><span class="n">factor_method</span><span class="p">)</span>
 
     <span class="c1"># reconstruct precision</span>
     <span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_df</span><span class="p">[</span><span class="n">file_spec</span><span class="o">.</span><span class="n">value_columns</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -411,7 +421,7 @@
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template_header</span><span class="p">)</span>
 
         <span class="c1"># write data</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="modify_ddm"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_ddm">[docs]</a><span class="k">def</span> <span class="nf">modify_ddm</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]],</span>
@@ -429,10 +439,11 @@
                <span class="n">data_specification_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">min_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
                <span class="n">max_bound_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
-               <span class="n">save_sample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+               <span class="n">save_sample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+               <span class="n">sample_array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample</span>
-<span class="sd">    from the user. Samples are processed in parallel. Modification is targeted at &#39;municipal&#39; and &#39;standard&#39; fields</span>
-<span class="sd">    where ids to modify are specified in the `modify_dict` argument. The user must specify bounds for each field name.</span>
+<span class="sd">    from the user. Samples are processed in parallel. Modification is targeted at ids to modify are specified in</span>
+<span class="sd">    the `modify_dict` argument. The user must specify bounds by which the samples will be generated.</span>
 
 <span class="sd">    :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.</span>
 <span class="sd">    :type modify_dict:          Dict[str, List[Union[str, float]]]</span>
@@ -495,6 +506,9 @@
 <span class="sd">                                to the output directory.</span>
 <span class="sd">    :type save_sample:          bool</span>
 
+<span class="sd">    :param sample_array:        Optionally provide array containing sample instead of generating it.</span>
+<span class="sd">    :type sample_array:         np.array</span>
+
 <span class="sd">    :return: None</span>
 <span class="sd">    :rtype: None</span>
 
@@ -506,9 +520,8 @@
 
 <span class="sd">        # a dictionary to describe what you want to modify and the bounds for the LHS</span>
 <span class="sd">        setup_dict = {</span>
-<span class="sd">            &quot;names&quot;: [&quot;municipal&quot;, &quot;standard&quot;],</span>
-<span class="sd">            &quot;ids&quot;: [[&quot;3600507&quot;, &quot;3600603&quot;], [&quot;3600649_D&quot;, &quot;3600662_D&quot;]],</span>
-<span class="sd">            &quot;bounds&quot;: [[0.5, 1.5], [0.5, 1.5]]</span>
+<span class="sd">            &quot;ids&quot;: [&quot;3600507&quot;, &quot;3600603&quot;],</span>
+<span class="sd">            &quot;bounds&quot;: [0.5, 1.0]</span>
 <span class="sd">        }</span>
 
 <span class="sd">        output_directory = &quot;&lt;your desired output directory&gt;&quot;</span>
@@ -533,9 +546,9 @@
 <span class="sd">        basin_name = &quot;Upper_Colorado&quot;</span>
 
 <span class="sd">        # generate a batch of files using generated LHS</span>
-<span class="sd">        stm.modify_ddm(modify_dict=modify_dict,</span>
+<span class="sd">        stm.modify_ddm(modify_dict=setup_dict,</span>
 <span class="sd">                       query_field=query_field,</span>
-<span class="sd">                       output_dir=output_dir,</span>
+<span class="sd">                       output_dir=output_directory,</span>
 <span class="sd">                       scenario=scenario,</span>
 <span class="sd">                       basin_name=basin_name,</span>
 <span class="sd">                       sampling_method=&quot;LHS&quot;,</span>
@@ -552,14 +565,16 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># build a problem dictionary for use by SALib</span>
-    <span class="n">problem_dict</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">build_problem_dict</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sample_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-    <span class="c1"># generate a sample array</span>
-    <span class="n">sample_array</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate_samples</span><span class="p">(</span><span class="n">problem_dict</span><span class="o">=</span><span class="n">problem_dict</span><span class="p">,</span>
-                                            <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-                                            <span class="n">sampling_method</span><span class="o">=</span><span class="n">sampling_method</span><span class="p">,</span>
-                                            <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+        <span class="c1"># build a problem dictionary for use by SALib</span>
+        <span class="n">problem_dict</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">build_problem_dict</span><span class="p">(</span><span class="n">modify_dict</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># generate a sample array</span>
+        <span class="n">sample_array</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate_samples</span><span class="p">(</span><span class="n">problem_dict</span><span class="o">=</span><span class="n">problem_dict</span><span class="p">,</span>
+                                                <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                                                <span class="n">sampling_method</span><span class="o">=</span><span class="n">sampling_method</span><span class="p">,</span>
+                                                <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
 
     <span class="c1"># if the user chooses, write the sample to file</span>
     <span class="k">if</span> <span class="n">save_sample</span><span class="p">:</span>
@@ -594,7 +609,7 @@
     <footer class="footer">
   <p>
     
-      By Rohini S. Gupta; Chris R. Vernon; Travis Thurber<br/>
+      By Rohini S. Gupta<br/>
     
         &copy; Copyright 2023, Battelle Memorial Institute.<br/>
   </p>
