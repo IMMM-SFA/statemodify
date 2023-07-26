@@ -1,3 +1,4 @@
+import glob
 import os
 import pkg_resources as pkg
 import random
@@ -607,20 +608,14 @@ def generate_modified_file(source_object: object,
     return output_file
 
 
-def modify_single_xbm_iwr(mu_0: float,
-                          sigma_0: float,
-                          mu_1: float,
-                          sigma_1: float,
-                          p00: float,
-                          p11: float,
-                          iwr_multiplier: float,
+def modify_single_xbm_iwr(iwr_multiplier: float,
+                          flow_realizations_directory: str,
                           output_dir: str,
                           scenario: str = "",
                           basin_name: str = "Upper_Colorado",
                           sample_id: int = 0,
                           n_sites: int = 208,
                           n_years: int = 105,
-                          n_basins: int = 5,
                           xbm_skip_rows: int = 1,
                           iwr_skip_rows: int = 1,
                           xbm_template_file: Union[None, str] = None,
@@ -629,28 +624,17 @@ def modify_single_xbm_iwr(mu_0: float,
                           iwr_data_specification_file: Union[None, str] = None,
                           historical_column: int = 0,
                           months_in_year: int = 12,
-                          seed_value: Union[None, int] = None):
+                          seed_value: Union[None, int] = None,
+                          randomly_select_flow_sample: bool = True,
+                          desired_sample_number: Union[None, int] = None):
     """Generate synthetic streamflow data using a Hidden Markov Model (HMM).
 
-    :param mu_0:                            mean multiplier for dry state
-    :type mu_0:                             float
+    :param flow_realizations_directory:     Full path to the directory containing the flow realization files for each
+                                            sample.  E.g., AnnualQ_s0.txt files produced by the 'hmm_multisite_sample'
+                                            function.
+    :type flow_realizations_directory:      str
 
-    :param sigma_0:                         covariance multiplier for dry state
-    :type sigma_0:                          float
-
-    :param mu_1:                            mean multiplier for wet state
-    :type mu_1:                             float
-
-    :param sigma_1:                         covariance multiplier for wet state
-    :type sigma_1:                          float
-
-    :param p00:                             probability of staying in dry state
-    :type p00:                              float
-
-    :param p11:                             probability of staying in wet state
-    :type p11:                              float
-
-    :param iwr_multiplier:                  irrigation water requirement multiplier
+    :param iwr_multiplier:                  Irrigation water requirement multiplier
     :type iwr_multiplier:                   float
 
     :param sample_id:                       Numeric ID of sample that is being processed. Defaults to 0.
@@ -675,9 +659,6 @@ def modify_single_xbm_iwr(mu_0: float,
 
     :param n_years:                         number of years
     :type n_years:                          int
-
-    :param n_basins:                        number of basins in HMM inputs
-    :type n_basins:                         int
 
     :param xbm_skip_rows:                   number of rows to skip in XBM template file
     :type xbm_skip_rows:                    int
@@ -705,6 +686,13 @@ def modify_single_xbm_iwr(mu_0: float,
 
     :param seed_value:                      Integer to use for random seed or None if not desired
     :type seed_value:                       Union[None, int] = None)
+
+    :param randomly_select_flow_sample:     Choice to randomly select a realization sample from the flow files directory.
+    :type randomly_select_flow_sample:      bool
+
+    :param desired_sample_number:           If 'randomly_select_flow_sample' is set to False, select a desired sample
+                                            number as an integer
+    :type desired_sample_number:            Union[None, int]
 
     """
 
@@ -750,24 +738,28 @@ def modify_single_xbm_iwr(mu_0: float,
     # model annual irrigation demand anomaly as function of annual flow anomaly at last node
     BetaIWR, muIWR, sigmaIWR = fit_iwr_model(AnnualQ_h, AnnualIWR_h)
 
-    AnnualQ_s = generate_flows(dry_state_means=generate_dry_state_means(),
-                               wet_state_means=generate_wet_state_means(),
-                               covariance_matrix_dry=generate_dry_covariance_matrix(),
-                               covariance_matrix_wet=generate_wet_covariance_matrix(),
-                               transition_matrix=generate_transition_matrix(),
-                               mu_0=mu_0,
-                               sigma_0=sigma_0,
-                               mu_1=mu_1,
-                               sigma_1=sigma_1,
-                               p00=p00,
-                               p11=p11,
-                               n_basins=n_basins,
-                               n_years=n_years)
+    if randomly_select_flow_sample:
+        files = glob.glob(os.path.join(flow_realizations_directory, "AnnualQ_s*.txt"))
+
+        if len(files) == 0:
+            raise FileNotFoundError(f"No flow files in directory: {flow_realizations_directory}")
+
+        sample_index = np.random.choice(range(len(files) - 1))
+        target_sample_file = files[sample_index]
+    else:
+
+        if desired_sample_number is None:
+            ValueError(f"If 'randomly_select_flow_sample' is False then please provide a value for 'desired_sample_number'.")
+
+        target_sample_file = os.path.join(flow_realizations_directory, f"AnnualQ_s{desired_sample_number}.txt")
+
+    print(f"Using sample file:  {target_sample_file}")
+    AnnualQ_s = np.loadtxt(target_sample_file)
 
     # calculate annual IWR anomalies based on annual flow anomalies at last node
     TotalAnnualIWRanomalies_s = BetaIWR * (AnnualQ_s[:,historical_column]-np.mean(AnnualQ_s[:,historical_column])) + \
             ss.norm.rvs(muIWR, sigmaIWR,len(AnnualQ_s[:,historical_column]))
-    TotalAnnualIWR_s = np.mean(IWRsums_h)*iwr_multiplier + TotalAnnualIWRanomalies_s
+    TotalAnnualIWR_s = np.mean(IWRsums_h) * iwr_multiplier + TotalAnnualIWRanomalies_s
     AnnualIWR_s = np.outer(TotalAnnualIWR_s, IWRfractions_h)
 
     # reshape monthly flows at all sites all years
@@ -846,6 +838,7 @@ def modify_single_xbm_iwr(mu_0: float,
 
 
 def modify_xbm_iwr(output_dir: str,
+                   flow_realizations_directory: str,
                    scenario: str = "",
                    basin_name: str = "Upper_Colorado",
                    n_years: int = 105,
@@ -860,11 +853,18 @@ def modify_xbm_iwr(output_dir: str,
                    seed_value: Union[None, int] = None,
                    n_jobs: int = -1,
                    n_samples: int = 1,
-                   save_sample: bool = False):
+                   save_sample: bool = False,
+                   randomly_select_flow_sample: bool = True,
+                   desired_sample_number: Union[None, int] = None):
     """Generate flows for all samples for all basins in parallel to build modified XBM and IWR files.
 
     :param output_dir:                      Path to output directory.
     :type output_dir:                       str
+
+    :param flow_realizations_directory:     Full path to the directory containing the flow realization files for each
+                                            sample.  E.g., AnnualQ_s0.txt files produced by the 'hmm_multisite_sample'
+                                            function.
+    :type flow_realizations_directory:      str
 
     :param scenario:                        Scenario name.
     :type scenario:                         str
@@ -914,9 +914,16 @@ def modify_xbm_iwr(output_dir: str,
     :param n_samples:                       Used if generate_samples is True.  Number of samples to generate.
     :type n_samples:                        int
 
-    :param save_sample:         Choice to save LHS sample or not; default False.  If True, sample array will be written
-                                to the output directory.
-    :type save_sample:          bool
+    :param save_sample:                     Choice to save LHS sample or not; default False.  If True, sample array
+                                            will be written to the output directory.
+    :type save_sample:                      bool
+
+    :param randomly_select_flow_sample:     Choice to randomly select a realization sample from the flow files directory.
+    :type randomly_select_flow_sample:      bool
+
+    :param desired_sample_number:           If 'randomly_select_flow_sample' is set to False, select a desired sample
+                                            number as an integer
+    :type desired_sample_number:            Union[None, int]
 
     :example:
 
@@ -926,6 +933,7 @@ def modify_xbm_iwr(output_dir: str,
 
 
         output_directory = "<your desired output directory>"
+        flow_realizations_directory = "<directory where the flow realization files are kept>"
         scenario = "<your scenario name>"
 
         # basin name to process
@@ -942,12 +950,14 @@ def modify_xbm_iwr(output_dir: str,
 
         # generate a batch of files using generated LHS
         stm.modify_xbm_iwr(output_dir=output_directory,
+                           flow_realizations_directory=flow_realizations_directory,
                            scenario=scenario,
                            basin_name=basin_name,
                            seed_value=seed_value,
                            n_jobs=n_jobs,
                            n_samples=n_samples,
-                           save_sample=False)
+                           save_sample=False,
+                           randomly_select_flow_sample=True)
 
 
     """
@@ -956,8 +966,8 @@ def modify_xbm_iwr(output_dir: str,
     param_dict = utx.yaml_to_dict(yaml_file)
 
     # generate an array of samples to process
-    sample_array = sampler.generate_sample_all_params(n_samples=n_samples,
-                                                      seed_value=seed_value)
+    sample_array = sampler.generate_sample_iwr(n_samples=n_samples,
+                                               seed_value=seed_value)
 
     # if the user chooses, write the sample to file
     if save_sample:
@@ -965,20 +975,14 @@ def modify_xbm_iwr(output_dir: str,
         np.save(sample_file, sample_array)
 
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(mu_0=sample[param_dict["mu0"]["index"]],
-                                                                                     sigma_0=sample[param_dict["sigma0"]["index"]],
-                                                                                     mu_1=sample[param_dict["mu1"]["index"]],
-                                                                                     sigma_1=sample[param_dict["sigma1"]["index"]],
-                                                                                     p00=sample[param_dict["p00"]["index"]],
-                                                                                     p11=sample[param_dict["p11"]["index"]],
-                                                                                     iwr_multiplier=sample[param_dict["iwr_multiplier"][basin_name]["index"]],
+    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(flow_realizations_directory=flow_realizations_directory,
+                                                                                     iwr_multiplier=sample[param_dict["iwr_multiplier"][basin_name]["hmm_index"]],
                                                                                      n_sites=param_dict["xbm_site_metadata"][basin_name]["n_sites"],
                                                                                      historical_column=param_dict["xbm_site_metadata"][basin_name]["historical_column"],
                                                                                      output_dir=output_dir,
                                                                                      scenario=scenario,
                                                                                      sample_id=sample_id,
                                                                                      n_years=n_years,
-                                                                                     n_basins=n_basins,
                                                                                      xbm_skip_rows=xbm_skip_rows,
                                                                                      iwr_skip_rows=iwr_skip_rows,
                                                                                      xbm_template_file=xbm_template_file,
@@ -986,6 +990,8 @@ def modify_xbm_iwr(output_dir: str,
                                                                                      xbm_data_specification_file=xbm_data_specification_file,
                                                                                      iwr_data_specification_file=iwr_data_specification_file,
                                                                                      months_in_year=months_in_year,
-                                                                                     seed_value=seed_value) for sample_id, sample in enumerate(sample_array))
+                                                                                     seed_value=seed_value,
+                                                                                     randomly_select_flow_sample=randomly_select_flow_sample,
+                                                                                     desired_sample_number=desired_sample_number) for sample_id, sample in enumerate(sample_array))
 
 

@@ -9,6 +9,7 @@ from .xbm_iwr import *
 from .res import *
 from .xre import *
 from .batch import *
+from .hmm import *
 
 
 __version__ = "0.0.0"
