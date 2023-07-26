@@ -12,6 +12,7 @@ class TestXbmIwr(unittest.TestCase):
     XBM_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", XBM_COMP_FILE_NAME))
     IWR_COMP_FILE_NAME = "cm2015B_S0_test.iwr"
     IWR_COMP_FULLPATH = pkg_resources.resource_filename("statemodify", os.path.join("tests/data", IWR_COMP_FILE_NAME))
+    REALIZATION_DIR = pkg_resources.resource_filename("statemodify", os.path.join("tests/data"))
 
     def test_modify_xbm_iwr_run(self):
         """Ensure the single file processor runs and generates the expected output."""
@@ -20,11 +21,14 @@ class TestXbmIwr(unittest.TestCase):
 
             # generate a batch of files using generated LHS
             stm.modify_xbm_iwr(output_dir=tmp_dir,
+                               flow_realizations_directory=TestXbmIwr.REALIZATION_DIR,
                                scenario="test",
                                basin_name="Upper_Colorado",
                                seed_value=0,
                                n_jobs=1,
-                               n_samples=1)
+                               n_samples=1,
+                               randomly_select_flow_sample=False,
+                               desired_sample_number=0)
 
             # get contents of comparison file
             with open(TestXbmIwr.XBM_COMP_FULLPATH) as comp:
