@@ -31,7 +31,7 @@ setup(
         'SALib>1.4.5',
         'scipy>=1.8.0',
         'matplotlib>=3.5.1',
-        'seaborn>=0.12.2'
+        'seaborn>=0.12.2',
         'hmmlearn>=0.2.8',
         'statsmodels>=0.13.5',
         'pyarrow>=10.0.1',
