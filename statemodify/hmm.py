@@ -54,11 +54,11 @@ def hmm_multisite_fit(n_basins: int = 5,
         if output_directory is None:
             raise ValueError("If saving parameters you must pass a valid path to `output_directory'")
 
-        np.savetxt(os.path.join(output_directory, 'dry_state_means.txt', dry_state_means))
-        np.savetxt(os.path.join(output_directory, 'wet_state_means.txt', wet_state_means))
-        np.savetxt(os.path.join(output_directory, 'covariance_matrix_dry.txt', covariance_matrix_dry))
-        np.savetxt(os.path.join(output_directory, 'covariance_matrix_wet.txt', covariance_matrix_wet))
-        np.savetxt(os.path.join(output_directory, 'transition_matrix.txt', transition_matrix))
+        np.savetxt(os.path.join(output_directory, 'dry_state_means.txt'), dry_state_means)
+        np.savetxt(os.path.join(output_directory, 'wet_state_means.txt'), wet_state_means)
+        np.savetxt(os.path.join(output_directory, 'covariance_matrix_dry.txt'), covariance_matrix_dry)
+        np.savetxt(os.path.join(output_directory, 'covariance_matrix_wet.txt'), covariance_matrix_wet)
+        np.savetxt(os.path.join(output_directory, 'transition_matrix.txt'), transition_matrix)
 
     # calculate stationary distribution to determine unconditional probabilities
     eigenvals, eigenvecs = np.linalg.eig(np.transpose(transition_matrix))
