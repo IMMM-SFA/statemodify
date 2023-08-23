@@ -1,0 +1,207 @@
+# for HMM in XBM and IWR modifier
+mu0:
+  index: 0
+  lower: 0.98 
+  upper: 1.02
+
+sigma0:
+  index: 1
+  lower: 0.75 
+  upper: 1.25
+
+mu1:
+  index: 2
+  lower: 0.98 
+  upper: 1.02
+
+sigma1: 
+  index: 3
+  lower: 0.75 
+  upper: 1.25
+
+p00: 
+  index: 4
+  lower: -0.3 
+  upper: 0.3
+
+p11:
+  index: 5
+  lower: -0.3 
+  upper: 0.3
+
+# other
+evap:
+  index: 6
+  lower: -0.5
+  upper: 1
+
+rstorage:
+  index: 7
+  lower: 0.8
+  upper: 1
+
+powerplants:
+  index: 8
+  lower: 0
+  upper: 1
+
+envflows:
+  index: 9
+  lower: 0
+  upper: 1
+
+oilgas:
+  index: 10
+  lower: 0
+  upper: 1
+
+tribal:
+  index: 11
+  lower: 0
+  upper: 1
+
+aspinall:
+  index: 12
+  lower: 0
+  upper: 1
+
+# specifics for XBM sites
+xbm_site_metadata:
+
+  Upper_Colorado:
+    abbrev: cm
+    n_sites: 208
+    historical_column: 0
+
+  Gunnison:
+    abbrev: gm
+    n_sites: 139
+    historical_column: 1
+
+  San_Juan:
+    abbrev: sj
+    n_sites: 165
+    historical_column: 4
+
+  Yampa:
+    abbrev: ym
+    n_sites: 94
+    historical_column: 2
+
+  White:
+    abbrev: wm
+    n_sites: 43
+    historical_column: 3
+
+# basin specific multipliers for IWR modification
+iwr_multiplier:
+
+  Upper_Colorado:
+    n_sites: 379
+    historical_column: 0
+    abbrev: cm
+    index: 13
+    hmm_index: 0
+    lower: 0.5
+    upper: 1.5
+
+  Gunnison:
+    n_sites: 541
+    historical_column: 1
+    abbrev: gm
+    index: 14
+    hmm_index: 1
+    lower: 0.5
+    upper: 1.5
+
+  San_Juan:
+    n_sites: 296
+    historical_column: 4
+    abbrev: sj
+    index: 15
+    hmm_index: 2
+    lower: 0.5
+    upper: 1.5
+
+  Yampa:
+    n_sites: 298
+    historical_column: 2
+    abbrev: ym
+    index: 16
+    hmm_index: 3
+    lower: 0.5
+    upper: 1.5
+
+  White:
+    n_sites: 137
+    historical_column: 3
+    abbrev: wm
+    index: 17
+    hmm_index: 4
+    lower: 0.5
+    upper: 1.5
+
+trans_multiplier:
+
+  Upper_Colorado:
+    abbrev: cm
+    index: 18
+    lower: 0.75
+    upper: 1.25
+
+  Gunnison:
+    abbrev: gm
+    index: 19
+    lower: 0.75
+    upper: 1.25
+
+  San_Juan:
+    abbrev: sj
+    index: 20
+    lower: 0.75
+    upper: 1.25
+
+  Yampa:
+    abbrev: ym
+    index: 21
+    lower: 0.75
+    upper: 1.25
+
+  White:
+    abbrev: wm
+    index: 22
+    lower: 0.75
+    upper: 1.25
+
+muni_multiplier:
+
+  Upper_Colorado:
+    abbrev: cm
+    index: 23
+    lower: 0.75
+    upper: 1.25
+
+  Gunnison:
+    abbrev: gm
+    index: 24
+    lower: 0.75
+    upper: 1.25
+
+  San_Juan:
+    abbrev: sj
+    index: 25
+    lower: 0.75
+    upper: 1.25
+
+  Yampa:
+    abbrev: ym
+    index: 26
+    lower: 0.75
+    upper: 1.25
+
+  White:
+    abbrev: wm
+    index: 27
+    lower: 0.75
+    upper: 1.25
+
