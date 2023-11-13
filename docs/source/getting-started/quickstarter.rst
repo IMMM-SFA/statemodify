@@ -22,14 +22,14 @@ The notebooks are hosted in MSD-LIVE containers and can be found at: https:/stat
 You will be taken to a JupyterLab homepage with "data" and "notebook" buckets on the side.  The "data" directory contains all the StateMod datasets and some other template files. Click on the "notebooks" directory and choose a notebook to start. Press shift + enter to execute the cells in the notebook.
 
 
-.. figure:: images/quickstarter_1.png
+.. figure:: ../images/quickstarter_1.png
   :alt: JupyterLab home screen
 
   Figure 1: JupyterLab home screen
 
 IMPORTANT: When you finish a notebook and move on to another one, please restart the kernel and clear the outputs as shown below. 
 
-.. figure:: images/quickstarter_2.png
+.. figure:: ../images/quickstarter_2.png
   :alt: Restarting the Kernel 
 
   Figure 1: Restarting the Kernel 
