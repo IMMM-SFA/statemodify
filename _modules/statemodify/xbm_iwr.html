@@ -92,23 +92,6 @@
    Quickstarter
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../getting-started/tutorial.html">
-   Tutorial
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  User Guides
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../examples/modify-inputs.html">
-   Modify Inputs
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -389,7 +372,7 @@
                                                                   <span class="n">replace_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;********&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">})</span>
 
 
-<span class="k">def</span> <span class="nf">get_samples</span><span class="p">(</span><span class="n">param_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<div class="viewcode-block" id="get_samples"><a class="viewcode-back" href="../../reference/api.html#statemodify.get_samples">[docs]</a><span class="k">def</span> <span class="nf">get_samples</span><span class="p">(</span><span class="n">param_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
                 <span class="n">basin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                 <span class="n">sampling_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;LHS&quot;</span><span class="p">,</span>
@@ -425,10 +408,10 @@
     <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate_samples</span><span class="p">(</span><span class="n">problem_dict</span><span class="o">=</span><span class="n">problem_dict</span><span class="p">,</span>
                                     <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
                                     <span class="n">sampling_method</span><span class="o">=</span><span class="n">sampling_method</span><span class="p">,</span>
-                                    <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+                                    <span class="n">seed_value</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_dry_state_means</span><span class="p">():</span>
+<div class="viewcode-block" id="generate_dry_state_means"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_dry_state_means">[docs]</a><span class="k">def</span> <span class="nf">generate_dry_state_means</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load dry state means.</span>
 
 <span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
@@ -438,10 +421,10 @@
 
     <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;dry_state_means.txt&quot;</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_wet_state_means</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_wet_state_means"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_wet_state_means">[docs]</a><span class="k">def</span> <span class="nf">generate_wet_state_means</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load wet state means.</span>
 
 <span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
@@ -451,10 +434,10 @@
 
     <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;wet_state_means.txt&quot;</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_dry_covariance_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_dry_covariance_matrix"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_dry_covariance_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_dry_covariance_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load dry covariance matrix.</span>
 
 <span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
@@ -464,10 +447,10 @@
 
     <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;covariance_matrix_dry.txt&quot;</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_wet_covariance_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_wet_covariance_matrix"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_wet_covariance_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_wet_covariance_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load wet covariance matrix.</span>
 
 <span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
@@ -477,10 +460,10 @@
 
     <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;covariance_matrix_wet.txt&quot;</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_transition_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_transition_matrix"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_transition_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_transition_matrix</span><span class="p">(</span><span class="n">load</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate or load transition matrix.</span>
 
 <span class="sd">    Currently, this reads in an input file of precalculated samples.  This should happen</span>
@@ -490,10 +473,10 @@
 
     <span class="n">target_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;statemodify&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;transition_matrix.txt&quot;</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">target_file</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">calculate_array_monthly</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+<div class="viewcode-block" id="calculate_array_monthly"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_array_monthly">[docs]</a><span class="k">def</span> <span class="nf">calculate_array_monthly</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
                             <span class="n">value_fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                             <span class="n">year_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;year&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an array of month rows and site columns for each year in the data frame.</span>
@@ -520,10 +503,10 @@
 
             <span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">calculate_array_annual</span><span class="p">(</span><span class="n">monthly_arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<div class="viewcode-block" id="calculate_array_annual"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_array_annual">[docs]</a><span class="k">def</span> <span class="nf">calculate_array_annual</span><span class="p">(</span><span class="n">monthly_arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate annual values.</span>
 
 <span class="sd">    :param monthly_arr:                     Array of monthly xbm values</span>
@@ -541,10 +524,10 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_years</span><span class="p">):</span>
         <span class="n">annual_arr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">monthly_arr</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">12</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">annual_arr</span>
+    <span class="k">return</span> <span class="n">annual_arr</span></div>
 
 
-<span class="k">def</span> <span class="nf">calculate_annual_sum</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<div class="viewcode-block" id="calculate_annual_sum"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_annual_sum">[docs]</a><span class="k">def</span> <span class="nf">calculate_annual_sum</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate annual sum of input array.</span>
 
 <span class="sd">    :param arr:                     Input 2D array where year, site</span>
@@ -558,10 +541,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">calculate_annual_mean_fractions</span><span class="p">(</span><span class="n">arr_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+<div class="viewcode-block" id="calculate_annual_mean_fractions"><a class="viewcode-back" href="../../reference/api.html#statemodify.calculate_annual_mean_fractions">[docs]</a><span class="k">def</span> <span class="nf">calculate_annual_mean_fractions</span><span class="p">(</span><span class="n">arr_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                                     <span class="n">arr_sum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate annual mean fractions of total values.</span>
 
@@ -581,10 +564,10 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">arr_annual</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="n">iwr_fractions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">arr_annual</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">arr_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iwr_fractions</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iwr_fractions</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">fit_iwr_model</span><span class="p">(</span><span class="n">xbm_data_array_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+<div class="viewcode-block" id="fit_iwr_model"><a class="viewcode-back" href="../../reference/api.html#statemodify.fit_iwr_model">[docs]</a><span class="k">def</span> <span class="nf">fit_iwr_model</span><span class="p">(</span><span class="n">xbm_data_array_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                   <span class="n">iwr_data_array_annual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Model annual irrigation demand anomaly as a function of annual flow anomaly at last node.</span>
 
@@ -612,10 +595,10 @@
     <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span>
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_hmm_inputs</span><span class="p">(</span><span class="n">template_file</span><span class="p">,</span> <span class="n">n_basins</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_hmm_inputs"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_hmm_inputs">[docs]</a><span class="k">def</span> <span class="nf">generate_hmm_inputs</span><span class="p">(</span><span class="n">template_file</span><span class="p">,</span> <span class="n">n_basins</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate HMM input files for all basins.&quot;&quot;&quot;</span>
     <span class="n">annual_q_h_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">template_file</span><span class="p">))</span>
     <span class="n">log_annual_q_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">annual_q_h_all</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># add 1 because some sites have 0 flow</span>
@@ -644,10 +627,10 @@
     <span class="n">wet_state_means</span> <span class="o">=</span> <span class="n">mus</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
     <span class="n">transition_matrix</span> <span class="o">=</span> <span class="n">p</span>
 
-    <span class="k">return</span> <span class="n">dry_state_means</span><span class="p">,</span> <span class="n">wet_state_means</span><span class="p">,</span> <span class="n">covariance_matrix_dry</span><span class="p">,</span> <span class="n">covariance_matrix_wet</span><span class="p">,</span> <span class="n">transition_matrix</span>
+    <span class="k">return</span> <span class="n">dry_state_means</span><span class="p">,</span> <span class="n">wet_state_means</span><span class="p">,</span> <span class="n">covariance_matrix_dry</span><span class="p">,</span> <span class="n">covariance_matrix_wet</span><span class="p">,</span> <span class="n">transition_matrix</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_flows</span><span class="p">(</span><span class="n">dry_state_means</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+<div class="viewcode-block" id="generate_flows"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_flows">[docs]</a><span class="k">def</span> <span class="nf">generate_flows</span><span class="p">(</span><span class="n">dry_state_means</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                    <span class="n">wet_state_means</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                    <span class="n">covariance_matrix_dry</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                    <span class="n">covariance_matrix_wet</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
@@ -762,10 +745,10 @@
     <span class="c1"># convert log-space flows to real-space flows</span>
     <span class="n">annual_q_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_annual_q_s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">annual_q_s</span>
+    <span class="k">return</span> <span class="n">annual_q_s</span></div>
 
 
-<span class="k">def</span> <span class="nf">generate_modified_file</span><span class="p">(</span><span class="n">source_object</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+<div class="viewcode-block" id="generate_modified_file"><a class="viewcode-back" href="../../reference/api.html#statemodify.generate_modified_file">[docs]</a><span class="k">def</span> <span class="nf">generate_modified_file</span><span class="p">(</span><span class="n">source_object</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
                            <span class="n">monthly_data_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
                            <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                            <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -827,10 +810,10 @@
         <span class="c1"># write data</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">output_file</span>
+    <span class="k">return</span> <span class="n">output_file</span></div>
 
 
-<span class="k">def</span> <span class="nf">modify_single_xbm_iwr</span><span class="p">(</span><span class="n">iwr_multiplier</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<div class="viewcode-block" id="modify_single_xbm_iwr"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_single_xbm_iwr">[docs]</a><span class="k">def</span> <span class="nf">modify_single_xbm_iwr</span><span class="p">(</span><span class="n">iwr_multiplier</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                           <span class="n">flow_realizations_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                           <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                           <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -1056,7 +1039,7 @@
                                           <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
                                           <span class="n">sample_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">xbm_new_file</span><span class="p">,</span> <span class="n">iwr_new_file</span>
+    <span class="k">return</span> <span class="n">xbm_new_file</span><span class="p">,</span> <span class="n">iwr_new_file</span></div>
 
 
 <div class="viewcode-block" id="modify_xbm_iwr"><a class="viewcode-back" href="../../reference/api.html#statemodify.modify_xbm_iwr">[docs]</a><span class="k">def</span> <span class="nf">modify_xbm_iwr</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
