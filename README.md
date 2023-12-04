@@ -1,5 +1,7 @@
 [![build](https://github.com/IMMM-SFA/statemodify/actions/workflows/build.yml/badge.svg)](https://github.com/IMMM-SFA/statemodify/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/IMMM-SFA/statemodify/branch/main/graph/badge.svg?token=csQBZMRSdp)](https://codecov.io/gh/IMMM-SFA/statemodify)
+[![Static Badge](https://img.shields.io/badge/Powered%20by-MSDLIVE-blue?label=Powered%20by&color=blue)](https:/statemodify.msdlive.org)
+
 
 # statemodify
 A package to modify StateMod's input and output files for exploratory modeling
