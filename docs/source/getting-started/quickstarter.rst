@@ -1,7 +1,7 @@
 Quickstarter
 ==============
 
-To demonstrate the functionality of **statemodify**, we have generated 5 notebooks that highlight how to use the functions in the package and show some very basic analyses that can be done with the output data. Each notebook demonstrates 1-2 **statemodify** functions for a specific West Slope basin in Colorado. The notebooks usually follow a specific form:
+To demonstrate the functionality of **statemodify**, we have generated 5 notebooks that highlight how to use the functions in the package and show some very basic analyses that can be done with the output data. Each notebook demonstrates one to two **statemodify** functions for a specific West Slope basin in Colorado. The notebooks usually follow a specific form:
 
 1. Run a baseline simulation for the basin (about 4 minutes)
 
