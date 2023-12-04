@@ -37,7 +37,7 @@
     <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python API" href="../reference/api.html" />
+    <link rel="next" title="Useful Links" href="useful_links.html" />
     <link rel="prev" title="Installation" href="installation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -92,6 +92,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Quickstarter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="useful_links.html">
+   Useful Links
   </a>
  </li>
 </ul>
@@ -225,17 +230,17 @@
                 
   <div class="section" id="quickstarter">
 <h1>Quickstarter<a class="headerlink" href="#quickstarter" title="Permalink to this headline">¶</a></h1>
-<p>To demonstrate the functionality of <strong>statemodify</strong>, we have generated 5 notebooks that highlight how to use the functions in the package and show some very basic analyses that can be done with the output data. Each notebook demonstrates 1-2 <strong>statemodify</strong> functions for a specific West Slope basin in Colorado. The notebooks usually follow a specific form:</p>
+<p>To demonstrate the functionality of <strong>statemodify</strong>, we have generated 5 notebooks that highlight how to use the functions in the package and show some very basic analyses that can be done with the output data. Each notebook demonstrates one to two <strong>statemodify</strong> functions for a specific West Slope basin in Colorado. The notebooks usually follow a specific form:</p>
 <ol class="arabic simple">
 <li><p>Run a baseline simulation for the basin (about 4 minutes)</p></li>
 <li><p>Plot the baseline shortages for specific users or reservoir storage</p></li>
-<li><p>Introduce a statemodify function that samples a specific uncertainty (evaporation, demand, streamflow, water rights, etc.)</p></li>
+<li><p>Introduce a <strong>statemodify</strong> function that samples a specific uncertainty (evaporation, demand, streamflow, water rights, etc.)</p></li>
 <li><p>Create a new set of input files to run through StateMod</p></li>
 <li><p>Run each StateMod simulation (usually about 2 simulations, each at 4 minutes)</p></li>
 <li><p>Plot the new shortages or reservoir levels with respect to the baseline values.</p></li>
 </ol>
-<p>The notebooks are hosted in MSD-LIVE containers and can be found at: <a class="reference external" href="https:/statemodify.msdlive.org">https:/statemodify.msdlive.org</a></p>
-<p>You will be taken to a JupyterLab homepage with “data” and “notebook” buckets on the side.  The “data” directory contains all the StateMod datasets and some other template files. Click on the “notebooks” directory and choose a notebook to start. Press shift + enter to execute the cells in the notebook.</p>
+<p>The notebooks are hosted in MSD-LIVE containers and can be found at: <cite>https:/statemodify.msdlive.org &lt;https:/statemodify.msdlive.org&gt;</cite></p>
+<p>You will be taken to a JupyterLab homepage with “data” and “notebook” buckets on the side.  The “data” directory contains all the StateMod datasets and some other template files. Click on the “notebooks” directory and choose a notebook to start. Press “shift + enter” to execute the cells in the notebook.</p>
 <div class="figure align-default" id="id1">
 <img alt="JupyterLab home screen" src="../_images/quickstarter_1.png" />
 <p class="caption"><span class="caption-text">Figure 1: JupyterLab home screen</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
@@ -245,6 +250,7 @@
 <img alt="Restarting the Kernel" src="../_images/quickstarter_2.png" />
 <p class="caption"><span class="caption-text">Figure 1: Restarting the Kernel</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
+<p>The table below lists the</p>
 <table class="colwidths-given table" id="id3">
 <caption><span class="caption-text">Notebook Topics</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
@@ -257,7 +263,7 @@
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Topic</p></th>
-<th class="head"><p>Notebook 1: Getting Started and Using the DDM and DDR modification functions in the San Juan Subbasin</p></th>
+<th class="head"><p>Notebook 1: Getting Started and using the DDM and DDR modification functions in the San Juan Subbasin</p></th>
 <th class="head"><p>Notebook 2: Using the EVA modification functions in the Gunnison Subbasin</p></th>
 <th class="head"><p>Notebook 3: Using the RES modification function in the Upper Colorado Subbasin</p></th>
 <th class="head"><p>Notebook 4: Using the XBM and IWR modification functions across all basins</p></th>
@@ -266,11 +272,11 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Description</p></td>
-<td><p>This notebook has more general intro information on StateModify and shows how changes to demand and water rights can lead to changes to user shortages in the San Juan Subbasin.</p></td>
+<td><p>This notebook has more general intro information on <strong>statemodify</strong> and shows how changes to demand and water rights can lead to changes to user shortages in the San Juan Subbasin.</p></td>
 <td><p>This notebook looks at how changes in evaporation in  reservoirs in the Gunnison subbasin lead to changes to reservoir levels</p></td>
 <td><p>This notebook looks at how changes in storage in reservoirs in the Upper Colorado subbasin lead to changes to user shortages</p></td>
 <td><p>This notebook debuts the stationary Hidden Markov Model to generate alternative streamflow scenarios across the basins.</p></td>
-<td><p>This notebook demonstrates how to create a global Latin hypercube sample to consider multiple uncertainties in a basin. Quickstarter</p></td>
+<td><p>This notebook demonstrates how to create a global Latin hypercube sample to consider multiple uncertainties in a basin.</p></td>
 </tr>
 </tbody>
 </table>
@@ -289,10 +295,10 @@
             <p class="prev-next-title">Installation</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../reference/api.html" title="next page">
+    <a class='right-next' id="next-link" href="useful_links.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Python API</p>
+        <p class="prev-next-title">Useful Links</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

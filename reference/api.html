@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Contributing to statemodify" href="contributing.html" />
-    <link rel="prev" title="Quickstarter" href="../getting-started/quickstarter.html" />
+    <link rel="prev" title="Useful Links" href="../getting-started/useful_links.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,6 +92,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../getting-started/quickstarter.html">
    Quickstarter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../getting-started/useful_links.html">
+   Useful Links
   </a>
  </li>
 </ul>
@@ -942,34 +947,34 @@ modify and specified in the <cite>modify_dict</cite> argument.  The user must sp
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
 Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<em>float</em>) – Minimum feasible sampling bounds in feet per month.
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
 Minimum allowable value:  -0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<em>float</em>) – Maximum feasible sampling bounds in feet per month.
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
 Maximum allowable value:  1.0</p></li>
-<li><p><strong>save_sample</strong> (<em>bool</em>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
+<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
 <li><p><strong>sample_array</strong> (<em>np.array</em>) – Optionally provide array containing sample instead of generating it.</p></li>
 </ul>
@@ -1045,28 +1050,28 @@ modify and specified in the <cite>modify_dict</cite> argument.  The user must sp
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
 <li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise, the
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise, the
 default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
 Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<em>float</em>) – Minimum feasible sampling bounds in feet per month.
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
 Minimum allowable value:  -0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<em>float</em>) – Maximum feasible sampling bounds in feet per month.
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
 Maximum allowable value:  1.0</p></li>
 </ul>
 </dd>
@@ -1141,34 +1146,34 @@ the <cite>modify_dict</cite> argument. The user must specify bounds by which the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
 Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<em>float</em>) – Minimum feasible sampling bounds in feet per month.
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
 Minimum allowable value:  0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<em>float</em>) – Maximum feasible sampling bounds in feet per month.
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
 Maximum allowable value:  1.5</p></li>
-<li><p><strong>save_sample</strong> (<em>bool</em>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
+<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
 <li><p><strong>sample_array</strong> (<em>np.array</em>) – Optionally provide array containing sample instead of generating it.</p></li>
 </ul>
@@ -1244,28 +1249,28 @@ the <cite>modify_dict</cite> argument. The user must specify bounds by which the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
 <li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
 Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<em>float</em>) – Minimum feasible sampling bounds in feet per month.
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
 Minimum allowable value:  0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<em>float</em>) – Maximum feasible sampling bounds in feet per month.
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
 Maximum allowable value:  1.5</p></li>
 </ul>
 </dd>
@@ -1340,34 +1345,34 @@ modify and specified in the <cite>modify_dict</cite> argument.  The user must sp
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning all but 1 processor.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
 Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<em>float</em>) – Minimum feasible sampling bounds in feet per month.
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
 Minimum allowable value:  -0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<em>float</em>) – Maximum feasible sampling bounds in feet per month.
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
 Maximum allowable value:  1.0</p></li>
-<li><p><strong>save_sample</strong> (<em>bool</em>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
+<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
 <li><p><strong>sample_array</strong> (<em>np.array</em>) – Optionally provide array containing sample instead of generating it.</p></li>
 </ul>
@@ -1455,32 +1460,32 @@ modify and specified in the <cite>modify_dict</cite> argument.  The user must sp
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
 <li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise, the
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise, the
 default template in this package will be used.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’.
 Defaults to ‘add’.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>min_bound_value</strong> (<em>float</em>) – Minimum feasible sampling bounds in feet per month.
+<li><p><strong>min_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Minimum feasible sampling bounds in feet per month.
 Minimum allowable value:  -0.5</p></li>
-<li><p><strong>max_bound_value</strong> (<em>float</em>) – Maximum feasible sampling bounds in feet per month.
+<li><p><strong>max_bound_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum feasible sampling bounds in feet per month.
 Maximum allowable value:  1.0</p></li>
-<li><p><strong>use_values</strong> (<em>bool</em>) – If values is present in the modify dictionary, use it instead of the sampler.
+<li><p><strong>use_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If values is present in the modify dictionary, use it instead of the sampler.
 Defaults to False.</p></li>
-<li><p><strong>use_sampling</strong> (<em>bool</em>) – If bounds are not present in the modify dictionary, then sampling will not be used.
+<li><p><strong>use_sampling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If bounds are not present in the modify dictionary, then sampling will not be used.
 Defaults to False.</p></li>
 </ul>
 </dd>
@@ -1569,8 +1574,8 @@ Defaults to False.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Data frame of extracted content from the source file.</p></li>
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1593,8 +1598,8 @@ Defaults to False.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Data frame of extracted content from the source file.</p></li>
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to use for target query.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.  See following example.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to use for target query.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1616,34 +1621,34 @@ Defaults to False.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>flow_realizations_directory</strong> (<em>str</em>) – Full path to the directory containing the flow realization files for each
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>flow_realizations_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Full path to the directory containing the flow realization files for each
 sample.  E.g., AnnualQ_s0.txt files produced by the ‘hmm_multisite_sample’
 function.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>n_years</strong> (<em>int</em>) – number of years</p></li>
-<li><p><strong>n_basins</strong> (<em>int</em>) – number of basins in HMM inputs</p></li>
-<li><p><strong>xbm_skip_rows</strong> (<em>int</em>) – number of rows to skip in XBM template file</p></li>
-<li><p><strong>iwr_skip_rows</strong> (<em>int</em>) – number of rows to skip in IWR template file</p></li>
-<li><p><strong>xbm_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Template file to build XBM adjustment off of</p></li>
-<li><p><strong>iwr_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Template file to build IWR adjustment off of</p></li>
-<li><p><strong>xbm_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Specification YAML file for XBM format</p></li>
-<li><p><strong>iwr_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Specification YAML file for XBM format</p></li>
-<li><p><strong>months_in_year</strong> (<em>int</em>) – Number of months in year</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of jobs to process in parallel.  Defaults to -1 meaning
+<li><p><strong>n_years</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of years</p></li>
+<li><p><strong>n_basins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of basins in HMM inputs</p></li>
+<li><p><strong>xbm_skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of rows to skip in XBM template file</p></li>
+<li><p><strong>iwr_skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of rows to skip in IWR template file</p></li>
+<li><p><strong>xbm_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Template file to build XBM adjustment off of</p></li>
+<li><p><strong>iwr_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Template file to build IWR adjustment off of</p></li>
+<li><p><strong>xbm_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Specification YAML file for XBM format</p></li>
+<li><p><strong>iwr_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Specification YAML file for XBM format</p></li>
+<li><p><strong>months_in_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of months in year</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning
 all but 1 processor.</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em>) – Used if generate_samples is True.  Number of samples to generate.</p></li>
-<li><p><strong>save_sample</strong> (<em>bool</em>) – Choice to save LHS sample or not; default False.  If True, sample array
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Used if generate_samples is True.  Number of samples to generate.</p></li>
+<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array
 will be written to the output directory.</p></li>
-<li><p><strong>randomly_select_flow_sample</strong> (<em>bool</em>) – Choice to randomly select a realization sample from the flow files directory.</p></li>
-<li><p><strong>desired_sample_number</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em>) – If ‘randomly_select_flow_sample’ is set to False, select a desired sample
+<li><p><strong>randomly_select_flow_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to randomly select a realization sample from the flow files directory.</p></li>
+<li><p><strong>desired_sample_number</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em>) – If ‘randomly_select_flow_sample’ is set to False, select a desired sample
 number as an integer</p></li>
 </ul>
 </dd>
@@ -1693,32 +1698,32 @@ number as an integer</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>flow_realizations_directory</strong> (<em>str</em>) – Full path to the directory containing the flow realization files for each
+<li><p><strong>flow_realizations_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Full path to the directory containing the flow realization files for each
 sample.  E.g., AnnualQ_s0.txt files produced by the ‘hmm_multisite_sample’
 function.</p></li>
-<li><p><strong>iwr_multiplier</strong> (<em>float</em>) – Irrigation water requirement multiplier</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>iwr_multiplier</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Irrigation water requirement multiplier</p></li>
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>n_sites</strong> (<em>int</em>) – number of sites</p></li>
-<li><p><strong>n_years</strong> (<em>int</em>) – number of years</p></li>
-<li><p><strong>xbm_skip_rows</strong> (<em>int</em>) – number of rows to skip in XBM template file</p></li>
-<li><p><strong>iwr_skip_rows</strong> (<em>int</em>) – number of rows to skip in IWR template file</p></li>
-<li><p><strong>xbm_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Template file to build XBM adjustment off of</p></li>
-<li><p><strong>iwr_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Template file to build IWR adjustment off of</p></li>
-<li><p><strong>xbm_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Specification YAML file for XBM format</p></li>
-<li><p><strong>iwr_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Specification YAML file for XBM format</p></li>
-<li><p><strong>historical_column</strong> (<em>int</em>) – Index of year to use for historical data</p></li>
-<li><p><strong>months_in_year</strong> (<em>int</em>) – Number of months in year</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
-<li><p><strong>randomly_select_flow_sample</strong> (<em>bool</em>) – Choice to randomly select a realization sample from the flow files directory.</p></li>
-<li><p><strong>desired_sample_number</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em>) – If ‘randomly_select_flow_sample’ is set to False, select a desired sample
+<li><p><strong>n_sites</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of sites</p></li>
+<li><p><strong>n_years</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of years</p></li>
+<li><p><strong>xbm_skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of rows to skip in XBM template file</p></li>
+<li><p><strong>iwr_skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of rows to skip in IWR template file</p></li>
+<li><p><strong>xbm_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Template file to build XBM adjustment off of</p></li>
+<li><p><strong>iwr_template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Template file to build IWR adjustment off of</p></li>
+<li><p><strong>xbm_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Specification YAML file for XBM format</p></li>
+<li><p><strong>iwr_data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Specification YAML file for XBM format</p></li>
+<li><p><strong>historical_column</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Index of year to use for historical data</p></li>
+<li><p><strong>months_in_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of months in year</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
+<li><p><strong>randomly_select_flow_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to randomly select a realization sample from the flow files directory.</p></li>
+<li><p><strong>desired_sample_number</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em>) – If ‘randomly_select_flow_sample’ is set to False, select a desired sample
 number as an integer</p></li>
 </ul>
 </dd>
@@ -1735,15 +1740,15 @@ number as an integer</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
 </ul>
 </dd>
@@ -1766,22 +1771,22 @@ Otherwise, the default file in the package is used.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
 <li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>target_structure_id_list</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Structure id list to process.  If None, all structure ids will be processed.</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>target_structure_id_list</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – Structure id list to process.  If None, all structure ids will be processed.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
 </ul>
 </dd>
 </dl>
@@ -1797,27 +1802,27 @@ Otherwise, the default file in the package is used.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
 <li><p><strong>sample</strong> (<em>np.array</em>) – An array of samples for each parameter.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a data specification template is provided it will be used.
+<li><p><strong>data_specification_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a data specification template is provided it will be used.
 Otherwise, the default file in the package is used.</p></li>
-<li><p><strong>target_structure_id_list</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Structure id list to process.  If None, all structure ids will be processed.</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of jobs to process in parallel.  Defaults to -1 meaning
+<li><p><strong>target_structure_id_list</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – Structure id list to process.  If None, all structure ids will be processed.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows to skip after the commented fields end; default 1</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>] </em><em>= None</em><em>)</em>) – Integer to use for random seed or None if not desired</p></li>
+<li><p><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of jobs to process in parallel.  Defaults to -1 meaning
 all but 1 processor.</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em>) – Used if generate_samples is True.  Number of samples to generate.</p></li>
-<li><p><strong>save_sample</strong> (<em>bool</em>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Used if generate_samples is True.  Number of samples to generate.</p></li>
+<li><p><strong>save_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Choice to save LHS sample or not; default False.  If True, sample array will be written
 to the output directory.</p></li>
 </ul>
 </dd>
@@ -1885,10 +1890,10 @@ on-demand and be given a seed value if reproducibility is needed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
 </ul>
 </dd>
@@ -1961,8 +1966,8 @@ on-demand and be given a seed value if reproducibility is needed.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input template data frame</p></li>
-<li><p><strong>value_fields</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – Month fields in data</p></li>
-<li><p><strong>year_field</strong> (<em>str</em>) – Name of the year field</p></li>
+<li><p><strong>value_fields</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Month fields in data</p></li>
+<li><p><strong>year_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the year field</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2005,7 +2010,7 @@ on-demand and be given a seed value if reproducibility is needed.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arr</strong> (<em>np.array</em>) – Input 2D array where year, site</p></li>
-<li><p><strong>axis</strong> (<em>int</em>) – Axis to sum over. Default: 1</p></li>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Axis to sum over. Default: 1</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2081,15 +2086,15 @@ on-demand and be given a seed value if reproducibility is needed.</p>
 <li><p><strong>covariance_matrix_dry</strong> (<em>np.array</em>) – covariance matrix for dry state</p></li>
 <li><p><strong>covariance_matrix_wet</strong> (<em>np.array</em>) – covariance matrix for wet state</p></li>
 <li><p><strong>transition_matrix</strong> (<em>np.array</em>) – transition matrix for HMM</p></li>
-<li><p><strong>mu_0</strong> (<em>float</em>) – mean multiplier for dry state</p></li>
-<li><p><strong>sigma_0</strong> (<em>float</em>) – covariance multiplier for dry state</p></li>
-<li><p><strong>mu_1</strong> (<em>float</em>) – mean multiplier for wet state</p></li>
-<li><p><strong>sigma_1</strong> (<em>float</em>) – covariance multiplier for wet state</p></li>
-<li><p><strong>p00</strong> (<em>float</em>) – transition matrix multiplier for dry state</p></li>
-<li><p><strong>p11</strong> (<em>float</em>) – transition matrix multiplier for wet state</p></li>
-<li><p><strong>n_basins</strong> (<em>int</em>) – number of sites to generate data for</p></li>
-<li><p><strong>n_years</strong> (<em>int</em>) – number of years to generate data for</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em>) – random seed value</p></li>
+<li><p><strong>mu_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – mean multiplier for dry state</p></li>
+<li><p><strong>sigma_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – covariance multiplier for dry state</p></li>
+<li><p><strong>mu_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – mean multiplier for wet state</p></li>
+<li><p><strong>sigma_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – covariance multiplier for wet state</p></li>
+<li><p><strong>p00</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – transition matrix multiplier for dry state</p></li>
+<li><p><strong>p11</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – transition matrix multiplier for wet state</p></li>
+<li><p><strong>n_basins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of sites to generate data for</p></li>
+<li><p><strong>n_years</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of years to generate data for</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em>) – random seed value</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2111,12 +2116,12 @@ on-demand and be given a seed value if reproducibility is needed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>source_object</strong> (<em>object</em>) – Instantiated object containing the source data and file specifics.</p></li>
+<li><p><strong>source_object</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a>) – Instantiated object containing the source data and file specifics.</p></li>
 <li><p><strong>monthly_data_array</strong> (<em>np.array</em>) – Array of monthly data per year and site matching the shape of the input
 value columns.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em>) – Path to output directory.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Numeric ID of sample that is being processed. Defaults to 0.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to output directory.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
 </ul>
 </dd>
 </dl>
@@ -2136,11 +2141,11 @@ with pandas dataframes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>output_path</strong> (<em>str</em>) – Path to a folder where outputs should be written; default “./output”</p></li>
-<li><p><strong>allow_overwrite</strong> (<em>bool</em>) – If False, abort if files already exist in the output_path; default False</p></li>
-<li><p><strong>xdd_files</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – File(s) or glob(s) to the .xdd files to convert; default “<a href="#id2"><span class="problematic" id="id3">**</span></a>/<a href="#id4"><span class="problematic" id="id5">*</span></a>.xdd”</p></li>
-<li><p><strong>id_subset</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of structure IDs to convert, or None for all; default None</p></li>
-<li><p><strong>parallel_jobs</strong> (<em>int</em>) – How many files to process in parallel; default 4</p></li>
+<li><p><strong>output_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to a folder where outputs should be written; default “./output”</p></li>
+<li><p><strong>allow_overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If False, abort if files already exist in the output_path; default False</p></li>
+<li><p><strong>xdd_files</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – File(s) or glob(s) to the .xdd files to convert; default “<a href="#id2"><span class="problematic" id="id3">**</span></a>/<a href="#id4"><span class="problematic" id="id5">*</span></a>.xdd”</p></li>
+<li><p><strong>id_subset</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – List of structure IDs to convert, or None for all; default None</p></li>
+<li><p><strong>parallel_jobs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – How many files to process in parallel; default 4</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2182,8 +2187,8 @@ with pandas dataframes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>xre_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – str, path to xre files</p></li>
-<li><p><strong>reservoir_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – str, name of reservoir that begins XRE file</p></li>
+<li><p><strong>xre_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – str, path to xre files</p></li>
+<li><p><strong>reservoir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – str, name of reservoir that begins XRE file</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2206,18 +2211,18 @@ Optionally save output to a CSV or Parquet file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>structure_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – str, name of the reservoir</p></li>
-<li><p><strong>structure_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – str, structure ID for reservoir of interest</p></li>
-<li><p><strong>input_file</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Union[None, str], path to the xre file</p></li>
-<li><p><strong>basin_name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Union[None, str], Name of basin for either:
+<li><p><strong>structure_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – str, name of the reservoir</p></li>
+<li><p><strong>structure_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – str, structure ID for reservoir of interest</p></li>
+<li><p><strong>input_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Union[None, str], path to the xre file</p></li>
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Union[None, str], Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>write_csv</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – bool, whether to write output to a CSV file</p></li>
-<li><p><strong>write_parquet</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – bool, whether to write output to a Parquet file</p></li>
-<li><p><strong>output_directory</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Union[str, None], path to the output directory</p></li>
+<li><p><strong>write_csv</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – bool, whether to write output to a CSV file</p></li>
+<li><p><strong>write_parquet</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – bool, whether to write output to a Parquet file</p></li>
+<li><p><strong>output_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Union[str, None], path to the output directory</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -2244,15 +2249,15 @@ White</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
-<li><p><strong>fill</strong> (<em>bool</em>) – If True, fill in missing names using the index of the ids list. Default False.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
+<li><p><strong>fill</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If True, fill in missing names using the index of the ids list. Default False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Dictionary ready for use by SALib sample generators</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><p></p></dd>
@@ -2281,11 +2286,11 @@ White</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>problem_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>problem_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
 </ul>
 </dd>
@@ -2308,16 +2313,16 @@ Defaults to None.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
-<li><p><strong>required_keys</strong> (<em>Tuple</em><em>[</em><em>str</em><em>]</em>) – Keys required to be present in the input dictionary.</p></li>
-<li><p><strong>fill</strong> (<em>bool</em>) – If True, fill in missing names using the index of the ids list. Default False.</p></li>
+<li><p><strong>modify_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>]</em>) – Dictionary of parameters to setup the sampler.</p></li>
+<li><p><strong>required_keys</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Keys required to be present in the input dictionary.</p></li>
+<li><p><strong>fill</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If True, fill in missing names using the index of the ids list. Default False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Dictionary of validated parameters</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2332,10 +2337,10 @@ Defaults to None.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
 </ul>
 </dd>
@@ -2352,10 +2357,10 @@ Defaults to None.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
+<li><p><strong>sampling_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Sampling method.  Uses SALib’s implementation (see <a class="reference external" href="https://salib.readthedocs.io/en/latest/">https://salib.readthedocs.io/en/latest/</a>).
 Currently supports the following method:  “LHS” for Latin Hypercube Sampling</p></li>
-<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
-<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of LHS samples to generate, optional. Defaults to 1.</p></li>
+<li><p><strong>seed_value</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Seed value to use when generating samples for the purpose of reproducibility.
 Defaults to None.</p></li>
 </ul>
 </dd>
@@ -2375,14 +2380,14 @@ Defaults to None.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>str</em>) – Value to evaluate.</p></li>
-<li><p><strong>n_spaces</strong> (<em>int</em>) – Number of spaces to buffer the value by. If less than the length
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Value to evaluate.</p></li>
+<li><p><strong>n_spaces</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of spaces to buffer the value by. If less than the length
 of the value, no spaces will be added to the padding.</p></li>
-<li><p><strong>align</strong> (<em>str</em>) – Either ‘left’ or ‘right’ alignment for the value.</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Either ‘left’ or ‘right’ alignment for the value.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Value with string padding.</p>
@@ -2400,13 +2405,13 @@ of the value, no spaces will be added to the padding.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>str</em>) – Value to evaluate.</p></li>
-<li><p><strong>expected_width</strong> (<em>int</em>) – Expected width of the field.</p></li>
-<li><p><strong>align</strong> (<em>str</em>) – Either ‘left’ or ‘right’ alignment for the value.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Value to evaluate.</p></li>
+<li><p><strong>expected_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Expected width of the field.</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Either ‘left’ or ‘right’ alignment for the value.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Value with string padding.</p>
@@ -2425,12 +2430,12 @@ This method adds that back in.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>str</em>) – Float value from file that is represented as a string.</p></li>
-<li><p><strong>precision</strong> (<em>int</em>) – Precision to account for.</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Float value from file that is represented as a string.</p></li>
+<li><p><strong>precision</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Precision to account for.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Zero padded string.</p>
@@ -2448,17 +2453,17 @@ This method adds that back in.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>line</strong> (<em>str</em>) – Line of data as a string from the input file.</p></li>
-<li><p><strong>field_dict</strong> (<em>dict</em>) – Dictionary holding values for each field.</p></li>
-<li><p><strong>column_widths</strong> (<em>dict</em>) – Dictionary of column names to expected widths.</p></li>
-<li><p><strong>column_list</strong> (<em>list</em>) – List of columns to process.</p></li>
-<li><p><strong>data_types</strong> (<em>dict</em>) – Dictionary of column names to data types.</p></li>
-<li><p><strong>replace_dict</strong> (<em>dict</em>) – Dictionary of value with replacement when necessary.
+<li><p><strong>line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Line of data as a string from the input file.</p></li>
+<li><p><strong>field_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary holding values for each field.</p></li>
+<li><p><strong>column_widths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of column names to expected widths.</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – List of columns to process.</p></li>
+<li><p><strong>data_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of column names to data types.</p></li>
+<li><p><strong>replace_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of value with replacement when necessary.
 For example, {“<strong>****</strong>”, “”}</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Populated data dictionary.</p>
@@ -2476,14 +2481,14 @@ For example, {“<strong>****</strong>”, “”}</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>field_dict</strong> (<em>dict</em>) – Dictionary holding values for each field.</p></li>
-<li><p><strong>template_file</strong> (<em>str</em>) – Statemod input file to parse.</p></li>
-<li><p><strong>column_widths</strong> (<em>dict</em>) – Dictionary of column names to expected widths.</p></li>
-<li><p><strong>column_list</strong> (<em>list</em>) – List of columns to process.</p></li>
-<li><p><strong>data_types</strong> (<em>dict</em>) – Dictionary of column names to data types.</p></li>
-<li><p><strong>comment</strong> (<em>str</em>) – Characters leading string indicating ignoring a line.</p></li>
-<li><p><strong>skip_rows</strong> (<em>int</em>) – The number of uncommented rows of data to skip.</p></li>
-<li><p><strong>replace_dict</strong> (<em>dict</em>) – Dictionary of value with replacement when necessary.
+<li><p><strong>field_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary holding values for each field.</p></li>
+<li><p><strong>template_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Statemod input file to parse.</p></li>
+<li><p><strong>column_widths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of column names to expected widths.</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – List of columns to process.</p></li>
+<li><p><strong>data_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of column names to data types.</p></li>
+<li><p><strong>comment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Characters leading string indicating ignoring a line.</p></li>
+<li><p><strong>skip_rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The number of uncommented rows of data to skip.</p></li>
+<li><p><strong>replace_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of value with replacement when necessary.
 For example, {“<strong>****</strong>”, “”}</p></li>
 </ul>
 </dd>
@@ -2504,14 +2509,14 @@ For example, {“<strong>****</strong>”, “”}</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>template_file</strong> (<em>str</em>) – Statemod input file to parse.</p></li>
-<li><p><strong>output_directory</strong> (<em>str</em>) – Output directory to save outputs to.</p></li>
-<li><p><strong>scenario</strong> (<em>str</em>) – Scenario name.</p></li>
-<li><p><strong>sample_id</strong> (<em>int</em>) – ID of sample.</p></li>
+<li><p><strong>template_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Statemod input file to parse.</p></li>
+<li><p><strong>output_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Output directory to save outputs to.</p></li>
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Scenario name.</p></li>
+<li><p><strong>sample_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – ID of sample.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Full path with file name and extension for the modified output file.</p>
@@ -2530,13 +2535,13 @@ For example, {“<strong>****</strong>”, “”}</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – ID of sample.</p></li>
-<li><p><strong>column_widths</strong> (<em>dict</em>) – Dictionary of column names to expected widths.</p></li>
-<li><p><strong>column_list</strong> (<em>list</em>) – List of columns to process.</p></li>
-<li><p><strong>column_alignment</strong> (<em>dict</em>) – Dictionary of column names to their expected alignment (e.g., right, left).</p></li>
+<li><p><strong>column_widths</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of column names to expected widths.</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – List of columns to process.</p></li>
+<li><p><strong>column_alignment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of column names to their expected alignment (e.g., right, left).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Formatted data string.</p>
@@ -2555,11 +2560,11 @@ For example, {“<strong>****</strong>”, “”}</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data_df</strong> (<em>pd.DataFrame</em>) – Data frame of data content from file.</p></li>
-<li><p><strong>value_columns</strong> (<em>list</em>) – Value columns that may be modified.</p></li>
-<li><p><strong>query_field</strong> (<em>str</em>) – Field name to conduct queries for.</p></li>
-<li><p><strong>target_ids</strong> (<em>list</em>) – Ids associated in query field to modify.</p></li>
-<li><p><strong>factor</strong> (<em>float</em>) – Value to multiply the selected value columns by.</p></li>
-<li><p><strong>factor_method</strong> (<em>str</em>) – Method by which to apply the factor. Options ‘add’, ‘multiply’, ‘assign’.
+<li><p><strong>value_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – Value columns that may be modified.</p></li>
+<li><p><strong>query_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Field name to conduct queries for.</p></li>
+<li><p><strong>target_ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – Ids associated in query field to modify.</p></li>
+<li><p><strong>factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Value to multiply the selected value columns by.</p></li>
+<li><p><strong>factor_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Method by which to apply the factor. Options ‘add’, ‘multiply’, ‘assign’.
 Defaults to ‘add’.</p></li>
 </ul>
 </dd>
@@ -2582,9 +2587,9 @@ Defaults to ‘add’.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>bounds_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em>) – List of bounds to use for each parameter.</p></li>
-<li><p><strong>min_value</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Minimum value of bounds that is feasible. Default -0.5.</p></li>
-<li><p><strong>max_value</strong> (<em>float</em>) – Maximum value of bounds that is feasible. Default 1.0.</p></li>
+<li><p><strong>bounds_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em>) – List of bounds to use for each parameter.</p></li>
+<li><p><strong>min_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimum value of bounds that is feasible. Default -0.5.</p></li>
+<li><p><strong>max_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum value of bounds that is feasible. Default 1.0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2619,13 +2624,13 @@ Defaults to ‘add’.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>comment_indicator</strong> (<em>str</em>) – Character(s) indicating the line in the file is a comment. Defualt “#”</p></li>
-<li><p><strong>data_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>None</em><em>]</em><em>]</em>) – Field specification in the file as a dictionary to hold the values for each field</p></li>
-<li><p><strong>column_widths</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – Column widths for the output file as a dictionary.</p></li>
-<li><p><strong>column_alignment</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – Expected column alignment.</p></li>
-<li><p><strong>data_types</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>type</em><em>]</em>) – Expected data types for each field</p></li>
-<li><p><strong>column_list</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of columns to process.</p></li>
-<li><p><strong>value_columns</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of columns that may be modified.</p></li>
+<li><p><strong>comment_indicator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Character(s) indicating the line in the file is a comment. Defualt “#”</p></li>
+<li><p><strong>data_dict</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>List</em><em>[</em><em>None</em><em>]</em><em>]</em>) – Field specification in the file as a dictionary to hold the values for each field</p></li>
+<li><p><strong>column_widths</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em>) – Column widths for the output file as a dictionary.</p></li>
+<li><p><strong>column_alignment</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Expected column alignment.</p></li>
+<li><p><strong>data_types</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><em>type</em></a><em>]</em>) – Expected data types for each field</p></li>
+<li><p><strong>column_list</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – List of columns to process.</p></li>
+<li><p><strong>value_columns</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – List of columns that may be modified.</p></li>
 </ul>
 </dd>
 </dl>
@@ -2643,7 +2648,7 @@ Defaults to ‘add’.</p></li>
 <dd><p>Get all required arguments for a function as a list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2657,7 +2662,7 @@ Defaults to ‘add’.</p></li>
 <dd><p>Get all arguments and their values as a dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2671,7 +2676,7 @@ Defaults to ‘add’.</p></li>
 <dd><p>Validate and generate parameters needed for the desired functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2685,7 +2690,7 @@ Defaults to ‘add’.</p></li>
 <dd><p>Run multiple modification functions from the same problem set and unified sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>problem_dict</strong> (<em>dict</em>) – Dictionary of options for running multiple functions in batch mode.  Used to
+<dd class="field-odd"><p><strong>problem_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Dictionary of options for running multiple functions in batch mode.  Used to
 generate the sample and pass other options to participating functions.
 See the following example.</p>
 </dd>
@@ -2693,7 +2698,7 @@ See the following example.</p>
 <dd class="field-even"><p>Dictionary of settings and samples for each participating funtion.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><p></p></dd>
@@ -2763,7 +2768,7 @@ See the following example.</p>
 <dd><p>Plots flow duration curves for historical and synthetic data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flow_realizations_directory</strong> (<em>str</em>) – Full path to the directory containing the flow realization files for each
+<dd class="field-odd"><p><strong>flow_realizations_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Full path to the directory containing the flow realization files for each
 sample.  E.g., AnnualQ_s0.txt files produced by the ‘hmm_multisite_sample’
 function.</p>
 </dd>
@@ -2800,7 +2805,7 @@ function.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hmm_data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a numpy array with monthly storage data from HMM realizations</p></li>
 <li><p><strong>historical_data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a numpy array with monthly storage data from hist data</p></li>
-<li><p><strong>reservoir_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – a string with the name of the reservoir</p></li>
+<li><p><strong>reservoir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – a string with the name of the reservoir</p></li>
 </ul>
 </dd>
 </dl>
@@ -2819,13 +2824,13 @@ function.</p>
 NOTE:  code can be executed from the YAML file due to the use of UnsafeLoader.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>yaml_file</strong> (<em>str</em>) – Full path with file name and extension to the input YAML file.</p>
+<dd class="field-odd"><p><strong>yaml_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Full path with file name and extension to the input YAML file.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Dictionary of typed elements of the YAML file.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2840,22 +2845,22 @@ NOTE:  code can be executed from the YAML file due to the use of UnsafeLoader.</
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>basin_name</strong> (<em>str</em>) – Name of basin for either:
+<li><p><strong>basin_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of basin for either:
 Upper_Colorado
 Yampa
 San_Juan
 Gunnison
 White</p></li>
-<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
+<li><p><strong>template_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a template file is provided it will be used.  Otherwise the
 default template in this package will be used.</p></li>
-<li><p><strong>extension</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Extension of the target template file with no dot.</p></li>
+<li><p><strong>extension</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Extension of the target template file with no dot.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Template file path</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2870,16 +2875,16 @@ default template in this package will be used.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>yaml_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – If a full path to a YAML file is provided it will be used.  Otherwise the
+<li><p><strong>yaml_file</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – If a full path to a YAML file is provided it will be used.  Otherwise the
 default file in this package will be used.</p></li>
-<li><p><strong>extension</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><em>str</em><em>]</em>) – Extension of the target template file with no dot.</p></li>
+<li><p><strong>extension</strong> (<em>Union</em><em>[</em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Extension of the target template file with no dot.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Template file path</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2894,11 +2899,11 @@ default file in this package will be used.</p></li>
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../getting-started/quickstarter.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../getting-started/useful_links.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Quickstarter</p>
+            <p class="prev-next-title">Useful Links</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="contributing.html" title="next page">
