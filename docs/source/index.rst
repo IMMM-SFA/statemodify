@@ -50,8 +50,9 @@ The steps of the workflow are outlined below:
   
   </ul>
 
-  <p>Visualizations: Within the Jupyter notebooks are examples of simple functions that can be used to visualized changes in shortages and reservoir storage relative to a historic baseline. However, within <b>statemodify</b>, there are more complex visualization functions that summarize reservoir storage across many simulations. These functions can be further adapted by the user to explore stakeholder shortages. </p></li>
+  <li><p>Visualizations: Within the Jupyter notebooks are examples of simple functions that can be used to visualized changes in shortages and reservoir storage relative to a historic baseline. However, within <b>statemodify</b>, there are more complex visualization functions that summarize reservoir storage across many simulations. These functions can be further adapted by the user to explore stakeholder shortages. </p> 
 
+  </ul>
   
     <li><i>plot_reservoir_boxes( ):</i> This function allows the user to create boxplots to compare the range of monthly historical reservoir storage experienced at a given reservoir vs. the range of reservoir storage that can result from synthetically generated streamflow. </li>
     <li><i>plot_res_quantiles( ):</i> This function allows the user to visualize the historical monthly distribution of reservoir levels at a given location versus the distribution that results under an array of simulated scenarios.</li>
@@ -61,15 +62,9 @@ The steps of the workflow are outlined below:
 Why do we need **statemodify**?
 --------------------------------
 
-Sustainable management of Colorado’s West Slope basins is necessary to support inflow into the Colorado River and, by extension, the 40 million people that depend on it for water, hydropower, agriculture, and recreation (Flavelle, 2023). Because it is unknown how the future will manifest in the West Slope, exploratory modeling with StateMod is a valuable approach to comprehensively identify the most important drivers of change and vulnerabilities to different stakeholders. Sustainable management of the region will also ultimately require combining expert knowledge across diverse groups, ranging from federal and state institutions who are prescribing larger policy and conservation efforts down to the practical knowledge acquired from individual stakeholders, many of whom have livelihoods that have been supported by the river for many generations. In an effort to better maintain StateMod and expand their user base, CWCB and DWR have developed the CDSS Open Source Initiative (OpenCDSS), which provides Java-based TSTool and StateDMI software to create and modify StateMod input files. The statemodify package seeks to complement and expand this toolset to accommodate large ensemble exploratory modeling and a Linux-based workflow and to provide additional options to develop more targeted file adjustments and richer streamflow scenarios. The use of Python for all **statemodify** methods as well as the ease of interacting through Jupyter notebooks can further broaden the user base that can interact with StateMod and serve as a sandbox environment for quickly testing hypotheses that a user might have without the user needing to invest large amounts of time to learn how to use StateMod and develop a workflow. Examples of such questions could be: What happens to user shortages in the Gunnison if evaporation were to change over the Blue Mesa Reservoir? If user X gains a more senior water right, does this have a bigger impact on reducing their shortages than shifts to a wetter hydroclimate? 
+Sustainable management of Colorado’s West Slope basins is necessary to support inflow into the Colorado River and, by extension, the 40 million people that depend on it for water, hydropower, agriculture, and recreation (Flavelle, 2023). Because it is unknown how the future will manifest in the West Slope, exploratory modeling with StateMod is a valuable approach to comprehensively identify the most important drivers of change and vulnerabilities to different stakeholders. Sustainable management of the region will also ultimately require combining expert knowledge across diverse groups, ranging from federal and state institutions who are prescribing larger policy and conservation efforts down to the practical knowledge acquired from individual stakeholders, many of whom have livelihoods that have been supported by the river for many generations. In an effort to better maintain StateMod and expand their user base, CWCB and DWR have developed the CDSS Open Source Initiative (OpenCDSS), which provides Java-based TSTool and StateDMI software to create and modify StateMod input files. The **statemodify** package seeks to complement and expand this toolset to accommodate large ensemble exploratory modeling and a Linux-based workflow and to provide additional options to develop more targeted file adjustments and richer streamflow scenarios. The use of Python for all **statemodify** methods as well as the ease of interacting through Jupyter notebooks can further broaden the user base that can interact with StateMod and serve as a sandbox environment for quickly testing hypotheses that a user might have without the user needing to invest large amounts of time to learn how to use StateMod and develop a workflow. Examples of such questions could be: What happens to user shortages in the Gunnison if evaporation were to change over the Blue Mesa Reservoir? If user X gains a more senior water right, does this have a bigger impact on reducing their shortages than shifts to a wetter hydroclimate? 
 
 Though **statemodify** focuses on Colorado’s West Slope basins, this case study is representative of a broader group of institutionally complex basins that are experiencing extreme conditions due to their own regionally-specific deep uncertainties. Discovering vulnerabilities of users in these regions will likely require similar finely resolved models along with extensive computational resources. It is important to note that not every user has access to the computational resources required to do exploratory modeling. At this point in time, those users are unable to participate in this type of modeling effort. To help overcome this barrier, we demonstrate **statemodify** and the associated notebooks in containers hosted by MSD-LIVE that allow any user to conduct a small scale analysis. Users can also use the associated Dockerfiles to download and compile StateMod and run the same Jupyter notebooks on their own personal computers or high performance computing (HPC) resources. Work is currently in progress to connect statemodify with cloud platforms, such as Amazon Web Services, Microsoft Azure, and Google Cloud, which provide more accessible tiers of computing to students and researchers who don’t have access to HPC. Overall, the statemodify framework will not only broaden the user base that can interact with StateMod, but also can serve as a guide on how to make exploratory modeling accessible to diverse groups whose inclusion can lead to more robust basin management.    
-
-
-Planning and Management Models
-+++++++++++++++++++++++++++++++
-
-The Colorado Water Conservation Board (CWCB) and the Division of Water Resources (DWR) have jointly developed Colorado's Decision Support System (CDSS), a collection of databases, data viewing and management tools, and models to support water resources planning in Colorado's major water basins (Malers et al., 2001). The CDSS is made up of a central database with water resources data (HydroBase), a public website where the data can be accessed, a Geographic Information System (GIS) for viewing and analyzing the data, and a consumptive use model (StateCU) that estimates consumptive use by each irrigation unit in a basin. The outputs from StateCU are then input to the State of Colorado's Stream Simulation Model (StateMod), a generic network-based water system model for water accounting and allocation, and the final component of CDSS. StateMod was developed to support comprehensive assessments of water demand, allocation, and use, as well as reservoir operations. It represents all of the major sub-basins within the state of Colorado (i.e., Parsons & Bennett, 2006; White, Yampa, Upper Colorado, Gunnison, Dolores, San Juan, and San Miguel CWCB, 2012). StateMod replicates each basin's unique application and enforcement of the prior appropriation doctrine and accounts for all of the consumptive use within the basins. To do so, it relies on the detailed historic demand and operation records contained in HydroBase that include individual water right information for all consumptive use, data on water structures (wells, ditches, reservoirs, and tunnels), and streamflow data. Further, StateMod uses irrigation consumptive use data output from StateCU, which calculates water consumption based on soil moisture, crop type, irrigated acreage, and conveyance and application efficiencies for each individual irrigation unit in the region.
 
 
 
@@ -85,6 +80,7 @@ Flavelle, C. (2023, May 25). A Breakthrough Deal to Keep the Colorado River From
 Gold, D.F., Gupta, R.S., Quinn, J.D, Reed P.M (2023). A Multi-site hidden Markov model to expand drought representation in the West Slope of Colorado. Journal of Water Resources Planning and Management, in prep.
 
 Graf, W. L., Wohl, E., Sinha, T., & Sabo, J. L. (2010). Sedimentation and sustainability of western American reservoirs. Water Resources Research, 46, W12535. https://doi.org/10.1029/2009WR008836
+
 Hadjimichael, A., Quinn, J., Wilson, E., Reed, P., Basdekas, L., Yates, D., & Garrison, M. (2020). Defining robustness, vulnerabilities, and consequential scenarios for diverse stakeholder interests in institutionally complex river basins. Earth's Future, 8(7), e2020EF001503.
 
 Kopytkovskiy, M., Geza, M., & McCray, J. E. (2015). Climate-change impacts on water resources and hydropower potential in the Upper Colorado River Basin. Journal of Hydrology: Regional Studies, 3, 473-493.
@@ -93,8 +89,6 @@ Kwakkel, J. H., Walker, W. E., & Haasnoot, M. (2016). Coping with the wickedness
 
 Lempert, R. J. (2002). A new decision sciences for complex systems. Proceedings of the National Academy of Sciences, (suppl 3), 7309–7313. https://doi.org/10.1073/pnas.082081699
 
-Malers, S. A., Bennett, R. R., & Nutting-Lane, C. (2000). Colorado's decision support systems: Data-centered water resources planning and administration. In Watershed Management and Operations Management 2000 (pp. 1-9).
-
 Marchau, V. A., Walker, W. E., Bloemen, P. J., & Popper, S. W. (2019). Decision making under deep uncertainty: from theory to practice (p. 405). Springer Nature.
 
 Miller, O. L., Miller, M. P., Longley, P. C., Alder, J. R., Bearup, L. A., Pruitt, T., ... & McKinney, T. (2021). How will baseflow respond to climate change in the upper Colorado River Basin?. Geophysical Research Letters, 48(22), e2021GL095085.
@@ -102,8 +96,6 @@ Miller, O. L., Miller, M. P., Longley, P. C., Alder, J. R., Bearup, L. A., Pruit
 Milly, P. C., & Dunne, K. A. (2020). Colorado River flow dwindles as warming-driven loss of reflective snow energizes evaporation. Science, 367(6483), 1252-1255.
 
 Nowak, K., Prairie, J., Rajagopalan, B., & Lall, U. (2010). A nonparametric stochastic approach for multisite disaggregation of annual to daily streamflow. Water resources research, 46(8).
-
-Parsons, R., & Bennett, R. (2006). Reservoir operations management using a water resources model. In Operating Reservoirs in Changing Conditions (pp. 304-311).
 
 Salehabadi, H., Tarboton, D., Kuhn, E., Udall, B., Wheeler, K., Rosenberg, D., ... & Schmidt, J. C. (2020). The future hydrology of the Colorado River Basin. The Future of the Colorado River Project.
 State of Colorado (2023). Colorado's water plan. Denver, Colorado.
@@ -122,6 +114,7 @@ Documentation
 
    getting-started/installation
    getting-started/quickstarter
+   getting-started/useful_links
 
 .. toctree::
    :maxdepth: 1
