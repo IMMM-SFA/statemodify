@@ -286,7 +286,7 @@ def plot_res_quantiles(hmm_data: np.array,
     my_cmap = plt.cm.get_cmap('BrBG')
     sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0, 1))
     sm.set_array([])
-    cbar = plt.colorbar(sm)
+    cbar = plt.colorbar(sm, ax=ax)
     cbar.set_label('Percentile of HMM Records', rotation=270, labelpad=20, fontsize=14)
     plt.tight_layout()
 
