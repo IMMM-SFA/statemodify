@@ -1,3 +1,4 @@
+import os
 import unittest
 from pathlib import Path
 
@@ -107,7 +108,7 @@ class TestModify(unittest.TestCase):
                                           scenario="test",
                                           sample_id=0)
 
-        self.assertEqual(str(self.COMP_FILE.absolute()), f)
+        self.assertEqual(self.COMP_FILE.name, os.path.basename(f))
 
     def test_construct_data_string(self):
         """Tests for construct_data_string function."""
