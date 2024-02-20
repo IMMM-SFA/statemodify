@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 
 import pandas as pd
 
@@ -13,7 +14,7 @@ class TestModify(unittest.TestCase):
     COMP_NONE = "test"
     COMP_ZEROS = "0.10"
     COMP_DATA = {'a': [0], 'b': ['alpha  '], 'c': [2.0]}
-    COMP_FILE = "/my/output/directory/file_S0_test.txt"
+    COMP_FILE = Path("/my/output/directory") / "file_S0_test.txt"
     COMP_STR = "item   focus\n"
     COMP_ADJ_DF_ADD = pd.DataFrame({"a": [10., 20.1], "b": [-1., -1.9]})
     COMP_ADJ_DF_MULTIPLY = pd.DataFrame({"a": [10., 2.], "b": [-1., -0.2]})
@@ -101,12 +102,12 @@ class TestModify(unittest.TestCase):
         """Tests for construct_outfile_name function."""
 
         # ensure function produces what is expected
-        f = modify.construct_outfile_name(template_file="/my/template/file/file.txt",
-                                          output_directory="/my/output/directory",
+        f = modify.construct_outfile_name(template_file=Path("/my/output/directory") / "file.txt",
+                                          output_directory=Path("/my/output/directory"),
                                           scenario="test",
                                           sample_id=0)
 
-        self.assertEqual(self.COMP_FILE, f)
+        self.assertEqual(str(self.COMP_FILE.absolute()), f)
 
     def test_construct_data_string(self):
         """Tests for construct_data_string function."""
