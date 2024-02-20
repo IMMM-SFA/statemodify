@@ -39,5 +39,6 @@ setup(
         'tqdm>=4.64.1',
         'pyyaml>=6.0.0',
         'pygame>=2.3.0',
+        'pre-commit'
     ],
 )
