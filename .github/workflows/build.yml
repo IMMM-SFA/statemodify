@@ -1,13 +1,13 @@
 ---
 name: build
 
-on:
+on:    # yamllint disable-line rule:truthy
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'false'
   pull_request:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'false'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -39,6 +39,7 @@ jobs:
           pip install pytest-cov
           pytest --cov=./ --cov-report=xml
       - name: Upload coverage to Codecov
+        if: matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@v1
         with:
           file: ./coverage.xml
