@@ -1,28 +1,70 @@
+"""This module is responsible for modifying and generating Integrated Water Resource (IWR) data."""
+
 import glob
 import os
-import pkg_resources as pkg
 import random
 from typing import List, Union
 
 import numpy as np
 import pandas as pd
-from scipy import stats as ss
+import pkg_resources as pkg
+import statsmodels.api as sm
 from hmmlearn import hmm
 from joblib import Parallel, delayed
-import statsmodels.api as sm
+from scipy import stats as ss
 
-import statemodify.utils as utx
 import statemodify.modify as modify
 import statemodify.sampler as sampler
+import statemodify.utils as utx
 
 
 class GenerateIwrData:
+    """Generate IWR data from user desired input template and file specification.  Defaults used if none provided.
 
-    def __init__(self,
-                 basin_name: str,
-                 skip_rows: int = 1,
-                 template_file: Union[None, str] = None,
-                 data_specification_file: Union[None, str] = None):
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
+
+    :param skip_rows:                                       Number of rows after comments to skip. Default 1.
+    :type skip_rows:                                        int
+
+    :param template_file:                                   File to use as template.  Default None.
+    :type template_file:                                    Union[None, str]
+
+    :param data_specification_file:                         Data specification YAML file.  Default None.
+    :type data_specification_file:                          Union[None, str]
+
+    :return template_file:                                  Selected template file path.
+    :rtype template_file:                                   str
+
+    :return data_specification_file:                        Selected data specification YAML file path.
+    :rtype data_specification_file:                         str
+
+    :return data_spec_dict:                                 Dictionary of data specification.
+    :rtype data_spec_dict:                                  dict
+
+    :return file_spec:                                      File modification specs.
+    :rtype file_spec:                                       class
+
+    :return template_df:                                    Processed data from file.
+    :rtype template_df:                                     pd.DataFrame
+
+    :return: template_header:                               Header for input template file.
+    :rtype: template_header:                                list
+
+    """
+
+    def __init__(
+        self,
+        basin_name: str,
+        skip_rows: int = 1,
+        template_file: Union[None, str] = None,
+        data_specification_file: Union[None, str] = None,
+    ):
         """Generate IWR data from user desired input template and file specification.  Defaults used if none provided.
 
         :param basin_name:                      Name of basin for either:
@@ -61,43 +103,87 @@ class GenerateIwrData:
         :rtype: template_header:                                list
 
         """
-
         # select the appropriate template file
-        self.template_file = utx.select_template_file(basin_name=basin_name,
-                                                      template_file=template_file,
-                                                      extension="iwr")
+        self.template_file = utx.select_template_file(
+            basin_name=basin_name, template_file=template_file, extension="iwr"
+        )
 
         # read in data specification yaml
-        self.data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                          extension="iwr")
+        self.data_specification_file = utx.select_data_specification_file(
+            yaml_file=data_specification_file, extension="iwr"
+        )
         self.data_spec_dict = utx.yaml_to_dict(self.data_specification_file)
 
         # instantiate data specification and validation class
-        self.file_spec = modify.Modify(comment_indicator=self.data_spec_dict["comment_indicator"],
-                                       data_dict=self.data_spec_dict["data_dict"],
-                                       column_widths=self.data_spec_dict["column_widths"],
-                                       column_alignment=self.data_spec_dict["column_alignment"],
-                                       data_types=self.data_spec_dict["data_types"],
-                                       column_list=self.data_spec_dict["column_list"],
-                                       value_columns=self.data_spec_dict["value_columns"])
+        self.file_spec = modify.Modify(
+            comment_indicator=self.data_spec_dict["comment_indicator"],
+            data_dict=self.data_spec_dict["data_dict"],
+            column_widths=self.data_spec_dict["column_widths"],
+            column_alignment=self.data_spec_dict["column_alignment"],
+            data_types=self.data_spec_dict["data_types"],
+            column_list=self.data_spec_dict["column_list"],
+            value_columns=self.data_spec_dict["value_columns"],
+        )
 
         # prepare template data frame for alteration
-        self.template_df, self.template_header = modify.prep_data(field_dict=self.file_spec.data_dict,
-                                                                  template_file=self.template_file,
-                                                                  column_list=self.file_spec.column_list,
-                                                                  column_widths=self.file_spec.column_widths,
-                                                                  data_types=self.file_spec.data_types,
-                                                                  comment=self.file_spec.comment_indicator,
-                                                                  skip_rows=skip_rows)
+        self.template_df, self.template_header = modify.prep_data(
+            field_dict=self.file_spec.data_dict,
+            template_file=self.template_file,
+            column_list=self.file_spec.column_list,
+            column_widths=self.file_spec.column_widths,
+            data_types=self.file_spec.data_types,
+            comment=self.file_spec.comment_indicator,
+            skip_rows=skip_rows,
+        )
 
 
 class GenerateXbmData:
+    """Generate XBM data from user desired input template and file specification.  Defaults used if none provided.
 
-    def __init__(self,
-                 basin_name: str,
-                 skip_rows: int = 1,
-                 template_file: Union[None, str] = None,
-                 data_specification_file: Union[None, str] = None):
+    :param basin_name:                      Name of basin for either:
+                                                Upper_Colorado
+                                                Yampa
+                                                San_Juan
+                                                Gunnison
+                                                White
+    :type basin_name:                       str
+
+    :param skip_rows:                                       Number of rows after comments to skip. Default 1.
+    :type skip_rows:                                        int
+
+    :param template_file:                                   File to use as template.  Default None.
+    :type template_file:                                    Union[None, str]
+
+    :param data_specification_file:                         Data specification YAML file.  Default None.
+    :type data_specification_file:                          Union[None, str]
+
+    :return template_file:                                  Selected template file path.
+    :rtype template_file:                                   str
+
+    :return data_specification_file:                        Selected data specification YAML file path.
+    :rtype data_specification_file:                         str
+
+    :return data_spec_dict:                                 Dictionary of data specification.
+    :rtype data_spec_dict:                                  dict
+
+    :return file_spec:                                      File modification specs.
+    :rtype file_spec:                                       class
+
+    :return template_df:                                    Processed data from file.
+    :rtype template_df:                                     pd.DataFrame
+
+    :return: template_header:                               Header for input template file.
+    :rtype: template_header:                                list
+
+    """
+
+    def __init__(
+        self,
+        basin_name: str,
+        skip_rows: int = 1,
+        template_file: Union[None, str] = None,
+        data_specification_file: Union[None, str] = None,
+    ):
         """Generate XBM data from user desired input template and file specification.  Defaults used if none provided.
 
         :param basin_name:                      Name of basin for either:
@@ -136,48 +222,55 @@ class GenerateXbmData:
         :rtype: template_header:                                list
 
         """
-
         # select the appropriate template file
-        self.template_file = utx.select_template_file(basin_name=basin_name,
-                                                      template_file=template_file,
-                                                      extension="xbm")
+        self.template_file = utx.select_template_file(
+            basin_name=basin_name, template_file=template_file, extension="xbm"
+        )
 
         # read in data specification yaml
-        self.data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                          extension="xbm")
+        self.data_specification_file = utx.select_data_specification_file(
+            yaml_file=data_specification_file, extension="xbm"
+        )
         self.data_spec_dict = utx.yaml_to_dict(self.data_specification_file)
 
         # instantiate data specification and validation class
-        self.file_spec = modify.Modify(comment_indicator=self.data_spec_dict["comment_indicator"],
-                                       data_dict=self.data_spec_dict["data_dict"],
-                                       column_widths=self.data_spec_dict["column_widths"],
-                                       column_alignment=self.data_spec_dict["column_alignment"],
-                                       data_types=self.data_spec_dict["data_types"],
-                                       column_list=self.data_spec_dict["column_list"],
-                                       value_columns=self.data_spec_dict["value_columns"])
+        self.file_spec = modify.Modify(
+            comment_indicator=self.data_spec_dict["comment_indicator"],
+            data_dict=self.data_spec_dict["data_dict"],
+            column_widths=self.data_spec_dict["column_widths"],
+            column_alignment=self.data_spec_dict["column_alignment"],
+            data_types=self.data_spec_dict["data_types"],
+            column_list=self.data_spec_dict["column_list"],
+            value_columns=self.data_spec_dict["value_columns"],
+        )
 
         # prepare template data frame for alteration
-        self.template_df, self.template_header = modify.prep_data(field_dict=self.file_spec.data_dict,
-                                                                  template_file=self.template_file,
-                                                                  column_list=self.file_spec.column_list,
-                                                                  column_widths=self.file_spec.column_widths,
-                                                                  data_types=self.file_spec.data_types,
-                                                                  comment=self.file_spec.comment_indicator,
-                                                                  skip_rows=skip_rows,
-                                                                  replace_dict={"********": np.nan})
+        self.template_df, self.template_header = modify.prep_data(
+            field_dict=self.file_spec.data_dict,
+            template_file=self.template_file,
+            column_list=self.file_spec.column_list,
+            column_widths=self.file_spec.column_widths,
+            data_types=self.file_spec.data_types,
+            comment=self.file_spec.comment_indicator,
+            skip_rows=skip_rows,
+            replace_dict={"********": np.nan},
+        )
 
 
-def get_samples(param_dict: dict,
-                basin_name: str,
-                n_samples: int = 1,
-                sampling_method: str = "LHS",
-                seed_value: Union[None, int] = None):
+def get_samples(
+    param_dict: dict,
+    basin_name: str,
+    n_samples: int = 1,
+    sampling_method: str = "LHS",
+    seed_value: Union[None, int] = None,
+):
     """Generate or load Latin Hypercube Samples (LHS).
 
     Currently, this reads in an input file of precalculated samples.  This should happen
     on-demand and be given a seed value if reproducibility is needed.
 
-    :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
+    :param sampling_method:     Sampling method.  Uses SALib's implementation
+                                (see https://salib.readthedocs.io/en/latest/).
                                 Currently supports the following method:  "LHS" for Latin Hypercube Sampling
     :type sampling_method:      str
 
@@ -189,21 +282,29 @@ def get_samples(param_dict: dict,
     :type seed_value:           Union[None, int], optional
 
     """
+    problem_dict = {
+        "num_vars": 7,
+        "names": ["mu0", "sigma0", "mu1", "sigma1", "p00", "p11", "iwr_multiplier"],
+        "bounds": [
+            [param_dict["mu0"]["lower"], param_dict["mu0"]["upper"]],
+            [param_dict["sigma0"]["lower"], param_dict["sigma0"]["upper"]],
+            [param_dict["mu1"]["lower"], param_dict["mu1"]["upper"]],
+            [param_dict["sigma1"]["lower"], param_dict["sigma1"]["upper"]],
+            [param_dict["p00"]["lower"], param_dict["p00"]["upper"]],
+            [param_dict["p11"]["lower"], param_dict["p11"]["upper"]],
+            [
+                param_dict["iwr_multiplier"][basin_name]["lower"],
+                param_dict["iwr_multiplier"][basin_name]["upper"],
+            ],
+        ],
+    }
 
-    problem_dict = {'num_vars': 7,
-                    'names': ['mu0', 'sigma0', 'mu1', 'sigma1', 'p00', 'p11', 'iwr_multiplier'],
-                    'bounds': [[param_dict["mu0"]["lower"], param_dict["mu0"]["upper"]],
-                               [param_dict["sigma0"]["lower"], param_dict["sigma0"]["upper"]],
-                               [param_dict["mu1"]["lower"], param_dict["mu1"]["upper"]],
-                               [param_dict["sigma1"]["lower"], param_dict["sigma1"]["upper"]],
-                               [param_dict["p00"]["lower"], param_dict["p00"]["upper"]],
-                               [param_dict["p11"]["lower"], param_dict["p11"]["upper"]],
-                               [param_dict["iwr_multiplier"][basin_name]["lower"], param_dict["iwr_multiplier"][basin_name]["upper"]]]}
-
-    return sampler.generate_samples(problem_dict=problem_dict,
-                                    n_samples=n_samples,
-                                    sampling_method=sampling_method,
-                                    seed_value=seed_value)
+    return sampler.generate_samples(
+        problem_dict=problem_dict,
+        n_samples=n_samples,
+        sampling_method=sampling_method,
+        seed_value=seed_value,
+    )
 
 
 def generate_dry_state_means():
@@ -213,8 +314,9 @@ def generate_dry_state_means():
     on-demand and be given a seed value if reproducibility is needed.
 
     """
-
-    target_file = pkg.resource_filename("statemodify", os.path.join("data", "dry_state_means.txt"))
+    target_file = pkg.resource_filename(
+        "statemodify", os.path.join("data", "dry_state_means.txt")
+    )
 
     return np.loadtxt(target_file)
 
@@ -226,8 +328,9 @@ def generate_wet_state_means(load: bool = True):
     on-demand and be given a seed value if reproducibility is needed.
 
     """
-
-    target_file = pkg.resource_filename("statemodify", os.path.join("data", "wet_state_means.txt"))
+    target_file = pkg.resource_filename(
+        "statemodify", os.path.join("data", "wet_state_means.txt")
+    )
 
     return np.loadtxt(target_file)
 
@@ -239,8 +342,9 @@ def generate_dry_covariance_matrix(load: bool = True):
     on-demand and be given a seed value if reproducibility is needed.
 
     """
-
-    target_file = pkg.resource_filename("statemodify", os.path.join("data", "covariance_matrix_dry.txt"))
+    target_file = pkg.resource_filename(
+        "statemodify", os.path.join("data", "covariance_matrix_dry.txt")
+    )
 
     return np.loadtxt(target_file)
 
@@ -252,8 +356,9 @@ def generate_wet_covariance_matrix(load: bool = True):
     on-demand and be given a seed value if reproducibility is needed.
 
     """
-
-    target_file = pkg.resource_filename("statemodify", os.path.join("data", "covariance_matrix_wet.txt"))
+    target_file = pkg.resource_filename(
+        "statemodify", os.path.join("data", "covariance_matrix_wet.txt")
+    )
 
     return np.loadtxt(target_file)
 
@@ -265,15 +370,16 @@ def generate_transition_matrix(load: bool = True):
     on-demand and be given a seed value if reproducibility is needed.
 
     """
-
-    target_file = pkg.resource_filename("statemodify", os.path.join("data", "transition_matrix.txt"))
+    target_file = pkg.resource_filename(
+        "statemodify", os.path.join("data", "transition_matrix.txt")
+    )
 
     return np.loadtxt(target_file)
 
 
-def calculate_array_monthly(df: pd.DataFrame,
-                            value_fields: List[str],
-                            year_field: str = "year") -> np.array:
+def calculate_array_monthly(
+    df: pd.DataFrame, value_fields: list[str], year_field: str = "year"
+) -> np.array:
     """Create an array of month rows and site columns for each year in the data frame.
 
     :param df:                          Input template data frame
@@ -289,10 +395,8 @@ def calculate_array_monthly(df: pd.DataFrame,
     :rtype:                             np.array
 
     """
-
     out_list = []
     for year in df[year_field].sort_values().unique():
-
         for month in value_fields:
             v = df.loc[df[year_field] == year][month]
 
@@ -311,13 +415,12 @@ def calculate_array_annual(monthly_arr: np.array) -> np.array:
     :rtype:                                 np.array
 
     """
-
     n_years = int(monthly_arr.shape[0] / 12)
     n_sites = monthly_arr.shape[1]
 
     annual_arr = np.zeros([n_years, n_sites])
     for i in range(n_years):
-        annual_arr[i, :] = np.sum(monthly_arr[i * 12:(i + 1) * 12], 0)
+        annual_arr[i, :] = np.sum(monthly_arr[i * 12 : (i + 1) * 12], 0)
 
     return annual_arr
 
@@ -335,12 +438,12 @@ def calculate_annual_sum(arr: np.array, axis: int = 1) -> np.array:
     :rtype:                         np.array
 
     """
-
     return np.sum(arr, axis)
 
 
-def calculate_annual_mean_fractions(arr_annual: np.array,
-                                    arr_sum: np.array) -> np.array:
+def calculate_annual_mean_fractions(
+    arr_annual: np.array, arr_sum: np.array
+) -> np.array:
     """Calculate annual mean fractions of total values.
 
     :param arr_annual:                          Array of annual values per site
@@ -353,7 +456,6 @@ def calculate_annual_mean_fractions(arr_annual: np.array,
     :rtype:                                     np.array
 
     """
-
     iwr_fractions = np.zeros(np.shape(arr_annual))
 
     for i in range(np.shape(arr_annual)[0]):
@@ -362,8 +464,7 @@ def calculate_annual_mean_fractions(arr_annual: np.array,
     return np.mean(iwr_fractions, 0)
 
 
-def fit_iwr_model(xbm_data_array_annual: np.array,
-                  iwr_data_array_annual: np.array):
+def fit_iwr_model(xbm_data_array_annual: np.array, iwr_data_array_annual: np.array):
     """Model annual irrigation demand anomaly as a function of annual flow anomaly at last node.
 
     :param xbm_data_array_annual:                       Annual flow from XBM
@@ -373,7 +474,6 @@ def fit_iwr_model(xbm_data_array_annual: np.array,
     :type iwr_data_array_annual:                        np.array
 
     """
-
     IWRsums = np.sum(iwr_data_array_annual, 1)
     Qsums = xbm_data_array_annual[:, -1]
 
@@ -393,13 +493,15 @@ def fit_iwr_model(xbm_data_array_annual: np.array,
     return model.params, mu, sigma
 
 
-def generate_hmm_inputs(template_file, n_basins=5):
+def generate_hmm_inputs(template_file: str, n_basins: int = 5):
     """Generate HMM input files for all basins."""
     annual_q_h_all = np.array(pd.read_csv(template_file))
     log_annual_q_h = np.log(annual_q_h_all + 1)  # add 1 because some sites have 0 flow
 
     # fit multi-site HMM to approximately last 2/3 of historical record
-    hmm_model = hmm.GMMHMM(n_components=2, n_iter=1000, covariance_type='full').fit(log_annual_q_h[30::, :])
+    hmm_model = hmm.GMMHMM(n_components=2, n_iter=1000, covariance_type="full").fit(
+        log_annual_q_h[30::, :]
+    )
 
     # Pull out some model parameters
     mus = np.array(hmm_model.means_)
@@ -422,23 +524,31 @@ def generate_hmm_inputs(template_file, n_basins=5):
     wet_state_means = mus[1, :]
     transition_matrix = p
 
-    return dry_state_means, wet_state_means, covariance_matrix_dry, covariance_matrix_wet, transition_matrix
+    return (
+        dry_state_means,
+        wet_state_means,
+        covariance_matrix_dry,
+        covariance_matrix_wet,
+        transition_matrix,
+    )
 
 
-def generate_flows(dry_state_means: np.array,
-                   wet_state_means: np.array,
-                   covariance_matrix_dry: np.array,
-                   covariance_matrix_wet: np.array,
-                   transition_matrix: np.array,
-                   mu_0: float,
-                   sigma_0: float,
-                   mu_1: float,
-                   sigma_1: float,
-                   p00: float,
-                   p11: float,
-                   n_basins: int = 5,
-                   n_years: int = 105,
-                   seed_value: Union[None, int] = None):
+def generate_flows(
+    dry_state_means: np.array,
+    wet_state_means: np.array,
+    covariance_matrix_dry: np.array,
+    covariance_matrix_wet: np.array,
+    transition_matrix: np.array,
+    mu_0: float,
+    sigma_0: float,
+    mu_1: float,
+    sigma_1: float,
+    p00: float,
+    p11: float,
+    n_basins: int = 5,
+    n_years: int = 105,
+    seed_value: Union[None, int] = None,
+):
     """Generate synthetic streamflow data using a Hidden Markov Model (HMM).
 
     :param dry_state_means: mean streamflow values for dry state
@@ -512,7 +622,7 @@ def generate_flows(dry_state_means: np.array,
     one_eigval = np.argmin(np.abs(eigenvals - 1))
     pi = eigenvecs[:, one_eigval] / np.sum(eigenvecs[:, one_eigval])
     unconditional_dry = pi[0]
-    unconditional_wet = pi[1]
+    # unconditional_wet = pi[1]
 
     log_annual_q_s = np.zeros([n_years, n_basins])
 
@@ -520,22 +630,33 @@ def generate_flows(dry_state_means: np.array,
 
     if random.random() <= unconditional_dry:
         states[0] = 0
-        log_annual_q_s[0, :] = np.random.multivariate_normal(np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled)
+        log_annual_q_s[0, :] = np.random.multivariate_normal(
+            np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled
+        )
     else:
         states[0] = 1
-        log_annual_q_s[0, :] = np.random.multivariate_normal(np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled)
+        log_annual_q_s[0, :] = np.random.multivariate_normal(
+            np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled
+        )
 
     # generate remaining state trajectory and log space flows
     for j in range(1, np.shape(log_annual_q_s)[0]):
-        if random.random() <= transition_matrix_sampled[int(states[j - 1]), int(states[j - 1])]:
+        if (
+            random.random()
+            <= transition_matrix_sampled[int(states[j - 1]), int(states[j - 1])]
+        ):
             states[j] = states[j - 1]
         else:
             states[j] = 1 - states[j - 1]
 
         if states[j] == 0:
-            log_annual_q_s[j, :] = np.random.multivariate_normal(np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled)
+            log_annual_q_s[j, :] = np.random.multivariate_normal(
+                np.reshape(dry_state_means_sampled, -1), covariance_matrix_dry_sampled
+            )
         else:
-            log_annual_q_s[j, :] = np.random.multivariate_normal(np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled)
+            log_annual_q_s[j, :] = np.random.multivariate_normal(
+                np.reshape(wet_state_means_sampled, -1), covariance_matrix_wet_sampled
+            )
 
     # convert log-space flows to real-space flows
     annual_q_s = np.exp(log_annual_q_s) - 1
@@ -543,11 +664,13 @@ def generate_flows(dry_state_means: np.array,
     return annual_q_s
 
 
-def generate_modified_file(source_object: object,
-                           monthly_data_array: np.array,
-                           output_dir: str,
-                           scenario: str,
-                           sample_id: int = 0):
+def generate_modified_file(
+    source_object: object,
+    monthly_data_array: np.array,
+    output_dir: str,
+    scenario: str,
+    sample_id: int = 0,
+):
     """Generate modified template data frame.
 
     :param source_object:       Instantiated object containing the source data and file specifics.
@@ -567,36 +690,46 @@ def generate_modified_file(source_object: object,
     :type scenario:             str
 
     """
-
     file_spec = source_object.data_spec_dict
 
     # format for overwriting original data in data frame
     arr_shape = monthly_data_array.shape
-    monthly_q_s_frame = monthly_data_array.reshape(arr_shape[0] * arr_shape[1], arr_shape[2])
+    monthly_q_s_frame = monthly_data_array.reshape(
+        arr_shape[0] * arr_shape[1], arr_shape[2]
+    )
 
     # reconstruct precision
-    source_object.template_df[file_spec["value_columns"]] = monthly_q_s_frame.round(0).astype(np.int64)
+    source_object.template_df[file_spec["value_columns"]] = monthly_q_s_frame.round(
+        0
+    ).astype(np.int64)
 
     # recalculate total column
-    source_object.template_df["total"] = source_object.template_df[file_spec["value_columns"]].sum(axis=1).astype(np.int64)
+    source_object.template_df["total"] = (
+        source_object.template_df[file_spec["value_columns"]]
+        .sum(axis=1)
+        .astype(np.int64)
+    )
 
     # convert all fields to str type
     source_object.template_df = source_object.template_df.astype(str)
 
     # add in trailing decimal
-    source_object.template_df[file_spec["value_columns"] + ["total"]] = source_object.template_df[file_spec["value_columns"] + ["total"]] + "."
+    source_object.template_df[file_spec["value_columns"] + ["total"]] = (
+        source_object.template_df[file_spec["value_columns"] + ["total"]] + "."
+    )
 
     # add formatted data to output string
-    data = modify.construct_data_string(source_object.template_df,
-                                        file_spec["column_list"],
-                                        file_spec["column_widths"],
-                                        file_spec["column_alignment"])
+    data = modify.construct_data_string(
+        source_object.template_df,
+        file_spec["column_list"],
+        file_spec["column_widths"],
+        file_spec["column_alignment"],
+    )
 
     # write output file
-    output_file = modify.construct_outfile_name(source_object.template_file,
-                                                output_dir,
-                                                scenario,
-                                                sample_id)
+    output_file = modify.construct_outfile_name(
+        source_object.template_file, output_dir, scenario, sample_id
+    )
 
     with open(output_file, "w") as out:
         # write header
@@ -608,25 +741,27 @@ def generate_modified_file(source_object: object,
     return output_file
 
 
-def modify_single_xbm_iwr(iwr_multiplier: float,
-                          flow_realizations_directory: str,
-                          output_dir: str,
-                          scenario: str = "",
-                          basin_name: str = "Upper_Colorado",
-                          sample_id: int = 0,
-                          n_sites: int = 208,
-                          n_years: int = 105,
-                          xbm_skip_rows: int = 1,
-                          iwr_skip_rows: int = 1,
-                          xbm_template_file: Union[None, str] = None,
-                          iwr_template_file: Union[None, str] = None,
-                          xbm_data_specification_file: Union[None, str] = None,
-                          iwr_data_specification_file: Union[None, str] = None,
-                          historical_column: int = 0,
-                          months_in_year: int = 12,
-                          seed_value: Union[None, int] = None,
-                          randomly_select_flow_sample: bool = True,
-                          desired_sample_number: Union[None, int] = None):
+def modify_single_xbm_iwr(
+    iwr_multiplier: float,
+    flow_realizations_directory: str,
+    output_dir: str,
+    scenario: str = "",
+    basin_name: str = "Upper_Colorado",
+    sample_id: int = 0,
+    n_sites: int = 208,
+    n_years: int = 105,
+    xbm_skip_rows: int = 1,
+    iwr_skip_rows: int = 1,
+    xbm_template_file: Union[None, str] = None,
+    iwr_template_file: Union[None, str] = None,
+    xbm_data_specification_file: Union[None, str] = None,
+    iwr_data_specification_file: Union[None, str] = None,
+    historical_column: int = 0,
+    months_in_year: int = 12,
+    seed_value: Union[None, int] = None,
+    randomly_select_flow_sample: bool = True,
+    desired_sample_number: Union[None, int] = None,
+):
     """Generate synthetic streamflow data using a Hidden Markov Model (HMM).
 
     :param flow_realizations_directory:     Full path to the directory containing the flow realization files for each
@@ -687,7 +822,8 @@ def modify_single_xbm_iwr(iwr_multiplier: float,
     :param seed_value:                      Integer to use for random seed or None if not desired
     :type seed_value:                       Union[None, int] = None)
 
-    :param randomly_select_flow_sample:     Choice to randomly select a realization sample from the flow files directory.
+    :param randomly_select_flow_sample:     Choice to randomly select a realization sample from the flow
+                                            files directory.
     :type randomly_select_flow_sample:      bool
 
     :param desired_sample_number:           If 'randomly_select_flow_sample' is set to False, select a desired sample
@@ -695,36 +831,43 @@ def modify_single_xbm_iwr(iwr_multiplier: float,
     :type desired_sample_number:            Union[None, int]
 
     """
-
     # set random seed if desired
     if seed_value is not None:
         random.seed(seed_value)
         np.random.seed(seed_value)
 
     # instantiate xbm template data and specification
-    xbm = GenerateXbmData(basin_name=basin_name,
-                          skip_rows=xbm_skip_rows,
-                          template_file=xbm_template_file,
-                          data_specification_file=xbm_data_specification_file)
+    xbm = GenerateXbmData(
+        basin_name=basin_name,
+        skip_rows=xbm_skip_rows,
+        template_file=xbm_template_file,
+        data_specification_file=xbm_data_specification_file,
+    )
 
     # instantiate iwr template data and specification
-    iwr = GenerateIwrData(basin_name=basin_name,
-                          skip_rows=iwr_skip_rows,
-                          template_file=iwr_template_file,
-                          data_specification_file=iwr_data_specification_file)
+    iwr = GenerateIwrData(
+        basin_name=basin_name,
+        skip_rows=iwr_skip_rows,
+        template_file=iwr_template_file,
+        data_specification_file=iwr_data_specification_file,
+    )
 
     # calculate the xbm monthly data array
-    MonthlyQ_h = calculate_array_monthly(df=xbm.template_df,
-                                         value_fields=xbm.data_spec_dict["value_columns"],
-                                         year_field="year")
+    MonthlyQ_h = calculate_array_monthly(
+        df=xbm.template_df,
+        value_fields=xbm.data_spec_dict["value_columns"],
+        year_field="year",
+    )
 
     # generate the xbm yearly data array
     AnnualQ_h = calculate_array_annual(MonthlyQ_h)
 
     # calculate the iwr monthly data array
-    MonthlyIWR_h = calculate_array_monthly(df=iwr.template_df,
-                                           value_fields=iwr.data_spec_dict["value_columns"],
-                                           year_field="year")
+    MonthlyIWR_h = calculate_array_monthly(
+        df=iwr.template_df,
+        value_fields=iwr.data_spec_dict["value_columns"],
+        year_field="year",
+    )
 
     # generate the iwr yearly data array
     AnnualIWR_h = calculate_array_annual(MonthlyIWR_h)
@@ -742,23 +885,30 @@ def modify_single_xbm_iwr(iwr_multiplier: float,
         files = glob.glob(os.path.join(flow_realizations_directory, "AnnualQ_s*.txt"))
 
         if len(files) == 0:
-            raise FileNotFoundError(f"No flow files in directory: {flow_realizations_directory}")
+            raise FileNotFoundError(
+                f"No flow files in directory: {flow_realizations_directory}"
+            )
 
         sample_index = np.random.choice(range(len(files) - 1))
         target_sample_file = files[sample_index]
     else:
-
         if desired_sample_number is None:
-            ValueError(f"If 'randomly_select_flow_sample' is False then please provide a value for 'desired_sample_number'.")
+            raise ValueError(
+                "If 'randomly_select_flow_sample' is False, "
+                "please provide a value for 'desired_sample_number'."
+            )
 
-        target_sample_file = os.path.join(flow_realizations_directory, f"AnnualQ_s{desired_sample_number}.txt")
+        target_sample_file = os.path.join(
+            flow_realizations_directory, f"AnnualQ_s{desired_sample_number}.txt"
+        )
 
     print(f"Using sample file:  {target_sample_file}")
     AnnualQ_s = np.loadtxt(target_sample_file)
 
     # calculate annual IWR anomalies based on annual flow anomalies at last node
-    TotalAnnualIWRanomalies_s = BetaIWR * (AnnualQ_s[:,historical_column]-np.mean(AnnualQ_s[:,historical_column])) + \
-            ss.norm.rvs(muIWR, sigmaIWR,len(AnnualQ_s[:,historical_column]))
+    TotalAnnualIWRanomalies_s = BetaIWR * (
+        AnnualQ_s[:, historical_column] - np.mean(AnnualQ_s[:, historical_column])
+    ) + ss.norm.rvs(muIWR, sigmaIWR, len(AnnualQ_s[:, historical_column]))
     TotalAnnualIWR_s = np.mean(IWRsums_h) * iwr_multiplier + TotalAnnualIWRanomalies_s
     AnnualIWR_s = np.outer(TotalAnnualIWR_s, IWRfractions_h)
 
@@ -785,7 +935,9 @@ def modify_single_xbm_iwr(iwr_multiplier: float,
     dists = np.zeros([n_years, np.shape(AnnualQ_h)[0]])
     for j in range(n_years):
         for m in range(np.shape(AnnualQ_h)[0]):
-            dists[j, m] = dists[j, m] + (AnnualQ_s[j, historical_column] - AnnualQ_h[m, -1]) ** 2
+            dists[j, m] = (
+                dists[j, m] + (AnnualQ_s[j, historical_column] - AnnualQ_h[m, -1]) ** 2
+            )
 
     # Create probabilities for assigning a nearest neighbor for the simulated years
     probs = np.zeros([int(np.sqrt(np.shape(AnnualQ_h)[0]))])
@@ -797,65 +949,95 @@ def modify_single_xbm_iwr(iwr_multiplier: float,
     probs = np.insert(probs, 0, 0)
 
     for j in range(n_years):
-
         # select one of k nearest neighbors for each simulated year
-        indices = np.argsort(dists[j, :])[0:int(np.sqrt(np.shape(AnnualQ_h)[0]))]
+        indices = np.argsort(dists[j, :])[0 : int(np.sqrt(np.shape(AnnualQ_h)[0]))]
         randnum = random.random()
         for k in range(1, len(probs)):
             if randnum > probs[k - 1] and randnum <= probs[k]:
                 neighbor_index = indices[k - 1]
 
         # Use selected neighbors to downscale flows and demands each year at last nodw
-        MonthlyQ_s[j, -1, :] = last_node_breakdown[neighbor_index, :] * AnnualQ_s[j, historical_column]
+        MonthlyQ_s[j, -1, :] = (
+            last_node_breakdown[neighbor_index, :] * AnnualQ_s[j, historical_column]
+        )
 
         # Find monthly flows at all other sites each year
         for k in range(months_in_year):
-            MonthlyQ_s[j, :, k] = MonthlyQ_all_ratios[neighbor_index, k, :] * MonthlyQ_s[j, -1, k]
+            MonthlyQ_s[j, :, k] = (
+                MonthlyQ_all_ratios[neighbor_index, k, :] * MonthlyQ_s[j, -1, k]
+            )
 
         for k in range(np.shape(MonthlyIWR_h)[1]):
-            if np.sum(MonthlyIWR_h[neighbor_index * months_in_year:(neighbor_index + 1) * months_in_year, k]) > 0:
-                proportions = MonthlyIWR_h[neighbor_index * months_in_year:(neighbor_index + 1) * months_in_year, k] / np.sum(
-                    MonthlyIWR_h[neighbor_index * months_in_year:(neighbor_index + 1) * months_in_year, k])
+            if (
+                np.sum(
+                    MonthlyIWR_h[
+                        neighbor_index
+                        * months_in_year : (neighbor_index + 1)
+                        * months_in_year,
+                        k,
+                    ]
+                )
+                > 0
+            ):
+                proportions = MonthlyIWR_h[
+                    neighbor_index
+                    * months_in_year : (neighbor_index + 1)
+                    * months_in_year,
+                    k,
+                ] / np.sum(
+                    MonthlyIWR_h[
+                        neighbor_index
+                        * months_in_year : (neighbor_index + 1)
+                        * months_in_year,
+                        k,
+                    ]
+                )
             else:
                 proportions = np.zeros([months_in_year])
 
             MonthlyIWR_s[j, k, :] = proportions * AnnualIWR_s[j, k]
 
     # generate modified output files
-    xbm_new_file = generate_modified_file(source_object=xbm,
-                                          monthly_data_array=MonthlyQ_s,
-                                          output_dir=output_dir,
-                                          scenario=scenario,
-                                          sample_id=sample_id)
+    xbm_new_file = generate_modified_file(
+        source_object=xbm,
+        monthly_data_array=MonthlyQ_s,
+        output_dir=output_dir,
+        scenario=scenario,
+        sample_id=sample_id,
+    )
 
-    iwr_new_file = generate_modified_file(source_object=iwr,
-                                          monthly_data_array=MonthlyIWR_s,
-                                          output_dir=output_dir,
-                                          scenario=scenario,
-                                          sample_id=sample_id)
+    iwr_new_file = generate_modified_file(
+        source_object=iwr,
+        monthly_data_array=MonthlyIWR_s,
+        output_dir=output_dir,
+        scenario=scenario,
+        sample_id=sample_id,
+    )
 
     return xbm_new_file, iwr_new_file
 
 
-def modify_xbm_iwr(output_dir: str,
-                   flow_realizations_directory: str,
-                   scenario: str = "",
-                   basin_name: str = "Upper_Colorado",
-                   n_years: int = 105,
-                   n_basins: int = 5,
-                   xbm_skip_rows: int = 1,
-                   iwr_skip_rows: int = 1,
-                   xbm_template_file: Union[None, str] = None,
-                   iwr_template_file: Union[None, str] = None,
-                   xbm_data_specification_file: Union[None, str] = None,
-                   iwr_data_specification_file: Union[None, str] = None,
-                   months_in_year: int = 12,
-                   seed_value: Union[None, int] = None,
-                   n_jobs: int = -1,
-                   n_samples: int = 1,
-                   save_sample: bool = False,
-                   randomly_select_flow_sample: bool = True,
-                   desired_sample_number: Union[None, int] = None):
+def modify_xbm_iwr(
+    output_dir: str,
+    flow_realizations_directory: str,
+    scenario: str = "",
+    basin_name: str = "Upper_Colorado",
+    n_years: int = 105,
+    n_basins: int = 5,
+    xbm_skip_rows: int = 1,
+    iwr_skip_rows: int = 1,
+    xbm_template_file: Union[None, str] = None,
+    iwr_template_file: Union[None, str] = None,
+    xbm_data_specification_file: Union[None, str] = None,
+    iwr_data_specification_file: Union[None, str] = None,
+    months_in_year: int = 12,
+    seed_value: Union[None, int] = None,
+    n_jobs: int = -1,
+    n_samples: int = 1,
+    save_sample: bool = False,
+    randomly_select_flow_sample: bool = True,
+    desired_sample_number: Union[None, int] = None,
+):
     """Generate flows for all samples for all basins in parallel to build modified XBM and IWR files.
 
     :param output_dir:                      Path to output directory.
@@ -918,7 +1100,8 @@ def modify_xbm_iwr(output_dir: str,
                                             will be written to the output directory.
     :type save_sample:                      bool
 
-    :param randomly_select_flow_sample:     Choice to randomly select a realization sample from the flow files directory.
+    :param randomly_select_flow_sample:     Choice to randomly select a realization sample from the flow
+                                            files directory.
     :type randomly_select_flow_sample:      bool
 
     :param desired_sample_number:           If 'randomly_select_flow_sample' is set to False, select a desired sample
@@ -933,7 +1116,9 @@ def modify_xbm_iwr(output_dir: str,
 
 
         output_directory = "<your desired output directory>"
-        flow_realizations_directory = "<directory where the flow realization files are kept>"
+        flow_realizations_directory = (
+            "<directory where the flow realization files are kept>"
+        )
         scenario = "<your scenario name>"
 
         # basin name to process
@@ -949,49 +1134,62 @@ def modify_xbm_iwr(output_dir: str,
         n_samples = 100
 
         # generate a batch of files using generated LHS
-        stm.modify_xbm_iwr(output_dir=output_directory,
-                           flow_realizations_directory=flow_realizations_directory,
-                           scenario=scenario,
-                           basin_name=basin_name,
-                           seed_value=seed_value,
-                           n_jobs=n_jobs,
-                           n_samples=n_samples,
-                           save_sample=False,
-                           randomly_select_flow_sample=True)
+        stm.modify_xbm_iwr(
+            output_dir=output_directory,
+            flow_realizations_directory=flow_realizations_directory,
+            scenario=scenario,
+            basin_name=basin_name,
+            seed_value=seed_value,
+            n_jobs=n_jobs,
+            n_samples=n_samples,
+            save_sample=False,
+            randomly_select_flow_sample=True,
+        )
 
 
     """
-
     yaml_file = pkg.resource_filename("statemodify", "data/parameter_definitions.yml")
     param_dict = utx.yaml_to_dict(yaml_file)
 
     # generate an array of samples to process
-    sample_array = sampler.generate_sample_iwr(n_samples=n_samples,
-                                               seed_value=seed_value)
+    sample_array = sampler.generate_sample_iwr(
+        n_samples=n_samples, seed_value=seed_value
+    )
 
     # if the user chooses, write the sample to file
     if save_sample:
-        sample_file = os.path.join(output_dir, f"xbm-iwr_{n_samples}-samples_scenario-{scenario}.npy")
+        sample_file = os.path.join(
+            output_dir, f"xbm-iwr_{n_samples}-samples_scenario-{scenario}.npy"
+        )
         np.save(sample_file, sample_array)
 
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_xbm_iwr)(flow_realizations_directory=flow_realizations_directory,
-                                                                                     iwr_multiplier=sample[param_dict["iwr_multiplier"][basin_name]["hmm_index"]],
-                                                                                     n_sites=param_dict["xbm_site_metadata"][basin_name]["n_sites"],
-                                                                                     historical_column=param_dict["xbm_site_metadata"][basin_name]["historical_column"],
-                                                                                     output_dir=output_dir,
-                                                                                     scenario=scenario,
-                                                                                     sample_id=sample_id,
-                                                                                     n_years=n_years,
-                                                                                     xbm_skip_rows=xbm_skip_rows,
-                                                                                     iwr_skip_rows=iwr_skip_rows,
-                                                                                     xbm_template_file=xbm_template_file,
-                                                                                     iwr_template_file=iwr_template_file,
-                                                                                     xbm_data_specification_file=xbm_data_specification_file,
-                                                                                     iwr_data_specification_file=iwr_data_specification_file,
-                                                                                     months_in_year=months_in_year,
-                                                                                     seed_value=seed_value,
-                                                                                     randomly_select_flow_sample=randomly_select_flow_sample,
-                                                                                     desired_sample_number=desired_sample_number) for sample_id, sample in enumerate(sample_array))
+    results = Parallel(n_jobs=n_jobs, backend="loky")(
+        delayed(modify_single_xbm_iwr)(
+            flow_realizations_directory=flow_realizations_directory,
+            iwr_multiplier=sample[
+                param_dict["iwr_multiplier"][basin_name]["hmm_index"]
+            ],
+            n_sites=param_dict["xbm_site_metadata"][basin_name]["n_sites"],
+            historical_column=param_dict["xbm_site_metadata"][basin_name][
+                "historical_column"
+            ],
+            output_dir=output_dir,
+            scenario=scenario,
+            sample_id=sample_id,
+            n_years=n_years,
+            xbm_skip_rows=xbm_skip_rows,
+            iwr_skip_rows=iwr_skip_rows,
+            xbm_template_file=xbm_template_file,
+            iwr_template_file=iwr_template_file,
+            xbm_data_specification_file=xbm_data_specification_file,
+            iwr_data_specification_file=iwr_data_specification_file,
+            months_in_year=months_in_year,
+            seed_value=seed_value,
+            randomly_select_flow_sample=randomly_select_flow_sample,
+            desired_sample_number=desired_sample_number,
+        )
+        for sample_id, sample in enumerate(sample_array)
+    )
 
-
+    del results

@@ -23,7 +23,6 @@ munimultiplierS 0.75 1.25
 rstorage 0.8 1
 powerplants 0 1
 envflows 0 1
-oilgas 0 1 
-tribal 0 1 
+oilgas 0 1
+tribal 0 1
 aspinall 0 1
-

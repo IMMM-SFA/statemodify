@@ -1,17 +1,20 @@
+"""Utility functions for the statemodify package."""
+
 import glob
 import os
-import pkg_resources
 from typing import Union
 
+import pkg_resources
 import yaml
 
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame
-from pygame.locals import QUIT, KEYDOWN
+from pygame.locals import KEYDOWN, QUIT
 
 
 def yaml_to_dict(yaml_file: str) -> dict:
     """Read in a YAML file and convert to a typed dictionary.
+
     NOTE:  code can be executed from the YAML file due to the use of UnsafeLoader.
 
     :param yaml_file:               Full path with file name and extension to the input YAML file.
@@ -21,14 +24,13 @@ def yaml_to_dict(yaml_file: str) -> dict:
     :rtype:                         dict
 
     """
-
-    with open(yaml_file, "r") as yml:
+    with open(yaml_file) as yml:
         return yaml.load(yml, Loader=yaml.UnsafeLoader)
 
 
-def select_template_file(basin_name: str,
-                         template_file: Union[None, str],
-                         extension: Union[None, str] = None) -> str:
+def select_template_file(
+    basin_name: str, template_file: Union[None, str], extension: Union[None, str] = None
+) -> str:
     """Select either the default template file or a user provided one.
 
     :param basin_name:                      Name of basin for either:
@@ -50,11 +52,11 @@ def select_template_file(basin_name: str,
     :rtype:                     str
 
     """
-
     if template_file is None:
-
         # get basin abbreviation from basin name
-        spec_file = pkg_resources.resource_filename("statemodify", "data/basin_specification.yml")
+        spec_file = pkg_resources.resource_filename(
+            "statemodify", "data/basin_specification.yml"
+        )
         basin_spec = yaml_to_dict(spec_file)
         basin_abbrev = basin_spec[basin_name]["abbrev"]
 
@@ -65,8 +67,9 @@ def select_template_file(basin_name: str,
         return template_file
 
 
-def select_data_specification_file(yaml_file: Union[None, str],
-                                   extension: Union[None, str] = None) -> str:
+def select_data_specification_file(
+    yaml_file: Union[None, str], extension: Union[None, str] = None
+) -> str:
     """Select either the default template file or a user provided one.
 
     :param yaml_file:           If a full path to a YAML file is provided it will be used.  Otherwise the
@@ -80,30 +83,37 @@ def select_data_specification_file(yaml_file: Union[None, str],
     :rtype:                     str
 
     """
-
     if yaml_file is None:
-        return pkg_resources.resource_filename("statemodify", f"data/{extension}_data_specification.yml")
+        return pkg_resources.resource_filename(
+            "statemodify", f"data/{extension}_data_specification.yml"
+        )
     else:
         return yaml_file
 
 
 def credits():
     """Run credit reel."""
-
-    credit_list = ["statemodify",
-                   " ",
-                   "A gift to you",
-                   "and yours from:",
-                   " ",
-                   "Rohini S. Gupta",
-                   "and",
-                   "Chris R. Vernon"]
+    credit_list = [
+        "statemodify",
+        " ",
+        "A gift to you",
+        "and yours from:",
+        " ",
+        "Rohini S. Gupta",
+        "and",
+        "Chris R. Vernon",
+    ]
 
     pygame.init()
-    pygame.display.set_caption('End credits')
+    pygame.display.set_caption("End credits")
     screen = pygame.display.set_mode((800, 600))
     screen_r = screen.get_rect()
-    font = pygame.font.Font(pkg_resources.resource_filename("statemodify", "data/EightBit-Atari-Regular.ttf"), 26)
+    font = pygame.font.Font(
+        pkg_resources.resource_filename(
+            "statemodify", "data/EightBit-Atari-Regular.ttf"
+        ),
+        26,
+    )
     music_file = pkg_resources.resource_filename("statemodify", "data/corrina.midi")
 
     clock = pygame.time.Clock()
@@ -111,13 +121,17 @@ def credits():
     pygame.mixer.music.load(music_file)
     pygame.mixer.music.play()
 
-    background_image = pygame.image.load(pkg_resources.resource_filename("statemodify", "data/background.png"))
+    background_image = pygame.image.load(
+        pkg_resources.resource_filename("statemodify", "data/background.png")
+    )
 
     content = []
     for index, line in enumerate(credit_list):
         ft = font.render(line, 1, (255, 255, 255))  # white font
 
-        placement = ft.get_rect(centerx=screen_r.centerx, y=screen_r.bottom + index * 45)
+        placement = ft.get_rect(
+            centerx=screen_r.centerx, y=screen_r.bottom + index * 45
+        )
         content.append((placement, ft))
 
     while True:

@@ -7,11 +7,11 @@
 # host:         Erin-PC
 # directory:    C:\Google Drive\CDSS\data\sj2015\Reservoirs
 # command line: StateDMI
-# 
+#
 #----
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\data\sj2015\Reservoirs\res.commands.StateDMI"
-# Commands: 
+# Commands:
 # # res.commands.StateDMI
 # #
 # # CRWAS extension and update - January 2015
@@ -147,7 +147,7 @@
 # #  Step 6 - create output file
 # #
 # WriteReservoirStationsToStateMod(OutputFile="..\StateMod\sj2015.res")
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Erin-PC
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -155,7 +155,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #>
 #> *************************************************************
@@ -218,33 +218,33 @@
 #>
 #> *************************************************************
 #>
-#>    ID              Name              Node     On/Off  RDate       DailyID 
+#>    ID              Name              Node     On/Off  RDate       DailyID
 #>---------eb----------------------eb----------eb------eb------exb----------e
 #>                       VolMin  VolMax  FloMax  DeadSt NumOwner NumEva  NumPre NumTable
 #>xxxxxxxxxxxxxxxxxxxxxxb------eb------eb------eb------eb------eb------eb------eb------e
 #>                         OwnName   OwnMax   Sto-1 EvapTyp FillTyp
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------eb------eb------eb------e
-#>                        Evap Id    EvapWt 
+#>                        Evap Id    EvapWt
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------e
-#>                        Prec Id    PrecWt 
+#>                        Prec Id    PrecWt
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------e
-#>                        Cont    Area    Seep  
+#>                        Cont    Area    Seep
 #>xxxxxxxxxxxxxxxxxxxxxxb------eb------eb------e
 #>EndHeader
 #>
-29_ARS002   ARS002_SanJuan          29_ARS002          1     -1. 5           
+29_ARS002   ARS002_SanJuan          29_ARS002          1     -1. 5
                               0.   2761. 999999.      0.       1       1       0       2
             Account        2761.   2761.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2761.     276       0
-29_ASS001   ASS001_SanJuan          29_ASS001          1     -1. 5           
+29_ASS001   ASS001_SanJuan          29_ASS001          1     -1. 5
                               0.   4233. 999999.      0.       1       1       0       2
             Account        4233.   4233.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    4233.     423       0
-3003536     CASCADE RESERVOIR       3003536            1     -1. 5           
+3003536     CASCADE RESERVOIR       3003536            1     -1. 5
                               0.  23468. 999999.      0.       2       1       0      11
             Account       22364.  13629.       0       1
             DeadPool       1100.   1100.       0       1
@@ -260,7 +260,7 @@
             CAP-AREA  8   19878.     795       0
             CAP-AREA  9   22364.     825       0
             CAP-AREA 10 9999999.     825       0
-3003581     LEMON RESERVOIR         3003581            1     -1. 5           
+3003581     LEMON RESERVOIR         3003581            1     -1. 5
                               0.  40140.   1000.      0.       9       1       0      14
             Harris_Patte    183.      0.      -1       1
             Pioneer         547.      0.      -1       1
@@ -286,7 +286,7 @@
             CAP-AREA 11   37342.     603       0
             CAP-AREA 12   39173.     617       0
             CAP-AREA 13   40999.     627       0
-3003623     Ridges Basin Reservoir  3003623            1     10. 5           
+3003623     Ridges Basin Reservoir  3003623            1     10. 5
                               0. 120000. 999999.      0.       2       1       0      14
             USA           90000.      0.       0       1
             DeadPool      30000.      0.       0       1
@@ -305,19 +305,19 @@
             CAP-AREA 11  110822.    1433       0
             CAP-AREA 12  121070.    1495       0
             CAP-AREA 13  125000.    1495       0
-30_ARS005   ARS005_Animas           30_ARS005          1     -1. 5           
+30_ARS005   ARS005_Animas           30_ARS005          1     -1. 5
                               0.   3359. 999999.      0.       1       1       0       2
             Account        3359.   3359.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    3359.     336       0
-30_ASS002   ASS002_Animas           30_ASS002          1     -1. 5           
+30_ASS002   ASS002_Animas           30_ASS002          1     -1. 5
                               0.   2469. 999999.      0.       1       1       0       2
             Account        2469.   2469.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2469.     247       0
-3103518     VALLECITO RESERVOIR     3103518            1     -1. 5           
+3103518     VALLECITO RESERVOIR     3103518            1     -1. 5
                            4243. 125441.   2500.      0.      21       1       0      17
             Indian_Water  20900.      0.       0       1
             Farrel          500.      0.       0       1
@@ -358,49 +358,49 @@
             CAP-AREA 14  120022.    2678       0
             CAP-AREA 15  125442.    2743       0
             CAP-AREA 16  129700.    2743       0
-31_ARS004   ARS004_LosPinos         31_ARS004          1     -1. 5           
+31_ARS004   ARS004_LosPinos         31_ARS004          1     -1. 5
                               0.    504. 999999.      0.       1       1       0       2
             Account         504.    504.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     504.   50.40       0
-31_ASS003   ASS003_LosPinos         31_ASS003          1     -1. 5           
+31_ASS003   ASS003_LosPinos         31_ASS003          1     -1. 5
                               0.   1411. 999999.      0.       1       1       0       2
             Account        1411.   1411.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1411.     141       0
-32_ARS008   ARS008_McElmo           32_ARS008          1     -1. 5           
+32_ARS008   ARS008_McElmo           32_ARS008          1     -1. 5
                               0.   1005. 999999.      0.       1       1       0       2
             Account        1005.   1005.       0       1
             Evaporation 10003           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1005.     101       0
-32_ASS004   ASS004_McElmo           32_ASS004          1     -1. 5           
+32_ASS004   ASS004_McElmo           32_ASS004          1     -1. 5
                               0.  16930. 999999.      0.       1       1       0       2
             Account       16930.  16930.       0       1
             Evaporation 10003           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   16930.    1693       0
-3303530     Long Hollow Reservoir   3303530            1     -1. 5           
+3303530     Long Hollow Reservoir   3303530            1     -1. 5
                               0.   1200. 999999.      0.       1       1       0       2
             Acct1          1200.      0.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    5400.     160       0
-33_ARS006   ARS006_LaPlata          33_ARS006          1     -1. 5           
+33_ARS006   ARS006_LaPlata          33_ARS006          1     -1. 5
                               0.   2465. 999999.      0.       1       1       0       2
             Account        2465.   2465.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2465.     247       0
-33_ASS005   ASS005_LaPlata          33_ASS005          1     -1. 5           
+33_ASS005   ASS005_LaPlata          33_ASS005          1     -1. 5
                               0.   2116. 999999.      0.       1       1       0       2
             Account        2116.   2116.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2116.     212       0
-3403589     JACKSON GULCH RESERVOIR 3403589            1     -1. 5           
+3403589     JACKSON GULCH RESERVOIR 3403589            1     -1. 5
                             167.   9980. 999999.      0.       4       1       0      14
             User_Account   9631.      0.       0       1
             USA             200.      0.       0       1
@@ -421,19 +421,19 @@
             CAP-AREA 11    8917.     204       0
             CAP-AREA 12    9980.     220       0
             CAP-AREA 13   11100.     220       0
-34_ARS007   ARS007_Mancos           34_ARS007          1     -1. 5           
+34_ARS007   ARS007_Mancos           34_ARS007          1     -1. 5
                               0.   2830. 999999.      0.       1       1       0       2
             Account        2830.   2830.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2830.     283       0
-34_ASS006   ASS006_Mancos           34_ASS006          1     -1. 5           
+34_ASS006   ASS006_Mancos           34_ASS006          1     -1. 5
                               0.   7760. 999999.      0.       1       1       0       2
             Account        7760.   7760.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    7760.     776       0
-6003507     GURLEY RESERVOIR        6003507            1     -1. 5           
+6003507     GURLEY RESERVOIR        6003507            1     -1. 5
                               0.  10039. 999999.      0.       2       1       0      15
             Account        9539.      0.       0       1
             DeadPool        500.      0.       0       1
@@ -453,7 +453,7 @@
             CAP-AREA 12    8409.     316       0
             CAP-AREA 13   10039.     335       0
             CAP-AREA 14 9999999.     335       0
-6003509     LAKE HOPE RESERVOIR     6003509            1     -1. 5           
+6003509     LAKE HOPE RESERVOIR     6003509            1     -1. 5
                               0.   2315. 999999.      0.       1       1       0      11
             Account        1037.    950.       0       1
             Evaporation 10003           100.
@@ -468,21 +468,21 @@
             CAP-AREA  8    2100.   40.00       0
             CAP-AREA  9    2400.   45.00       0
             CAP-AREA 10 9999999.   45.00       0
-6003510     LILYLANDS RESERVOIR     6003510            1     -1. 5           
+6003510     LILYLANDS RESERVOIR     6003510            1     -1. 5
                               0.    494. 999999.      0.       1       1       0       3
             Irrigation      494.      0.       0       1
             Evaporation 10003           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     653.   37.00       0
             CAP-AREA  2     999.   37.00       0
-6003511     LONE CONE RESERVOIR     6003511            1     -1. 5           
+6003511     LONE CONE RESERVOIR     6003511            1     -1. 5
                               0.   1840. 999999.      0.       1       1       0       3
             Irrigation     1840.      0.       0       1
             Evaporation 10003           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1840.     177       0
             CAP-AREA  2    9999.     177       0
-6003512     MIRAMONTE RESERVOIR     6003512            1     -1. 5           
+6003512     MIRAMONTE RESERVOIR     6003512            1     -1. 5
                               0.   6852. 999999.      0.       1       1       0      14
             Account        6852.      0.       0       1
             Evaporation 10003           100.
@@ -500,7 +500,7 @@
             CAP-AREA 11    5424.     362       0
             CAP-AREA 12    6852.     410       0
             CAP-AREA 13 9999999.     410       0
-6003527     TROUT LAKE RESERVOIR    6003527            1     -1. 5           
+6003527     TROUT LAKE RESERVOIR    6003527            1     -1. 5
                               0.   3422. 999999.      0.       2       1       0      10
             Account        2504.      0.       0       1
             DeadPool        918.      0.       0       1
@@ -515,19 +515,19 @@
             CAP-AREA  7    2900.     130       0
             CAP-AREA  8    3500.     135       0
             CAP-AREA  9 9999999.     135       0
-63_ARS009   ARS009_Dolores          63_ARS009          1     -1. 5           
+63_ARS009   ARS009_Dolores          63_ARS009          1     -1. 5
                               0.  10392. 999999.      0.       1       1       0       2
             Account       10392.  10392.       0       1
             Evaporation 10003           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   10392.    1039       0
-63_ASS007   ASS007_Dolores          63_ASS007          1     -1. 5           
+63_ASS007   ASS007_Dolores          63_ASS007          1     -1. 5
                               0.    352. 999999.      0.       1       1       0       2
             Account         352.    352.       0       1
             Evaporation 10003           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     352.   35.20       0
-7103602     NARRAGUINNEP RESERVOIR  7103602            1     -1. 5           
+7103602     NARRAGUINNEP RESERVOIR  7103602            1     -1. 5
                               0.  18960. 999999.      0.       1       1       0       9
             Account       18900.  11046.       0       1
             Evaporation 10003           100.
@@ -540,7 +540,7 @@
             CAP-AREA  6   13000.     475       0
             CAP-AREA  7   15500.     525       0
             CAP-AREA  8   19018.     580       0
-7103612     GROUNDHOG RESERVOIR     7103612            1     -1. 5           
+7103612     GROUNDHOG RESERVOIR     7103612            1     -1. 5
                               0.  22011. 999999.      0.       3       1       0      12
             MVIC          19411.   7182.       0       1
             McPhee_Ex      2300.    851.       0       1
@@ -558,7 +558,7 @@
             CAP-AREA  9   18810.     614       0
             CAP-AREA 10   22011.     668       0
             CAP-AREA 11 9999999.     668       0
-7103614     MCPHEE RESERVOIR        7103614            1     -1. 5           
+7103614     MCPHEE RESERVOIR        7103614            1     -1. 5
                          151705. 380905. 999999.      0.       9       1       0      11
             MVIC         105500.      0.       0       1
             Ute_Tribe     23300.      0.       0       1
@@ -581,7 +581,7 @@
             CAP-AREA  8  201515.    2807       0
             CAP-AREA  9  285900.    3687       0
             CAP-AREA 10  383799.    4471       0
-7103619     SUMMIT RESERVOIR        7103619            1     -1. 5           
+7103619     SUMMIT RESERVOIR        7103619            1     -1. 5
                               0.   5508. 999999.      0.       2       1       0       8
             Account        5108.   3117.       0       1
             DeadPool        400.    400.       0       1
@@ -594,7 +594,7 @@
             CAP-AREA  5    3096.     308       0
             CAP-AREA  6    4433.     357       0
             CAP-AREA  7    5954.     402       0
-71_Call     McPhee Phantom MVIC Call71_Call            1     11. 5           
+71_Call     McPhee Phantom MVIC Call71_Call            1     11. 5
                               0.  72000. 999999.      0.       1       0       0       7
             Account       72000.      0.       0       1
             CAP-AREA  0     0.00    0.00       0
@@ -604,13 +604,13 @@
             CAP-AREA  4   39179.     816       0
             CAP-AREA  5   63279.    1115       0
             CAP-AREA  6   72000.    1563       0
-77_ARS001   ARS001_Navajo           77_ARS001          1     -1. 5           
+77_ARS001   ARS001_Navajo           77_ARS001          1     -1. 5
                               0.    874. 999999.      0.       1       1       0       2
             Account         874.    874.       0       1
             Evaporation 10007           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     874.   87.40       0
-78_ARS003   003_Piedra              78_ARS003          1     -1. 5           
+78_ARS003   003_Piedra              78_ARS003          1     -1. 5
                               0.  15611. 999999.      0.       1       1       0       2
             Account       15611.  15611.       0       1
             Evaporation 10007           100.

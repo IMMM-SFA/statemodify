@@ -122,7 +122,7 @@ statemodify.generate_wet_covariance_matrix
 statemodify.generate_transition_matrix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autofunction:: statemodify.generate_transition_matrix 
+.. autofunction:: statemodify.generate_transition_matrix
 
 statemodify.calculate_array_monthly
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,12 +132,12 @@ statemodify.calculate_array_monthly
 statemodify.calculate_array_annual
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autofunction:: statemodify.calculate_array_annual 
+.. autofunction:: statemodify.calculate_array_annual
 
 statemodify.calculate_annual_sum
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autofunction:: statemodify.calculate_annual_sum 
+.. autofunction:: statemodify.calculate_annual_sum
 
 statemodify.calculate_annual_mean_fractions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -158,7 +158,7 @@ statemodify.generate_hmm_inputs
 statemodify.generate_flows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autofunction:: statemodify.generate_flows 
+.. autofunction:: statemodify.generate_flows
 
 
 statemodify.generate_modified_file
@@ -278,7 +278,7 @@ statemodify.get_required_arguments
 statemodify.get_arguments_values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autofunction:: statemodify.get_arguments_values 
+.. autofunction:: statemodify.get_arguments_values
 
 statemodify.generate_parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

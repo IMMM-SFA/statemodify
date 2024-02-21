@@ -7,14 +7,14 @@
 # host:         Katie
 # directory:    C:\Google Drive\CDSS\wm2015\Diversions
 # command line: StateDMI
-# 
+#
 #----
-# 
+#
 # StateMod diversion demand time series (monthly).
-# 
+#
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\wm2015\Diversions\Bddm.commands.StateDMI"
-# Commands: 
+# Commands:
 # #
 # # Bddm.commands.StateDMI
 # #
@@ -94,7 +94,7 @@
 # #
 # WriteDiversionDemandTSMonthlyToStateMod(OutputFile="..\StateMod\wm2015B.ddm")
 # #
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Katie
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -102,7 +102,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #
 # StateMod time series

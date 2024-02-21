@@ -1,38 +1,38 @@
 #
-# evadat.                                                                                                                                       
-# net reservoir evaporation annual data                                                                                                         
-#                                                                                                                                               
-# *******************************************************                                                                                       
-#                                                                                                                                               
-#     Card 1   Control                                                                                                                          
-#     format:  (5x, a12, 12f8.0                                                                                                                 
-#                                                                                                                                               
-#     ID       cistat:          Station id                                                                                                      
-#              diverm(1-12):    Evap by month                                                                                                   
-#                                                                                                                                               
-# Oct-Sept units in feet                                                                                                                        
-# 1 yampa,                                                                                                                                      
-# 2 white,                                                                                                                                      
-# 3 dolores/san miguel (mcphee),                                                                                                                
-# 4 san juan (navajo reservoir), Modified to reflect BuRec evap 10/9/98 ra                                                                                                                
-# 5 colorado (rifle gap),                                                                                                                       
-# 6 colorado (ruedi, vega),                                                                                                                     
-# 7 sanjuan,                                                                                                                                    
-# 8 colorado (dillon, williams fork),                                                                                                           
-# 9 colorado (shadow mt, granby, willow crk)                                                                                                    
-#10 gunnison (taylor park)                                                                                                                      
-#11 gunnison (blue mesa, paonia)                                                                                                                
-#12 gunnison (ridgeway)                                                                                                                         
-# 01-03-96: added a ninth evaporation curve for the extreme upper Colorado basin (10009).                                                       
-# This curve was developed from the evaporation pan located at Shadow Mountain Reservoir which reports                                          
-# an annual average gross pan evaporation of 40 inches and a pan coefficient of 0.75 which yields an annual                                     
-# average gross free water surface evaporation value of 30 inches.  Evaporation curve 10008 was developed using                                 
-# 35 inches of gross annual free water survace evaporation.  Curve 10009 was developed by multiplying                                           
-# curve 10008 by the ratio 30/35.                                                                                                               
-#                                                                                                                                               
-# NA ID               Oct     Nov     Dec     Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sep                               
-# -e-b----------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb                              
-   10/   0  -      9/   0   FT  WYR                                                                                                                        
+# evadat.
+# net reservoir evaporation annual data
+#
+# *******************************************************
+#
+#     Card 1   Control
+#     format:  (5x, a12, 12f8.0
+#
+#     ID       cistat:          Station id
+#              diverm(1-12):    Evap by month
+#
+# Oct-Sept units in feet
+# 1 yampa,
+# 2 white,
+# 3 dolores/san miguel (mcphee),
+# 4 san juan (navajo reservoir), Modified to reflect BuRec evap 10/9/98 ra
+# 5 colorado (rifle gap),
+# 6 colorado (ruedi, vega),
+# 7 sanjuan,
+# 8 colorado (dillon, williams fork),
+# 9 colorado (shadow mt, granby, willow crk)
+#10 gunnison (taylor park)
+#11 gunnison (blue mesa, paonia)
+#12 gunnison (ridgeway)
+# 01-03-96: added a ninth evaporation curve for the extreme upper Colorado basin (10009).
+# This curve was developed from the evaporation pan located at Shadow Mountain Reservoir which reports
+# an annual average gross pan evaporation of 40 inches and a pan coefficient of 0.75 which yields an annual
+# average gross free water surface evaporation value of 30 inches.  Evaporation curve 10008 was developed using
+# 35 inches of gross annual free water survace evaporation.  Curve 10009 was developed by multiplying
+# curve 10008 by the ratio 30/35.
+#
+# NA ID               Oct     Nov     Dec     Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sep
+# -e-b----------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb------eb
+   10/   0  -      9/   0   FT  WYR
      10001         0.6747  0.5347  0.4347  0.4247  0.5147  0.6047  0.6947  0.8247  0.9447  0.9347  0.8347  0.7947
      10002           0.13    0.04   -0.05   -0.06    0.02    0.09    0.16     0.3    0.41    0.41    0.27    0.24
      10003           0.13    0.04   -0.02   -0.03    0.05    0.11    0.22    0.33    0.48    0.43    0.32    0.28

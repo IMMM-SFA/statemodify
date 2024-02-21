@@ -7,11 +7,11 @@
 # host:         Katie
 # directory:    C:\Google Drive\CDSS\ym2015\Reservoirs
 # command line: StateDMI
-# 
+#
 #----
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\ym2015\Reservoirs\Bres.commands.StateDMI"
-# Commands: 
+# Commands:
 # # Bres.commands.StateDMI
 # #
 # # Creates the reservoir station file for the Yampa River monthly models
@@ -210,7 +210,7 @@
 # #
 # WriteReservoirStationsToStateMod(OutputFile="..\StateMod\ym2015B.res")
 # #----
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Katie
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -218,7 +218,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #>
 #> *************************************************************
@@ -281,21 +281,21 @@
 #>
 #> *************************************************************
 #>
-#>    ID              Name              Node     On/Off  RDate       DailyID 
+#>    ID              Name              Node     On/Off  RDate       DailyID
 #>---------eb----------------------eb----------eb------eb------exb----------e
 #>                       VolMin  VolMax  FloMax  DeadSt NumOwner NumEva  NumPre NumTable
 #>xxxxxxxxxxxxxxxxxxxxxxb------eb------eb------eb------eb------eb------eb------eb------e
 #>                         OwnName   OwnMax   Sto-1 EvapTyp FillTyp
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------eb------eb------eb------e
-#>                        Evap Id    EvapWt 
+#>                        Evap Id    EvapWt
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------e
-#>                        Prec Id    PrecWt 
+#>                        Prec Id    PrecWt
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------e
-#>                        Cont    Area    Seep  
+#>                        Cont    Area    Seep
 #>xxxxxxxxxxxxxxxxxxxxxxb------eb------eb------e
 #>EndHeader
 #>
-4403902     ELKHEAD CREEK RESERVOIR 4403902            1      4. 5           
+4403902     ELKHEAD CREEK RESERVOIR 4403902            1      4. 5
                               0.  25656. 999999.      0.       5       1       0      21
             Craig_PP       8408.   8408.       0       1
             Craig_muni     4413.   4413.       0       1
@@ -324,7 +324,7 @@
             CAP-AREA 18   26241.     754       0
             CAP-AREA 19   30987.     833       0
             CAP-AREA 20 9999999.     944       0
-4404323     MilkCrkRes              4404323            1     11. 5           
+4404323     MilkCrkRes              4404323            1     11. 5
                               0.  70000. 999999.      0.       3       1       0       3
             Industrial    28000.      0.       0       1
             AgIrr         35000.      0.       0       1
@@ -333,84 +333,84 @@
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   70000.    1400       0
             CAP-AREA  2 9999999.    1400       0
-4404325     Rampart_Res             4404325            1     11. 5           
+4404325     Rampart_Res             4404325            1     11. 5
                               0.  12133. 999999.      0.       1       1       0       3
             AgIrr         12133.      0.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     800.     485       0
             CAP-AREA  2 9999999.     485       0
-44_ARY001   44_ARY001_YampaRbelCraig44_ARY001          1     11. 5           
+44_ARY001   44_ARY001_YampaRbelCraig44_ARY001          1     11. 5
                               0.  23206. 999999.      0.       1       1       0       3
             Operational   23206.  23206.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   23206.     928       0
             CAP-AREA  2 9999999.     928       0
-44_ARY002   44_ARY002_Yampa@Deerlodg44_ARY002          1     11. 5           
+44_ARY002   44_ARY002_Yampa@Deerlodg44_ARY002          1     11. 5
                               0.   9122. 999999.      0.       1       1       0       3
             Operational    9122.   9122.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    9122.     365       0
             CAP-AREA  2 9999999.     365       0
-44_ASY001   44_ASY001_YampaRbelCraig44_ASY001          1     11. 5           
+44_ASY001   44_ASY001_YampaRbelCraig44_ASY001          1     11. 5
                               0.   8344. 999999.      0.       1       1       0       3
             Non-operat     8344.   8344.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    8344.     834       0
             CAP-AREA  2 9999999.     834       0
-44_ASY002   44_ASY002_YampaR@Deerlod44_ASY002          1     11. 5           
+44_ASY002   44_ASY002_YampaR@Deerlod44_ASY002          1     11. 5
                               0.   4441. 999999.      0.       1       1       0       3
             Non-operat     4441.   4441.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    4441.     444       0
             CAP-AREA  2 9999999.     444       0
-44_LBear1   Little Bear 1 Reservoir 44_LBear1          1     11. 5           
+44_LBear1   Little Bear 1 Reservoir 44_LBear1          1     11. 5
                               0.    800. 999999.      0.       1       1       0       3
             AgIrr           800.      0.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     800.   32.00       0
             CAP-AREA  2 9999999.   32.00       0
-44_MonButte Monument Butte Reservoir44_MonButte        1     11. 5           
+44_MonButte Monument Butte Reservoir44_MonButte        1     11. 5
                               0.   4390. 999999.      0.       1       1       0       3
             AgIrr          4390.      0.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    4390.     176       0
             CAP-AREA  2 9999999.     176       0
-44_SFrk2    South Fork 2 Reservoir  44_SFrk2           1     11. 5           
+44_SFrk2    South Fork 2 Reservoir  44_SFrk2           1     11. 5
                               0.   1700. 999999.      0.       1       1       0       3
             AgIrr          1700.      0.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1700.   68.00       0
             CAP-AREA  2 9999999.   68.00       0
-5404208     POT HOOK RESERVOIR      5404208            1     11. 5           
+5404208     POT HOOK RESERVOIR      5404208            1     11. 5
                               0.      0. 999999.      0.       1       1       0       3
             Unknown           0.      0.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     0.00    0.00       0
             CAP-AREA  2 9999999.    0.00       0
-55_ARY003   55_ARY003_LSnakeRnrLily 55_ARY003          1     11. 5           
+55_ARY003   55_ARY003_LSnakeRnrLily 55_ARY003          1     11. 5
                               0.   1494. 999999.      0.       1       1       0       3
             Operational    1494.   1494.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    1494.   59.76       0
             CAP-AREA  2 9999999.   59.76       0
-55_ASY003   55_ASY003_LSnakeRnrLily 55_ASY003          1     11. 5           
+55_ASY003   55_ASY003_LSnakeRnrLily 55_ASY003          1     11. 5
                               0.   3173. 999999.      0.       1       1       0       3
             Non-operat     3173.   3173.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    3173.     317       0
             CAP-AREA  2 9999999.     317       0
-5704204     ENERGY FUELS RES 2      5704204            1     11. 5           
+5704204     ENERGY FUELS RES 2      5704204            1     11. 5
                               0.  11720.  99999.      0.       2       1       0      11
             Energy         7070.      0.       0       1
             Dead_Storage   4650.      0.       0       1
@@ -426,7 +426,7 @@
             CAP-AREA  8   10250.     353       0
             CAP-AREA  9   11720.     385       0
             CAP-AREA 10   12110.     395       0
-5803500     ALLEN BASIN RES         5803500            1     -1. 5           
+5803500     ALLEN BASIN RES         5803500            1     -1. 5
                               0.   2250. 999999.      0.       1       1       0      17
             agg-pool       2250.   2250.       0       1
             Evaporation 10001           100.
@@ -447,7 +447,7 @@
             CAP-AREA 14    2100.   91.40       0
             CAP-AREA 15    2250.   93.40       0
             CAP-AREA 16 9999999.   93.40       0
-5803508     FISH CREEK RES          5803508            1      4. 5           
+5803508     FISH CREEK RES          5803508            1      4. 5
                               0.   4268. 999999.      0.       1       1       0      22
             SSpgs-MtWer    4268.   4268.       0       1
             Evaporation 10001           100.
@@ -473,7 +473,7 @@
             CAP-AREA 19    3899.     132       0
             CAP-AREA 20    4167.     136       0
             CAP-AREA 21    4268.     136       0
-5803521     LESTER CK RESERVOIR     5803521            1     11. 5           
+5803521     LESTER CK RESERVOIR     5803521            1     11. 5
                               0.   5657. 999999.      0.       1       1       0      17
             Consv-pool     5657.   5657.       0       1
             Evaporation 10001           100.
@@ -494,7 +494,7 @@
             CAP-AREA 14    5280.     162       0
             CAP-AREA 15    5657.     168       0
             CAP-AREA 16 9999999.     168       0
-5803540     STILLWATER RES 1        5803540            1     11. 5           
+5803540     STILLWATER RES 1        5803540            1     11. 5
                               0.   6392. 999999.      0.       8       1       0      17
             BigMesa         444.    444.       0       1
             CoalCr          435.    435.       0       1
@@ -522,7 +522,7 @@
             CAP-AREA 14    5966.     147       0
             CAP-AREA 15    6392.     150       0
             CAP-AREA 16 9999999.     150       0
-5803631     LAKE CATAMOUNT          5803631            1     11. 5           
+5803631     LAKE CATAMOUNT          5803631            1     11. 5
                               0.   7422. 999999.      0.       1       1       0      18
             Cons-pool      7422.   7422.       0       1
             Evaporation 10001           100.
@@ -544,7 +544,7 @@
             CAP-AREA 15    7422.     519       0
             CAP-AREA 16    7800.     535       0
             CAP-AREA 17 9999999.     535       0
-5803787     STEAMBOAT LAKE          5803787            1     11. 5           
+5803787     STEAMBOAT LAKE          5803787            1     11. 5
                               0.  26364.    450.      0.       3       1       0      18
             HaydenSt       5000.   5000.       0       1
             Consv-pool    18209.  18209.       0       1
@@ -568,7 +568,7 @@
             CAP-AREA 15   23064.    1037       0
             CAP-AREA 16   26364.    1151       0
             CAP-AREA 17 9999999.    1151       0
-5803913     Morrison Creek Reservoir5803913            1      4. 5           
+5803913     Morrison Creek Reservoir5803913            1      4. 5
                               0.   4965. 999999.      0.       3       1       0       3
             FirstFill      4215.      0.       0       1
             IcingPool       750.      0.       0       1
@@ -577,7 +577,7 @@
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    4965.     200       0
             CAP-AREA  2 9999999.     200       0
-5804213     STAGECOACH RESERVOIR    5804213            1      3. 5           
+5804213     STAGECOACH RESERVOIR    5804213            1      3. 5
                               0.  36460. 999999.      0.       8       1       0      19
             Tri-state      7000.   7000.       0       1
             muni-pool      2000.   2000.       0       1
@@ -607,7 +607,7 @@
             CAP-AREA 16   34776.     790       0
             CAP-AREA 17   35974.     804       0
             CAP-AREA 18   37193.     818       0
-5804240     YAMCOLO RES             5804240            1     11. 5           
+5804240     YAMCOLO RES             5804240            1     11. 5
                               0.   9621. 999999.      0.       6       1       0      20
             Conservation   1086.   1086.       0       1
             YamcoloM&I     1010.   1010.       0       1
@@ -636,21 +636,21 @@
             CAP-AREA 17    9284.     188       0
             CAP-AREA 18    9621.     202       0
             CAP-AREA 19 9999999.     202       0
-9903000     9903000_Wyo_above       9903000            1     11. 5           
+9903000     9903000_Wyo_above       9903000            1     11. 5
                               0.    860. 999999.      0.       1       1       0       3
             Non_operat      860.    860.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     860.   74.00       0
             CAP-AREA  2 9999999.   74.00       0
-9903001     9903001_Wyo_below       9903001            1     11. 5           
+9903001     9903001_Wyo_below       9903001            1     11. 5
                               0.    390. 999999.      0.       1       1       0       3
             Non_operat      390.    390.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     390.   34.00       0
             CAP-AREA  2 9999999.   34.00       0
-9903002     HIGH SAVERY RESERVOIR   9903002            1     11. 5           
+9903002     HIGH SAVERY RESERVOIR   9903002            1     11. 5
                               0.  22433. 999999.   5720.       1       1       0      28
             Irrigation    22433.  22433.       0       1
             Evaporation 10001           100.
@@ -682,28 +682,28 @@
             CAP-AREA 25   17928.     419       0
             CAP-AREA 26   20101.     450       0
             CAP-AREA 27   22433.     482       0
-9903003     9903003_Wyo_dikes       9903003            1     11. 5           
+9903003     9903003_Wyo_dikes       9903003            1     11. 5
                               0.    570. 999999.      0.       1       1       0       3
             Non_operat      570.    570.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     570.   48.00       0
             CAP-AREA  2 9999999.   48.00       0
-9903004     9903004LS_Small_R       9903004            1     11. 5           
+9903004     9903004LS_Small_R       9903004            1     11. 5
                               0.    290. 999999.      0.       1       1       0       3
             Non_operat      290.    290.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1     290.   29.00       0
             CAP-AREA  2 9999999.   29.00       0
-9903005     9903005_Wyo_new         9903005            1     11. 5           
+9903005     9903005_Wyo_new         9903005            1     11. 5
                               0.  16000. 999999.      0.       1       1       0       3
             Ag             9000.      0.       0       1
             Evaporation 10001           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1   16000.     320       0
             CAP-AREA  2 9999999.     320       0
-9903007     9903007_Willow Ck_S     9903007            1     11. 5           
+9903007     9903007_Willow Ck_S     9903007            1     11. 5
                               0.      0. 999999.      0.       1       1       0       3
             Unknown           0.      0.       0       1
             Evaporation 10001           100.

@@ -1,9 +1,12 @@
-# Assumptions for template file contents and parsing for the StateMod evapotranspiration file (.eva)
+---
+# Assumptions for template file contents and parsing for the StateMod
+# evapotranspiration file (.eva)
 
 # Character(s) indicating the line in the file is a comment.
 comment_indicator: "#"
 
-# Field specification in the file as a dictionary to hold the values for each field
+# Field specification in the file as a dictionary to hold the
+# values for each field
 data_dict:
   "prefix": []
   "id": []

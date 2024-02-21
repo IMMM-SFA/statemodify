@@ -1,5 +1,7 @@
+"""This module is responsible for modifying StateMod Demand (.ddm) files based on specified criteria."""
+
 import os
-from typing import Union, Dict, List
+from typing import Dict, List, Union
 
 import numpy as np
 from joblib import Parallel, delayed
@@ -9,20 +11,23 @@ import statemodify.sampler as sampler
 import statemodify.utils as utx
 
 
-def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
-                      query_field: str,
-                      output_dir: str,
-                      scenario: str,
-                      basin_name: str,
-                      sample: np.array,
-                      sample_id: int = 0,
-                      skip_rows: int = 1,
-                      template_file: Union[None, str] = None,
-                      factor_method: str = "multiply",
-                      data_specification_file: Union[None, str] = None,
-                      min_bound_value: float = 0.5,
-                      max_bound_value: float = 1.5) -> None:
+def modify_single_ddm(
+    modify_dict: dict[str, list[Union[str, float]]],
+    query_field: str,
+    output_dir: str,
+    scenario: str,
+    basin_name: str,
+    sample: np.array,
+    sample_id: int = 0,
+    skip_rows: int = 1,
+    template_file: Union[None, str] = None,
+    factor_method: str = "multiply",
+    data_specification_file: Union[None, str] = None,
+    min_bound_value: float = 0.5,
+    max_bound_value: float = 1.5,
+) -> None:
     """Modify StateMod municipal, industrial, transbasin Demands (.ddm) using a sample from the user.
+
     Samples are processed in parallel. Modification is targeted at ids to modify are specified in
     the `modify_dict` argument. The user must specify bounds by which the samples will be generated.
 
@@ -85,10 +90,7 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         import statemodify as stm
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
-        setup_dict = {
-            "ids": ["10001", "10004"],
-            "bounds": [0.5, 1.0]
-        }
+        setup_dict = {"ids": ["10001", "10004"], "bounds": [0.5, 1.0]}
 
         output_directory = "<your desired output directory>"
         scenario = "<your scenario name>"
@@ -115,69 +117,81 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         basin_name = "Upper_Colorado"
 
         # generate a batch of files using generated LHS
-        stm.modify_single_ddm(modify_dict=setup_dict,
-                              query_field=query_field,
-                              sample=sample,
-                              sample_id=sample_id,
-                              output_dir=output_dir,
-                              scenario=scenario,
-                              basin_name=basin_name,
-                              skip_rows=skip_rows,
-                              template_file=None,
-                              factor_method="multiply",
-                              data_specification_file=None,
-                              min_bound_value=-0.5,
-                              max_bound_value=1.0)
+        stm.modify_single_ddm(
+            modify_dict=setup_dict,
+            query_field=query_field,
+            sample=sample,
+            sample_id=sample_id,
+            output_dir=output_dir,
+            scenario=scenario,
+            basin_name=basin_name,
+            skip_rows=skip_rows,
+            template_file=None,
+            factor_method="multiply",
+            data_specification_file=None,
+            min_bound_value=-0.5,
+            max_bound_value=1.0,
+        )
 
     """
-
     # select the appropriate template file
     template_file = utx.select_template_file(basin_name, template_file, extension="ddm")
 
     # read in data specification yaml
-    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                 extension="ddm")
+    data_specification_file = utx.select_data_specification_file(
+        yaml_file=data_specification_file, extension="ddm"
+    )
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
     # instantiate data specification and validation class
-    file_spec = modify.Modify(comment_indicator=data_spec_dict["comment_indicator"],
-                              data_dict=data_spec_dict["data_dict"],
-                              column_widths=data_spec_dict["column_widths"],
-                              column_alignment=data_spec_dict["column_alignment"],
-                              data_types=data_spec_dict["data_types"],
-                              column_list=data_spec_dict["column_list"],
-                              value_columns=data_spec_dict["value_columns"])
+    file_spec = modify.Modify(
+        comment_indicator=data_spec_dict["comment_indicator"],
+        data_dict=data_spec_dict["data_dict"],
+        column_widths=data_spec_dict["column_widths"],
+        column_alignment=data_spec_dict["column_alignment"],
+        data_types=data_spec_dict["data_types"],
+        column_list=data_spec_dict["column_list"],
+        value_columns=data_spec_dict["value_columns"],
+    )
 
     # prepare template data frame for alteration
-    template_df, template_header = modify.prep_data(field_dict=file_spec.data_dict,
-                                                    template_file=template_file,
-                                                    column_list=file_spec.column_list,
-                                                    column_widths=file_spec.column_widths,
-                                                    data_types=file_spec.data_types,
-                                                    comment=file_spec.comment_indicator,
-                                                    skip_rows=skip_rows)
+    template_df, template_header = modify.prep_data(
+        field_dict=file_spec.data_dict,
+        template_file=template_file,
+        column_list=file_spec.column_list,
+        column_widths=file_spec.column_widths,
+        data_types=file_spec.data_types,
+        comment=file_spec.comment_indicator,
+        skip_rows=skip_rows,
+    )
 
     # strip the query field of any whitespace
     template_df[query_field] = template_df[query_field].str.strip()
 
     # validate user provided sample bounds to ensure they are within a feasible range
-    modify.validate_bounds(bounds_list=[modify_dict["bounds"]],
-                           min_value=min_bound_value,
-                           max_value=max_bound_value)
+    modify.validate_bounds(
+        bounds_list=[modify_dict["bounds"]],
+        min_value=min_bound_value,
+        max_value=max_bound_value,
+    )
 
     # extract target ids to modify
     id_list = modify_dict["ids"]
 
     # apply adjustment
-    template_df[file_spec.value_columns] = modify.apply_adjustment_factor(data_df=template_df,
-                                                                          value_columns=file_spec.value_columns,
-                                                                          query_field=query_field,
-                                                                          target_ids=id_list,
-                                                                          factor=sample,
-                                                                          factor_method=factor_method)
+    template_df[file_spec.value_columns] = modify.apply_adjustment_factor(
+        data_df=template_df,
+        value_columns=file_spec.value_columns,
+        query_field=query_field,
+        target_ids=id_list,
+        factor=sample,
+        factor_method=factor_method,
+    )
 
     # reconstruct precision
-    template_df[file_spec.value_columns] = template_df[file_spec.value_columns].round(0).astype(np.int64)
+    template_df[file_spec.value_columns] = (
+        template_df[file_spec.value_columns].round(0).astype(np.int64)
+    )
 
     # convert all fields to str type
     template_df = template_df.astype(str)
@@ -186,13 +200,17 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
     template_df[file_spec.value_columns] = template_df[file_spec.value_columns] + "."
 
     # add formatted data to output string
-    data = modify.construct_data_string(template_df,
-                                        file_spec.column_list,
-                                        file_spec.column_widths,
-                                        file_spec.column_alignment)
+    data = modify.construct_data_string(
+        template_df,
+        file_spec.column_list,
+        file_spec.column_widths,
+        file_spec.column_alignment,
+    )
 
     # write output file
-    output_file = modify.construct_outfile_name(template_file, output_dir, scenario, sample_id)
+    output_file = modify.construct_outfile_name(
+        template_file, output_dir, scenario, sample_id
+    )
 
     with open(output_file, "w") as out:
         # write header
@@ -202,25 +220,29 @@ def modify_single_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         out.write(data)
 
 
-def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
-               query_field: str,
-               output_dir: str,
-               scenario: str,
-               basin_name: str,
-               sampling_method: str = "LHS",
-               n_samples: int = 1,
-               skip_rows: int = 1,
-               n_jobs: int = -1,
-               seed_value: Union[None, int] = None,
-               template_file: Union[None, str] = None,
-               factor_method: str = "multiply",
-               data_specification_file: Union[None, str] = None,
-               min_bound_value: float = 0.5,
-               max_bound_value: float = 1.5,
-               save_sample: bool = False,
-               sample_array: Union[None, np.array] = None) -> None:
-    """Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm) using a Latin Hypercube Sample
-    from the user. Samples are processed in parallel. Modification is targeted at ids to modify are specified in
+def modify_ddm(
+    modify_dict: dict[str, list[Union[str, float]]],
+    query_field: str,
+    output_dir: str,
+    scenario: str,
+    basin_name: str,
+    sampling_method: str = "LHS",
+    n_samples: int = 1,
+    skip_rows: int = 1,
+    n_jobs: int = -1,
+    seed_value: Union[None, int] = None,
+    template_file: Union[None, str] = None,
+    factor_method: str = "multiply",
+    data_specification_file: Union[None, str] = None,
+    min_bound_value: float = 0.5,
+    max_bound_value: float = 1.5,
+    save_sample: bool = False,
+    sample_array: Union[None, np.array] = None,
+) -> None:
+    """Parallel modification of StateMod municipal, industrial, transbasin Demands (.ddm).
+
+    Modifed using a Latin Hypercube Sample from the user.
+    Samples are processed in parallel. Modification is targeted at ids to modify are specified in
     the `modify_dict` argument. The user must specify bounds by which the samples will be generated.
 
     :param modify_dict:         Dictionary of parameters to setup the sampler.  See following example.
@@ -243,7 +265,8 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
                                                 White
     :type basin_name:                       str
 
-    :param sampling_method:     Sampling method.  Uses SALib's implementation (see https://salib.readthedocs.io/en/latest/).
+    :param sampling_method:     Sampling method.  Uses SALib's implementation
+                                (see https://salib.readthedocs.io/en/latest/).
                                 Currently supports the following method:  "LHS" for Latin Hypercube Sampling
     :type sampling_method:      str
 
@@ -297,10 +320,7 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         import statemodify as stm
 
         # a dictionary to describe what you want to modify and the bounds for the LHS
-        setup_dict = {
-            "ids": ["3600507", "3600603"],
-            "bounds": [0.5, 1.0]
-        }
+        setup_dict = {"ids": ["3600507", "3600603"], "bounds": [0.5, 1.0]}
 
         output_directory = "<your desired output directory>"
         scenario = "<your scenario name>"
@@ -324,52 +344,63 @@ def modify_ddm(modify_dict: Dict[str, List[Union[str, float]]],
         basin_name = "Upper_Colorado"
 
         # generate a batch of files using generated LHS
-        stm.modify_ddm(modify_dict=setup_dict,
-                       query_field=query_field,
-                       output_dir=output_directory,
-                       scenario=scenario,
-                       basin_name=basin_name,
-                       sampling_method="LHS",
-                       n_samples=n_samples,
-                       skip_rows=skip_rows,
-                       n_jobs=n_jobs,
-                       seed_value=seed_value,
-                       template_file=None,
-                       factor_method="multiply",
-                       data_specification_file=None,
-                       min_bound_value=-0.5,
-                       max_bound_value=1.0,
-                       save_sample=False)
+        stm.modify_ddm(
+            modify_dict=setup_dict,
+            query_field=query_field,
+            output_dir=output_directory,
+            scenario=scenario,
+            basin_name=basin_name,
+            sampling_method="LHS",
+            n_samples=n_samples,
+            skip_rows=skip_rows,
+            n_jobs=n_jobs,
+            seed_value=seed_value,
+            template_file=None,
+            factor_method="multiply",
+            data_specification_file=None,
+            min_bound_value=-0.5,
+            max_bound_value=1.0,
+            save_sample=False,
+        )
 
     """
-
     if sample_array is None:
-
         # build a problem dictionary for use by SALib
         problem_dict = sampler.build_problem_dict(modify_dict, fill=True)
 
         # generate a sample array
-        sample_array = sampler.generate_samples(problem_dict=problem_dict,
-                                                n_samples=n_samples,
-                                                sampling_method=sampling_method,
-                                                seed_value=seed_value)
+        sample_array = sampler.generate_samples(
+            problem_dict=problem_dict,
+            n_samples=n_samples,
+            sampling_method=sampling_method,
+            seed_value=seed_value,
+        )
 
     # if the user chooses, write the sample to file
     if save_sample:
-        sample_file = os.path.join(output_dir, f"ddm_{n_samples}-samples_scenario-{scenario}.npy")
+        sample_file = os.path.join(
+            output_dir, f"ddm_{n_samples}-samples_scenario-{scenario}.npy"
+        )
         np.save(sample_file, sample_array)
 
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_ddm)(modify_dict=modify_dict,
-                                                                                 query_field=query_field,
-                                                                                 sample=sample,
-                                                                                 basin_name=basin_name,
-                                                                                 sample_id=sample_id,
-                                                                                 output_dir=output_dir,
-                                                                                 scenario=scenario,
-                                                                                 skip_rows=skip_rows,
-                                                                                 template_file=template_file,
-                                                                                 factor_method=factor_method,
-                                                                                 data_specification_file=data_specification_file,
-                                                                                 min_bound_value=min_bound_value,
-                                                                                 max_bound_value=max_bound_value) for sample_id, sample in enumerate(sample_array))
+    results = Parallel(n_jobs=n_jobs, backend="loky")(
+        delayed(modify_single_ddm)(
+            modify_dict=modify_dict,
+            query_field=query_field,
+            sample=sample,
+            basin_name=basin_name,
+            sample_id=sample_id,
+            output_dir=output_dir,
+            scenario=scenario,
+            skip_rows=skip_rows,
+            template_file=template_file,
+            factor_method=factor_method,
+            data_specification_file=data_specification_file,
+            min_bound_value=min_bound_value,
+            max_bound_value=max_bound_value,
+        )
+        for sample_id, sample in enumerate(sample_array)
+    )
+
+    del results
