@@ -1,32 +1,33 @@
+---
 # for HMM in XBM and IWR modifier
 mu0:
   index: 0
-  lower: 0.98 
+  lower: 0.98
   upper: 1.02
 
 sigma0:
   index: 1
-  lower: 0.75 
+  lower: 0.75
   upper: 1.25
 
 mu1:
   index: 2
-  lower: 0.98 
+  lower: 0.98
   upper: 1.02
 
-sigma1: 
+sigma1:
   index: 3
-  lower: 0.75 
+  lower: 0.75
   upper: 1.25
 
-p00: 
+p00:
   index: 4
-  lower: -0.3 
+  lower: -0.3
   upper: 0.3
 
 p11:
   index: 5
-  lower: -0.3 
+  lower: -0.3
   upper: 0.3
 
 # other
@@ -204,4 +205,3 @@ muni_multiplier:
     index: 27
     lower: 0.75
     upper: 1.25
-

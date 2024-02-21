@@ -7,11 +7,11 @@
 # host:         Logan_Laptop
 # directory:    C:\Users\CTS\Google Drive\CDSS\Data\cm2015_7\Diversions
 # command line: StateDMI
-# 
+#
 #----
 # -----------------------------------------------------------------------
 # Command file name: "C:\Users\CTS\Google Drive\CDSS\Data\cm2015_7\Diversions\cm2015_ddr.commands.StateDMI"
-# Commands: 
+# Commands:
 # # ddr.commands.StateDMI
 # #
 # #  StateDMI command file to create the direct diversion rights file for the Colorado model
@@ -377,7 +377,7 @@
 # SetDiversionRight(ID="7200766_I.04",Name="Mason Eddy Ditch-irrig",StationID="ID",AdministrationNumber=32811.00000,Decree=2.12,OnOff=0,IfNotFound=Warn,IfFound=Set)
 # #
 # WriteDiversionRightsToStateMod(OutputFile="..\StateMod\cm2015B.ddr")
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Logan_Laptop
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -385,7 +385,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #>
 #>***************************************************
@@ -393,7 +393,7 @@
 #>
 #>     format:  (a12, a24, a12, f16.5, f8.2, i8)
 #>
-#>     ID       cidvri:  Diversion right ID 
+#>     ID       cidvri:  Diversion right ID
 #>     Name      named:  Diversion right name
 #>     Struct    cgoto:  Direct Diversion Structure ID associated with this right
 #>     Admin #   irtem:  Administration number

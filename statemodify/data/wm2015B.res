@@ -7,11 +7,11 @@
 # host:         Katie
 # directory:    C:\Google Drive\CDSS\wm2015\Reservoirs
 # command line: StateDMI
-# 
+#
 #----
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\wm2015\Reservoirs\Bres.commands.StateDMI"
-# Commands: 
+# Commands:
 # # Bres.commands.stateDMI
 # #
 # # Creates the reservoir station file for the White River monthly model
@@ -60,7 +60,7 @@
 # # Step 7 - create output file
 # WriteReservoirStationsToStateMod(OutputFile="..\StateMod\wm2015B.res")
 # #
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Katie
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -68,7 +68,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #>
 #> *************************************************************
@@ -131,21 +131,21 @@
 #>
 #> *************************************************************
 #>
-#>    ID              Name              Node     On/Off  RDate       DailyID 
+#>    ID              Name              Node     On/Off  RDate       DailyID
 #>---------eb----------------------eb----------eb------eb------exb----------e
 #>                       VolMin  VolMax  FloMax  DeadSt NumOwner NumEva  NumPre NumTable
 #>xxxxxxxxxxxxxxxxxxxxxxb------eb------eb------eb------eb------eb------eb------eb------e
 #>                         OwnName   OwnMax   Sto-1 EvapTyp FillTyp
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------eb------eb------eb------e
-#>                        Evap Id    EvapWt 
+#>                        Evap Id    EvapWt
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------e
-#>                        Prec Id    PrecWt 
+#>                        Prec Id    PrecWt
 #>xxxxxxxxxxxxxxxxxxxxxxb----------eb------e
-#>                        Cont    Area    Seep  
+#>                        Cont    Area    Seep
 #>xxxxxxxxxxxxxxxxxxxxxxb------eb------eb------e
 #>EndHeader
 #>
-4303633     Big Beaver Creek Reservo4303633            1     -1. 5           
+4303633     Big Beaver Creek Reservo4303633            1     -1. 5
                               0.   7658. 999999.      0.       1       1       0      17
             Active Stora   7658.   7658.     100       1
             Evaporation 10002           100.
@@ -166,13 +166,13 @@
             CAP-AREA 14    7147.     262       0
             CAP-AREA 15    7658.     274       0
             CAP-AREA 16  999999.     274       0
-4304313     Wolf Creek Reservoir    4304313            1      4. 5           
+4304313     Wolf Creek Reservoir    4304313            1      4. 5
                               0. 162400. 999999.      0.       1       1       0       2
             Active       162400.      0.     100       1
             Evaporation 10002           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1  162400.    1624       0
-4304433     Taylor Draw Reservoir   4304433            1     -1. 5           
+4304433     Taylor Draw Reservoir   4304433            1     -1. 5
                               0.  13800. 999999.      0.       1       1       0      17
             Live Storage  13800.  13800.     100       1
             Evaporation 10002           100.
@@ -193,25 +193,25 @@
             CAP-AREA 14   12880.     562       0
             CAP-AREA 15   13800.     587       0
             CAP-AREA 16  999999.     587       0
-43_ARW001   Agg Res near COLO-UTAH s43_ARW001          1     -1. 5           
+43_ARW001   Agg Res near COLO-UTAH s43_ARW001          1     -1. 5
                               0.   2117. 999999.      0.       1       1       0       2
             Active Stora   2117.   2117.     100       1
             Evaporation 10002           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2117.   88.00       0
-43_ARW002   Agg Res above Piceance C43_ARW002          1     -1. 5           
+43_ARW002   Agg Res above Piceance C43_ARW002          1     -1. 5
                               0.   2117. 999999.      0.       1       1       0       2
             Active Stora   2117.   2117.     100       1
             Evaporation 10002           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2117.   88.00       0
-43_ASW001   Stock Pond near COLO-UTA43_ASW001          1     -1. 5           
+43_ASW001   Stock Pond near COLO-UTA43_ASW001          1     -1. 5
                               0.   2388. 999999.      0.       1       1       0       2
             Active Stora   2388.   2388.     100       1
             Evaporation 10002           100.
             CAP-AREA  0     0.00    0.00       0
             CAP-AREA  1    2388.     239       0
-43_ASW002   Stock Pond above Piceanc43_ASW002          1     -1. 5           
+43_ASW002   Stock Pond above Piceanc43_ASW002          1     -1. 5
                               0.   2388. 999999.      0.       1       1       0       2
             Active Stora   2388.   2388.     100       1
             Evaporation 10002           100.

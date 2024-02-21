@@ -2,7 +2,7 @@
 # gm2015B.rsp
 #
 # StateMod Response File
-# for the Gunnison River Basin 
+# for the Gunnison River Basin
 # This file is step 7 of the Gunnison model development
 # Step 1 = use gm2015.rsp file with StateMod option 1 (baseflow at gaged locations)
 # Step 2 = Mixed Station Model (fill basedflows at gaged locations)
@@ -15,48 +15,39 @@
 # StateMod Response File
 #
 # Type                                    Name
-# ______________________________________  ________________________________________________________________________                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+# ______________________________________  ________________________________________________________________________
 # CONTROL DATA
-Control                                 = gm2015.ctl 
-# RIVER NETWORK 
-River_Network                           = gm2015.rin 
+Control                                 = gm2015.ctl
+# RIVER NETWORK
+River_Network                           = gm2015.rin
 # CONSUMPTIVE USE DATA
-StateCU_Structure                       = gm2015.str   
+StateCU_Structure                       = gm2015.str
 ConsumptiveWaterRequirement_Monthly     = gm2015B.iwr
 IrrigationPractice_Yearly               = gm2015B.ipy
 # STREAM GAGE DATA
-StreamGage_Station                      = gm2015.ris                                                                                                                                                                                                                                                  
-StreamEstimate_Coefficients             = gm2015.rib                                                                                                                                                                                                                                                
+StreamGage_Station                      = gm2015.ris
+StreamEstimate_Coefficients             = gm2015.rib
 StreamGage_Historic_Monthly             = gm2015.rih
 Stream_Base_Monthly                     = gm2015x.xbm
 # DIVERSION DATA
-Diversion_Station                       = gm2015.dds    
+Diversion_Station                       = gm2015.dds
 Diversion_Right                         = gm2015B.ddr
-Diversion_Historic_Monthly              = gm2015.ddh 
-Diversion_Demand_Monthly                = gm2015B.ddm 
-# RESERVOIR DATA 
-Reservoir_Station                       = gm2015B.res 
-Reservoir_Right                         = gm2015.rer                                                                                                                                                                                                                                            
-Evaporation_Annual                      = gm2015.eva 
-Reservoir_Historic_Monthly              = gm2015.eom 
+Diversion_Historic_Monthly              = gm2015.ddh
+Diversion_Demand_Monthly                = gm2015B.ddm
+# RESERVOIR DATA
+Reservoir_Station                       = gm2015B.res
+Reservoir_Right                         = gm2015.rer
+Evaporation_Annual                      = gm2015.eva
+Reservoir_Historic_Monthly              = gm2015.eom
 Reservoir_Target_Monthly                = gm2015B.tar
-# INSTREAM FLOW DATA  
-Instreamflow_Station                    = gm2015.ifs 
-Instreamflow_Right                      = gm2015.ifr                                                                                                                                                                                                                                                   
-Instreamflow_Demand_AverageMonthly      = gm2015.ifa                                                                                                                                                                                                                                             
-Instreamflow_Demand_Monthly             = gm2015.ifm    
+# INSTREAM FLOW DATA
+Instreamflow_Station                    = gm2015.ifs
+Instreamflow_Right                      = gm2015.ifr
+Instreamflow_Demand_AverageMonthly      = gm2015.ifa
+Instreamflow_Demand_Monthly             = gm2015.ifm
 # OPERATIONs & PLAN DATA
-Operational_Right                      = gm2015B.opr                                                                                                                                                                                                                                                    
+Operational_Right                      = gm2015B.opr
 # DELAY TABLE DATA
-DelayTable_Monthly                      = gm2015.dly                                                                                                                                                                                                                                       
+DelayTable_Monthly                      = gm2015.dly
 # PLAN
 Plan_Data                               = gm2015.pln
-                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                       
-                                                                                                                                                                                                                                           
-                                                                                                                                                                                                                                                  
-
-                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                          

@@ -7,14 +7,14 @@
 # host:         Erin-PC
 # directory:    C:\Google Drive\CDSS\data\sj2015\Diversions
 # command line: StateDMI
-# 
+#
 #----
-# 
+#
 # StateMod diversion historical time series (monthly).
-# 
+#
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\data\sj2015\Diversions\Biwr.commands.StateDMI"
-# Commands: 
+# Commands:
 # #iwr.commands.StateDMI
 # #
 # #  StateDMI commands file to fill ddc file back to 1909
@@ -30,7 +30,7 @@
 # #
 # ReadDiversionHistoricalTSMonthlyFromStateMod(InputFile="..\StateCU\sj2015B.ddc")
 # #
-# 
+#
 # #
 # #  Step 3 - fill historical diversion using pattern approach
 # #
@@ -54,7 +54,7 @@
 # #
 # SortDiversionHistoricalTSMonthly(Order=Ascending)
 # WriteDiversionHistoricalTSMonthlyToStateMod(OutputFile="..\statemod\sj2015B.iwr")
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Erin-PC
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -62,7 +62,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #
 # StateMod time series

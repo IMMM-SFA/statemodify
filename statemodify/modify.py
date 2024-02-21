@@ -1,3 +1,9 @@
+"""Module for modifying state data.
+
+This module provides functions for modifying state data, including setting alignment,
+padding with spaces, and other utilities for data manipulation.
+"""
+
 import os
 from dataclasses import dataclass
 from typing import Dict, List
@@ -6,9 +12,7 @@ import numpy as np
 import pandas as pd
 
 
-def set_alignment(value: str,
-                  n_spaces: int = 0,
-                  align: str = "left") -> str:
+def set_alignment(value: str, n_spaces: int = 0, align: str = "left") -> str:
     """Set left or right alignment.
 
     :param value:                   Value to evaluate.
@@ -24,7 +28,6 @@ def set_alignment(value: str,
     :return:                        Value with string padding.
 
     """
-
     # set align attribute to lower case
     lowercase_align = align.casefold().strip()
 
@@ -35,12 +38,12 @@ def set_alignment(value: str,
         return f"{n_spaces * ' '}{value}"
 
     else:
-        raise AssertionError(f"Choice for alignment '{align}' not supported.  Must be 'left' or 'right'.")
+        raise AssertionError(
+            f"Choice for alignment '{align}' not supported.  Must be 'left' or 'right'."
+        )
 
 
-def pad_with_spaces(value: str,
-                    expected_width: int,
-                    align="left") -> str:
+def pad_with_spaces(value: str, expected_width: int, align="left") -> str:
     """Pad a string with the number of spaces specified by the user.
 
     :param value:                   Value to evaluate.
@@ -55,7 +58,6 @@ def pad_with_spaces(value: str,
     :return:                        Value with string padding.
 
     """
-
     # strip all whitespace padding from value
     value_stripped = value.strip()
 
@@ -63,24 +65,21 @@ def pad_with_spaces(value: str,
     field_length = len(value_stripped)
 
     if field_length <= expected_width:
-
         # get the number of missing spaces
         missing_spaces = expected_width - field_length
 
-        return set_alignment(value=value_stripped,
-                             n_spaces=missing_spaces,
-                             align=align)
+        return set_alignment(value=value_stripped, n_spaces=missing_spaces, align=align)
 
     else:
-
         # reduce precision to fit field if float
         try:
-
             split_value = value_stripped.split(".")
 
             if len(split_value) == 1:
-                raise f"Column width '{field_length}' for value '{split_value[0]}' exceeds the expected width '{expected_width}'"
-
+                raise ValueError(
+                    f"Column width '{field_length}' for value '{split_value[0]}' "
+                    f"exceeds the expected width '{expected_width}'"
+                )
             # precision of value
             n_decimals = len(split_value[-1])
 
@@ -91,13 +90,15 @@ def pad_with_spaces(value: str,
             return np.float64(value_stripped).round(overflow).astype(str)
 
         except TypeError:
-            raise f"Column width '{field_length}' for value '{value_stripped}' exceeds the expected width '{expected_width}'"
+            raise ValueError(
+                f"Column width '{field_length}' for value "
+                f"'{value_stripped}' exceeds the expected width "
+                f"'{expected_width}'"
+            )
 
 
-def add_zero_padding(x: str,
-                     precision: int = 2) -> str:
-    """Some fields expect zero padding that gets rounded off by pandas.
-    This method adds that back in.
+def add_zero_padding(x: str, precision: int = 2) -> str:
+    """Fields may expect zero padding that gets rounded off by pandas. This method adds that back in.
 
     :param x:                       Float value from file that is represented as a string.
     :type x:                        str
@@ -108,12 +109,10 @@ def add_zero_padding(x: str,
     :return:                        Zero padded string.
 
     """
-
     # get length of precision
     x_length = len(x.split(".")[-1])
 
     if x_length < precision:
-
         # determine the number of zeros needed
         n_zeros = precision - x_length
 
@@ -122,12 +121,14 @@ def add_zero_padding(x: str,
         return x
 
 
-def populate_dict(line: str,
-                  field_dict: dict,
-                  column_widths: dict,
-                  column_list: list,
-                  data_types: dict,
-                  replace_dict: dict) -> dict:
+def populate_dict(
+    line: str,
+    field_dict: dict,
+    column_widths: dict,
+    column_list: list,
+    data_types: dict,
+    replace_dict: dict,
+) -> dict:
     """Populate the input dictionary with values from each line based on column widths.
 
     :param line:                    Line of data as a string from the input file.
@@ -152,10 +153,8 @@ def populate_dict(line: str,
     :return:                        Populated data dictionary.
 
     """
-
     start_index = 0
     for idx, i in enumerate(column_list):
-
         if idx == 0:
             end_index = column_widths[i]
 
@@ -163,7 +162,7 @@ def populate_dict(line: str,
             end_index = start_index + column_widths[i]
 
         # extract portion of the line based on the known column width
-        string_extraction = line[start_index: end_index]
+        string_extraction = line[start_index:end_index]
 
         if string_extraction in replace_dict:
             string_extraction = replace_dict[string_extraction]
@@ -180,14 +179,16 @@ def populate_dict(line: str,
     return field_dict
 
 
-def prep_data(field_dict: dict,
-              template_file: str,
-              column_list: list,
-              column_widths: dict,
-              data_types: dict,
-              comment: str = "#",
-              skip_rows: int = 0,
-              replace_dict: dict = {}):
+def prep_data(
+    field_dict: dict,
+    template_file: str,
+    column_list: list,
+    column_widths: dict,
+    data_types: dict,
+    comment: str = "#",
+    skip_rows: int = 0,
+    replace_dict: dict = {},
+):
     """Ingest statemod file and format into a data frame.
 
     :param field_dict:              Dictionary holding values for each field.
@@ -219,33 +220,39 @@ def prep_data(field_dict: dict,
                                     [1] header data from file
 
     """
-
     # empty string to hold header data
     header = ""
 
     capture = False
     with open(template_file) as template:
-
         for idx, line in enumerate(template):
-
             if capture:
-
                 # populate dictionary with data content
-                field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types, replace_dict)
+                field_dict = populate_dict(
+                    line,
+                    field_dict,
+                    column_widths,
+                    column_list,
+                    data_types,
+                    replace_dict,
+                )
 
             else:
-
                 # passes all commented lines in header
                 if line[0] != comment:
-
                     # if you are not skipping any rows that are not comments
                     if skip_rows == 0:
-
-                        field_dict = populate_dict(line, field_dict, column_widths, column_list, data_types, replace_dict)
+                        field_dict = populate_dict(
+                            line,
+                            field_dict,
+                            column_widths,
+                            column_list,
+                            data_types,
+                            replace_dict,
+                        )
                         capture = True
 
                     else:
-
                         # count down the number of rows to skip
                         skip_rows -= 1
 
@@ -261,10 +268,9 @@ def prep_data(field_dict: dict,
     return df, header
 
 
-def construct_outfile_name(template_file: str,
-                           output_directory: str,
-                           scenario: str,
-                           sample_id: int) -> str:
+def construct_outfile_name(
+    template_file: str, output_directory: str, scenario: str, sample_id: int
+) -> str:
     """Construct output file name from input template.
 
     :param template_file:           Statemod input file to parse.
@@ -282,7 +288,6 @@ def construct_outfile_name(template_file: str,
     :return:                        Full path with file name and extension for the modified output file.
 
     """
-
     # extract file basename
     template_basename = os.path.basename(template_file)
 
@@ -290,15 +295,16 @@ def construct_outfile_name(template_file: str,
     template_name_parts = os.path.splitext(template_basename)
 
     # output file name == cm2015B_S{sampleid}_{sceanrio}.ext
-    output_file = f"{template_name_parts[0]}_S{sample_id}_{scenario}{template_name_parts[-1]}"
+    output_file = (
+        f"{template_name_parts[0]}_S{sample_id}_{scenario}{template_name_parts[-1]}"
+    )
 
     return os.path.join(output_directory, output_file)
 
 
-def construct_data_string(df: pd.DataFrame,
-                          column_list: list,
-                          column_widths: dict,
-                          column_alignment: dict) -> str:
+def construct_data_string(
+    df: pd.DataFrame, column_list: list, column_widths: dict, column_alignment: dict
+) -> str:
     """Format line and construct data string.
 
     :param df:                      ID of sample.
@@ -316,32 +322,31 @@ def construct_data_string(df: pd.DataFrame,
     :return:                        Formatted data string.
 
     """
-
     # initialize empty string to store data in
     data = ""
 
     # for each row of data
     for idx in df.index:
-
         # for each column in row
         for i in column_list:
-
             # add to output string
-            data += pad_with_spaces(df[i][idx],
-                                    column_widths[i],
-                                    align=column_alignment[i])
+            data += pad_with_spaces(
+                df[i][idx], column_widths[i], align=column_alignment[i]
+            )
         # add in newline
         data += "\n"
 
     return data
 
 
-def apply_adjustment_factor(data_df: pd.DataFrame,
-                            value_columns: list,
-                            query_field: str,
-                            target_ids: list,
-                            factor: float,
-                            factor_method: str = "add") -> pd.DataFrame:
+def apply_adjustment_factor(
+    data_df: pd.DataFrame,
+    value_columns: list,
+    query_field: str,
+    target_ids: list,
+    factor: float,
+    factor_method: str = "add",
+) -> pd.DataFrame:
     """Apply adjustment to template file values for target ids using a sample factor.
 
     :param data_df:                         Data frame of data content from file.
@@ -367,27 +372,34 @@ def apply_adjustment_factor(data_df: pd.DataFrame,
     :rtype:                                 pd.DataFrame
 
     """
-
     # get only value
     if type(factor) not in (int, float, np.int64, np.float64):
         factor = factor[0]
 
     if factor_method == "add":
-        return (data_df[value_columns] + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+        return (data_df[value_columns] + factor).where(
+            data_df[query_field].isin(target_ids), data_df[value_columns]
+        )
 
     elif factor_method == "multiply":
-        return (data_df[value_columns] * factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+        return (data_df[value_columns] * factor).where(
+            data_df[query_field].isin(target_ids), data_df[value_columns]
+        )
 
     elif factor_method == "assign":
-        return (data_df[value_columns] * 0 + factor).where(data_df[query_field].isin(target_ids), data_df[value_columns])
+        return (data_df[value_columns] * 0 + factor).where(
+            data_df[query_field].isin(target_ids), data_df[value_columns]
+        )
 
     else:
-        raise KeyError(f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply').")
+        raise KeyError(
+            f"'factor_method' value {factor_method} is not in available options of ('add', 'multiply')."
+        )
 
 
-def validate_bounds(bounds_list: List[List[float]],
-                    min_value: float = -0.5,
-                    max_value: float = 1.0) -> None:
+def validate_bounds(
+    bounds_list: list[list[float]], min_value: float = -0.5, max_value: float = 1.0
+) -> None:
     """Ensure sample bounds provided by the user conform to a feasible range of values in feet per month.
 
     :param bounds_list:             List of bounds to use for each parameter.
@@ -412,12 +424,9 @@ def validate_bounds(bounds_list: List[List[float]],
         bounds_list = [[-0.5, 1.0], [-0.5, 1.0]]
 
         # validate bounds
-        stm.validate_bounds(bounds_list=bounds_list,
-                            min_value=-0.5,
-                            max_value=1.0)
+        stm.validate_bounds(bounds_list=bounds_list, min_value=-0.5, max_value=1.0)
 
     """
-
     flag_min_error = False
     flag_max_error = False
 
@@ -428,11 +437,17 @@ def validate_bounds(bounds_list: List[List[float]],
     l_max = max([max(i) for i in bounds_list])
 
     if l_min < min_value:
-        msg_min = f"Minimum value for feasible sample bound '{l_min}' is invalid.  Minimum possible bound is '{min_value}'."
+        msg_min = (
+            f"Minimum value for feasible sample bound '{l_min}' is invalid. "
+            f"Minimum possible bound is '{min_value}'."
+        )
         flag_min_error = True
 
     if l_max > max_value:
-        msg_max = f"Maximum value for feasible sample bound '{l_max}' is invalid.  Maximum possible bound is '{max_value}'."
+        msg_max = (
+            f"Maximum value for feasible sample bound '{l_max}' is invalid. "
+            f"Maximum possible bound is '{max_value}'."
+        )
         flag_max_error = True
 
     if flag_min_error and flag_max_error:
@@ -476,9 +491,9 @@ class Modify:
     """
 
     comment_indicator: str
-    data_dict: Dict[str, List[None]]
-    column_widths: Dict[str, int]
-    column_alignment: Dict[str, str]
-    data_types: Dict[str, type]
-    column_list: List[str]
-    value_columns: List[str]
+    data_dict: dict[str, list[None]]
+    column_widths: dict[str, int]
+    column_alignment: dict[str, str]
+    data_types: dict[str, type]
+    column_list: list[str]
+    value_columns: list[str]

@@ -1,17 +1,21 @@
+"""This module is responsible for modifying reservoir structure ids based on specified criteria."""
+
 import os
-import pkg_resources
-from typing import Union, List
+from typing import List, Union
 
 import numpy as np
+import pkg_resources
 from joblib import Parallel, delayed
 
 import statemodify.sampler as sampler
 import statemodify.utils as utx
 
 
-def get_reservoir_structure_ids(basin_name: str,
-                                template_file: Union[None, str] = None,
-                                data_specification_file: Union[None, str] = None):
+def get_reservoir_structure_ids(
+    basin_name: str,
+    template_file: Union[None, str] = None,
+    data_specification_file: Union[None, str] = None,
+):
     """Generate a list of structure ids that are in the input file.
 
     :param basin_name:                      Name of basin for either:
@@ -34,13 +38,13 @@ def get_reservoir_structure_ids(basin_name: str,
     :rtype:                             List
 
     """
-
     # select the appropriate template file
     template_file = utx.select_template_file(basin_name, template_file, extension="res")
 
     # read in data specification yaml
-    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                 extension="res")
+    data_specification_file = utx.select_data_specification_file(
+        yaml_file=data_specification_file, extension="res"
+    )
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
     content = []
@@ -49,22 +53,24 @@ def get_reservoir_structure_ids(basin_name: str,
             if line[0] == data_spec_dict["comment_indicator"]:
                 pass
             else:
-                x = line[0:data_spec_dict["id_column_width"]].strip()
+                x = line[0 : data_spec_dict["id_column_width"]].strip()
                 if len(x) > 0:
                     content.append(x)
 
     return content
 
 
-def modify_single_res(output_dir: str,
-                      scenario: str,
-                      basin_name: str,
-                      sample: np.array,
-                      sample_id: int = 0,
-                      template_file: Union[None, str] = None,
-                      data_specification_file: Union[None, str] = None,
-                      target_structure_id_list: Union[None, List[str]] = None,
-                      skip_rows: int = 0):
+def modify_single_res(
+    output_dir: str,
+    scenario: str,
+    basin_name: str,
+    sample: np.array,
+    sample_id: int = 0,
+    template_file: Union[None, str] = None,
+    data_specification_file: Union[None, str] = None,
+    target_structure_id_list: Union[None, list[str]] = None,
+    skip_rows: int = 0,
+):
     """Modify a single reservoir (.res) file based on a user provided sample.
 
     :param output_dir:          Path to output directory.
@@ -102,32 +108,37 @@ def modify_single_res(output_dir: str,
     :type skip_rows:            int, optional
 
     """
-
     # select the appropriate template file
     template_file = utx.select_template_file(basin_name, template_file, extension="res")
 
     # read in data specification yaml
-    data_specification_file = utx.select_data_specification_file(yaml_file=data_specification_file,
-                                                                 extension="res")
+    data_specification_file = utx.select_data_specification_file(
+        yaml_file=data_specification_file, extension="res"
+    )
     data_spec_dict = utx.yaml_to_dict(data_specification_file)
 
     column_widths = data_spec_dict["column_start_index"]
 
     if target_structure_id_list is None:
-        target_structure_id_list = get_reservoir_structure_ids(basin_name=basin_name,
-                                                               template_file=template_file,
-                                                               data_specification_file=data_specification_file)
+        target_structure_id_list = get_reservoir_structure_ids(
+            basin_name=basin_name,
+            template_file=template_file,
+            data_specification_file=data_specification_file,
+        )
 
     # do not modify any in no modify list
     ignore_parts = data_spec_dict["ignore_structure_with_content"]
-    target_structure_id_list = [i for i in target_structure_id_list if f"_{i.split('_')[-1]}" not in ignore_parts]
+    target_structure_id_list = [
+        i
+        for i in target_structure_id_list
+        if f"_{i.split('_')[-1]}" not in ignore_parts
+    ]
 
     capture = False
     account_capture = False
     content = []
     with open(template_file) as get:
         for index, line in enumerate(get):
-
             # capture header
             if line[0] == data_spec_dict["comment_indicator"] or skip_rows > 0:
                 content.append(line)
@@ -138,13 +149,17 @@ def modify_single_res(output_dir: str,
                 skip_rows -= 1
 
             else:
-
                 # get segment of line that usually houses structure id
-                structure_id_segement = line[0:data_spec_dict["id_column_width"]].strip()
+                structure_id_segement = line[
+                    0 : data_spec_dict["id_column_width"]
+                ].strip()
 
                 # if reservoir start line found trigger capture
-                if (len(structure_id_segement) > 0) and (capture is False) and (data_spec_dict["terminate_string"] not in line):
-
+                if (
+                    (len(structure_id_segement) > 0)
+                    and (capture is False)
+                    and (data_spec_dict["terminate_string"] not in line)
+                ):
                     # keep content
                     content.append(line)
 
@@ -155,14 +170,18 @@ def modify_single_res(output_dir: str,
                     structure_id = structure_id_segement
 
                 # if capturing line
-                elif (len(structure_id_segement) == 0) and (capture is True) and (data_spec_dict["terminate_string"] not in line) and (
-                        structure_id in target_structure_id_list):
-
+                elif (
+                    (len(structure_id_segement) == 0)
+                    and (capture is True)
+                    and (data_spec_dict["terminate_string"] not in line)
+                    and (structure_id in target_structure_id_list)
+                ):
                     # line contains the
                     if account_capture is False:
-
                         # get original value
-                        volmax_initial = line[column_widths["volmin"]:column_widths["volmax"]]
+                        volmax_initial = line[
+                            column_widths["volmin"] : column_widths["volmax"]
+                        ]
                         volmax_initial_length = len(volmax_initial)
 
                         # modify the original value with the multiplier from the sample
@@ -173,7 +192,11 @@ def modify_single_res(output_dir: str,
                         volmax_modified = f"{' ' * n_space_padding}{volmax_modified}"
 
                         # place back in string
-                        line = line[:column_widths["volmin"]] + volmax_modified + line[column_widths["volmax"]:]
+                        line = (
+                            line[: column_widths["volmin"]]
+                            + volmax_modified
+                            + line[column_widths["volmax"] :]
+                        )
                         content.append(line)
 
                         # initialize list for all accounts for follow
@@ -184,16 +207,23 @@ def modify_single_res(output_dir: str,
                     else:
                         account_list.append(line)
 
-                elif (len(structure_id_segement) == 0) and (capture is True) and (data_spec_dict["terminate_string"] in line) and (
-                        structure_id in target_structure_id_list):
-
+                elif (
+                    (len(structure_id_segement) == 0)
+                    and (capture is True)
+                    and (data_spec_dict["terminate_string"] in line)
+                    and (structure_id in target_structure_id_list)
+                ):
                     # compile accounts
                     for acct_line in account_list:
                         # get original values for ownmax and sto-1
-                        ownmax_initial = acct_line[column_widths["ownname"]:column_widths["ownmax"]]
+                        ownmax_initial = acct_line[
+                            column_widths["ownname"] : column_widths["ownmax"]
+                        ]
                         ownmax_initial_length = len(ownmax_initial)
 
-                        sto_initial = acct_line[column_widths["ownmax"]:column_widths["sto_1"]]
+                        sto_initial = acct_line[
+                            column_widths["ownmax"] : column_widths["sto_1"]
+                        ]
                         sto_initial_length = len(sto_initial)
 
                         # break out account volume by total number of accounts in equal shares
@@ -206,7 +236,12 @@ def modify_single_res(output_dir: str,
                         sto_modified = f"{' ' * (sto_initial_length - len(sto_modified))}{sto_modified}"
 
                         # place back in string and write for ownmax and sto_1
-                        acct_line = acct_line[:column_widths["ownname"]] + ownmax_modified + sto_modified + acct_line[column_widths["sto_1"]:]
+                        acct_line = (
+                            acct_line[: column_widths["ownname"]]
+                            + ownmax_modified
+                            + sto_modified
+                            + acct_line[column_widths["sto_1"] :]
+                        )
                         content.append(acct_line)
 
                     account_capture = False
@@ -222,24 +257,28 @@ def modify_single_res(output_dir: str,
 
     # write modified output file
     template_file_base = os.path.splitext(os.path.basename(template_file))[0]
-    output_file = os.path.join(output_dir, f"{template_file_base}_S{sample_id}_{scenario}.res")
+    output_file = os.path.join(
+        output_dir, f"{template_file_base}_S{sample_id}_{scenario}.res"
+    )
 
     with open(output_file, "w") as out:
         for item in content:
             out.write(item)
 
 
-def modify_res(output_dir: str,
-               scenario: str,
-               basin_name: str = "Gunnison",
-               template_file: Union[None, str] = None,
-               data_specification_file: Union[None, str] = None,
-               target_structure_id_list: Union[None, List[str]] = None,
-               skip_rows: int = 0,
-               seed_value: Union[None, int] = None,
-               n_jobs: int = -1,
-               n_samples: int = 1,
-               save_sample: bool = False):
+def modify_res(
+    output_dir: str,
+    scenario: str,
+    basin_name: str = "Gunnison",
+    template_file: Union[None, str] = None,
+    data_specification_file: Union[None, str] = None,
+    target_structure_id_list: Union[None, list[str]] = None,
+    skip_rows: int = 0,
+    seed_value: Union[None, int] = None,
+    n_jobs: int = -1,
+    n_samples: int = 1,
+    save_sample: bool = False,
+):
     """Modify a single reservoir (.res) file based on a user provided sample.
 
     :param output_dir:          Path to output directory.
@@ -312,38 +351,51 @@ def modify_res(output_dir: str,
         # number of samples to generate
         n_samples = 2
 
-        stm.modify_res(output_dir=output_directory,
-                       scenario=scenario,
-                       basin_name=basin_name,
-                       target_structure_id_list=None,
-                       seed_value=seed_value,
-                       n_jobs=n_jobs,
-                       n_samples=n_samples,
-                       save_sample=False)
+        stm.modify_res(
+            output_dir=output_directory,
+            scenario=scenario,
+            basin_name=basin_name,
+            target_structure_id_list=None,
+            seed_value=seed_value,
+            n_jobs=n_jobs,
+            n_samples=n_samples,
+            save_sample=False,
+        )
 
     """
-
-    yaml_file = pkg_resources.resource_filename("statemodify", "data/parameter_definitions.yml")
+    yaml_file = pkg_resources.resource_filename(
+        "statemodify", "data/parameter_definitions.yml"
+    )
     param_dict = utx.yaml_to_dict(yaml_file)
 
     # generate an array of samples to process and only keep the rstorage samples
-    sample_array = sampler.generate_sample_all_params(n_samples=n_samples,
-                                                      seed_value=seed_value)[:, param_dict["rstorage"]["index"]]
+    sample_array = sampler.generate_sample_all_params(
+        n_samples=n_samples, seed_value=seed_value
+    )[:, param_dict["rstorage"]["index"]]
 
     # only keep the rstorage samples
 
     # if the user chooses, write the sample to file
     if save_sample:
-        sample_file = os.path.join(output_dir, f"res_{n_samples}-samples_scenario-{scenario}.npy")
+        sample_file = os.path.join(
+            output_dir, f"res_{n_samples}-samples_scenario-{scenario}.npy"
+        )
         np.save(sample_file, sample_array)
 
     # generate all files in parallel
-    results = Parallel(n_jobs=n_jobs, backend="loky")(delayed(modify_single_res)(output_dir=output_dir,
-                                                                                 scenario=scenario,
-                                                                                 basin_name=basin_name,
-                                                                                 sample=sample,
-                                                                                 sample_id=sample_id,
-                                                                                 template_file=template_file,
-                                                                                 data_specification_file=data_specification_file,
-                                                                                 target_structure_id_list=target_structure_id_list,
-                                                                                 skip_rows=skip_rows) for sample_id, sample in enumerate(sample_array))
+    results = Parallel(n_jobs=n_jobs, backend="loky")(
+        delayed(modify_single_res)(
+            output_dir=output_dir,
+            scenario=scenario,
+            basin_name=basin_name,
+            sample=sample,
+            sample_id=sample_id,
+            template_file=template_file,
+            data_specification_file=data_specification_file,
+            target_structure_id_list=target_structure_id_list,
+            skip_rows=skip_rows,
+        )
+        for sample_id, sample in enumerate(sample_array)
+    )
+
+    del results

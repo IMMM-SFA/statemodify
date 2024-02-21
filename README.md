@@ -2,6 +2,7 @@
 [![codecov](https://codecov.io/gh/IMMM-SFA/statemodify/branch/main/graph/badge.svg?token=csQBZMRSdp)](https://codecov.io/gh/IMMM-SFA/statemodify)
 [![Static Badge](https://img.shields.io/badge/Powered%20by-MSDLIVE-blue?label=Powered%20by&color=blue)](https://statemodify.msdlive.org)
 [![DOI](https://zenodo.org/badge/484620418.svg)](https://zenodo.org/doi/10.5281/zenodo.10258007)
+[![pre-commit](https://github.com/IMMM-SFA/statemodify/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/IMMM-SFA/statemodify/actions/workflows/pre-commit.yml)
 
 
 
