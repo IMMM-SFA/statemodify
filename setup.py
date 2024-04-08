@@ -30,7 +30,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "joblib>=1.1.0",
-        "numpy>=1.22.3",
+        "numpy>=1.22.3,<2",
         "pandas>=1.4.2",
         "joblib>=1.1.0",
         "SALib>1.4.5",
