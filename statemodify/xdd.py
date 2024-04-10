@@ -21,23 +21,27 @@ class XddConverter:
         xdd_files: Union[str, Path, list[Union[str, Path]]] = "**/*.xdd",
         id_subset: Union[None, list[str]] = None,
         parallel_jobs: int = 4,
+        preserve_string_dtype: bool = True
     ):
         """Convert object for transforming StateMod output .xdd files into compressed, columnar .parquet files.
 
-        :param output_path:         Path to a folder where outputs should be written; default "./output"
-        :type output_path:          str
+        :param output_path:             Path to a folder where outputs should be written; default "./output"
+        :type output_path:              str
 
-        :param allow_overwrite:     If False, abort if files already exist in the output_path; default False
-        :type allow_overwrite:      bool
+        :param allow_overwrite:         If False, abort if files already exist in the output_path; default False
+        :type allow_overwrite:          bool
 
-        :param xdd_files:           File(s) or glob(s) to the .xdd files to convert; default "**/*.xdd"
-        :type xdd_files:            List[str]
+        :param xdd_files:               File(s) or glob(s) to the .xdd files to convert; default "**/*.xdd"
+        :type xdd_files:                List[str]
 
-        :param id_subset:           List of structure IDs to convert, or None for all; default None
-        :type id_subset:            List[str]
+        :param id_subset:               List of structure IDs to convert, or None for all; default None
+        :type id_subset:                List[str]
 
-        :param parallel_jobs:       How many files to process in parallel; default 4
-        :type parallel_jobs:        int
+        :param parallel_jobs:           How many files to process in parallel; default 4
+        :type parallel_jobs:            int
+
+        :param preserve_string_dtype:   Keep string parsed data instead of casting to actual type; default True
+        :type preserve_string_dtype:    bool
 
         :example:
 
@@ -96,6 +100,9 @@ class XddConverter:
         # run this many jobs in parallel
         self.parallel_jobs = parallel_jobs
 
+        # to preserve string type for spacing set to True otherwise False for natural types
+        self.preserve_string_dtype = preserve_string_dtype
+
         # field names for each .xdd entry
         self.fields = [
             "structure_id",
@@ -134,6 +141,45 @@ class XddConverter:
             "control_location",
             "control_right",
         ]
+
+        # actual field data types
+        self.field_dtypes = {
+            "structure_id": str,
+            "river_id": str,
+            "year": np.int64,
+            "month": str,
+            "demand_total": np.float64,
+            "demand_cu": np.float64,
+            "from_river_by_priority": np.float64,
+            "from_river_by_storage": np.float64,
+            "from_river_by_other": np.float64,
+            "from_river_by_loss": np.float64,
+            "from_well": np.float64,
+            "from_carrier_by_priority": np.float64,
+            "from_carrier_by_other": np.float64,
+            "from_carrier_by_loss": np.float64,
+            "carried_exchange_bypass": np.float64,
+            "from_soil": np.float64,
+            "supply_total": np.float64,
+            "shortage_total": np.float64,
+            "shortage_cu": np.float64,
+            "water_use_cu": np.float64,
+            "water_use_to_soil": np.float64,
+            "water_use_to_other": np.float64,
+            "water_use_loss": np.float64,
+            "station_in_out_upstream_inflow": np.float64,
+            "station_in_out_reach_gain": np.float64,
+            "station_in_out_return_flow": np.float64,
+            "station_in_out_well_deplete": np.float64,
+            "station_in_out_from_to_groundwater_storage": np.float64,
+            "station_balance_river_inflow": np.float64,
+            "station_balance_river_divert": np.float64,
+            "station_balance_river_by_well": np.float64,
+            "station_balance_river_outflow": np.float64,
+            "available_flow": np.float64,
+            "control_location": str,
+            "control_right": np.float64,
+        }
 
         # field sizes for each line of interest in the .xdd file
         self.field_sizes = np.array(
@@ -243,7 +289,11 @@ class XddConverter:
         df = pd.DataFrame(data=data, columns=["structure_name"] + fields)
         if id_subset is not None:
             df = df[df["structure_id"].isin(id_subset)]
-        df.to_parquet(f"{output_path}/{Path(file).stem}.parquet")
+
+        if self.preserve_string_dtype is False:
+            df = df.astype(self.field_dtypes)
+
+        df.to_parquet(f"{output_path}/{Path(file).stem}.parquet") 
 
 
 def convert_xdd(
@@ -253,6 +303,7 @@ def convert_xdd(
     xdd_files: Union[str, Path, list[Union[str, Path]]] = "**/*.xdd",
     id_subset: Union[None, list[str]] = None,
     parallel_jobs: int = 4,
+    preserve_string_dtype: bool = True
 ):
     """Convert StateMod output .xdd files to compressed, columnar .parquet files.
 
@@ -272,6 +323,9 @@ def convert_xdd(
 
     :param parallel_jobs:       How many files to process in parallel; default 4
     :type parallel_jobs:        int
+
+    :param preserve_string_dtype:   Keep string parsed data instead of casting to actual type; default True
+    :type preserve_string_dtype:    bool
 
     :return: None
     :rtype: None
