@@ -18,4 +18,4 @@ from .xbm_iwr import *
 from .xdd import *
 from .xre import *
 
-__version__ = "0.1.4"
+__version__ = "0.2"
