@@ -54,3 +54,10 @@ The table below lists the
      - This notebook looks at how changes in storage in reservoirs in the Upper Colorado subbasin lead to changes to user shortages
      - This notebook debuts the stationary Hidden Markov Model to generate alternative streamflow scenarios across the basins.
      - This notebook demonstrates how to create a global Latin hypercube sample to consider multiple uncertainties in a basin.
+
+
+.. include:: ../notebooks/N1_Demand_WaterRights_File_Modification.rst
+.. include:: ../notebooks/N2_Evaporation_File_Modification.rst
+.. include:: ../notebooks/N3_Reservoir_File_Modification.rst
+.. include:: ../notebooks/N4_Streamflow_File_Modification.rst
+.. include:: ../notebooks/N5_Batch_Modification.rst
