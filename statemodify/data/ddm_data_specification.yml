@@ -1,9 +1,12 @@
-# Assumptions for template file contents and parsing for the StateMod municipal, industrial, transbasin Demands (.ddm)
+---
+# Assumptions for StateMod municipal, industrial,
+# transbasin Demands (.ddm) template parsing
 
 # Character(s) indicating the line in the file is a comment.
 comment_indicator: "#"
 
-# Field specification in the file as a dictionary to hold the values for each field
+# Field specification in the file as a dictionary to hold the values
+# for each field
 data_dict:
   "year": []
   "id": []

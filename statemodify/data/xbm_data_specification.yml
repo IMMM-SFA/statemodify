@@ -1,9 +1,12 @@
-# Assumptions for template file contents and parsing for the StateMod baseflows gaged and ungaged via BaseflowX option (.xbm)
+---
+# Assumptions for template file contents and parsing for the StateMod
+# baseflows gaged and ungaged via BaseflowX option (.xbm)
 
 # Character(s) indicating the line in the file is a comment.
 comment_indicator: "#"
 
-# Field specification in the file as a dictionary to hold the values for each field
+# Field specification in the file as a dictionary to hold the v
+# alues for each field
 data_dict:
   "year": []
   "id": []

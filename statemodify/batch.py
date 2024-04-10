@@ -1,37 +1,47 @@
+"""This module is responsible for batch processing modifications on StateMod files."""
+
 import inspect
 
 from SALib.sample import latin
 
-from statemodify.eva import modify_eva
-from statemodify.ddr import modify_ddr
 from statemodify.ddm import modify_ddm
+from statemodify.ddr import modify_ddr
+from statemodify.eva import modify_eva
 
 
 def get_required_arguments(fn) -> list:
     """Get all required arguments for a function as a list."""
-
     signature = inspect.signature(fn)
 
-    return [k for k, v in signature.parameters.items() if v.default is inspect.Parameter.empty]
+    return [
+        k
+        for k, v in signature.parameters.items()
+        if v.default is inspect.Parameter.empty
+    ]
 
 
 def get_arguments_values(fn) -> dict:
     """Get all arguments and their values as a dictionary."""
-
     signature = inspect.signature(fn)
 
-    return {k: v.default if v.default is not inspect.Parameter.empty else None for k, v in signature.parameters.items()}
+    return {
+        k: v.default if v.default is not inspect.Parameter.empty else None
+        for k, v in signature.parameters.items()
+    }
 
 
 def generate_parameters(problem_dict: dict) -> dict:
     """Validate and generate parameters needed for the desired functions."""
-
     required_problem_set_keys = ("n_samples", "num_vars", "names", "bounds")
     provided_problem_set_keys = problem_dict.keys()
-    missing_from_problem_set = set(required_problem_set_keys) - set(provided_problem_set_keys)
+    missing_from_problem_set = set(required_problem_set_keys) - set(
+        provided_problem_set_keys
+    )
 
     if len(missing_from_problem_set) > 0:
-        raise KeyError(f"Missing the following required keys in the problem dictionary: {missing_from_problem_set}")
+        raise KeyError(
+            f"Missing the following required keys in the problem dictionary: {missing_from_problem_set}"
+        )
 
     # check for missing bounds and remove from problem dict to generate samples
     sample_dict = {
@@ -42,12 +52,20 @@ def generate_parameters(problem_dict: dict) -> dict:
     }
 
     # list of indices for variables to remove
-    remove_indices = [index for index, i in enumerate(sample_dict["bounds"]) if i is None]
+    remove_indices = [
+        index for index, i in enumerate(sample_dict["bounds"]) if i is None
+    ]
 
     # update sample dict
     sample_dict["num_vars"] = sample_dict["num_vars"] - len(remove_indices)
-    sample_dict["names"] = [i for index, i in enumerate(sample_dict["names"]) if index not in remove_indices]
-    sample_dict["bounds"] = [i for index, i in enumerate(sample_dict["bounds"]) if index not in remove_indices]
+    sample_dict["names"] = [
+        i for index, i in enumerate(sample_dict["names"]) if index not in remove_indices
+    ]
+    sample_dict["bounds"] = [
+        i
+        for index, i in enumerate(sample_dict["bounds"])
+        if index not in remove_indices
+    ]
 
     # generate LHS sample over the problem set
     param_values = latin.sample(sample_dict, sample_dict["n_samples"])
@@ -73,7 +91,7 @@ def generate_parameters(problem_dict: dict) -> dict:
     modification_dict = {
         "modify_ddr": ("ids", "on_off", "admin", "values"),
         "modify_eva": ("ids",),
-        "modify_ddm": ("ids",)
+        "modify_ddm": ("ids",),
     }
 
     # get function parameters for each component
@@ -81,7 +99,6 @@ def generate_parameters(problem_dict: dict) -> dict:
 
     # ensure required arguments are met
     for i in function_list:
-
         if i not in parameter_dict:
             raise KeyError(f"No function parameters queued for:  {i}")
 
@@ -92,14 +109,25 @@ def generate_parameters(problem_dict: dict) -> dict:
         missing_from_possible = set(submitted_params) - set(possible_params)
 
         if len(missing_from_possible) > 0:
-            msg = f"The arguments '{missing_from_possible}' were given by the user for '{i}' but were not in the possible options of: '{possible_params}'"
+            msg = (
+                f"The arguments '{missing_from_possible}' were given by the user "
+                f"for '{i}' but were not in the possible options of: "
+                f"'{possible_params}'"
+            )
             raise ValueError(msg)
 
         # ensure that all required non default value arguements are in what the user provides
-        missing_from_required = [x for x in required_dict[i] if x not in submitted_params and x != "modify_dict"]
+        missing_from_required = [
+            x
+            for x in required_dict[i]
+            if x not in submitted_params and x != "modify_dict"
+        ]
 
         if len(missing_from_required) > 0:
-            msg = f"The arguments '{missing_from_required}' are required for '{i}' but were not in the those provided by the user: '{submitted_params}'"
+            msg = (
+                f"The arguments '{missing_from_required}' are required for '{i}' "
+                f"but were not in those provided by the user: '{submitted_params}'"
+            )
             raise ValueError(msg)
 
         # update arguement dictionary for function with what the user has provided
@@ -121,7 +149,9 @@ def generate_parameters(problem_dict: dict) -> dict:
 
         # add bounds to modify dict
         if i in sample_dict["names"]:
-            fn_modify_dict["bounds"] = sample_dict["bounds"][sample_dict["names"].index(i)]
+            fn_modify_dict["bounds"] = sample_dict["bounds"][
+                sample_dict["names"].index(i)
+            ]
 
         # add modify dict to parameters
         function_parameters[i]["modify_dict"] = fn_modify_dict
@@ -155,13 +185,9 @@ def modify_batch(problem_dict: dict) -> dict:
         # problem dictionary
         problem_dict = {
             "n_samples": 2,
-            'num_vars': 3,
-            'names': ['modify_eva', 'modify_ddr', 'modify_ddm'],
-            'bounds': [
-                [-0.5, 1.0],
-                [0.5, 1.0],
-                [0.5, 1.0]
-            ],
+            "num_vars": 3,
+            "names": ["modify_eva", "modify_ddr", "modify_ddm"],
+            "bounds": [[-0.5, 1.0], [0.5, 1.0], [0.5, 1.0]],
             # additional settings for each function
             "modify_eva": {
                 "seed_value": seed_value,
@@ -169,7 +195,7 @@ def modify_batch(problem_dict: dict) -> dict:
                 "scenario": scenario,
                 "basin_name": basin_name,
                 "query_field": "id",
-                "ids": ["10001", "10004"]
+                "ids": ["10001", "10004"],
             },
             "modify_ddr": {
                 "seed_value": seed_value,
@@ -179,7 +205,7 @@ def modify_batch(problem_dict: dict) -> dict:
                 "query_field": "id",
                 "ids": ["3600507.01", "3600507.02"],
                 "admin": [None, 0],
-                "on_off": [-1977, 1]
+                "on_off": [-1977, 1],
             },
             "modify_ddm": {
                 "seed_value": seed_value,
@@ -187,15 +213,14 @@ def modify_batch(problem_dict: dict) -> dict:
                 "scenario": scenario,
                 "basin_name": basin_name,
                 "query_field": "id",
-                "ids": ["3600507", "3600603"]
-            }
+                "ids": ["3600507", "3600603"],
+            },
         }
 
         # run in batch
         fn_parameter_dict = stm.modify_batch(problem_dict=problem_dict)
 
     """
-
     # functions availabe for use in batch mode
     available_functions = ("modify_eva", "modify_ddm", "modify_ddr")
 
@@ -203,12 +228,10 @@ def modify_batch(problem_dict: dict) -> dict:
     parameter_dict = generate_parameters(problem_dict=problem_dict)
 
     for i in parameter_dict.keys():
-
         print(f"Running {i}")
         params = parameter_dict[i]
 
         if i == "modify_eva":
-
             modify_eva(
                 modify_dict=params["modify_dict"],
                 query_field=params["query_field"],
@@ -226,11 +249,10 @@ def modify_batch(problem_dict: dict) -> dict:
                 min_bound_value=params["min_bound_value"],
                 max_bound_value=params["max_bound_value"],
                 save_sample=params["save_sample"],
-                sample_array=params["sample_array"]
+                sample_array=params["sample_array"],
             )
 
         elif i == "modify_ddr":
-
             modify_ddr(
                 modify_dict=params["modify_dict"],
                 query_field=params["query_field"],
@@ -248,11 +270,10 @@ def modify_batch(problem_dict: dict) -> dict:
                 min_bound_value=params["min_bound_value"],
                 max_bound_value=params["max_bound_value"],
                 save_sample=params["save_sample"],
-                sample_array=params["sample_array"]
+                sample_array=params["sample_array"],
             )
 
         elif i == "modify_ddm":
-
             modify_ddm(
                 modify_dict=params["modify_dict"],
                 query_field=params["query_field"],
@@ -270,11 +291,12 @@ def modify_batch(problem_dict: dict) -> dict:
                 min_bound_value=params["min_bound_value"],
                 max_bound_value=params["max_bound_value"],
                 save_sample=params["save_sample"],
-                sample_array=params["sample_array"]
+                sample_array=params["sample_array"],
             )
 
         else:
             raise KeyError(
-                f"Function '{i}' is not supported in batch mode.  Available functions are:  {available_functions}")
+                f"Function '{i}' is not supported in batch mode.  Available functions are:  {available_functions}"
+            )
 
     return parameter_dict

@@ -1,5 +1,8 @@
-on: [push]
-
+---
+on:    # yamllint disable-line rule:truthy
+  push:
+    branches-ignore:
+      - '**'
 jobs:
   paper:
     runs-on: ubuntu-latest

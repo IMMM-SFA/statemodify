@@ -7,11 +7,11 @@
 # host:         Katie
 # directory:    C:\Google Drive\CDSS\wm2015\Diversions
 # command line: StateDMI
-# 
+#
 #----
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\wm2015\Diversions\ddr.commands.StateDMI"
-# Commands: 
+# Commands:
 # # ddr.commands.StateDMI
 # # -- 2015 Model Refinements
 # #
@@ -171,7 +171,7 @@
 # # Step 7 - create direct diversion rights file
 # #
 # WriteDiversionRightsToStateMod(OutputFile="..\StateMod\wm2015.ddr")
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Katie
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -179,7 +179,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #>
 #>***************************************************
@@ -187,7 +187,7 @@
 #>
 #>     format:  (a12, a24, a12, f16.5, f8.2, i8)
 #>
-#>     ID       cidvri:  Diversion right ID 
+#>     ID       cidvri:  Diversion right ID
 #>     Name      named:  Diversion right name
 #>     Struct    cgoto:  Direct Diversion Structure ID associated with this right
 #>     Admin #   irtem:  Administration number

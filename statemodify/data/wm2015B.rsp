@@ -37,4 +37,3 @@ StreamEstimate_Coefficients             = wm2015.rib
 StreamGage_Historic_Monthly             = wm2015.rih
 Diversion_Historic_Monthly              = wm2015.ddh
 Network                                 = ..\Network\wm2015.net
-

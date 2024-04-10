@@ -7,14 +7,14 @@
 # host:         Katie
 # directory:    C:\Google Drive\CDSS\wm2015\Diversions
 # command line: StateDMI
-# 
+#
 #----
-# 
+#
 # StateMod diversion historical time series (monthly).
-# 
+#
 # -----------------------------------------------------------------------
 # Command file name: "C:\Google Drive\CDSS\wm2015\Diversions\iwrB.commands.StateDMI"
-# Commands: 
+# Commands:
 # # iwrB.commands.StateDMI
 # #
 # #   StateDMI commands file to fill wm2015B.ddc file back to 1909 for the baseline run
@@ -38,7 +38,7 @@
 # #
 # SortDiversionHistoricalTSMonthly(Order=Ascending)
 # WriteDiversionHistoricalTSMonthlyToStateMod(OutputFile="..\StateMod\wm2015B.iwr",Precision=0)
-# 
+#
 # -----------------------------------------------------------------------------
 # HydroBase database is: HydroBase_CO_20150304 on Katie
 # HydroBase.db_version:  design version: 20141201  last data change: 20150304
@@ -46,7 +46,7 @@
 # HydroBase input name is "".
 # Stored procedures are being used.
 # -----------------------------------------------------------------------------
-# 
+#
 #------------------------------------------------
 #
 # StateMod time series

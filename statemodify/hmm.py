@@ -1,32 +1,50 @@
+"""This module is responsible for modifying and fitting Hidden Markov Models (HMM) to multisite data."""
+
 import os
-import pkg_resources
+from random import random
 from typing import Union
 
-from hmmlearn import hmm
-import pandas as pd
-from random import random
-import numpy as np
 import matplotlib
 import matplotlib.cm as cm
-from matplotlib.cm import ScalarMappable
-from matplotlib import pyplot as plt
+import numpy as np
+import pandas as pd
+import pkg_resources
 import seaborn as sns
+from hmmlearn import hmm
+from matplotlib import pyplot as plt
+from matplotlib.cm import ScalarMappable
 
 
-def hmm_multisite_fit(n_basins: int = 5,
-                      save_parameters: bool = False,
-                      output_directory: Union[None, str] = None):
+def hmm_multisite_fit(
+    n_basins: int = 5,
+    save_parameters: bool = False,
+    output_directory: Union[None, str] = None,
+):
+    """
+    Fits a Hidden Markov Model (HMM) to multisite data.
 
-    all_basins_file = pkg_resources.resource_filename("statemodify", "data/all_basins.csv")
+    :param n_basins:                The number of basins to fit the model to. Defaults to 5.
+    :type n_basins:                 int, optional
+    :param save_parameters:         If True, saves the model parameters to the specified output
+                                    directory. Defaults to False.
+    :type save_parameters:          bool, optional
+    :param output_directory:        The directory where model parameters will be saved
+                                    if save_parameters is True.
+                                    If None, parameters are not saved. Defaults to None.
+    :type output_directory:         Union[None, str], optional
+    """
+    all_basins_file = pkg_resources.resource_filename(
+        "statemodify", "data/all_basins.csv"
+    )
     AnnualQ_h_all = pd.read_csv(all_basins_file).values
 
     # add 1 because some sites have 0 flow
-    logAnnualQ_h = np.log(AnnualQ_h_all+1)
+    logAnnualQ_h = np.log(AnnualQ_h_all + 1)
 
     # fit multi-site HMM to approximately last 2/3 of historical record (30 years)
-    hmm_model = hmm.GMMHMM(n_components=2,
-                           n_iter=1000,
-                           covariance_type='full').fit(logAnnualQ_h[30::, :])
+    hmm_model = hmm.GMMHMM(n_components=2, n_iter=1000, covariance_type="full").fit(
+        logAnnualQ_h[30::, :]
+    )
 
     # Pull out some model parameters
     mus = np.array(hmm_model.means_)
@@ -50,19 +68,32 @@ def hmm_multisite_fit(n_basins: int = 5,
     transition_matrix = P
 
     if save_parameters:
-
         if output_directory is None:
-            raise ValueError("If saving parameters you must pass a valid path to `output_directory'")
+            raise ValueError(
+                "If saving parameters you must pass a valid path to `output_directory'"
+            )
 
-        np.savetxt(os.path.join(output_directory, 'dry_state_means.txt'), dry_state_means)
-        np.savetxt(os.path.join(output_directory, 'wet_state_means.txt'), wet_state_means)
-        np.savetxt(os.path.join(output_directory, 'covariance_matrix_dry.txt'), covariance_matrix_dry)
-        np.savetxt(os.path.join(output_directory, 'covariance_matrix_wet.txt'), covariance_matrix_wet)
-        np.savetxt(os.path.join(output_directory, 'transition_matrix.txt'), transition_matrix)
+        np.savetxt(
+            os.path.join(output_directory, "dry_state_means.txt"), dry_state_means
+        )
+        np.savetxt(
+            os.path.join(output_directory, "wet_state_means.txt"), wet_state_means
+        )
+        np.savetxt(
+            os.path.join(output_directory, "covariance_matrix_dry.txt"),
+            covariance_matrix_dry,
+        )
+        np.savetxt(
+            os.path.join(output_directory, "covariance_matrix_wet.txt"),
+            covariance_matrix_wet,
+        )
+        np.savetxt(
+            os.path.join(output_directory, "transition_matrix.txt"), transition_matrix
+        )
 
     # calculate stationary distribution to determine unconditional probabilities
     eigenvals, eigenvecs = np.linalg.eig(np.transpose(transition_matrix))
-    one_eigval = np.argmin(np.abs(eigenvals-1))
+    one_eigval = np.argmin(np.abs(eigenvals - 1))
     pi = eigenvecs[:, one_eigval] / np.sum(eigenvecs[:, one_eigval])
     unconditional_dry = pi[0]
     unconditional_wet = pi[1]
@@ -75,24 +106,53 @@ def hmm_multisite_fit(n_basins: int = 5,
         "covariance_matrix_wet": covariance_matrix_wet,
         "covariance_matrix_dry": covariance_matrix_dry,
         "wet_state_means": wet_state_means,
-        "dry_state_means": dry_state_means
+        "dry_state_means": dry_state_means,
     }
 
 
-def hmm_multisite_sample (logAnnualQ_h,
-                         transition_matrix,
-                         unconditional_dry,
-                         dry_state_means,
-                         wet_state_means,
-                         covariance_matrix_dry,
-                         covariance_matrix_wet,
-                         n_basins: int = 5,
-                         n_alternatives: int = 100,
-                         save_samples: bool = True,
-                         output_directory: Union[None, str] = None):
+def hmm_multisite_sample(
+    logAnnualQ_h,
+    transition_matrix,
+    unconditional_dry,
+    dry_state_means,
+    wet_state_means,
+    covariance_matrix_dry,
+    covariance_matrix_wet,
+    n_basins: int = 5,
+    n_alternatives: int = 100,
+    save_samples: bool = True,
+    output_directory: Union[None, str] = None,
+):
+    """
+    Generate multisite samples for hydrological modeling using a Hidden Markov Model (HMM).
 
+    :param logAnnualQ_h: Historical log space annual flows.
+    :param transition_matrix: The transition matrix of the HMM.
+    :param unconditional_dry: Unconditional probability of the dry state.
+    :param dry_state_means: Means of the log space flows in the dry state.
+    :param wet_state_means: Means of the log space flows in the wet state.
+    :param covariance_matrix_dry: Covariance matrix for the dry state.
+    :param covariance_matrix_wet: Covariance matrix for the wet state.
+    :param n_basins: Number of basins to simulate. Defaults to 5.
+    :param n_alternatives: Number of alternative sequences to generate. Defaults to 100.
+    :param save_samples: Whether to save the generated samples. Defaults to True.
+    :param output_directory: Directory where samples should be saved. Required if save_samples is True.
+
+    :type logAnnualQ_h: ndarray
+    :type transition_matrix: ndarray
+    :type unconditional_dry: float
+    :type dry_state_means: ndarray
+    :type wet_state_means: ndarray
+    :type covariance_matrix_dry: ndarray
+    :type covariance_matrix_wet: ndarray
+    :type n_basins: int
+    :type n_alternatives: int
+    :type save_samples: bool
+    :type output_directory: Union[None, str]
+
+    :raises ValueError: If `save_samples` is True but `output_directory` is None.
+    """
     for i in range(n_alternatives):
-
         # Determine the number of years to simulate. Here we are just simulating 105 years across all basins
         logAnnualQ_s = np.zeros([np.shape(logAnnualQ_h)[0], n_basins])
 
@@ -100,10 +160,14 @@ def hmm_multisite_sample (logAnnualQ_h,
 
         if random() <= unconditional_dry:
             states[0] = 0
-            logAnnualQ_s[0, :] = np.random.multivariate_normal(np.reshape(dry_state_means, -1), covariance_matrix_dry)
+            logAnnualQ_s[0, :] = np.random.multivariate_normal(
+                np.reshape(dry_state_means, -1), covariance_matrix_dry
+            )
         else:
             states[0] = 1
-            logAnnualQ_s[0, :] = np.random.multivariate_normal(np.reshape(wet_state_means, -1), covariance_matrix_wet)
+            logAnnualQ_s[0, :] = np.random.multivariate_normal(
+                np.reshape(wet_state_means, -1), covariance_matrix_wet
+            )
 
         # generate remaining state trajectory and log space flows
         for j in range(1, np.shape(logAnnualQ_h)[0]):
@@ -113,28 +177,33 @@ def hmm_multisite_sample (logAnnualQ_h,
                 states[j] = 1 - states[j - 1]
 
             if states[j] == 0:
-                logAnnualQ_s[j, :] = np.random.multivariate_normal(np.reshape(dry_state_means, -1),
-                                                                   covariance_matrix_dry)
+                logAnnualQ_s[j, :] = np.random.multivariate_normal(
+                    np.reshape(dry_state_means, -1), covariance_matrix_dry
+                )
             else:
-                logAnnualQ_s[j, :] = np.random.multivariate_normal(np.reshape(wet_state_means, -1),
-                                                                   covariance_matrix_wet)
+                logAnnualQ_s[j, :] = np.random.multivariate_normal(
+                    np.reshape(wet_state_means, -1), covariance_matrix_wet
+                )
 
         AnnualQ_s = np.exp(logAnnualQ_s)
 
         if save_samples:
-
             if output_directory is None:
-                raise ValueError("If saving samples you must pass a valid path to `output_directory'")
+                raise ValueError(
+                    "If saving samples you must pass a valid path to `output_directory'"
+                )
 
             np.savetxt(os.path.join(output_directory, f"AnnualQ_s{i}.txt"), AnnualQ_s)
 
 
-def plot_flow_duration_curves(flow_realizations_directory: str,
-                              save_figure: bool = False,
-                              output_directory: Union[None, str] = None,
-                              figure_name: Union[None, str] = None,
-                              dpi: int = 300):
-    """Plots flow duration curves for historical and synthetic data
+def plot_flow_duration_curves(
+    flow_realizations_directory: str,
+    save_figure: bool = False,
+    output_directory: Union[None, str] = None,
+    figure_name: Union[None, str] = None,
+    dpi: int = 300,
+):
+    """Plot flow duration curves for historical and synthetic data.
 
     :param flow_realizations_directory:     Full path to the directory containing the flow realization files for each
                                             sample.  E.g., AnnualQ_s0.txt files produced by the 'hmm_multisite_sample'
@@ -142,46 +211,57 @@ def plot_flow_duration_curves(flow_realizations_directory: str,
     :type flow_realizations_directory:      str
 
     """
-
     fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(12, 6))
 
     # Plot historical FDCs
-    all_basins_file = pkg_resources.resource_filename("statemodify", "data/all_basins.csv")
-    historical_data = np.loadtxt(all_basins_file, delimiter=',', skiprows=1)
-    basins = ['Upper Colorado', 'Gunnison', 'Yampa', 'White', 'San Juan / Dolores']
+    all_basins_file = pkg_resources.resource_filename(
+        "statemodify", "data/all_basins.csv"
+    )
+    historical_data = np.loadtxt(all_basins_file, delimiter=",", skiprows=1)
+    basins = ["Upper Colorado", "Gunnison", "Yampa", "White", "San Juan / Dolores"]
 
     for i in range(len(basins)):
-        axes.flatten()[i].plot(np.arange(len(historical_data[:, 0])), np.sort(np.log(historical_data[:, i])),
-                               color='darkblue')
+        axes.flatten()[i].plot(
+            np.arange(len(historical_data[:, 0])),
+            np.sort(np.log(historical_data[:, i])),
+            color="darkblue",
+        )
         axes.flatten()[i].set_xlim([0, 105])
-        axes.flatten()[i].set_xlabel('Non-Exceedance %')
-        axes.flatten()[i].set_ylabel('log(Streamflow) (log(acft))')
+        axes.flatten()[i].set_xlabel("Non-Exceedance %")
+        axes.flatten()[i].set_ylabel("log(Streamflow) (log(acft))")
         axes.flatten()[i].set_title(basins[i])
-    axes.flatten()[5].axis('off')
+    axes.flatten()[5].axis("off")
 
     # read synthetic record
     for r in range(100):
-        target_sample_file = os.path.join(flow_realizations_directory, f"AnnualQ_s{r}.txt")
+        target_sample_file = os.path.join(
+            flow_realizations_directory, f"AnnualQ_s{r}.txt"
+        )
         AnnualQ_s = np.loadtxt(target_sample_file)
 
         for i in range(5):
-            axes.flatten()[i].plot(np.arange(len(AnnualQ_s[:,i])),
-                                   np.sort(np.log(AnnualQ_s[:,i])),
-                                   color = 'cornflowerblue',
-                                   alpha=.05)
+            axes.flatten()[i].plot(
+                np.arange(len(AnnualQ_s[:, i])),
+                np.sort(np.log(AnnualQ_s[:, i])),
+                color="cornflowerblue",
+                alpha=0.05,
+            )
 
     for i in range(5):
-        axes.flatten()[i].legend(['Historical', 'HMM Traces'])
+        axes.flatten()[i].legend(["Historical", "HMM Traces"])
 
     plt.tight_layout()
 
     if save_figure:
-
         if output_directory is None:
-            raise ValueError(f"If choosing to save figure you must specify an 'output_directory'")
+            raise ValueError(
+                "If choosing to save figure you must specify an 'output_directory'"
+            )
 
         if figure_name is None:
-            raise ValueError(f"If choosing to save figure you must specify a 'figure_name'")
+            raise ValueError(
+                "If choosing to save figure you must specify a 'figure_name'"
+            )
 
         figure_outfile = f"{os.path.join(output_directory, figure_name)}.png"
 
@@ -192,7 +272,7 @@ def plot_flow_duration_curves(flow_realizations_directory: str,
 
 
 def read_xre(xre_path: str, reservoir_name: str):
-    """Reads xre files generated by statemod using HMM data and historical data
+    """Read xre files generated by statemod using HMM data and historical data.
 
     :param xre_path:            str, path to xre files
     :param reservoir_name:      str, name of reservoir that begins XRE file
@@ -203,99 +283,141 @@ def read_xre(xre_path: str, reservoir_name: str):
                                 a numpy array with monthly 1st percentiles of storage of the hist record
     """
     target_columns = [
-        'Res ID', 'ACC', 'Year', 'MO', 'Init. Storage',
-        'From River By Priority', 'From River By Storage',
-        'From River By Other', 'From River By Loss', 'From Carrier By Priority',
-        'From Carrier By Other', 'From Carrier By Loss', 'Total Supply',
-        'From Storage to River For Use', 'From Storage to River for Exc',
-        'From Storage to Carrier for use', 'Total Release', 'Evap',
-        'Seep and Spill', 'EOM Content', 'Target Stor', 'Decree Lim',
-        'River Inflow', 'River Release', 'River Divert', 'River by Well',
-        'River Outflow'
+        "Res ID",
+        "ACC",
+        "Year",
+        "MO",
+        "Init. Storage",
+        "From River By Priority",
+        "From River By Storage",
+        "From River By Other",
+        "From River By Loss",
+        "From Carrier By Priority",
+        "From Carrier By Other",
+        "From Carrier By Loss",
+        "Total Supply",
+        "From Storage to River For Use",
+        "From Storage to River for Exc",
+        "From Storage to Carrier for use",
+        "Total Release",
+        "Evap",
+        "Seep and Spill",
+        "EOM Content",
+        "Target Stor",
+        "Decree Lim",
+        "River Inflow",
+        "River Release",
+        "River Divert",
+        "River by Well",
+        "River Outflow",
     ]
 
     for r in range(100):
         input_file = os.path.join(xre_path, f"{reservoir_name}_xre_data_S{r}_1.csv")
-        reservoir_data = pd.read_csv(input_file, index_col=False, usecols=target_columns)
+        reservoir_data = pd.read_csv(
+            input_file, index_col=False, usecols=target_columns
+        )
 
-        account_0 = reservoir_data[reservoir_data['ACC']==0]
+        account_0 = reservoir_data[reservoir_data["ACC"] == 0]
         # TODO:  there is no field named `TOT` in the data but this will return
-        monthly_data = account_0[account_0['MO'] != 'TOT']
-        monthly_storage = np.array(monthly_data['Init. Storage'].astype(float))
+        monthly_data = account_0[account_0["MO"] != "TOT"]
+        monthly_storage = np.array(monthly_data["Init. Storage"].astype(float))
         monthly_storage = np.reshape(monthly_storage, [105, 12])
 
         if r == 0:
             all_realizations_storage = monthly_storage
         else:
-            all_realizations_storage = np.vstack((all_realizations_storage, monthly_storage))
+            all_realizations_storage = np.vstack(
+                (all_realizations_storage, monthly_storage)
+            )
 
     # read in "historical"
-    reservoir_data_hist = pd.read_csv(os.path.join(xre_path, f"{reservoir_name}_xre_data_hist.csv"),
-                                      index_col=False)
+    reservoir_data_hist = pd.read_csv(
+        os.path.join(xre_path, f"{reservoir_name}_xre_data_hist.csv"), index_col=False
+    )
 
-    account_0_hist = reservoir_data_hist[reservoir_data_hist['ACC']==0]
-    monthly_data_hist = account_0_hist[account_0_hist['MO'] != 'TOT']
-    monthly_data_hist = np.array(monthly_data_hist['Init. Storage'].astype(float))
+    account_0_hist = reservoir_data_hist[reservoir_data_hist["ACC"] == 0]
+    monthly_data_hist = account_0_hist[account_0_hist["MO"] != "TOT"]
+    monthly_data_hist = np.array(monthly_data_hist["Init. Storage"].astype(float))
     monthly_storage_hist = np.reshape(monthly_data_hist, [105, 12])
 
     # get mean and first percentile
     hist_means = np.zeros([12])
     hist_1p = np.zeros([12])
     for m in range(12):
-        hist_means[m] = np.mean(monthly_storage_hist[:,m])
-        hist_1p[m] = np.percentile(monthly_storage_hist[:,m], 0.01)
+        hist_means[m] = np.mean(monthly_storage_hist[:, m])
+        hist_1p[m] = np.percentile(monthly_storage_hist[:, m], 0.01)
 
     return all_realizations_storage, monthly_storage_hist, hist_means, hist_1p
 
 
-def plot_res_quantiles(hmm_data: np.array,
-                       historical_mean: np.array,
-                       reservoir_name: str,
-                       save_figure: bool = False,
-                       output_directory: Union[None, str] = None,
-                       dpi: int = 300):
-    """Plots quantiles of the HMM data and the mean and 1st percentile of the historical record
+def plot_res_quantiles(
+    hmm_data: np.array,
+    historical_mean: np.array,
+    reservoir_name: str,
+    save_figure: bool = False,
+    output_directory: Union[None, str] = None,
+    dpi: int = 300,
+):
+    """Plot quantiles of the HMM data and the mean and 1st percentile of the historical record.
 
     :param hmm_data:            a numpy array with monthly storage data from HMM realizations
     :param historical_mean:     a numpy array with the historical mean monthly storage
     :param res_name:            a string with the name of the reservoir
 
     """
-
-    months = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+    months = [
+        "Oct",
+        "Nov",
+        "Dec",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+    ]
     ps = np.arange(0, 1.01, 0.05) * 100
 
     fig, ax = plt.subplots()
     for j in range(1, len(ps)):
-        u = np.percentile(hmm_data, ps[j], axis=0)
-        l = np.percentile(hmm_data, ps[j - 1], axis=0)
-        ax.fill_between(np.arange(12),
-                        l,
-                        u,
-                        color=cm.BrBG(ps[j - 1] / 100.0),
-                        alpha=0.75,
-                        edgecolor='none')
+        upper_bound = np.percentile(hmm_data, ps[j], axis=0)
+        lower_bound = np.percentile(hmm_data, ps[j - 1], axis=0)
+        ax.fill_between(
+            np.arange(12),
+            lower_bound,
+            upper_bound,
+            color=cm.BrBG(ps[j - 1] / 100.0),
+            alpha=0.75,
+            edgecolor="none",
+        )
 
-    ax.plot(np.arange(12), historical_mean, linestyle='--', color='k', linewidth=3)
-    ax.set_xlim(0,11)
+    ax.plot(np.arange(12), historical_mean, linestyle="--", color="k", linewidth=3)
+    ax.set_xlim(0, 11)
     ax.set_xticks(np.arange(12))
     ax.set_xticklabels(months)
     ax.set_title(reservoir_name)
-    ax.set_ylabel('Storage (acft)')
+    ax.set_ylabel("Storage (acft)")
 
-    my_cmap = plt.cm.get_cmap('BrBG')
+    my_cmap = plt.cm.get_cmap("BrBG")
     sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0, 1))
     sm.set_array([])
     cbar = plt.colorbar(sm, ax=ax)
-    cbar.set_label('Percentile of HMM Records', rotation=270, labelpad=20, fontsize=14)
+    cbar.set_label("Percentile of HMM Records", rotation=270, labelpad=20, fontsize=14)
     plt.tight_layout()
 
     if save_figure:
-
         if output_directory is None:
-            raise ValueError(f"If choosing to save figure you must specify an 'output_directory'")
+            raise ValueError(
+                "If choosing to save figure you must specify an 'output_directory'"
+            )
 
-        figure_outfile = os.path.join(output_directory, f"{reservoir_name}_HMM_Hist_quantiles.png")
+        figure_outfile = os.path.join(
+            output_directory, f"{reservoir_name}_HMM_Hist_quantiles.png"
+        )
 
         plt.savefig(figure_outfile, dpi=dpi)
 
@@ -303,46 +425,63 @@ def plot_res_quantiles(hmm_data: np.array,
     plt.close()
 
 
-def plot_reservoir_boxes(hmm_data: np.array,
-                         historical_data: np.array,
-                         reservoir_name: str,
-                         save_figure: bool = False,
-                         output_directory: Union[None, str] = None,
-                         dpi: int = 300):
+def plot_reservoir_boxes(
+    hmm_data: np.array,
+    historical_data: np.array,
+    reservoir_name: str,
+    save_figure: bool = False,
+    output_directory: Union[None, str] = None,
+    dpi: int = 300,
+):
     """
-
-    makes a boxplot comparing the historical record to the HMM realizations
+    Generate a boxplot comparing the historical record to the HMM realizations.
 
     :param hmm_data:                a numpy array with monthly storage data from HMM realizations
     :param historical_data:         a numpy array with monthly storage data from hist data
     :param reservoir_name:          a string with the name of the reservoir
 
     """
-
-    months = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+    months = [
+        "Oct",
+        "Nov",
+        "Dec",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+    ]
 
     fig, ax = plt.subplots()
 
     # HMM
-    hmm_box = ax.boxplot(hmm_data, patch_artist=True, positions=np.arange(0, 24, 2), showfliers=False)
+    hmm_box = ax.boxplot(
+        hmm_data, patch_artist=True, positions=np.arange(0, 24, 2), showfliers=False
+    )
 
     # set up colors
-    plt.setp(hmm_box["boxes"], facecolor='lightblue', edgecolor='white')
-    plt.setp(hmm_box["whiskers"], color='lightblue')
-    plt.setp(hmm_box["caps"], color='lightblue')
-    plt.setp(hmm_box["medians"], color='darkblue')
+    plt.setp(hmm_box["boxes"], facecolor="lightblue", edgecolor="white")
+    plt.setp(hmm_box["whiskers"], color="lightblue")
+    plt.setp(hmm_box["caps"], color="lightblue")
+    plt.setp(hmm_box["medians"], color="darkblue")
 
     # Historical
-    hist_box = ax.boxplot(historical_data, patch_artist=True, positions=np.arange(1, 25, 2))
+    hist_box = ax.boxplot(
+        historical_data, patch_artist=True, positions=np.arange(1, 25, 2)
+    )
     # set up colors
-    plt.setp(hist_box["boxes"], facecolor='orange', edgecolor='white')
-    plt.setp(hist_box["whiskers"], color='orange')
-    plt.setp(hist_box["caps"], color='orange')
-    plt.setp(hist_box["fliers"], color='orange')
-    plt.setp(hist_box["medians"], color='firebrick')
+    plt.setp(hist_box["boxes"], facecolor="orange", edgecolor="white")
+    plt.setp(hist_box["whiskers"], color="orange")
+    plt.setp(hist_box["caps"], color="orange")
+    plt.setp(hist_box["fliers"], color="orange")
+    plt.setp(hist_box["medians"], color="firebrick")
 
     # set up labeling
-    ax.set_ylabel('Storage (acft)')
+    ax.set_ylabel("Storage (acft)")
     ax.set_xticks(np.arange(0.5, 24, 2))
     ax.set_xticklabels(months)
     ax.set_title(reservoir_name)
@@ -350,11 +489,14 @@ def plot_reservoir_boxes(hmm_data: np.array,
     plt.tight_layout()
 
     if save_figure:
-
         if output_directory is None:
-            raise ValueError(f"If choosing to save figure you must specify an 'output_directory'")
+            raise ValueError(
+                "If choosing to save figure you must specify an 'output_directory'"
+            )
 
-        figure_outfile = os.path.join(output_directory, f"{reservoir_name}_HMM_Hist_boxplot.png")
+        figure_outfile = os.path.join(
+            output_directory, f"{reservoir_name}_HMM_Hist_boxplot.png"
+        )
 
         plt.savefig(figure_outfile, dpi=dpi)
 
