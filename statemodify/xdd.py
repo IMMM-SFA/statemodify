@@ -256,6 +256,7 @@ class XddConverter:
                 output_path=self.output_path,
                 id_subset=self.id_subset,
                 preserve_string_dtype=self.preserve_string_dtype,
+                field_dtypes=self.field_dtypes,
             )
             for file in tqdm(self.xdd_files)
         )
@@ -271,6 +272,7 @@ class XddConverter:
         output_path: str,
         id_subset: Union[None, list[str]],
         preserve_string_dtype: bool,
+        field_dtypes: dict
     ):
         data = []
         with open(file) as f:
@@ -293,7 +295,7 @@ class XddConverter:
             df = df[df["structure_id"].isin(id_subset)]
 
         if preserve_string_dtype is False:
-            df = df.astype(self.field_dtypes)
+            df = df.astype(field_dtypes)
 
         df.to_parquet(f"{output_path}/{Path(file).stem}.parquet") 
 
