@@ -360,4 +360,5 @@ def convert_xdd(
         xdd_files=xdd_files,
         id_subset=id_subset,
         parallel_jobs=parallel_jobs,
+        preserve_string_dtype=preserve_string_dtype,
     ).convert()
