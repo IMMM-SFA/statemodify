@@ -57,10 +57,10 @@ Step 1: Fit Multi-Site HMM
     import pickle
     from string import Template
     import subprocess
-    
+
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd 
+    import pandas as pd
     import statemodify as stm
 
 First we define directories and associated paths.
@@ -69,16 +69,16 @@ First we define directories and associated paths.
 
     # statemod directory
     statemod_dir = "/usr/src/statemodify/statemod_upper_co"
-    
+
     # root directory of statemod data for the target basin
     root_dir = os.path.join(statemod_dir, "src", "main", "fortran")
-    
+
     # home directory of notebook instance
     home_dir = os.path.dirname(os.getcwd())
-    
+
     # path to the statemod executable
     statemod_exe = os.path.join(root_dir, "statemod")
-    
+
     # data directory and root name for the target basin
     data_dir = os.path.join(
         home_dir,
@@ -86,14 +86,14 @@ First we define directories and associated paths.
         "cm2015_StateMod",
         "StateMod"
     )
-    
+
     # directory to the target basin input files with root name for the basin
     basin_path = os.path.join(data_dir, "cm2015B")
-    
+
     # scenarios output directory
     scenarios_dir = os.path.join(data_dir, "scenarios")
-    
-    # path to iwr/xbm file 
+
+    # path to iwr/xbm file
     xbm_iwr_template_file = os.path.join(
         home_dir,
         "data",
@@ -108,21 +108,21 @@ store the HMM parameters.
 .. code:: ipython3
 
     #Make directory to store HMM parameters
-    
+
     output_dir = os.path.join(data_dir, "HMM_parameters")
-    
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    
+
     n_basins = 5
-    
+
     # choice to save parameters to NumPy array files
     save_parameters = True
-    
+
     fit_array_dict = stm.hmm_multisite_fit(n_basins=n_basins,
                                            save_parameters=save_parameters,
                                            output_directory=output_dir)
-    
+
     # unpack output dictionary
     unconditional_dry = fit_array_dict["unconditional_dry"]
     unconditional_wet = fit_array_dict["unconditional_wet"]
@@ -145,12 +145,12 @@ in the ``HMM_Runs`` folder.
 .. code:: ipython3
 
     #Create a folder to store the runs
-    
+
     output_dir = os.path.join(data_dir, "HMM_Runs")
-    
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    
+
     # using the outputs of the fit function above; this function write output sample files to the output directory
     stm.hmm_multisite_sample(logAnnualQ_h,
                              transition_matrix,
@@ -209,30 +209,30 @@ function.
 
 .. code:: ipython3
 
-    #Make directory to store input files 
-    
+    #Make directory to store input files
+
     output_dir = os.path.join(data_dir, "input_files")
-    
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-        
-    
+
+
     flow_realizations_directory = os.path.join(data_dir, "HMM_Runs")
-        
+
     scenario = "1"
-    
+
     # basin name to process
     basin_name = "Upper_Colorado"
-    
+
     # seed value for reproducibility if so desired
     seed_value = 123
-    
+
     # number of jobs to launch in parallel; -1 is all but 1 processor used
     n_jobs = 2
-    
+
     # number of samples to generate (how many new xbm and iwr files); produces an IWR multiplier
     n_samples = 1
-    
+
     # generate a batch of files using generated LHS
     stm.modify_xbm_iwr(output_dir=output_dir,
                        flow_realizations_directory=flow_realizations_directory,
@@ -242,7 +242,7 @@ function.
                        n_jobs=n_jobs,
                        n_samples=n_samples,
                        save_sample=True,
-                       randomly_select_flow_sample=True)    
+                       randomly_select_flow_sample=True)
 
 Step 4: Read in the New Input Files and Run StateMod : Streamflow Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -268,43 +268,43 @@ levels.
     # set realization and sample
     realization = 1
     sample = np.arange(0, 1, 1)
-    
+
     # read RSP template
     with open(xbm_iwr_template_file) as template_obj:
-        
+
         # read in file
         template_rsp = Template(template_obj.read())
-    
+
         for i in sample:
-            
+
             # create scenario name
             scenario = f"S{i}_{realization}"
-            
+
             # dictionary holding search keys and replacement values to update the template file
             d = {"XBM": f"../../input_files/cm2015B_{scenario}.xbm","IWR": f"../../input_files/cm2015B_{scenario}.iwr"}
-            
+
             # update the template
             new_rsp = template_rsp.safe_substitute(d)
-            
+
             # construct simulated scenario directory
             simulated_scenario_dir = os.path.join(scenarios_dir, scenario)
             if not os.path.exists(simulated_scenario_dir):
                 os.makedirs(simulated_scenario_dir)
-                
+
             # target rsp file
             rsp_file = os.path.join(simulated_scenario_dir, f"cm2015B_{scenario}.rsp")
-            
+
             # write updated rsp file
             with open(rsp_file, "w") as f1:
                 f1.write(new_rsp)
-            
+
             # construct simulated basin path
             simulated_basin_path = f"cm2015B_{scenario}"
-    
+
             # run StateMod
             print(f"Running: {scenario}")
             os.chdir(simulated_scenario_dir)
-    
+
             subprocess.call([statemod_exe, simulated_basin_path, "-simulate"])
 
 
@@ -312,28 +312,28 @@ levels.
 .. parsed-literal::
 
     Running: S0_1
-      Parse; Command line argument: 
-      cm2015B_S0_1 -simulate                                                                                                         
+      Parse; Command line argument:
+      cm2015B_S0_1 -simulate
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
             Version: 15.00.01
             Last revision date: 2015/10/28
-    
+
     ________________________________________________________________________
-    
-      Opening log file cm2015B_S0_1.log                                                                                                                                                                                                                                                
-      
+
+      Opening log file cm2015B_S0_1.log
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
  ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in file: cm2015B_S0_1.log                                                                                                                                                                                                                                                
+      Statem; See detailed messages in file: cm2015B_S0_1.log
      Stop 0
 
 
@@ -351,10 +351,10 @@ the historical 105-year period.
     # Example with Granby Lake
     zip_file_path = os.path.join(home_dir, 'data', 'Granby_Dataset.zip')
     final_directory = os.path.join(home_dir, 'data/')
-    
-    !unzip $zip_file_path -d $final_directory  
+
+    !unzip $zip_file_path -d $final_directory
     granby_hmm, granby_hist, granby_hist_mean, granby_hist_1p = stm.read_xre(os.path.join(home_dir,"data/Upper_Colorado/"), 'Granby')
-    
+
     # Plot quantiles
     stm.plot_res_quantiles(granby_hmm, granby_hist_mean, 'Lake Granby')
 
@@ -415,13 +415,13 @@ assessments.
 
       ::
 
-          2.  <a href="https://waterprogramming.wordpress.com/2018/07/03/fitting-hidden-markov-models-part-ii-sample-python-script/">Fitting Hidden Markov Models: Sample Scripts</a> 
+          2.  <a href="https://waterprogramming.wordpress.com/2018/07/03/fitting-hidden-markov-models-part-ii-sample-python-script/">Fitting Hidden Markov Models: Sample Scripts</a>
 
    .. container::
 
       ::
 
-          3. <a href="https://uc-ebook.org/docs/html/A2_Jupyter_Notebooks.html#a-hidden-markov-modeling-approach-to-creating-synthetic-streamflow-scenarios-tutorial">A Hidden-Markov Modeling Approach to Creating Synthetic Streamflow Scenarios Tutorial</a> 
+          3. <a href="https://uc-ebook.org/docs/html/A2_Jupyter_Notebooks.html#a-hidden-markov-modeling-approach-to-creating-synthetic-streamflow-scenarios-tutorial">A Hidden-Markov Modeling Approach to Creating Synthetic Streamflow Scenarios Tutorial</a>
 
 Notebook Specific References
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -447,4 +447,3 @@ e2020EF001503.
       ::
 
          1.  <a href="https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/xbm_iwr.py">modify_xbm_iwr()</a>
-

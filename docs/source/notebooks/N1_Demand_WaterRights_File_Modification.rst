@@ -58,10 +58,10 @@ conditions.
     import pickle
     from string import Template
     import subprocess
-    
+
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd 
+    import pandas as pd
     import statemodify as stm
 
 .. container:: alert alert-block alert-info
@@ -79,16 +79,16 @@ conditions.
 
     # statemod directory
     statemod_dir = "/usr/src/statemodify/statemod_gunnison_sjd"
-    
+
     # root directory of statemod data for the target basin
     root_dir = os.path.join(statemod_dir, "src", "main", "fortran")
-    
+
     # home directory of notebook instance
     home_dir = os.path.dirname(os.getcwd())
-    
+
     # path to the statemod executable
     statemod_exe = os.path.join(root_dir, "statemod-17.0.3-gfortran-lin-64bit-o3")
-    
+
     # data directory and root name for the target basin
     data_dir = os.path.join(
         home_dir,
@@ -97,25 +97,25 @@ conditions.
         "sj2015_StateMod_modified",
         "StateMod"
     )
-    
+
     # directory to the target basin input files with root name for the basin
     basin_path = os.path.join(data_dir, "sj2015B")
-    
+
     # scenarios output directory
     scenarios_dir_ddm = os.path.join(data_dir, "scenarios_ddm")
     scenarios_dir_ddr = os.path.join(data_dir, "scenarios_ddr")
-    
+
     # parquet files output directory
     parquet_dir_ddm = os.path.join(data_dir, "parquet_ddm")
     parquet_dir_ddr = os.path.join(data_dir, "parquet_ddr")
-    
+
     # path to ddm and ddr template file
     ddm_template_file = os.path.join(
         home_dir,
         "data",
         "sj2015B_template_ddm.rsp"
     )
-    
+
     ddr_template_file = os.path.join(
         home_dir,
         "data",
@@ -131,19 +131,19 @@ conditions.
 
 .. parsed-literal::
 
-     Startup log file for messages to this point: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/sj2015B.rsp                                                                                                                                                                        
+     Startup log file for messages to this point: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/sj2015B.rsp
        Closing startup log file: statem.log
-       Opening dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/sj2015B.log                                                                                                                                                                        
+       Opening dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/sj2015B.log
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
-            Version:     17.0.3          
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
+            Version:     17.0.3
             Last revision date: 2021/09/12
-    
+
     ________________________________________________________________________
-      
+
       Subroutine Execut
       Subroutine Datinp
 
@@ -151,7 +151,7 @@ conditions.
 
     ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/sj2015B.log                                                                                                                                                                        
+      Statem; See detailed messages in dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/sj2015B.log
      Stop 0
 
 Once StateMod has run successfully, we can now extract user shortages
@@ -167,16 +167,16 @@ and saved.
 
 .. code:: ipython3
 
-    #Extract shortages using statemodify convert_xdd() function  
-    
-    # create a directory to store the historical shortages  
+    #Extract shortages using statemodify convert_xdd() function
+
+    # create a directory to store the historical shortages
     output_dir = os.path.join(data_dir, "historic_shortages")
-    
+
     # create a directory to store the new files in if it does not exist
     output_directory = os.path.join(data_dir, "historic_shortages")
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
-    
+
     stm.xdd.convert_xdd(
         # path to a directory where output .parquet files should be written
         output_path=output_dir,
@@ -212,11 +212,11 @@ and saved.
         .dataframe tbody tr th:only-of-type {
             vertical-align: middle;
         }
-    
+
         .dataframe tbody tr th {
             vertical-align: top;
         }
-    
+
         .dataframe thead th {
             text-align: right;
         }
@@ -529,11 +529,11 @@ We can then take these shortages and plot them for our list of users.
 .. code:: ipython3
 
     fig, ax = plt.subplots()
-    
+
     for name, group in data.groupby('structure_id'):
         ax.scatter(
             group['year'], group['shortage_total'], label=name)
-    
+
     plt.xlabel("Year")
     plt.ylabel("Shortage (AF)")
     plt.legend()
@@ -585,29 +585,29 @@ the ``input_files`` directory.
         "ids": ["2900501", "2900519","2900555"],
         "bounds": [0.5, 1.5]
     }
-    
+
     output_directory = output_dir = os.path.join(data_dir, "input_files")
-    
+
     scenario = "1"
-    
+
     # the number of samples you wish to generate
     n_samples = 2
-    
+
     # seed value for reproducibility if so desired
     seed_value = 1
-    
+
     # number of rows to skip in file after comment
     skip_rows = 1
-    
+
     # name of field to query
     query_field = "id"
-    
+
     # number of jobs to launch in parallel; -1 is all but 1 processor used
     n_jobs = -1
-    
+
     # basin to process
     basin_name = "San_Juan"
-    
+
     # generate a batch of files using generated LHS
     stm.modify_ddm(
         modify_dict=setup_dict,
@@ -669,53 +669,53 @@ scenario will take approximately 4 minutes.
     # set realization and sample
     realization = 1
     sample = np.arange(0, 2, 1)
-    
+
     # read RSP template
     with open(ddm_template_file) as template_obj:
-        
+
         # read in file
         template_rsp = Template(template_obj.read())
-    
+
         for i in sample:
-            
+
             # create scenario name
             scenario = f"S{i}_{realization}"
-            
+
             # dictionary holding search keys and replacement values to update the template file
             d = {"DDM": f"../../input_files/sj2015B_{scenario}.ddm"}
-            
+
             # update the template
             new_rsp = template_rsp.safe_substitute(d)
-            
+
             # construct simulated scenario directory
             simulated_scenario_dir = os.path.join(scenarios_dir_ddm, scenario)
             if not os.path.exists(simulated_scenario_dir):
                 os.makedirs(simulated_scenario_dir)
-                
+
             # target rsp file
             rsp_file = os.path.join(simulated_scenario_dir, f"sj2015B_{scenario}.rsp")
-            
+
             # write updated rsp file
             with open(rsp_file, "w") as f1:
                 f1.write(new_rsp)
-            
+
             # construct simulated basin path
             simulated_basin_path = os.path.join(simulated_scenario_dir, f"sj2015B_{scenario}")
-    
+
             # run StateMod
             print(f"Running: {scenario}")
             os.chdir(simulated_scenario_dir)
-    
+
             subprocess.call([statemod_exe, simulated_basin_path, "-simulate"])
-            
-            #Save output to parquet files 
+
+            #Save output to parquet files
             print('creating parquet for ' + scenario)
-            
+
             output_directory = os.path.join(parquet_dir_ddm+"/scenario/"+ scenario)
-            
+
             if not os.path.exists(output_directory):
                 os.makedirs(output_directory)
-            
+
             stm.xdd.convert_xdd(
                 output_path=output_directory,
                 allow_overwrite=False,
@@ -730,19 +730,19 @@ scenario will take approximately 4 minutes.
 .. parsed-literal::
 
     Running: S0_1
-     Startup log file for messages to this point: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddm/S0_1/sj2015B_S0_1.rsp                                                                                                                                                
+     Startup log file for messages to this point: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddm/S0_1/sj2015B_S0_1.rsp
        Closing startup log file: statem.log
-       Opening dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddm/S0_1/sj2015B_S0_1.log                                                                                                                                                
+       Opening dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddm/S0_1/sj2015B_S0_1.log
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
-            Version:     17.0.3          
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
+            Version:     17.0.3
             Last revision date: 2021/09/12
-    
+
     ________________________________________________________________________
-      
+
       Subroutine Execut
       Subroutine Datinp
 
@@ -750,7 +750,7 @@ scenario will take approximately 4 minutes.
 
     ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddm/S0_1/sj2015B_S0_1.log                                                                                                                                                
+      Statem; See detailed messages in dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddm/S0_1/sj2015B_S0_1.log
      Stop 0
     creating parquet for S0_1
 
@@ -791,19 +791,19 @@ respect to the shortages received in the baseline case.
     baseline=pd.read_parquet(data_dir+'/historic_shortages/sj2015B.parquet',engine='pyarrow')
     SOW_1=pd.read_parquet(parquet_dir_ddm+'/scenario/S0_1/sj2015B_S0_1.parquet',engine='pyarrow')
     SOW_2=pd.read_parquet(parquet_dir_ddm+'/scenario/S1_1/sj2015B_S1_1.parquet',engine='pyarrow')
-    
+
     # Subtract shortages with respect to the baseline
     subset_df=pd.concat([baseline['year'],baseline['shortage_total'],SOW_1['shortage_total'],SOW_2['shortage_total']],axis=1)
     subset_df = subset_df.set_axis(['Year', 'Baseline', 'SOW_1','SOW_2'], axis=1)
     subset_df['SOW_1_diff'] = subset_df['SOW_1']-subset_df['Baseline']
     subset_df['SOW_2_diff'] = subset_df['SOW_2']-subset_df['Baseline']
-    
+
     # Plot shortages
     fig, ax = plt.subplots()
-    
+
     ax.scatter(subset_df['Year'], subset_df['SOW_1_diff'],label='Decreased Demand')
     ax.scatter(subset_df['Year'], subset_df['SOW_2_diff'],label='Increased Demand')
-    
+
     plt.xlabel("Year")
     plt.ylabel("Shortage (AF)")
     plt.title("Change in Shortages from the Baseline")
@@ -846,36 +846,36 @@ rank to 1.
     setup_dict = {
         # ids can either be 'struct' or 'id' values
         "ids": ["2900501"],
-    
+
         # turn id on or off completely or for a given period
         # if 0 = off, 1 = on, YYYY = on for years >= YYYY, -YYYY = off for years > YYYY; see file header
         "on_off": [1],
-    
+
         # apply rank of administrative order where 0 is lowest (senior) and n is highest (junior); None is no change
         "admin": [1],
     }
-    
+
     output_directory = os.path.join(data_dir, "input_files")
     scenario = "1"
-    
+
     # the number of samples you wish to generate
     n_samples = 1
-    
+
     # seed value for reproducibility if so desired
     seed_value = 1
-    
+
     # number of rows to skip in file after comment
     skip_rows = 0
-    
+
     # name of field to query
     query_field = "struct"
-    
+
     # number of jobs to launch in parallel; -1 is all but 1 processor used
     n_jobs = -1
-    
+
     # basin to process
     basin_name = "San_Juan"
-    
+
     # generate a batch of files using generated LHS
     stm.modify_ddr(
         modify_dict=setup_dict,
@@ -907,53 +907,53 @@ using the .\ ``ddr`` template file.
     # set realization and sample
     realization = 1
     sample = np.arange(0, 1, 1)
-    
+
     # read RSP template
     with open(ddr_template_file) as template_obj:
-        
+
         # read in file
         template_rsp = Template(template_obj.read())
-    
+
         for i in sample:
-            
+
             # create scenario name
             scenario = f"S{i}_{realization}"
-            
+
             # dictionary holding search keys and replacement values to update the template file
             d = {"DDR": f"../../input_files/sj2015B_{scenario}.ddr"}
-            
+
             # update the template
             new_rsp = template_rsp.safe_substitute(d)
-            
+
             # construct simulated scenario directory
             simulated_scenario_dir = os.path.join(scenarios_dir_ddr, scenario)
             if not os.path.exists(simulated_scenario_dir):
                 os.makedirs(simulated_scenario_dir)
-                
+
             # target rsp file
             rsp_file = os.path.join(simulated_scenario_dir, f"sj2015B_{scenario}.rsp")
-            
+
             # write updated rsp file
             with open(rsp_file, "w") as f1:
                 f1.write(new_rsp)
-            
+
             # construct simulated basin path
             simulated_basin_path = os.path.join(simulated_scenario_dir, f"sj2015B_{scenario}")
-    
+
             # run StateMod
             print(f"Running: {scenario}")
             os.chdir(simulated_scenario_dir)
-    
+
             subprocess.call([statemod_exe, simulated_basin_path, "-simulate"])
-            
-            #Save output to parquet files 
+
+            #Save output to parquet files
             print('creating parquet for ' + scenario)
-            
+
             output_directory = os.path.join(parquet_dir_ddr+"/scenario/"+ scenario)
-            
+
             if not os.path.exists(output_directory):
                 os.makedirs(output_directory)
-            
+
             stm.xdd.convert_xdd(
                 output_path=output_directory,
                 allow_overwrite=False,
@@ -968,27 +968,27 @@ using the .\ ``ddr`` template file.
 .. parsed-literal::
 
     Running: S0_1
-     Startup log file for messages to this point: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddr/S0_1/sj2015B_S0_1.rsp                                                                                                                                                
+     Startup log file for messages to this point: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddr/S0_1/sj2015B_S0_1.rsp
        Closing startup log file: statem.log
-       Opening dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddr/S0_1/sj2015B_S0_1.log                                                                                                                                                
+       Opening dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddr/S0_1/sj2015B_S0_1.log
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
-            Version:     17.0.3          
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
+            Version:     17.0.3
             Last revision date: 2021/09/12
-    
+
     ________________________________________________________________________
-      
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
     ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddr/S0_1/sj2015B_S0_1.log                                                                                                                                                
+      Statem; See detailed messages in dataset log file: /home/jovyan/data/sj2015_StateMod_modified/sj2015_StateMod_modified/StateMod/scenarios_ddr/S0_1/sj2015B_S0_1.log
      Stop 0
     creating parquet for S0_1
 
@@ -1001,17 +1001,17 @@ with respect to the baseline shortages.
     # Read in raw parquet files
     baseline=pd.read_parquet(data_dir+'/historic_shortages/sj2015B.parquet',engine='pyarrow')
     SOW_1=pd.read_parquet(parquet_dir_ddr+ '/scenario/S0_1/sj2015B_S0_1.parquet',engine='pyarrow')
-    
+
     # Subtract shortages with respect to the baseline
     subset_df=pd.concat([baseline['year'],baseline['shortage_total'],SOW_1['shortage_total']],axis=1)
     subset_df = subset_df.set_axis(['Year', 'Baseline', 'SOW_1'], axis=1)
     subset_df['diff']=subset_df['SOW_1']-subset_df['Baseline']
-    
+
     # Plot shortages
     fig, ax = plt.subplots()
-    
+
     ax.scatter(subset_df['Year'], subset_df['diff'])
-    
+
     plt.xlabel("Year")
     plt.ylabel("Shortage (AF)")
     plt.title("Change in Shortages from the Baseline")
@@ -1052,4 +1052,3 @@ reservoir evaporation modification fuction.
       ::
 
          2.  <a href="https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/ddr.py">modify_ddr()</a>
-

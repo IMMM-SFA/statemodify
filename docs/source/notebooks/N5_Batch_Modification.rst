@@ -21,10 +21,10 @@ using the ``modify_batch()`` function.
     import pickle
     from string import Template
     import subprocess
-    
+
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd 
+    import pandas as pd
     import statemodify as stm
 
 .. container:: alert alert-block alert-info
@@ -39,16 +39,16 @@ using the ``modify_batch()`` function.
 
     # statemod directory
     statemod_dir = "/usr/src/statemodify/statemod_upper_co"
-    
+
     # root directory of statemod data for the target basin
     root_dir = os.path.join(statemod_dir, "src", "main", "fortran")
-    
+
     # home directory of notebook instance
     home_dir = os.path.dirname(os.getcwd())
-    
+
     # path to the statemod executable
     statemod_exe = os.path.join(root_dir, "statemod")
-    
+
     # data directory and root name for the target basin
     data_dir = os.path.join(
         home_dir,
@@ -56,17 +56,17 @@ using the ``modify_batch()`` function.
         "cm2015_StateMod",
         "StateMod"
     )
-    
+
     # directory to the target basin input files with root name for the basin
     basin_path = os.path.join(data_dir, "cm2015B")
-    
+
     # scenarios output directory
     scenarios_dir = os.path.join(data_dir, "scenarios")
-    
+
     #parquet output directory
     parquet_dir=os.path.join(data_dir, "parquet")
-    
-    
+
+
     # path to template file
     multi_template_file = os.path.join(
         home_dir,
@@ -99,13 +99,13 @@ additives are applied to the target IDs listed.
 .. code:: ipython3
 
     import statemodify as stm
-    
+
     # variables that apply to multiple functions
     output_dir = os.path.join(data_dir, "input_files")
     basin_name = "Upper_Colorado"
     scenario = "1"
     seed_value = 77
-    
+
     # problem dictionary
     problem_dict = {
         "n_samples": 1,
@@ -144,7 +144,7 @@ additives are applied to the target IDs listed.
             "ids": ["3600507", "3600603"]
         }
     }
-    
+
     # run in batch
     fn_parameter_dict = stm.modify_batch(problem_dict=problem_dict)
 
@@ -178,53 +178,53 @@ a specific user (ID: 3601008).
     # set realization and sample
     realization = 1
     sample = np.arange(0, 1, 1)
-    
+
     # read RSP template
     with open(multi_template_file) as template_obj:
-        
+
         # read in file
         template_rsp = Template(template_obj.read())
-    
+
         for i in sample:
-            
+
             # create scenario name
             scenario = f"S{i}_{realization}"
-            
+
             # dictionary holding search keys and replacement values to update the template file
             d = {"EVA": f"../../input_files/cm2015B_{scenario}.eva","DDM": f"../../input_files/cm2015B_{scenario}.ddm","DDR": f"../../input_files/cm2015B_{scenario}.ddr"}
-            
+
             # update the template
             new_rsp = template_rsp.safe_substitute(d)
-            
+
             # construct simulated scenario directory
             simulated_scenario_dir = os.path.join(scenarios_dir, scenario)
             if not os.path.exists(simulated_scenario_dir):
                 os.makedirs(simulated_scenario_dir)
-                
+
             # target rsp file
             rsp_file = os.path.join(simulated_scenario_dir, f"cm2015B_{scenario}.rsp")
-            
+
             # write updated rsp file
             with open(rsp_file, "w") as f1:
                 f1.write(new_rsp)
-            
+
             # construct simulated basin path
             simulated_basin_path = f"cm2015B_{scenario}"
-    
+
             # run StateMod
             print(f"Running: {scenario}")
             os.chdir(simulated_scenario_dir)
-    
+
             subprocess.call([statemod_exe, simulated_basin_path, "-simulate"])
-            
-            #Save output to parquet files 
+
+            #Save output to parquet files
             print('creating parquet for ' + scenario)
-            
+
             output_directory = os.path.join(parquet_dir+ "/scenario/"+ scenario)
-            
+
             if not os.path.exists(output_directory):
                 os.makedirs(output_directory)
-            
+
             stm.xdd.convert_xdd(output_path=output_directory,allow_overwrite=False,xdd_files=scenarios_dir + "/"+ scenario + "/cm2015B_"+scenario+".xdd",id_subset=['3601008'],parallel_jobs=2)
 
 
@@ -232,23 +232,23 @@ a specific user (ID: 3601008).
 .. parsed-literal::
 
     Running: S0_1
-      Parse; Command line argument: 
-      cm2015B_S0_1 -simulate                                                                                                         
+      Parse; Command line argument:
+      cm2015B_S0_1 -simulate
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
             Version: 15.00.01
             Last revision date: 2015/10/28
-    
+
     ________________________________________________________________________
-    
-      Opening log file cm2015B_S0_1.log                                                                                                                                                                                                                                                
-      
+
+      Opening log file cm2015B_S0_1.log
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
 
@@ -270,4 +270,3 @@ the prior notebooks.
       ::
 
          1.  <a href="https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/batch.py">modify_batch()</a>
-

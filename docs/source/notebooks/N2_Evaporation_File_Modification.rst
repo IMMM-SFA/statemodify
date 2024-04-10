@@ -25,10 +25,10 @@ dataset for the Gunnison.
     import pickle
     from string import Template
     import subprocess
-    
+
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd 
+    import pandas as pd
     import statemodify as stm
 
 .. container:: alert alert-block alert-info
@@ -44,16 +44,16 @@ dataset for the Gunnison.
 
     # statemod directory
     statemod_dir = "/usr/src/statemodify/statemod_gunnison_sjd"
-    
+
     # root directory of statemod data for the target basin
     root_dir = os.path.join(statemod_dir, "src", "main", "fortran")
-    
+
     # home directory of notebook instance
     home_dir = os.path.dirname(os.getcwd())
-    
+
     # path to the statemod executable
     statemod_exe = os.path.join(root_dir, "statemod-17.0.3-gfortran-lin-64bit-o3")
-    
+
     # data directory and root name for the target basin
     data_dir = os.path.join(
         home_dir,
@@ -62,13 +62,13 @@ dataset for the Gunnison.
         "gm2015_StateMod_modified",
         "StateMod"
     )
-    
+
     # directory to the target basin input files with root name for the basin
     basin_path = os.path.join(data_dir, "gm2015B")
-    
+
     # scenarios output directory
     scenarios_dir = os.path.join(data_dir, "scenarios")
-    
+
     # path to eva template file
     eva_template_file = os.path.join(
         home_dir,
@@ -85,27 +85,27 @@ dataset for the Gunnison.
 
 .. parsed-literal::
 
-     Startup log file for messages to this point: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/gm2015B.rsp                                                                                                                                                                        
+     Startup log file for messages to this point: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/gm2015B.rsp
        Closing startup log file: statem.log
-       Opening dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/gm2015B.log                                                                                                                                                                        
+       Opening dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/gm2015B.log
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
-            Version:     17.0.3          
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
+            Version:     17.0.3
             Last revision date: 2021/09/12
-    
+
     ________________________________________________________________________
-      
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
     ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/gm2015B.log                                                                                                                                                                        
+      Statem; See detailed messages in dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/gm2015B.log
      Stop 0
 
 
@@ -122,21 +122,21 @@ for supplying emergency water to Lake Powell.
 
 .. code:: ipython3
 
-    # create a directory to store the historical reservoir levels at Blue Mesa  
+    # create a directory to store the historical reservoir levels at Blue Mesa
     output_dir = os.path.join(data_dir, "historic_reservoir_levels")
-    
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    
+
     # path the the xre file
     xre_file = os.path.join(data_dir, "gm2015B.xre")
-    
+
     # structure ID for reservoir of interest
-    structure_ID = '6203532'  
-    
+    structure_ID = '6203532'
+
     # name of the reservoir
-    structure_name = 'Blue_Mesa' 
-    
+    structure_name = 'Blue_Mesa'
+
     # extract the target info into a Pandas data frame
     df = stm.extract_xre_data(structure_name=structure_name,
                               structure_id=structure_ID,
@@ -153,16 +153,16 @@ reservoir storage.
 .. code:: ipython3
 
     output_xre_file = os.path.join(output_dir, "Blue_Mesa_xre_data.csv")
-    
+
     # read output data into a data frame
     df = pd.read_csv(
-        output_xre_file, 
+        output_xre_file,
         usecols=['Year','Init. Storage'],
-        index_col=False) 
-    
+        index_col=False)
+
     # calculate the annual average
     df = df.groupby('Year').mean().reset_index()
-    
+
     df
 
 
@@ -176,11 +176,11 @@ reservoir storage.
         .dataframe tbody tr th:only-of-type {
             vertical-align: middle;
         }
-    
+
         .dataframe tbody tr th {
             vertical-align: top;
         }
-    
+
         .dataframe thead th {
             text-align: right;
         }
@@ -264,9 +264,9 @@ the 1930s dustbowl and 1950s drought and the severe early 2002 drought).
 .. code:: ipython3
 
     fig, ax = plt.subplots()
-    
+
     plt.plot(df['Year'], df['Init. Storage'])
-    
+
     plt.title("Blue Mesa Storage")
     plt.xlabel("Year")
     plt.ylabel("Reservoir Storage (AF)")
@@ -304,38 +304,38 @@ create 2 alternative states of the world and store them in the
 
 .. code:: ipython3
 
-    # a dictionary to describe what you want to modify and the bounds for the Latin hypercube sample. 
+    # a dictionary to describe what you want to modify and the bounds for the Latin hypercube sample.
     setup_dict = {
         "ids": ['10011'],
         "bounds": [-0.5, 1.0]
     }
-    
+
     # create a directory to store the new files in if it does not exist
     output_directory = os.path.join(data_dir, "input_files")
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
-    
+
     # scenario name
     scenario = "1"
-    
+
     # the number of samples you wish to generate
     n_samples = 2
-    
+
     # seed value for reproducibility if so desired
     seed_value = 1
-    
+
     # number of rows to skip in file after comment
     skip_rows = 1
-    
+
     # name of field to query
     query_field = "id"
-    
+
     # number of jobs to launch in parallel; -1 is all but 1 processor used
     n_jobs = -1
-    
+
     # basin to process
     basin_name = "Gunnison"
-    
+
     # generate a batch of files using generated LHS
     stm.modify_eva(modify_dict=setup_dict,
                    query_field=query_field,
@@ -364,10 +364,10 @@ termed SOW 1 and SOW 2 respectively.
 
     # path to the numpy file containing the samples
     eva_samples_file = os.path.join(output_directory, "eva_2-samples_scenario-1.npy")
-    
-    # load samples 
+
+    # load samples
     sample_array = np.load(eva_samples_file)
-    
+
     sample_array
 
 
@@ -395,43 +395,43 @@ scenarios and extract the reservoir levels for Blue Mesa.
     # set realization and sample
     realization = 1
     sample = np.arange(0, 2, 1)
-    
+
     # read RSP template
     with open(eva_template_file) as template_obj:
-        
+
         # read in file
         template_rsp = Template(template_obj.read())
-    
+
         for i in sample:
-            
+
             # create scenario name
             scenario = f"S{i}_{realization}"
-            
+
             # dictionary holding search keys and replacement values to update the template file
             d = {"EVA": f"../../input_files/gm2015B_{scenario}.eva"}
-            
+
             # update the template
             new_rsp = template_rsp.safe_substitute(d)
-            
+
             # construct simulated scenario directory
             simulated_scenario_dir = os.path.join(scenarios_dir, scenario)
             if not os.path.exists(simulated_scenario_dir):
                 os.makedirs(simulated_scenario_dir)
-                
+
             # target rsp file
             rsp_file = os.path.join(simulated_scenario_dir, f"gm2015B_{scenario}.rsp")
-            
+
             # write updated rsp file
             with open(rsp_file, "w") as f1:
                 f1.write(new_rsp)
-            
+
             # construct simulated basin path
             simulated_basin_path = os.path.join(simulated_scenario_dir, f"gm2015B_{scenario}")
-    
+
             # run StateMod
             print(f"Running: {scenario}")
             os.chdir(simulated_scenario_dir)
-    
+
             subprocess.call([statemod_exe, simulated_basin_path, "-simulate"])
 
 
@@ -439,27 +439,27 @@ scenarios and extract the reservoir levels for Blue Mesa.
 .. parsed-literal::
 
     Running: S0_1
-     Startup log file for messages to this point: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/scenarios/S0_1/gm2015B_S0_1.rsp                                                                                                                                                    
+     Startup log file for messages to this point: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/scenarios/S0_1/gm2015B_S0_1.rsp
        Closing startup log file: statem.log
-       Opening dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/scenarios/S0_1/gm2015B_S0_1.log                                                                                                                                                    
+       Opening dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/scenarios/S0_1/gm2015B_S0_1.log
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
-            Version:     17.0.3          
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
+            Version:     17.0.3
             Last revision date: 2021/09/12
-    
+
     ________________________________________________________________________
-      
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
     ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/scenarios/S1_1/gm2015B_S1_1.log                                                                                                                                                    
+      Statem; See detailed messages in dataset log file: /home/jovyan/data/gm2015_StateMod_modified/gm2015_StateMod_modified/StateMod/scenarios/S1_1/gm2015B_S1_1.log
      Stop 0
 
 
@@ -473,16 +473,16 @@ at Blue Mesa in the two new SOWs.
 
     # SOW 1
     output_dir= os.path.join(scenarios_dir, "S0_1")
-    
+
     # path the the xre file
-    xre_file = os.path.join(output_dir, "gm2015B_S0_1.xre") 
-    
+    xre_file = os.path.join(output_dir, "gm2015B_S0_1.xre")
+
     # structure ID for reservoir of interest
-    structure_ID = '6203532'  
-    
+    structure_ID = '6203532'
+
     # name of the reservoir
-    structure_name = 'Blue_Mesa' 
-    
+    structure_name = 'Blue_Mesa'
+
     # extract the target info into a Pandas data frame
     df = stm.extract_xre_data(structure_name=structure_name,
                               structure_id=structure_ID,
@@ -492,14 +492,14 @@ at Blue Mesa in the two new SOWs.
                               write_csv=True,
                               write_parquet=None
     )
-    
+
     # SOW 2
     output_dir= os.path.join(scenarios_dir, "S1_1")
-    
+
     # path the the xre file
-    xre_file = os.path.join(output_dir, "gm2015B_S1_1.xre") 
-    
-    
+    xre_file = os.path.join(output_dir, "gm2015B_S1_1.xre")
+
+
     # extract the target info into a Pandas data frame
     df = stm.extract_xre_data(structure_name=structure_name,
                               structure_id=structure_ID,
@@ -519,32 +519,32 @@ world and alternative states of the world.
     # historic reservoir directory
     historic_res_dir = os.path.join(data_dir, "historic_reservoir_levels")
     blue_mesa_file = os.path.join(historic_res_dir, "Blue_Mesa_xre_data.csv")
-    
-    # Import baseline dataframe 
-    baseline = pd.read_csv(blue_mesa_file, index_col=False, usecols=['Year','Init. Storage']) 
+
+    # Import baseline dataframe
+    baseline = pd.read_csv(blue_mesa_file, index_col=False, usecols=['Year','Init. Storage'])
     baseline = baseline.groupby('Year').mean().reset_index()
-    
+
     # Import SOW1
     s0_1_file = os.path.join(scenarios_dir, "S0_1", "Blue_Mesa_xre_data.csv")
-    SOW1 = pd.read_csv(s0_1_file, index_col=False, usecols=['Year','Init. Storage']) 
+    SOW1 = pd.read_csv(s0_1_file, index_col=False, usecols=['Year','Init. Storage'])
     SOW1 = SOW1.groupby('Year').mean().reset_index()
-     
+
     # Import SOW2
     s1_1_file = os.path.join(scenarios_dir, "S1_1", "Blue_Mesa_xre_data.csv")
-    SOW2 = pd.read_csv(s1_1_file, index_col=False, usecols=['Year','Init. Storage']) 
+    SOW2 = pd.read_csv(s1_1_file, index_col=False, usecols=['Year','Init. Storage'])
     SOW2 = SOW2.groupby('Year').mean().reset_index()
-     
-    # Plot reservoir levels 
+
+    # Plot reservoir levels
     fig, ax = plt.subplots()
-    
+
     plt.plot(baseline['Year'], baseline['Init. Storage'],label='Baseline')
     plt.plot(SOW1['Year'], SOW1['Init. Storage'],label='Reduced Evaporation')
     plt.plot(SOW2['Year'], SOW2['Init. Storage'],label='Increased Evaporation')
-    
+
     plt.title("Blue Mesa Storage")
     plt.xlabel("Year")
     plt.ylabel("Reservoir Storage (AF)")
-    
+
     plt.legend()
 
 
@@ -589,4 +589,3 @@ e2020EF001503.
       ::
 
          1.  <a href="https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/eva.py">modify_eva()</a>
-

@@ -21,10 +21,10 @@ Step 1: Run a Historical Simulation in StateMod for the Uppper Colorado Subbasin
     import pickle
     from string import Template
     import subprocess
-    
+
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd 
+    import pandas as pd
     import statemodify as stm
 
 .. container:: alert alert-block alert-info
@@ -42,16 +42,16 @@ StateMod in a baseline simulation.
 
     # statemod directory
     statemod_dir = "/usr/src/statemodify/statemod_upper_co"
-    
+
     # root directory of statemod data for the target basin
     root_dir = os.path.join(statemod_dir, "src", "main", "fortran")
-    
+
     # home directory of notebook instance
     home_dir = os.path.dirname(os.getcwd())
-    
+
     # path to the statemod executable
     statemod_exe = os.path.join(root_dir, "statemod")
-    
+
     # data directory and root name for the target basin
     data_dir = os.path.join(
         home_dir,
@@ -59,17 +59,17 @@ StateMod in a baseline simulation.
         "cm2015_StateMod",
         "StateMod"
     )
-    
+
     # directory to the target basin input files with root name for the basin
     basin_path = os.path.join(data_dir, "cm2015B")
-    
+
     # scenarios output directory
     scenarios_dir_res = os.path.join(data_dir, "scenarios_res")
-    
+
     # parquet files output directory
     parquet_dir_res = os.path.join(data_dir, "parquet_res")
-    
-    
+
+
     # path to res template file
     res_template_file = os.path.join(
         home_dir,
@@ -86,7 +86,7 @@ StateMod in a baseline simulation.
 
 .. code:: ipython3
 
-    # Change directories first 
+    # Change directories first
     os.chdir(data_dir) #This is needed specific to the Upper Colorado model as the path name is too long for the model to accept
     subprocess.call([statemod_exe, "cm2015B", "-simulate"])
 
@@ -94,28 +94,28 @@ StateMod in a baseline simulation.
 
 .. parsed-literal::
 
-      Parse; Command line argument: 
-      cm2015B -simulate                                                                                                              
+      Parse; Command line argument:
+      cm2015B -simulate
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
             Version: 15.00.01
             Last revision date: 2015/10/28
-    
+
     ________________________________________________________________________
-    
-      Opening log file cm2015B.log                                                                                                                                                                                                                                                     
-      
+
+      Opening log file cm2015B.log
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
    ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in file: cm2015B.log                                                                                                                                                                                                                                                     
+      Statem; See detailed messages in file: cm2015B.log
      Stop 0
 
 
@@ -127,16 +127,16 @@ median water rights (47483.00000) and a smaller decree of 2.90 cfs.
 
 .. code:: ipython3
 
-    #Extract shortages using statemodify convert_xdd() function  
-    
-    # create a directory to store the historic shortages 
+    #Extract shortages using statemodify convert_xdd() function
+
+    # create a directory to store the historic shortages
     output_dir = os.path.join(data_dir, "historic_shortages")
-    
+
     # create a directory to store the new files in if it does not exist
     output_directory = os.path.join(data_dir, "historic_shortages")
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
-    
+
     stm.xdd.convert_xdd(
         # path to a directory where output .parquet files should be written
         output_path=output_dir,
@@ -150,7 +150,7 @@ median water rights (47483.00000) and a smaller decree of 2.90 cfs.
         parallel_jobs=2,
         # convert to natural data types
         preserve_string_dtype=False
-        
+
     )
 
 
@@ -164,13 +164,13 @@ Next we plot the shortages for Breckenridge.
 .. code:: ipython3
 
     data=pd.read_parquet(output_dir +'/cm2015B.parquet',engine='pyarrow')
-    
+
     fig, ax = plt.subplots()
-    
+
     for name, group in data.groupby('structure_id'):
         ax.scatter(
             group['year'], group['shortage_total'], label=name)
-    
+
     plt.xlabel("Year")
     plt.ylabel("Shortage (AF)")
     plt.title("Baseline Shortages for Breckenridge")
@@ -220,16 +220,16 @@ storage at all reservoirs in the basin.
     scenario = "1"
     # basin name to process
     basin_name = "Upper_Colorado"
-    
+
     # seed value for reproducibility if so desired
     seed_value = 1
-    
+
     # number of jobs to launch in parallel; -1 is all but 1 processor used
     n_jobs = 2
-    
+
     # number of samples to generate
     n_samples = 1
-    
+
     stm.modify_res(output_dir=output_directory,
                    scenario=scenario,
                    basin_name=basin_name,
@@ -275,53 +275,53 @@ scenarios and extract the shortages for Breckenridge.
     # set realization and sample
     realization = 1
     sample = np.arange(0, 2, 1)
-    
+
     # read RSP template
     with open(res_template_file) as template_obj:
-        
+
         # read in file
         template_rsp = Template(template_obj.read())
-    
+
         for i in sample:
-            
+
             # create scenario name
             scenario = f"S{i}_{realization}"
-            
+
             # dictionary holding search keys and replacement values to update the template file
             d = {"RES": f"../../input_files/cm2015B_{scenario}.res"}
-            
+
             # update the template
             new_rsp = template_rsp.safe_substitute(d)
-            
+
             # construct simulated scenario directory
             simulated_scenario_dir = os.path.join(scenarios_dir_res, scenario)
             if not os.path.exists(simulated_scenario_dir):
                 os.makedirs(simulated_scenario_dir)
-                
+
             # target rsp file
             rsp_file = os.path.join(simulated_scenario_dir, f"cm2015B_{scenario}.rsp")
-            
+
             # write updated rsp file
             with open(rsp_file, "w") as f1:
                 f1.write(new_rsp)
-            
+
             # construct simulated basin path
             simulated_basin_path = f"cm2015B_{scenario}"
-    
+
             # run StateMod
             print(f"Running: {scenario}")
             os.chdir(simulated_scenario_dir)
-    
+
             subprocess.call([statemod_exe, simulated_basin_path, "-simulate"])
-            
-            #Save output to parquet files 
+
+            #Save output to parquet files
             print('creating parquet for ' + scenario)
-            
+
             output_directory = os.path.join(parquet_dir_res+"/scenario/"+ scenario)
-            
+
             if not os.path.exists(output_directory):
                 os.makedirs(output_directory)
-            
+
             stm.xdd.convert_xdd(
                 output_path=output_directory,
                 allow_overwrite=True,
@@ -335,28 +335,28 @@ scenarios and extract the shortages for Breckenridge.
 .. parsed-literal::
 
     Running: S0_1
-      Parse; Command line argument: 
-      cm2015B_S0_1 -simulate                                                                                                         
+      Parse; Command line argument:
+      cm2015B_S0_1 -simulate
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
             Version: 15.00.01
             Last revision date: 2015/10/28
-    
+
     ________________________________________________________________________
-    
-      Opening log file cm2015B_S0_1.log                                                                                                                                                                                                                                                
-      
+
+      Opening log file cm2015B_S0_1.log
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ...
 
     ________________________________________________________________________
       Execut; Successful Termination
-      Statem; See detailed messages in file: cm2015B_S0_1.log                                                                                                                                                                                                                                                
+      Statem; See detailed messages in file: cm2015B_S0_1.log
      Stop 0
     creating parquet for S0_1
 
@@ -369,32 +369,32 @@ scenarios and extract the shortages for Breckenridge.
 .. parsed-literal::
 
     Running: S1_1
-      Parse; Command line argument: 
-      cm2015B_S1_1 -simulate                                                                                                         
+      Parse; Command line argument:
+      cm2015B_S1_1 -simulate
     ________________________________________________________________________
-    
-            StateMod                       
-            State of Colorado - Water Supply Planning Model     
-    
+
+            StateMod
+            State of Colorado - Water Supply Planning Model
+
             Version: 15.00.01
             Last revision date: 2015/10/28
-    
+
     ________________________________________________________________________
-    
-      Opening log file cm2015B_S1_1.log                                                                                                                                                                                                                                                
-      
+
+      Opening log file cm2015B_S1_1.log
+
       Subroutine Execut
       Subroutine Datinp
-    
+
     ________________________________________________________________________
-      Datinp; Control File (*.ctl) 
-    
+      Datinp; Control File (*.ctl)
+
     ________________________________________________________________________
       Datinp; River Network File (*.rin)
-    
+
     ________________________________________________________________________
       Datinp; Reservoir Station File (*.res)
-    
+
     ________________________________________________________________________
       GetFile;  Stopped in GetFile, see the log file (*.log)
      Stop 1
@@ -429,7 +429,7 @@ and alternative states of the world and plot the resulting shortages.
     283922      0.
     283923    220.
     283924    201.
-              ... 
+              ...
     285280      0.
     285281      0.
     285282      0.
@@ -443,17 +443,17 @@ and alternative states of the world and plot the resulting shortages.
 
     baseline=pd.read_parquet(data_dir+'/'+'historic_shortages/cm2015B.parquet',engine='pyarrow')
     SOW_1=pd.read_parquet(parquet_dir_res+'/scenario/S0_1/cm2015B_S0_1.parquet',engine='pyarrow')
-    
+
     #Subtract shortages with respect to the baseline
     subset_df=pd.concat([baseline['year'],baseline['shortage_total'],SOW_1['shortage_total']],axis=1)
     subset_df = subset_df.set_axis(['Year', 'Baseline', 'SOW_1'], axis=1)
     subset_df['SOW_1_diff']=subset_df['SOW_1']-subset_df['Baseline']
-    
+
     #Plot shortages
     fig, ax = plt.subplots()
-    
+
     ax.scatter(subset_df['Year'], subset_df['SOW_1_diff'])
-    
+
     plt.xlabel("Year")
     plt.ylabel("Shortage (AF)")
     plt.title("Change in Breckenridge Shortages from the Baseline")
@@ -516,4 +516,3 @@ e2020EF001503.
       ::
 
          1.  <a href="https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/res.py">modify_res()</a>
-

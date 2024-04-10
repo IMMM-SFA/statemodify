@@ -21,7 +21,7 @@ class XddConverter:
         xdd_files: Union[str, Path, list[Union[str, Path]]] = "**/*.xdd",
         id_subset: Union[None, list[str]] = None,
         parallel_jobs: int = 4,
-        preserve_string_dtype: bool = True
+        preserve_string_dtype: bool = True,
     ):
         """Convert object for transforming StateMod output .xdd files into compressed, columnar .parquet files.
 
@@ -272,7 +272,7 @@ class XddConverter:
         output_path: str,
         id_subset: Union[None, list[str]],
         preserve_string_dtype: bool,
-        field_dtypes: dict
+        field_dtypes: dict,
     ):
         data = []
         with open(file) as f:
@@ -297,7 +297,7 @@ class XddConverter:
         if preserve_string_dtype is False:
             df = df.astype(field_dtypes)
 
-        df.to_parquet(f"{output_path}/{Path(file).stem}.parquet") 
+        df.to_parquet(f"{output_path}/{Path(file).stem}.parquet")
 
 
 def convert_xdd(
@@ -307,7 +307,7 @@ def convert_xdd(
     xdd_files: Union[str, Path, list[Union[str, Path]]] = "**/*.xdd",
     id_subset: Union[None, list[str]] = None,
     parallel_jobs: int = 4,
-    preserve_string_dtype: bool = True
+    preserve_string_dtype: bool = True,
 ):
     """Convert StateMod output .xdd files to compressed, columnar .parquet files.
 
