@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>statemodify Quickstarter Notebook #4: Using External Methods to Generate Synthetic Streamflow Traces &#8212; statemodify documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=f6d3da1f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/N4_Streamflow_File_Modification';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_statemodify.png" class="logo__image only-light" alt="statemodify documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo_statemodify.png" class="logo__image only-dark" alt="statemodify documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/quickstarter.html">Quickstarter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/useful_links.html">Useful Links</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/api.html">Python API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/contributing.html">Contributing to <strong>statemodify</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify/edit/main/docs/source/notebooks/N4_Streamflow_File_Modification.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify/issues/new?title=Issue%20on%20page%20%2Fnotebooks/N4_Streamflow_File_Modification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/N4_Streamflow_File_Modification.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>statemodify Quickstarter Notebook #4: Using External Methods to Generate Synthetic Streamflow Traces</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-fit-multi-site-hmm">Step 1: Fit Multi-Site HMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-sample-from-multi-site-hmm">Step 2: Sample from multi-site HMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-modify-statemod-input-files-for-exploratory-analyses-streamflow-example">Step 3: Modify StateMod Input Files for Exploratory Analyses- Streamflow Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-read-in-the-new-input-files-and-run-statemod-streamflow-example">Step 4: Read in the New Input Files and Run StateMod : Streamflow Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-specific-references">Notebook Specific References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="statemodify-quickstarter-notebook-4-using-external-methods-to-generate-synthetic-streamflow-traces">
+<h1><code class="docutils literal notranslate"><span class="pre">statemodify</span></code> Quickstarter Notebook #4: Using External Methods to Generate Synthetic Streamflow Traces<a class="headerlink" href="#statemodify-quickstarter-notebook-4-using-external-methods-to-generate-synthetic-streamflow-traces" title="Link to this heading">#</a></h1>
+<p>In this notebook, we will demonstrate Option 2 that is provided by
+<code class="docutils literal notranslate"><span class="pre">statemodify</span></code>, which is the ability to create future states of the
+world through external methods rather than manipulating the baseline
+time series as we do in Option 1. Here we offer a method to generate
+alternative streamflow time series for the five West Slope basins using
+the <code class="docutils literal notranslate"><span class="pre">modify_xbm_iwr()</span></code> function.</p>
+<p>The Colorado River Basin (CRB) is experiencing a shift to a more arid
+climate which will likely be characterized by droughts that are longer
+and more severe than what has been experienced historically. The
+historic streamflow record is now not a sufficient representation of
+future hydroclimate. Thus, we need methods of creating plausible future
+streamflow scenarios for the region that can plausibly expand this
+historic record.</p>
+<p>In this notebook, we demonstrate how to use the multi-site Hidden Markov
+model (HMM)-based synthetic streamflow generator in <code class="docutils literal notranslate"><span class="pre">statemodify</span></code> to
+create ensembles of plausible future regional streamflow traces for our
+five West Slope basins. The HMM is fit to log annual historical
+streamflow across the outlet gauges of five key basins on the West Slope
+of the state of Colorado that drain into the Colorado River. The model
+can then be used to generate streamflow scenarios that envelope the
+historical record and expand the representation of natural variability
+in the hydroclimate while still preserving the inter-site correlations
+across the outlet gauges and at sites within each of the five basins.
+The HMM-based model is particularly useful for generating sequences of
+streamflow that exhibit long persistence, including decadal to
+multidecadal hydrological drought conditions that are scarcely
+represented within the historical records.</p>
+<p>By fitting the HMM on the historical time series of the basins, we
+create synthetic traces that are stationary and thus give an indication
+of the extent of natural variability that characterizes the region. The
+HMM can be extended to create non-stationary traces, as shown in
+Hadjimichael et al. (2020), but that version of the model is not
+currently included in <code class="docutils literal notranslate"><span class="pre">statemodify</span></code>.</p>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE: Each simulation in this notebook is run for the length of the
+historical period (from 1909-2013). If you want to reduce the length
+of the simulation, navigate to the <code class="docutils literal notranslate"><span class="pre">.ctl</span></code> file and adjust the
+<code class="docutils literal notranslate"><span class="pre">iystr</span></code> and <code class="docutils literal notranslate"><span class="pre">iyend</span></code> variables. For this notebook, this file is
+located in: <code class="docutils literal notranslate"><span class="pre">data/cm2015_StateMod/StateMod/cm2015.ctl</span></code></p>
+</div>
+<section id="step-1-fit-multi-site-hmm">
+<h2>Step 1: Fit Multi-Site HMM<a class="headerlink" href="#step-1-fit-multi-site-hmm" title="Link to this heading">#</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import argparse
+import logging
+import os
+import pickle
+from string import Template
+import subprocess
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import statemodify as stm
+</pre></div>
+</div>
+<p>First we define directories and associated paths.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># statemod directory
+statemod_dir = &quot;/usr/src/statemodify/statemod_upper_co&quot;
+
+# root directory of statemod data for the target basin
+root_dir = os.path.join(statemod_dir, &quot;src&quot;, &quot;main&quot;, &quot;fortran&quot;)
+
+# home directory of notebook instance
+home_dir = os.path.dirname(os.getcwd())
+
+# path to the statemod executable
+statemod_exe = os.path.join(root_dir, &quot;statemod&quot;)
+
+# data directory and root name for the target basin
+data_dir = os.path.join(
+    home_dir,
+    &quot;data&quot;,
+    &quot;cm2015_StateMod&quot;,
+    &quot;StateMod&quot;
+)
+
+# directory to the target basin input files with root name for the basin
+basin_path = os.path.join(data_dir, &quot;cm2015B&quot;)
+
+# scenarios output directory
+scenarios_dir = os.path.join(data_dir, &quot;scenarios&quot;)
+
+# path to iwr/xbm file
+xbm_iwr_template_file = os.path.join(
+    home_dir,
+    &quot;data&quot;,
+    &quot;cm2015B_template_xbm_iwr.rsp&quot;
+)
+</pre></div>
+</div>
+<p>We create a function <code class="docutils literal notranslate"><span class="pre">hmm_multisite_fit()</span></code> that houses the Python code
+to fit the multi-site HMM to annual flow at the outlet gauges of the
+five basins. In this function, you can specify the output directory to
+store the HMM parameters.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#Make directory to store HMM parameters
+
+output_dir = os.path.join(data_dir, &quot;HMM_parameters&quot;)
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+n_basins = 5
+
+# choice to save parameters to NumPy array files
+save_parameters = True
+
+fit_array_dict = stm.hmm_multisite_fit(n_basins=n_basins,
+                                       save_parameters=save_parameters,
+                                       output_directory=output_dir)
+
+# unpack output dictionary
+unconditional_dry = fit_array_dict[&quot;unconditional_dry&quot;]
+unconditional_wet = fit_array_dict[&quot;unconditional_wet&quot;]
+logAnnualQ_h = fit_array_dict[&quot;logAnnualQ_h&quot;]
+transition_matrix = fit_array_dict[&quot;transition_matrix&quot;]
+covariance_matrix_wet = fit_array_dict[&quot;covariance_matrix_wet&quot;]
+covariance_matrix_dry = fit_array_dict[&quot;covariance_matrix_dry&quot;]
+wet_state_means = fit_array_dict[&quot;wet_state_means&quot;]
+dry_state_means = fit_array_dict[&quot;dry_state_means&quot;]
+</pre></div>
+</div>
+</section>
+<section id="step-2-sample-from-multi-site-hmm">
+<h2>Step 2: Sample from multi-site HMM<a class="headerlink" href="#step-2-sample-from-multi-site-hmm" title="Link to this heading">#</a></h2>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">hmm_multisite_sample()</span></code> function to sample from the
+HMM 100 times to develop 100 alternative, 105-year traces of streamflow
+at the outlet gauge of each basin and we save each trace in a .csv file
+in the <code class="docutils literal notranslate"><span class="pre">HMM_Runs</span></code> folder.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#Create a folder to store the runs
+
+output_dir = os.path.join(data_dir, &quot;HMM_Runs&quot;)
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+# using the outputs of the fit function above; this function write output sample files to the output directory
+stm.hmm_multisite_sample(logAnnualQ_h,
+                         transition_matrix,
+                         unconditional_dry,
+                         dry_state_means,
+                         wet_state_means,
+                         covariance_matrix_dry,
+                         covariance_matrix_wet,
+                         n_basins=n_basins,
+                         output_directory=output_dir)
+</pre></div>
+</div>
+<p>Then one can plot flow duration curves (FDCs) of the annual
+synthetically generated flow at each basin compared to the the
+historical record. We see that the HMM is enveloping the historical
+record and also expanding it around it, particularly around the tails of
+the distribution, which will lead to more instances of extreme flood and
+drought events.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stm.plot_flow_duration_curves(flow_realizations_directory=output_dir,
+                              save_figure=True,output_directory=output_dir,
+                              figure_name= &#39;FDC&#39;,
+                              dpi= 300)
+</pre></div>
+</div>
+<img alt="../_images/output_15_0.png" src="../_images/output_15_0.png" />
+</section>
+<section id="step-3-modify-statemod-input-files-for-exploratory-analyses-streamflow-example">
+<h2>Step 3: Modify StateMod Input Files for Exploratory Analyses- Streamflow Example<a class="headerlink" href="#step-3-modify-statemod-input-files-for-exploratory-analyses-streamflow-example" title="Link to this heading">#</a></h2>
+<p>In order for the HMM to be used in conjunction with StateMod, we utilize
+a statistical disaggregation technique to disaggregate the synthetically
+generated outlet gauge flow to the upstream nodes and also from an
+annual to monthly time scale. The synthetic log-space annual flows are
+converted to real space and temporally downscaled to monthly flows using
+a modification of the proportional scaling method used by Nowak et
+al. (2010). First, a historical year is probabilistically selected based
+on its “nearness” to the synthetic flow at the last node in terms of
+annual total. The shifted monthly flows at the last node are then
+downscaled to all other nodes using the same ratios of monthly flows at
+the upstream nodes to the last node as in the historically selected
+year.Though not demonstrated in this notebook, the irrigation demands
+(in the
+<code class="docutils literal notranslate"><span class="pre">`.iwr</span></code> &lt;<a class="reference external" href="https://opencdss.state.co.us/statemod/latest/doc-user/InputDescription/41/">https://opencdss.state.co.us/statemod/latest/doc-user/InputDescription/41/</a>&gt;`__
+file) are also inherently tied to the generation of the streamflow, as
+irrigation demands will increase in dry years. Thus, a regression is fit
+across historical irrigation anomalies and historical annual flow
+anomalies and the appropriate irrigation anomaly is determined from this
+regression for every synthetically generated flow anomaly. More
+information on this method can be found in Hadjimichael et al., 2020.
+All of this functionality is embedded in the <code class="docutils literal notranslate"><span class="pre">modify_xbm_iwr()</span></code>
+function.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#Make directory to store input files
+
+output_dir = os.path.join(data_dir, &quot;input_files&quot;)
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+
+flow_realizations_directory = os.path.join(data_dir, &quot;HMM_Runs&quot;)
+
+scenario = &quot;1&quot;
+
+# basin name to process
+basin_name = &quot;Upper_Colorado&quot;
+
+# seed value for reproducibility if so desired
+seed_value = 123
+
+# number of jobs to launch in parallel; -1 is all but 1 processor used
+n_jobs = 2
+
+# number of samples to generate (how many new xbm and iwr files); produces an IWR multiplier
+n_samples = 1
+
+# generate a batch of files using generated LHS
+stm.modify_xbm_iwr(output_dir=output_dir,
+                   flow_realizations_directory=flow_realizations_directory,
+                   scenario=scenario,
+                   basin_name=basin_name,
+                   seed_value=seed_value,
+                   n_jobs=n_jobs,
+                   n_samples=n_samples,
+                   save_sample=True,
+                   randomly_select_flow_sample=True)
+</pre></div>
+</div>
+</section>
+<section id="step-4-read-in-the-new-input-files-and-run-statemod-streamflow-example">
+<h2>Step 4: Read in the New Input Files and Run StateMod : Streamflow Example<a class="headerlink" href="#step-4-read-in-the-new-input-files-and-run-statemod-streamflow-example" title="Link to this heading">#</a></h2>
+<p>Now that we have created the new files, the next step is to run them
+through StateMod. We create a template <code class="docutils literal notranslate"><span class="pre">.rsp</span></code> file
+(<code class="docutils literal notranslate"><span class="pre">cm2015B_template_xbm_iwr.rsp</span></code>) and swap in the path to the
+alternative
+<code class="docutils literal notranslate"><span class="pre">`.xbm</span></code> &lt;<a class="reference external" href="https://opencdss.state.co.us/statemod/latest/doc-user/OutputDescription/513/">https://opencdss.state.co.us/statemod/latest/doc-user/OutputDescription/513/</a>&gt;`__
+and <code class="docutils literal notranslate"><span class="pre">.iwr</span></code> files that are created. Then we run StateMod for the single
+scenario and one can then go on and extract shortages or reservoir
+levels.</p>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE In order to expedite simulations for the Upper Colorado dataset,
+make sure to turn off “Reoperation” mode. You can do so by opening
+<code class="docutils literal notranslate"><span class="pre">/home/jovyan/data/cm2015_StateMod/StateMod/cm2015.ctl</span></code>, navigating
+to the <code class="docutils literal notranslate"><span class="pre">ireopx</span></code> entry and changing the value from “0” to “10”.</p>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># set realization and sample
+realization = 1
+sample = np.arange(0, 1, 1)
+
+# read RSP template
+with open(xbm_iwr_template_file) as template_obj:
+
+    # read in file
+    template_rsp = Template(template_obj.read())
+
+    for i in sample:
+
+        # create scenario name
+        scenario = f&quot;S{i}_{realization}&quot;
+
+        # dictionary holding search keys and replacement values to update the template file
+        d = {&quot;XBM&quot;: f&quot;../../input_files/cm2015B_{scenario}.xbm&quot;,&quot;IWR&quot;: f&quot;../../input_files/cm2015B_{scenario}.iwr&quot;}
+
+        # update the template
+        new_rsp = template_rsp.safe_substitute(d)
+
+        # construct simulated scenario directory
+        simulated_scenario_dir = os.path.join(scenarios_dir, scenario)
+        if not os.path.exists(simulated_scenario_dir):
+            os.makedirs(simulated_scenario_dir)
+
+        # target rsp file
+        rsp_file = os.path.join(simulated_scenario_dir, f&quot;cm2015B_{scenario}.rsp&quot;)
+
+        # write updated rsp file
+        with open(rsp_file, &quot;w&quot;) as f1:
+            f1.write(new_rsp)
+
+        # construct simulated basin path
+        simulated_basin_path = f&quot;cm2015B_{scenario}&quot;
+
+        # run StateMod
+        print(f&quot;Running: {scenario}&quot;)
+        os.chdir(simulated_scenario_dir)
+
+        subprocess.call([statemod_exe, simulated_basin_path, &quot;-simulate&quot;])
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">Running</span><span class="p">:</span> <span class="n">S0_1</span>
+     <span class="n">Parse</span><span class="p">;</span> <span class="n">Command</span> <span class="n">line</span> <span class="n">argument</span><span class="p">:</span>
+     <span class="n">cm2015B_S0_1</span> <span class="o">-</span><span class="n">simulate</span>
+   <span class="n">________________________________________________________________________</span>
+
+           <span class="n">StateMod</span>
+           <span class="n">State</span> <span class="n">of</span> <span class="n">Colorado</span> <span class="o">-</span> <span class="n">Water</span> <span class="n">Supply</span> <span class="n">Planning</span> <span class="n">Model</span>
+
+           <span class="n">Version</span><span class="p">:</span> <span class="mf">15.00.01</span>
+           <span class="n">Last</span> <span class="n">revision</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2015</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">28</span>
+
+   <span class="n">________________________________________________________________________</span>
+
+     <span class="n">Opening</span> <span class="n">log</span> <span class="n">file</span> <span class="n">cm2015B_S0_1</span><span class="o">.</span><span class="n">log</span>
+
+     <span class="n">Subroutine</span> <span class="n">Execut</span>
+     <span class="n">Subroutine</span> <span class="n">Datinp</span>
+
+   <span class="o">...</span>
+
+<span class="n">________________________________________________________________________</span>
+     <span class="n">Execut</span><span class="p">;</span> <span class="n">Successful</span> <span class="n">Termination</span>
+     <span class="n">Statem</span><span class="p">;</span> <span class="n">See</span> <span class="n">detailed</span> <span class="n">messages</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span> <span class="n">cm2015B_S0_1</span><span class="o">.</span><span class="n">log</span>
+    <span class="n">Stop</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>It’s easiest to see the value of generating multiple streamflow
+scenarios if we run 100-1000 scenarios through StateMod. However, this
+container does not have the resources to support exploratory modeling at
+this scale. So we run these simulations externally and below, we read in
+the <code class="docutils literal notranslate"><span class="pre">.xre</span></code> files with the <code class="docutils literal notranslate"><span class="pre">read_xre()</span></code> helper function and show the
+distribution of the reservoir levels that are observed across Lake
+Granby in the Upper Colorado under the 100 simulated scenarios versus
+the historical 105-year period.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Example with Granby Lake
+zip_file_path = os.path.join(home_dir, &#39;data&#39;, &#39;Granby_Dataset.zip&#39;)
+final_directory = os.path.join(home_dir, &#39;data/&#39;)
+
+!unzip $zip_file_path -d $final_directory
+granby_hmm, granby_hist, granby_hist_mean, granby_hist_1p = stm.read_xre(os.path.join(home_dir,&quot;data/Upper_Colorado/&quot;), &#39;Granby&#39;)
+
+# Plot quantiles
+stm.plot_res_quantiles(granby_hmm, granby_hist_mean, &#39;Lake Granby&#39;)
+</pre></div>
+</div>
+<img alt="../_images/output_24_0.png" src="../_images/output_24_0.png" />
+<p>Here, we plot the monthly reservoir storage quantiles across each month
+of the year. The shading corresponds to the larger 100-member sample
+from the HMM and the dotted black line corresponds to the monthly
+average storage across the historical 105-year record. Importantly, the
+HMM is expanding the distribution of reservoir storages, particularly
+creating both larger and smaller storages, meaning that we are capturing
+reservoir levels under a broader range of wetter and drier conditions
+that could have implications for shortages for users.</p>
+<p>We can also plot the range of monthly storages from the HMM and
+historical period as box plots for an alternative comparison using the
+<code class="docutils literal notranslate"><span class="pre">plot_reservoir_boxes()</span></code> helper function.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># using the output of the above `read_xre` function as inputs
+stm.plot_reservoir_boxes(granby_hmm, granby_hist, &#39;Lake Granby&#39;)
+</pre></div>
+</div>
+<img alt="../_images/output_27_0.png" src="../_images/output_27_0.png" />
+<p>Here, the blue box plots correspond to the HMM-generated reservoir
+storages and the orange box plots correspond to the historical monthly
+dataset. The black circles represent outliers. As illustrated in the
+quantile plot above as well, for all months, the HMM is creating a wider
+distribution of reservoir storages, and tends to be able to encompass
+even historical outliers. Remember that the HMM has only been fit on the
+historical dataset. Thus, the HMM can provide an estimate of the expanse
+of reservoir storages that can be expected just within the range of
+natural variability, which is quite large! Particularly, the HMM is
+creating many more instances of drier scenarios and lower reservoir
+levels which can be very useful for informing drought vulnerability
+assessments.</p>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE: If you are curious to learn more about HMM-based synthetic
+streamflow generation, including model fitting, validation, and
+applications, please refer to the following resources:</p>
+<div class="docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span>  <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://waterprogramming.wordpress.com/2018/07/03/fitting-hidden-markov-models-part-i-background-and-methods/&quot;</span><span class="o">&gt;</span><span class="n">Fitting</span> <span class="n">Hidden</span> <span class="n">Markov</span> <span class="n">Models</span><span class="p">:</span> <span class="n">Background</span> <span class="ow">and</span> <span class="n">Methods</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">2.</span>  <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://waterprogramming.wordpress.com/2018/07/03/fitting-hidden-markov-models-part-ii-sample-python-script/&quot;</span><span class="o">&gt;</span><span class="n">Fitting</span> <span class="n">Hidden</span> <span class="n">Markov</span> <span class="n">Models</span><span class="p">:</span> <span class="n">Sample</span> <span class="n">Scripts</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://uc-ebook.org/docs/html/A2_Jupyter_Notebooks.html#a-hidden-markov-modeling-approach-to-creating-synthetic-streamflow-scenarios-tutorial&quot;</span><span class="o">&gt;</span><span class="n">A</span> <span class="n">Hidden</span><span class="o">-</span><span class="n">Markov</span> <span class="n">Modeling</span> <span class="n">Approach</span> <span class="n">to</span> <span class="n">Creating</span> <span class="n">Synthetic</span> <span class="n">Streamflow</span> <span class="n">Scenarios</span> <span class="n">Tutorial</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="notebook-specific-references">
+<h2>Notebook Specific References<a class="headerlink" href="#notebook-specific-references" title="Link to this heading">#</a></h2>
+<p>Nowak, K., Prairie, J., Rajagopalan, B., &amp; Lall, U. (2010). A
+nonparametric stochastic approach for multisite disaggregation of annual
+to daily streamflow. Water resources research, 46(8).</p>
+<p>Hadjimichael, A., Quinn, J., Wilson, E., Reed, P., Basdekas, L., Yates,
+D., &amp; Garrison, M. (2020). Defining robustness, vulnerabilities, and
+consequential scenarios for diverse stakeholder interests in
+institutionally complex river basins. Earth’s Future, 8(7),
+e2020EF001503.</p>
+<div class="alert alert-block alert-warning docutils container">
+<p>Tip: If you are interested in understanding how to apply
+<code class="docutils literal notranslate"><span class="pre">statemodify</span></code> functions to your own model, take a look at the
+source code found in the repository here:</p>
+<div class="docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span>  <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/xbm_iwr.py&quot;</span><span class="o">&gt;</span><span class="n">modify_xbm_iwr</span><span class="p">()</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-fit-multi-site-hmm">Step 1: Fit Multi-Site HMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-sample-from-multi-site-hmm">Step 2: Sample from multi-site HMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-modify-statemod-input-files-for-exploratory-analyses-streamflow-example">Step 3: Modify StateMod Input Files for Exploratory Analyses- Streamflow Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-read-in-the-new-input-files-and-run-statemod-streamflow-example">Step 4: Read in the New Input Files and Run StateMod : Streamflow Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-specific-references">Notebook Specific References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Rohini S. Gupta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Battelle Memorial Institute.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

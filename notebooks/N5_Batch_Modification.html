@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>statemodify Quickstarter Notebook #5 : Sampling Multiple Uncertainties &#8212; statemodify documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=f6d3da1f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/N5_Batch_Modification';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_statemodify.png" class="logo__image only-light" alt="statemodify documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo_statemodify.png" class="logo__image only-dark" alt="statemodify documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/quickstarter.html">Quickstarter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/useful_links.html">Useful Links</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/api.html">Python API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/contributing.html">Contributing to <strong>statemodify</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify/edit/main/docs/source/notebooks/N5_Batch_Modification.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify/issues/new?title=Issue%20on%20page%20%2Fnotebooks/N5_Batch_Modification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/N5_Batch_Modification.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>statemodify Quickstarter Notebook #5 : Sampling Multiple Uncertainties</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-creating-a-sample-across-multiple-uncertainties">Step 1: Creating a Sample Across Multiple Uncertainties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-running-a-simulation">Step 2: Running a Simulation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="statemodify-quickstarter-notebook-5-sampling-multiple-uncertainties">
+<h1><code class="docutils literal notranslate"><span class="pre">statemodify</span></code> Quickstarter Notebook #5 : Sampling Multiple Uncertainties<a class="headerlink" href="#statemodify-quickstarter-notebook-5-sampling-multiple-uncertainties" title="Link to this heading">#</a></h1>
+<p>In the prior notebooks, we sampled just one type of uncertainty at a
+time to demonstrate how a single adjustment in the selected input file
+leads to a verifiable change in output so that we can demonstrate that
+<code class="docutils literal notranslate"><span class="pre">statemodify</span></code> is working as expected. It is much harder to make sense
+of the relative importance of uncertain drivers unless we conduct a
+formal sensitivity analysis, which lies outside of the bounds of this
+tutorial. However, it is very likely that many of these uncertainties
+will be present and of interest in any given future for the region.
+Thus, this notebook is used to demonstrate how to do a Latin hypercube
+sample simultaneously across multiple uncertainties in a given basin
+using the <code class="docutils literal notranslate"><span class="pre">modify_batch()</span></code> function.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import argparse
+import logging
+import os
+import pickle
+from string import Template
+import subprocess
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import statemodify as stm
+</pre></div>
+</div>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE: Each simulation in this notebook is run for the length of the
+historical period (from 1909-2013). If you want to reduce the length
+of the simulation, navigate to the <code class="docutils literal notranslate"><span class="pre">.ctl</span></code> file and adjust the
+<code class="docutils literal notranslate"><span class="pre">iystr</span></code> and <code class="docutils literal notranslate"><span class="pre">iyend</span></code> variables. For this notebook, this file is
+located in: <code class="docutils literal notranslate"><span class="pre">data/cm2015_StateMod/StateMod/cm2015.ctl</span></code></p>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># statemod directory
+statemod_dir = &quot;/usr/src/statemodify/statemod_upper_co&quot;
+
+# root directory of statemod data for the target basin
+root_dir = os.path.join(statemod_dir, &quot;src&quot;, &quot;main&quot;, &quot;fortran&quot;)
+
+# home directory of notebook instance
+home_dir = os.path.dirname(os.getcwd())
+
+# path to the statemod executable
+statemod_exe = os.path.join(root_dir, &quot;statemod&quot;)
+
+# data directory and root name for the target basin
+data_dir = os.path.join(
+    home_dir,
+    &quot;data&quot;,
+    &quot;cm2015_StateMod&quot;,
+    &quot;StateMod&quot;
+)
+
+# directory to the target basin input files with root name for the basin
+basin_path = os.path.join(data_dir, &quot;cm2015B&quot;)
+
+# scenarios output directory
+scenarios_dir = os.path.join(data_dir, &quot;scenarios&quot;)
+
+#parquet output directory
+parquet_dir=os.path.join(data_dir, &quot;parquet&quot;)
+
+
+# path to template file
+multi_template_file = os.path.join(
+    home_dir,
+    &quot;data&quot;,
+    &quot;cm2015B_template_multi.rsp&quot;
+)
+</pre></div>
+</div>
+<section id="step-1-creating-a-sample-across-multiple-uncertainties">
+<h2>Step 1: Creating a Sample Across Multiple Uncertainties<a class="headerlink" href="#step-1-creating-a-sample-across-multiple-uncertainties" title="Link to this heading">#</a></h2>
+<p>In this example, we create a global Latin hypercube sample across 3
+example uncertainties that we are interested in for the Upper Colorado:
+evaporation at reservoirs, modification of water rights, and demands.
+The form of the <code class="docutils literal notranslate"><span class="pre">modify_batch()</span></code> function is similiar to those
+presented in the last notebooks; however, now, a problem dictionary
+stores the names of the respective <code class="docutils literal notranslate"><span class="pre">statemodify</span></code> functions
+(<code class="docutils literal notranslate"><span class="pre">modify_eva</span></code>, <code class="docutils literal notranslate"><span class="pre">modify_ddr</span></code>, <code class="docutils literal notranslate"><span class="pre">modify_ddm</span></code>) that will now be
+applied simultaneously. The Latin hypercube sample is conducted with
+respect to the <code class="docutils literal notranslate"><span class="pre">bounds</span></code> listed and the resulting multipliers or
+additives are applied to the target IDs listed.</p>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE: If you are interested in creating an alternative <code class="docutils literal notranslate"><span class="pre">.ddr</span></code> file
+that does not sample decrees, only adjusts the water rights, then you
+will need to write <code class="docutils literal notranslate"><span class="pre">None</span></code> in the “bounds” parameter as we do below.
+If you include bounds, then decrees as well as water rights will be
+adjusted simultaneously.</p>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statemodify as stm
+
+# variables that apply to multiple functions
+output_dir = os.path.join(data_dir, &quot;input_files&quot;)
+basin_name = &quot;Upper_Colorado&quot;
+scenario = &quot;1&quot;
+seed_value = 77
+
+# problem dictionary
+problem_dict = {
+    &quot;n_samples&quot;: 1,
+    &#39;num_vars&#39;: 3,
+    &#39;names&#39;: [&#39;modify_eva&#39;, &#39;modify_ddr&#39;, &#39;modify_ddm&#39;],
+    &#39;bounds&#39;: [
+        [-0.5, 1.0],
+        None,
+        [0.5, 1.0]
+    ],
+    # additional settings for each function
+    &quot;modify_eva&quot;: {
+        &quot;seed_value&quot;: seed_value,
+        &quot;output_dir&quot;: output_dir,
+        &quot;scenario&quot;: scenario,
+        &quot;basin_name&quot;: basin_name,
+        &quot;query_field&quot;: &quot;id&quot;,
+        &quot;ids&quot;: [&quot;10008&quot;, &quot;10009&quot;]
+    },
+    &quot;modify_ddr&quot;: {
+        &quot;seed_value&quot;: seed_value,
+        &quot;output_dir&quot;: output_dir,
+        &quot;scenario&quot;: scenario,
+        &quot;basin_name&quot;: basin_name,
+        &quot;query_field&quot;: &quot;id&quot;,
+        &quot;ids&quot;: [&quot;3600507.01&quot;, &quot;3600507.02&quot;],
+        &quot;admin&quot;: [1, None],
+        &quot;on_off&quot;: [1, 1]
+    },
+    &quot;modify_ddm&quot;: {
+        &quot;seed_value&quot;: seed_value,
+        &quot;output_dir&quot;: output_dir,
+        &quot;scenario&quot;: scenario,
+        &quot;basin_name&quot;: basin_name,
+        &quot;query_field&quot;: &quot;id&quot;,
+        &quot;ids&quot;: [&quot;3600507&quot;, &quot;3600603&quot;]
+    }
+}
+
+# run in batch
+fn_parameter_dict = stm.modify_batch(problem_dict=problem_dict)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">modify_eva</span>
+<span class="n">Running</span> <span class="n">modify_ddr</span>
+<span class="n">Running</span> <span class="n">modify_ddm</span>
+</pre></div>
+</div>
+</section>
+<section id="step-2-running-a-simulation">
+<h2>Step 2: Running a Simulation<a class="headerlink" href="#step-2-running-a-simulation" title="Link to this heading">#</a></h2>
+<p>Now that we have developed the samples, we need to adjust our template
+file to take in the additional uncertainties and then we can run our
+simulation! Note that in contrast to the other notebooks, we are
+changing the “EVA”, “DDM”, and “DDR” entries in the <code class="docutils literal notranslate"><span class="pre">.rsp</span></code> file at the
+same time, running the simulation, and then extracting the shortages for
+a specific user (ID: 3601008).</p>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE In order to expedite simulations for the Upper Colorado dataset,
+make sure to turn off “Reoperation” mode. You can do so by opening
+<code class="docutils literal notranslate"><span class="pre">/home/jovyan/data/cm2015_StateMod/StateMod/cm2015.ctl</span></code>, navigating
+to the <code class="docutils literal notranslate"><span class="pre">ireopx</span></code> entry and changing the value from “0” to “10”.</p>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># set realization and sample
+realization = 1
+sample = np.arange(0, 1, 1)
+
+# read RSP template
+with open(multi_template_file) as template_obj:
+
+    # read in file
+    template_rsp = Template(template_obj.read())
+
+    for i in sample:
+
+        # create scenario name
+        scenario = f&quot;S{i}_{realization}&quot;
+
+        # dictionary holding search keys and replacement values to update the template file
+        d = {&quot;EVA&quot;: f&quot;../../input_files/cm2015B_{scenario}.eva&quot;,&quot;DDM&quot;: f&quot;../../input_files/cm2015B_{scenario}.ddm&quot;,&quot;DDR&quot;: f&quot;../../input_files/cm2015B_{scenario}.ddr&quot;}
+
+        # update the template
+        new_rsp = template_rsp.safe_substitute(d)
+
+        # construct simulated scenario directory
+        simulated_scenario_dir = os.path.join(scenarios_dir, scenario)
+        if not os.path.exists(simulated_scenario_dir):
+            os.makedirs(simulated_scenario_dir)
+
+        # target rsp file
+        rsp_file = os.path.join(simulated_scenario_dir, f&quot;cm2015B_{scenario}.rsp&quot;)
+
+        # write updated rsp file
+        with open(rsp_file, &quot;w&quot;) as f1:
+            f1.write(new_rsp)
+
+        # construct simulated basin path
+        simulated_basin_path = f&quot;cm2015B_{scenario}&quot;
+
+        # run StateMod
+        print(f&quot;Running: {scenario}&quot;)
+        os.chdir(simulated_scenario_dir)
+
+        subprocess.call([statemod_exe, simulated_basin_path, &quot;-simulate&quot;])
+
+        #Save output to parquet files
+        print(&#39;creating parquet for &#39; + scenario)
+
+        output_directory = os.path.join(parquet_dir+ &quot;/scenario/&quot;+ scenario)
+
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+
+        stm.xdd.convert_xdd(output_path=output_directory,allow_overwrite=False,xdd_files=scenarios_dir + &quot;/&quot;+ scenario + &quot;/cm2015B_&quot;+scenario+&quot;.xdd&quot;,id_subset=[&#39;3601008&#39;],parallel_jobs=2)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span><span class="p">:</span> <span class="n">S0_1</span>
+  <span class="n">Parse</span><span class="p">;</span> <span class="n">Command</span> <span class="n">line</span> <span class="n">argument</span><span class="p">:</span>
+  <span class="n">cm2015B_S0_1</span> <span class="o">-</span><span class="n">simulate</span>
+<span class="n">________________________________________________________________________</span>
+
+        <span class="n">StateMod</span>
+        <span class="n">State</span> <span class="n">of</span> <span class="n">Colorado</span> <span class="o">-</span> <span class="n">Water</span> <span class="n">Supply</span> <span class="n">Planning</span> <span class="n">Model</span>
+
+        <span class="n">Version</span><span class="p">:</span> <span class="mf">15.00.01</span>
+        <span class="n">Last</span> <span class="n">revision</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2015</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">28</span>
+
+<span class="n">________________________________________________________________________</span>
+
+  <span class="n">Opening</span> <span class="n">log</span> <span class="n">file</span> <span class="n">cm2015B_S0_1</span><span class="o">.</span><span class="n">log</span>
+
+  <span class="n">Subroutine</span> <span class="n">Execut</span>
+  <span class="n">Subroutine</span> <span class="n">Datinp</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>At the end of the simulation, the output is the file,
+<code class="docutils literal notranslate"><span class="pre">cm2015B_S0_1.parquet</span></code>, which now contains the shortages for the
+target ID for the length of the simulation. The user can then proceed to
+do similiar analyses on water shortages that have been demonstrated in
+the prior notebooks.</p>
+<div class="alert alert-block alert-warning docutils container">
+<p>Tip: If you are interested in understanding how to apply
+<code class="docutils literal notranslate"><span class="pre">statemodify</span></code> functions to your own model, take a look at the
+source code found in the repository here:</p>
+<div class="docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span>  <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/batch.py&quot;</span><span class="o">&gt;</span><span class="n">modify_batch</span><span class="p">()</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-creating-a-sample-across-multiple-uncertainties">Step 1: Creating a Sample Across Multiple Uncertainties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-running-a-simulation">Step 2: Running a Simulation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Rohini S. Gupta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Battelle Memorial Institute.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

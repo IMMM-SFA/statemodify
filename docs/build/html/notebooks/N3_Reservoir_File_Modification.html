@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>statemodify Quickstarter Notebook #3 : Using the RES Modification Function in the Upper Colorado River Basin &#8212; statemodify documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=f6d3da1f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/N3_Reservoir_File_Modification';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_statemodify.png" class="logo__image only-light" alt="statemodify documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo_statemodify.png" class="logo__image only-dark" alt="statemodify documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/quickstarter.html">Quickstarter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/useful_links.html">Useful Links</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/api.html">Python API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/contributing.html">Contributing to <strong>statemodify</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify/edit/main/docs/source/notebooks/N3_Reservoir_File_Modification.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IMMM-SFA/statemodify/issues/new?title=Issue%20on%20page%20%2Fnotebooks/N3_Reservoir_File_Modification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/N3_Reservoir_File_Modification.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>statemodify Quickstarter Notebook #3 : Using the RES Modification Function in the Upper Colorado River Basin</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-run-a-historical-simulation-in-statemod-for-the-uppper-colorado-subbasin">Step 1: Run a Historical Simulation in StateMod for the Uppper Colorado Subbasin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-modify-statemod-input-files-for-exploratory-analyses-reservoir-function-example">Step 2: Modify StateMod Input Files for Exploratory Analyses- Reservoir Function Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-read-in-the-new-input-files-and-run-statemod-reservoir-example">Step 3: Read in the New Input Files and Run StateMod : Reservoir Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-references">Notebook References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="statemodify-quickstarter-notebook-3-using-the-res-modification-function-in-the-upper-colorado-river-basin">
+<h1><code class="docutils literal notranslate"><span class="pre">statemodify</span></code> Quickstarter Notebook #3 : Using the RES Modification Function in the Upper Colorado River Basin<a class="headerlink" href="#statemodify-quickstarter-notebook-3-using-the-res-modification-function-in-the-upper-colorado-river-basin" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates the reservoir storage modification function
+in the Upper Colorado River Basin. In this notebook, we seek to
+understand how changes to reservoir storage can impact user shortages.
+First we run a baseline simulation, which runs the StateMod simulation
+assuming that the current infrastructure has existed through the whole
+simulation period. We next extract shortages for a municipality. Recall
+that the list of users and their water rights can be found in the
+<code class="docutils literal notranslate"><span class="pre">.ddr</span></code> file (located: <code class="docutils literal notranslate"><span class="pre">data/cm2015_StateMod/StateMod/cm2015.ddr</span></code>)</p>
+<section id="step-1-run-a-historical-simulation-in-statemod-for-the-uppper-colorado-subbasin">
+<h2>Step 1: Run a Historical Simulation in StateMod for the Uppper Colorado Subbasin<a class="headerlink" href="#step-1-run-a-historical-simulation-in-statemod-for-the-uppper-colorado-subbasin" title="Link to this heading">#</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import argparse
+import logging
+import os
+import pickle
+from string import Template
+import subprocess
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import statemodify as stm
+</pre></div>
+</div>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE: Each simulation in this notebook is run for the length of the
+historical period (from 1909-2013). If you want to reduce the length
+of the simulation, navigate to the <code class="docutils literal notranslate"><span class="pre">.ctl</span></code> file and adjust the
+<code class="docutils literal notranslate"><span class="pre">iystr</span></code> and <code class="docutils literal notranslate"><span class="pre">iyend</span></code> variables. For this notebook, this file is
+located in: <code class="docutils literal notranslate"><span class="pre">data/cm2015_StateMod/StateMod/cm2015.ctl</span></code></p>
+</div>
+<p>As before, we set the directories and associated paths and also run
+StateMod in a baseline simulation.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># statemod directory
+statemod_dir = &quot;/usr/src/statemodify/statemod_upper_co&quot;
+
+# root directory of statemod data for the target basin
+root_dir = os.path.join(statemod_dir, &quot;src&quot;, &quot;main&quot;, &quot;fortran&quot;)
+
+# home directory of notebook instance
+home_dir = os.path.dirname(os.getcwd())
+
+# path to the statemod executable
+statemod_exe = os.path.join(root_dir, &quot;statemod&quot;)
+
+# data directory and root name for the target basin
+data_dir = os.path.join(
+    home_dir,
+    &quot;data&quot;,
+    &quot;cm2015_StateMod&quot;,
+    &quot;StateMod&quot;
+)
+
+# directory to the target basin input files with root name for the basin
+basin_path = os.path.join(data_dir, &quot;cm2015B&quot;)
+
+# scenarios output directory
+scenarios_dir_res = os.path.join(data_dir, &quot;scenarios_res&quot;)
+
+# parquet files output directory
+parquet_dir_res = os.path.join(data_dir, &quot;parquet_res&quot;)
+
+
+# path to res template file
+res_template_file = os.path.join(
+    home_dir,
+    &quot;data&quot;,
+    &quot;cm2015B_template_res.rsp&quot;
+)
+</pre></div>
+</div>
+<div class="alert alert-block alert-info docutils container">
+<p>NOTE In order to expedite simulations for the Upper Colorado dataset,
+make sure to turn off “Reoperation” mode. You can do so by opening
+<code class="docutils literal notranslate"><span class="pre">/home/jovyan/data/cm2015_StateMod/StateMod/cm2015.ctl</span></code>, navigating
+to the <code class="docutils literal notranslate"><span class="pre">ireopx</span></code> entry and changing the value from “0” to “10”.</p>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Change directories first
+os.chdir(data_dir) #This is needed specific to the Upper Colorado model as the path name is too long for the model to accept
+subprocess.call([statemod_exe, &quot;cm2015B&quot;, &quot;-simulate&quot;])
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">Parse</span><span class="p">;</span> <span class="n">Command</span> <span class="n">line</span> <span class="n">argument</span><span class="p">:</span>
+   <span class="n">cm2015B</span> <span class="o">-</span><span class="n">simulate</span>
+ <span class="n">________________________________________________________________________</span>
+
+         <span class="n">StateMod</span>
+         <span class="n">State</span> <span class="n">of</span> <span class="n">Colorado</span> <span class="o">-</span> <span class="n">Water</span> <span class="n">Supply</span> <span class="n">Planning</span> <span class="n">Model</span>
+
+         <span class="n">Version</span><span class="p">:</span> <span class="mf">15.00.01</span>
+         <span class="n">Last</span> <span class="n">revision</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2015</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">28</span>
+
+ <span class="n">________________________________________________________________________</span>
+
+   <span class="n">Opening</span> <span class="n">log</span> <span class="n">file</span> <span class="n">cm2015B</span><span class="o">.</span><span class="n">log</span>
+
+   <span class="n">Subroutine</span> <span class="n">Execut</span>
+   <span class="n">Subroutine</span> <span class="n">Datinp</span>
+
+ <span class="o">...</span>
+
+<span class="n">________________________________________________________________________</span>
+   <span class="n">Execut</span><span class="p">;</span> <span class="n">Successful</span> <span class="n">Termination</span>
+   <span class="n">Statem</span><span class="p">;</span> <span class="n">See</span> <span class="n">detailed</span> <span class="n">messages</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span> <span class="n">cm2015B</span><span class="o">.</span><span class="n">log</span>
+  <span class="n">Stop</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>We isolate the shortages for one municipal user: the Town of Brekenridge
+at the base of the Rocky Mountains’ Tenmile Range (ID: 3601008). If we
+look up this user in the <code class="docutils literal notranslate"><span class="pre">cm2015B.ddr</span></code> file, we see that the user has
+median water rights (47483.00000) and a smaller decree of 2.90 cfs.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#Extract shortages using statemodify convert_xdd() function
+
+# create a directory to store the historic shortages
+output_dir = os.path.join(data_dir, &quot;historic_shortages&quot;)
+
+# create a directory to store the new files in if it does not exist
+output_directory = os.path.join(data_dir, &quot;historic_shortages&quot;)
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
+
+stm.xdd.convert_xdd(
+    # path to a directory where output .parquet files should be written
+    output_path=output_dir,
+    # whether to abort if .parquet files already exist at the output_path
+    allow_overwrite=True,
+    # path, glob, or a list of paths/globs to the .xdd files you want to convert
+    xdd_files=os.path.join(data_dir, &quot;*.xdd&quot;),
+    # if the output .parquet files should only contain a subset of structure ids, list them here; None for all
+    id_subset=[&#39;3601008&#39;],
+    # how many .xdd files to convert in parallel; optimally you will want 2-4 CPUs per parallel process
+    parallel_jobs=2,
+    # convert to natural data types
+    preserve_string_dtype=False
+
+)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>100%|██████████| 1/1 [00:00&lt;00:00, 17.73it/s]
+</pre></div>
+</div>
+<p>Next we plot the shortages for Breckenridge.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data=pd.read_parquet(output_dir +&#39;/cm2015B.parquet&#39;,engine=&#39;pyarrow&#39;)
+
+fig, ax = plt.subplots()
+
+for name, group in data.groupby(&#39;structure_id&#39;):
+    ax.scatter(
+        group[&#39;year&#39;], group[&#39;shortage_total&#39;], label=name)
+
+plt.xlabel(&quot;Year&quot;)
+plt.ylabel(&quot;Shortage (AF)&quot;)
+plt.title(&quot;Baseline Shortages for Breckenridge&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f44455974f0</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_12_1.png" src="../_images/output_12_1.png" />
+<p>We see that Breckenridge has experienced a variety of shortages
+throughout the baseline simulation period.</p>
+</section>
+<section id="step-2-modify-statemod-input-files-for-exploratory-analyses-reservoir-function-example">
+<h2>Step 2: Modify StateMod Input Files for Exploratory Analyses- Reservoir Function Example<a class="headerlink" href="#step-2-modify-statemod-input-files-for-exploratory-analyses-reservoir-function-example" title="Link to this heading">#</a></h2>
+<p>If we look at the <code class="docutils literal notranslate"><span class="pre">cm2015B.res</span></code> file (learn more about the
+<code class="docutils literal notranslate"><span class="pre">`.res</span></code> &lt;<a class="reference external" href="https://opencdss.state.co.us/statemod/latest/doc-user/InputDescription/411/">https://opencdss.state.co.us/statemod/latest/doc-user/InputDescription/411/</a>&gt;`__file),
+we see that Breckenridge has an account in the Clinton Gulch Reservoir,
+but a quick look in the
+<code class="docutils literal notranslate"><span class="pre">`.opr</span></code> &lt;<a class="reference external" href="https://opencdss.state.co.us/statemod/latest/doc-user/InputDescription/413/">https://opencdss.state.co.us/statemod/latest/doc-user/InputDescription/413/</a>&gt;`__
+file also indicates that Breckenridge can receive water from the Dillon
+reservoir. Let’s investigate what happens to these shortages when
+storage at these two basins decreases using the <code class="docutils literal notranslate"><span class="pre">modify_res()</span></code>
+function. As done in Hadjimichael et al. (2020), we sample losses using
+a Latin hypercube sampling of up to 20% of the capacity of the
+reservoirs (informed by Graf et al. (2010)) which may be due to erosion
+and sedimentation of reservoirs in the UCRB, resulting in reduced
+storage. The accounts associated with the reservoirs are also reduced
+equally in order to accommodate the new storage level. For this example,
+we want to change the reservoir storage for a specific set of reservoirs
+by specifying the reservoir IDs for the <code class="docutils literal notranslate"><span class="pre">target_structure_id_list</span></code>.
+However, by setting <code class="docutils literal notranslate"><span class="pre">target_structure_id_list=None</span></code> we can decrease
+storage at all reservoirs in the basin.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>output_directory = output_dir = os.path.join(data_dir, &quot;input_files&quot;)
+scenario = &quot;1&quot;
+# basin name to process
+basin_name = &quot;Upper_Colorado&quot;
+
+# seed value for reproducibility if so desired
+seed_value = 1
+
+# number of jobs to launch in parallel; -1 is all but 1 processor used
+n_jobs = 2
+
+# number of samples to generate
+n_samples = 1
+
+stm.modify_res(output_dir=output_directory,
+               scenario=scenario,
+               basin_name=basin_name,
+               target_structure_id_list=[&#39;3603575&#39;,&#39;3604512&#39;],
+               seed_value=seed_value,
+               n_jobs=n_jobs,
+               n_samples=n_samples,
+               save_sample=True)
+</pre></div>
+</div>
+<p>Since we are sampling only reductions in storage, we can investigate
+behavior with a single sample. We can then load the saved sample to see
+the percent reduction in reservoir storage volume that has been applied
+to the different reservoirs. The sample indicates that we are reducing
+the reservoir storage volume to 86% of the original storage.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+sample_array = np.load(output_directory+&#39;/res_1-samples_scenario-1.npy&#39;)
+sample_array
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span><span class="mf">0.86911215</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-read-in-the-new-input-files-and-run-statemod-reservoir-example">
+<h2>Step 3: Read in the New Input Files and Run StateMod : Reservoir Example<a class="headerlink" href="#step-3-read-in-the-new-input-files-and-run-statemod-reservoir-example" title="Link to this heading">#</a></h2>
+<p>Now that we have created the input files, the next step is to run
+StateMod with the new input files. We create a template <code class="docutils literal notranslate"><span class="pre">.rsp</span></code> file
+(<code class="docutils literal notranslate"><span class="pre">cm2015B_template_res.rsp</span></code>) and swap in the path to the alternative
+<code class="docutils literal notranslate"><span class="pre">.res</span></code> files that are created. Then we run StateMod for the two
+scenarios and extract the shortages for Breckenridge.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># set realization and sample
+realization = 1
+sample = np.arange(0, 2, 1)
+
+# read RSP template
+with open(res_template_file) as template_obj:
+
+    # read in file
+    template_rsp = Template(template_obj.read())
+
+    for i in sample:
+
+        # create scenario name
+        scenario = f&quot;S{i}_{realization}&quot;
+
+        # dictionary holding search keys and replacement values to update the template file
+        d = {&quot;RES&quot;: f&quot;../../input_files/cm2015B_{scenario}.res&quot;}
+
+        # update the template
+        new_rsp = template_rsp.safe_substitute(d)
+
+        # construct simulated scenario directory
+        simulated_scenario_dir = os.path.join(scenarios_dir_res, scenario)
+        if not os.path.exists(simulated_scenario_dir):
+            os.makedirs(simulated_scenario_dir)
+
+        # target rsp file
+        rsp_file = os.path.join(simulated_scenario_dir, f&quot;cm2015B_{scenario}.rsp&quot;)
+
+        # write updated rsp file
+        with open(rsp_file, &quot;w&quot;) as f1:
+            f1.write(new_rsp)
+
+        # construct simulated basin path
+        simulated_basin_path = f&quot;cm2015B_{scenario}&quot;
+
+        # run StateMod
+        print(f&quot;Running: {scenario}&quot;)
+        os.chdir(simulated_scenario_dir)
+
+        subprocess.call([statemod_exe, simulated_basin_path, &quot;-simulate&quot;])
+
+        #Save output to parquet files
+        print(&#39;creating parquet for &#39; + scenario)
+
+        output_directory = os.path.join(parquet_dir_res+&quot;/scenario/&quot;+ scenario)
+
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+
+        stm.xdd.convert_xdd(
+            output_path=output_directory,
+            allow_overwrite=True,
+            xdd_files=scenarios_dir_res + &quot;/&quot;+ scenario + &quot;/cm2015B_&quot;+scenario+&quot;.xdd&quot;,
+            id_subset=[&#39;3601008&#39;],
+            parallel_jobs=2,
+            preserve_string_dtype=False
+        )
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span><span class="p">:</span> <span class="n">S0_1</span>
+  <span class="n">Parse</span><span class="p">;</span> <span class="n">Command</span> <span class="n">line</span> <span class="n">argument</span><span class="p">:</span>
+  <span class="n">cm2015B_S0_1</span> <span class="o">-</span><span class="n">simulate</span>
+<span class="n">________________________________________________________________________</span>
+
+        <span class="n">StateMod</span>
+        <span class="n">State</span> <span class="n">of</span> <span class="n">Colorado</span> <span class="o">-</span> <span class="n">Water</span> <span class="n">Supply</span> <span class="n">Planning</span> <span class="n">Model</span>
+
+        <span class="n">Version</span><span class="p">:</span> <span class="mf">15.00.01</span>
+        <span class="n">Last</span> <span class="n">revision</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2015</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">28</span>
+
+<span class="n">________________________________________________________________________</span>
+
+  <span class="n">Opening</span> <span class="n">log</span> <span class="n">file</span> <span class="n">cm2015B_S0_1</span><span class="o">.</span><span class="n">log</span>
+
+  <span class="n">Subroutine</span> <span class="n">Execut</span>
+  <span class="n">Subroutine</span> <span class="n">Datinp</span>
+
+<span class="o">...</span>
+
+<span class="n">________________________________________________________________________</span>
+  <span class="n">Execut</span><span class="p">;</span> <span class="n">Successful</span> <span class="n">Termination</span>
+  <span class="n">Statem</span><span class="p">;</span> <span class="n">See</span> <span class="n">detailed</span> <span class="n">messages</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span> <span class="n">cm2015B_S0_1</span><span class="o">.</span><span class="n">log</span>
+ <span class="n">Stop</span> <span class="mi">0</span>
+<span class="n">creating</span> <span class="n">parquet</span> <span class="k">for</span> <span class="n">S0_1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>100%|██████████| 1/1 [00:00&lt;00:00, 586.29it/s]
+</pre></div>
+</div>
+<pre class="literal-block">Running: S1_1
+  Parse; Command line argument:
+  cm2015B_S1_1 -simulate
+________________________________________________________________________
+
+        StateMod
+        State of Colorado - Water Supply Planning Model
+
+        Version: 15.00.01
+        Last revision date: 2015/10/28
+
+________________________________________________________________________
+
+  Opening log file cm2015B_S1_1.log
+
+  Subroutine Execut
+  Subroutine Datinp
+
+________________________________________________________________________
+  Datinp; Control File (<em>.ctl)
+
+________________________________________________________________________
+  Datinp; River Network File (</em>.rin)
+
+________________________________________________________________________
+  Datinp; Reservoir Station File (<em>.res)
+
+________________________________________________________________________
+  GetFile;  Stopped in GetFile, see the log file (</em>.log)
+ Stop 1
+creating parquet for S1_1</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>100%|██████████| 1/1 [00:00&lt;00:00, 589.42it/s]
+</pre></div>
+</div>
+<p>Here, we extract the shortages from the Parquet files for the baseline
+and alternative states of the world and plot the resulting shortages.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>baseline=pd.read_parquet(data_dir+&#39;/&#39;+&#39;historic_shortages/cm2015B.parquet&#39;,engine=&#39;pyarrow&#39;)
+SOW_1=pd.read_parquet(parquet_dir_res+&#39;/scenario/S0_1/cm2015B_S0_1.parquet&#39;,engine=&#39;pyarrow&#39;)
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>baseline[&quot;shortage_total&quot;]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">283920</span>      <span class="mf">0.</span>
+<span class="mi">283921</span>      <span class="mf">0.</span>
+<span class="mi">283922</span>      <span class="mf">0.</span>
+<span class="mi">283923</span>    <span class="mf">220.</span>
+<span class="mi">283924</span>    <span class="mf">201.</span>
+          <span class="o">...</span>
+<span class="mi">285280</span>      <span class="mf">0.</span>
+<span class="mi">285281</span>      <span class="mf">0.</span>
+<span class="mi">285282</span>      <span class="mf">0.</span>
+<span class="mi">285283</span>      <span class="mf">0.</span>
+<span class="mi">285284</span>      <span class="mf">0.</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">shortage_total</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">1365</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="nb">object</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>baseline=pd.read_parquet(data_dir+&#39;/&#39;+&#39;historic_shortages/cm2015B.parquet&#39;,engine=&#39;pyarrow&#39;)
+SOW_1=pd.read_parquet(parquet_dir_res+&#39;/scenario/S0_1/cm2015B_S0_1.parquet&#39;,engine=&#39;pyarrow&#39;)
+
+#Subtract shortages with respect to the baseline
+subset_df=pd.concat([baseline[&#39;year&#39;],baseline[&#39;shortage_total&#39;],SOW_1[&#39;shortage_total&#39;]],axis=1)
+subset_df = subset_df.set_axis([&#39;Year&#39;, &#39;Baseline&#39;, &#39;SOW_1&#39;], axis=1)
+subset_df[&#39;SOW_1_diff&#39;]=subset_df[&#39;SOW_1&#39;]-subset_df[&#39;Baseline&#39;]
+
+#Plot shortages
+fig, ax = plt.subplots()
+
+ax.scatter(subset_df[&#39;Year&#39;], subset_df[&#39;SOW_1_diff&#39;])
+
+plt.xlabel(&quot;Year&quot;)
+plt.ylabel(&quot;Shortage (AF)&quot;)
+plt.title(&quot;Change in Breckenridge Shortages from the Baseline&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">No</span> <span class="n">artists</span> <span class="k">with</span> <span class="n">labels</span> <span class="n">found</span> <span class="n">to</span> <span class="n">put</span> <span class="ow">in</span> <span class="n">legend</span><span class="o">.</span>  <span class="n">Note</span> <span class="n">that</span> <span class="n">artists</span> <span class="n">whose</span> <span class="n">label</span> <span class="n">start</span> <span class="k">with</span> <span class="n">an</span> <span class="n">underscore</span> <span class="n">are</span> <span class="n">ignored</span> <span class="n">when</span> <span class="n">legend</span><span class="p">()</span> <span class="ow">is</span> <span class="n">called</span> <span class="k">with</span> <span class="n">no</span> <span class="n">argument</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f4434f250f0</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_25_2.png" src="../_images/output_25_2.png" />
+<p>When we plot the shortages to Breckenridge under the alternative SOW
+where reservoir storage is reduced across the two reservoirs, we can see
+that there are now instances in which Breckenridge experiences larger
+shortages than in the baseline case. Given that the town utilizes both
+direct diversions and reservoir storage for water supply, this result
+suggests that they have less of a bank of water to pull from in the two
+reservoirs which increases shortages. However, there are even some cases
+where the town experiences surpluses and many cases where the shortages
+do not change, demonstrating that there is inherent complexity in the
+mapping of reservoir level to shortages, especially when the user has
+multiple reservoir accounts.</p>
+<p>Now continue on to Quickstarter Notebook #4 to learn about running
+StateMod with new streamflow scenarios across the West Slope basins.</p>
+</section>
+<section id="notebook-references">
+<h2>Notebook References<a class="headerlink" href="#notebook-references" title="Link to this heading">#</a></h2>
+<p>Graf, W. L., Wohl, E., Sinha, T., &amp; Sabo, J. L. (2010). Sedimentation
+and sustainability of western American reservoirs. Water Resources
+Research, 46, W12535. <a class="reference external" href="https://doi.org/10.1029/2009WR008836">https://doi.org/10.1029/2009WR008836</a></p>
+<p>Hadjimichael, A., Quinn, J., Wilson, E., Reed, P., Basdekas, L., Yates,
+D., &amp; Garrison, M. (2020). Defining robustness, vulnerabilities, and
+consequential scenarios for diverse stakeholder interests in
+institutionally complex river basins. Earth’s Future, 8(7),
+e2020EF001503.</p>
+<div class="alert alert-block alert-warning docutils container">
+<p>Tip: If you are interested in understanding how to apply
+<code class="docutils literal notranslate"><span class="pre">statemodify</span></code> functions to your own model, take a look at the
+source code found in the repository here:</p>
+<div class="docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span>  <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/IMMM-SFA/statemodify/blob/main/statemodify/res.py&quot;</span><span class="o">&gt;</span><span class="n">modify_res</span><span class="p">()</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-run-a-historical-simulation-in-statemod-for-the-uppper-colorado-subbasin">Step 1: Run a Historical Simulation in StateMod for the Uppper Colorado Subbasin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-modify-statemod-input-files-for-exploratory-analyses-reservoir-function-example">Step 2: Modify StateMod Input Files for Exploratory Analyses- Reservoir Function Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-read-in-the-new-input-files-and-run-statemod-reservoir-example">Step 3: Read in the New Input Files and Run StateMod : Reservoir Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-references">Notebook References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Rohini S. Gupta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Battelle Memorial Institute.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
