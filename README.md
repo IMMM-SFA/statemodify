@@ -3,8 +3,7 @@
 [![Static Badge](https://img.shields.io/badge/Powered%20by-MSDLIVE-blue?label=Powered%20by&color=blue)](https://statemodify.msdlive.org)
 [![DOI](https://zenodo.org/badge/484620418.svg)](https://zenodo.org/doi/10.5281/zenodo.10258007)
 [![pre-commit](https://github.com/IMMM-SFA/statemodify/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/IMMM-SFA/statemodify/actions/workflows/pre-commit.yml)
-
-
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.06325/status.svg)](https://doi.org/10.21105/joss.06325)
 
 # statemodify
 `statemodify` is an open-source Python package that provides users with a way to easily modify [StateMod](https://github.com/OpenCDSS/cdss-app-statemod-fortran)'s input and output files to enable exploratory modeling. StateMod is written in Fortran and conducting high-performance computing enabled ensemble exploratory modeling with it requires a systematic and automated approach. Due to the model’s complexity, there are also nontrivial computational challenges in comprehensively sampling the model’s input space and managing the outputs of interest, especially for large ensembles. These challenges limit its use among researchers and broader operational users. Thus, we developed `statemodify`, a Python package and framework that allows users to easily interact with StateMod using Python exclusively. The user can implement statemodify functions to manipulate StateMod’s input files to develop alternative demand, hydrology, infrastructure, and institutional scenarios for Colorado’s West Slope basins and run these scenarios through StateMod. We also create methods to compress and extract model output into easily readable data frames and provide guidance on analysis and visualization of output in a series of Jupyter notebooks that step through the functionality of the package.
